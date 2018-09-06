@@ -15,53 +15,67 @@
 
     <!-- Custom styles for this template -->
     <link href={{asset('css/footer.css')}} rel="stylesheet">
+    <link href={{asset('css/estilos.css')}} rel="stylesheet">
   </head>
 
   <body>
 
-    <header>
-      <!-- Fixed navbar -->
-      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
-        <a class="navbar-brand" href="#">Inicio</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Perfiles <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Tutores</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Areas</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </header>
+        <header class="row">
+            <div class="col">
+              <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary nav-pills text-white">
+                <div class="col-4 align-content-center">
+                  <h5>UNIVERSIDAD MAYOR DE SAN SIMON</h5>
+                </div>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                  <ul class="navbar-nav mr-auto ">
+                    <li class="nav-item ">
+                      <a class="nav-link  btn-primary h5" href="{{route('inicio')}}">Inicio</a>
+                    </li>
+                    <li class="nav-item ">
+                      <a class="nav-link btn-primary h5" href="#">Perfiles</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link btn-primary h5" href="#">Tutores</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link btn-primary h5" href="#">Areas</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link btn-primary h5" href="#">Profesionales</a>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
+            </div>
+        </header>
+        <titulo class="row text-white p-3 mb-2">
+          <div class="col offset-1">
+            <img class="fondo" src="{{asset('img/fcyt.jpg')}}" width="70" height="70">
+          </div>
+          <div class="col">
+            <h2>FACULTAD DE CIENCIAS Y TECNOLOGIA</h2>
+          </div>
+        </titulo>
 
-    <!-- Begin page content -->
-    <main role="main" class="container">
-     @yield("contenido")
-    </main>
+       <div class="row">
+         <div class="col">
+           <main role="main" class="container">
+             @yield("contenido")
+           </main>
+         </div>
+       </div>
 
-    <footer class="footer">
-      <div class="container">
-      	<div class="row justify-content-center">
-      		 <span class="text-muted">
-        Facultad de Ciencias y Tecnología (UMSS). Cochabamba - Bolivia</span>
-      	</div>
-      </div>
-    </footer>
+        <footer class="footer">
+          <div class="container">
+            <div class="row justify-content-center">
+                 <span class="text-muted">Facultad de Ciencias y Tecnología (UMSS). Cochabamba - Bolivia</span>
+            </div>
+          </div>
+        </footer>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="../../assets/js/vendor/popper.min.js"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+
   </body>
 </html>
