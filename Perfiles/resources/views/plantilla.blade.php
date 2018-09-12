@@ -14,7 +14,7 @@
     <link href={{asset('css/bootstrap.min.css')}} rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href={{asset('css/footer.css')}} rel="stylesheet">
+    <link href={{asset('css/footer2.css')}} rel="stylesheet">
     <link href={{asset('css/estilos.css')}} rel="stylesheet">
   </head>
 
@@ -22,50 +22,56 @@
       <div class="container-fluid">
           <header class="row">
               <div class="col">
-                <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary nav-pills text-white">
-                  <div class="col-4 align-content-center">
-                    <h5>UNIVERSIDAD MAYOR DE SAN SIMON</h5>
-                  </div>
-                  <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav mr-auto ">
-                      <li class="nav-item ">
-                        <a class="nav-link btn-primary h5" href="{{route('inicio')}}">Inicio</a>
-                      </li>
-                      <li class="nav-item ">
-                        <a class="nav-link btn-primary h5" href="#">Perfiles</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link btn-primary h5" href="#">Tutores</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link btn-primary h5" href="#">Areas</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link btn-primary h5" href="#">Profesionales</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link btn-primary h5" href="#">Iniciar sesion</a>
-                      </li>
-                    </ul>
-                  </div>
-                </nav>
+                  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary nav-pills text-white">
+                      <div class="col-auto align-content-center">
+                          <h5>Registro de Perfiles de Proyectos Finales de Grado</h5>
+                      </div>
+                      <div class="collapse navbar-collapse" id="navbarCollapse">
+                          <ul class="navbar-nav mr-auto ">
+                              <li class="nav-item ">
+                                  <a class="nav-link btn-primary h5" href="{{route('inicio')}}">Inicio</a>
+                              </li>
+                              <li class="nav-item ">
+                                  <a class="nav-link btn-primary h5" href="#">Perfiles</a>
+                              </li>
+                              <li class="nav-item">
+                                  <a class="nav-link btn-primary h5" href="#">Tutores</a>
+                              </li>
+                              <li class="nav-item">
+                                  <a class="nav-link btn-primary h5" href="#">Areas</a>
+                              </li>
+                              <li class="nav-item">
+                                  <a class="nav-link btn-primary h5" href="#">Profesionales</a>
+                              </li>
+                              <li class="nav-item">
+                                  <a class="nav-link btn-primary h5" href="#">Iniciar sesion</a>
+                              </li>
+                          </ul>
+                      </div>
+                  </nav>
               </div>
           </header>
-          <titulo class="row text-white p-3 mb-2">
-            <div class="col-3 offset-2">
-              <img  src="{{asset('img/fcyt.jpg')}}" width="70" height="70">
-            </div>
-            <div class="col">
-              <h1>FACULTAD DE CIENCIAS Y TECNOLOGIA</h1>
-            </div>
+
+          <titulo class="row text-white text-center p-3 mb-2">
+              <div class="col-2 mt-1">
+                  <img src="{{asset('img/umss.png')}}" width="100" height="100">
+              </div>
+              <div class="col-8">
+                  <h1>UNIVERSIDAD MAYOR DE SAN SIMON</h1>
+                  <h2>FACULTAD DE CIENCIAS Y TECNOLOGIA</h2>
+              </div>
+              <div class="col mt-1">
+                  <img  src="{{asset('img/fcyt.jpg')}}" width="100" height="100">
+              </div>
           </titulo>
 
          <div class="row">
-           <div class="col-9 mt-1 ">
-             <main role="main" class="container">
-               @yield("contenido")
-             </main>
-           </div>
+            <div class="col-9 mt-1 ">
+
+                <main role="main" class="container">
+                    @yield("contenido")
+                </main>
+            </div>
 
            <div class="col-3 mb-3 mt-2 ">
               <div class="row">
@@ -99,10 +105,21 @@
            </div>
          </div>
 
-         <footer class="footer">
-              <div class="row justify-content-center">
-                   <span class="text-muted">Facultad de Ciencias y Tecnología (UMSS). Cochabamba - Bolivia</span>
-              </div>
+         <footer class="footer text-white">
+             <div class="row">
+                 <div class="col-auto ml-2 mt-1">
+                     <img  src="{{asset('img/vensoft.jpg')}}" width="50" height="50">
+                 </div>
+                 <div class="col-4">
+                         <span class="font-italic">El sistema es Diseño y Desarrollo de la Empresa de software
+                             "VENSOFT" Copyright © 2018 . Todos los derechos reservados.
+                         </span>
+                 </div>
+                 <div class="col-3 offset-4 text-center">
+                     <span>Facultad de Ciencias y Tecnología (UMSS).<br></span>
+                     <span> Cochabamba - Bolivia</span>
+                 </div>
+             </div>
          </footer>
 
       </div>
