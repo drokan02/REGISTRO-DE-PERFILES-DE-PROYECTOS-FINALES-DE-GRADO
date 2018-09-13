@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -67,13 +67,25 @@
 
          <div class="row">
             <div class="col-9 mt-1 ">
-
                 <main role="main" class="container">
                     @yield("contenido")
                 </main>
             </div>
 
            <div class="col-3 mb-3 mt-2 ">
+
+               <div class="row">
+                   <div class="card border-primary col mr-4 mb-3">
+                       <div class="card-header border-primary text-primary font-weight-bold">
+                           hora del sistema
+                       </div>
+                       <div class="card-body">
+                           <h5 class="card-title">Fecha: {{date('d/m/Y')}}</h5>
+                           <h5 class="card-title">Hora: {{date('H:i:s')}}</h5>
+                       </div>
+                   </div>
+               </div>
+
               <div class="row">
                 <div class="card border-primary col mr-4 mb-3">
                   <div class="card-header border-primary text-primary font-weight-bold">
@@ -88,7 +100,6 @@
                     <a href="http://fcyt.umss.edu.bo" class="btn btn-link">http://fcyt.umss.edu.bo</a>
                     <h5 class="card-title">CS:</h5>
                     <a href="http://www.cs.umss.edu.bo" class="btn btn-link">http://www.cs.umss.edu.bo</a>
-
                   </div>
                 </div>
               </div>
@@ -98,7 +109,6 @@
                        Proximos Perfiles
                      </div>
                      <div class="card-body">
-
                      </div>
                    </div>
                </div>
