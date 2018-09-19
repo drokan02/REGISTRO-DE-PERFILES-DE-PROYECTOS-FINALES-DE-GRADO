@@ -1,4 +1,5 @@
-@extends('plantilla')
+@extends('layouts.menu')
+@section('titulo','REGISTRAR ROL')
 @section('contenido')
     <div class="row justify-content-center mt-4">
         <div class="col-6">
