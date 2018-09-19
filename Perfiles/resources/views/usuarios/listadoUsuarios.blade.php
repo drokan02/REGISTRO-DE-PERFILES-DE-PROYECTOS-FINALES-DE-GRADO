@@ -1,4 +1,5 @@
-@extends('plantilla')
+@extends('layouts.menu')
+@section('titulo','USUARIOS')
 @section('contenido')
     <div class="row ">
         <div class="col-8">

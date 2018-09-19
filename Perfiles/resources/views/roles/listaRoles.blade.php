@@ -1,4 +1,5 @@
-@extends('plantilla')
+@extends('layouts.menu')
+@section('titulo','ROLES')
 @section('contenido')
 
     <h1 class="display-4 font-weight-bold">Lista de Roles del Sistema</h1>

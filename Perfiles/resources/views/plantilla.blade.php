@@ -31,18 +31,6 @@
                               <li class="nav-item ">
                                   <a class="nav-link btn-primary h5" href="{{route('inicio')}}">Inicio</a>
                               </li>
-                              <li class="nav-item ">
-                                  <a class="nav-link btn-primary h5" href="#">Perfiles</a>
-                              </li>
-                              <li class="nav-item">
-                                  <a class="nav-link btn-primary h5" href="#">Docentes</a>
-                              </li>
-                              <li class="nav-item">
-                                  <a class="nav-link btn-primary h5" href="#">Tutores</a>
-                              </li>
-                              <li class="nav-item">
-                                  <a class="nav-link btn-primary h5" href="#">Areas</a>
-                              </li>
                               <li class="nav-item">
                                   <a class="nav-link btn-primary h5" href="{{route('usuarios')}}">Usuarios</a>
                               </li>
