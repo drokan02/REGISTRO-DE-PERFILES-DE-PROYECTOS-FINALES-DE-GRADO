@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 })->name('inicio');
 //Roles
+
+Route::get('/menu','menuController@index')->name('menu');
 Route::get('/roles','RoleController@index')->name('roles');
 Route::get('/roles/crear','RoleController@crear')->name('crearRol');
 Route::post('/roles/guardar','RoleController@guardar')->name('guardarRol');
