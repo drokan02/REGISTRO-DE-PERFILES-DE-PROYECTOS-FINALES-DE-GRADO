@@ -19,5 +19,8 @@ Route::get('/menu','menuController@index')->name('menu');
 Route::get('/roles','RoleController@index')->name('roles');
 Route::get('/roles/crear','RoleController@crear')->name('crearRol');
 Route::post('/roles/guardar','RoleController@guardar')->name('guardarRol');
+Route::get('/roles/{role}/editar','RoleController@editar')->name('editarRol');
+Route::put('/roles/{role}','RoleController@actualizar')->name('actualizarRol');
+Route::delete('/roles/{role}/eliminar','RoleController@eliminar')->name('eliminarRol');
 //usuarios
 Route::get('/usuarios','usuarioController@index')->name('usuarios');

@@ -25,6 +25,12 @@
                     <td>{{$rol->nombre_rol}}</td>
                     <td>{{$rol->privilegios}}</td>
                     <td>
+                        <form method="POST" action="{{route('eliminarRol',$rol)}}">
+                            {{method_field('DELETE')}}
+                            {!! csrf_field() !!}
+                            <a href="{{route('editarRol',$rol)}}" class="btn btn-link">Editar</a>
+                            <button class="btn btn-link" type="submit">Eliminar</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
