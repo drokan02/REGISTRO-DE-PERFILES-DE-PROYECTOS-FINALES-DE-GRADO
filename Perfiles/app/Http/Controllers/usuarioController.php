@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Role;
 use Illuminate\Http\Request;
 use App\User;
 
@@ -22,9 +23,9 @@ class usuarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function crear(){
+        $roles=Role::all()->pluck('nombre_rol');
+        return view('usuarios/crearUsuarios',compact('roles'));
     }
 
     /**
@@ -33,9 +34,21 @@ class usuarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function guardar(Request $request)
     {
-        //
+
+        $this->validate(request(), [
+            'name' => ['required'],
+            'user_name' => ['required','unique:users,user_name'],
+            'email' => ['required','email','unique:users,email'],
+            'password' => ['required'],
+            'role_id'=> ['required','not_in:seleccione una opcion']
+        ]);
+        $rol_id=Role::query()->where('nombre_rol',$request['role_id'])->value('id');
+        $request['role_id']=$rol_id;
+        $user=new User();
+        $user->create($request->all());
+        return redirect()->route('usuarios');
     }
 
     /**
