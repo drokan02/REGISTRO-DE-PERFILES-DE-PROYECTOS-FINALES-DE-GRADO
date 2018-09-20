@@ -24,3 +24,5 @@ Route::put('/roles/{role}','RoleController@actualizar')->name('actualizarRol');
 Route::delete('/roles/{role}/eliminar','RoleController@eliminar')->name('eliminarRol');
 //usuarios
 Route::get('/usuarios','usuarioController@index')->name('usuarios');
+Route::get('/usuarios/crear','usuarioController@crear')->name('crearUsuario');
+Route::post('/usuarios/guardar','usuarioController@guardar')->name('guardarUsuario');
