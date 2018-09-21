@@ -6,7 +6,7 @@
             <h1 class="display-4 font-weight-bold">Lista de Usuarios</h1>
         </div>
         <div class="col p-3 mt-1">
-            <a href="#" class="btn btn-link">crear usuario</a>
+            <a href="{{route('crearUsuario')}}" class="btn btn-link">crear usuario</a>
             <a href="{{route('roles')}}" class="btn btn-link">Roles</a>
         </div>
     </div>
