@@ -1,13 +1,15 @@
 @extends('layouts.menu')
 @section('titulo','ROLES')
 @section('contenido')
-
-    <h1 class="display-4 font-weight-bold">Lista de Roles del Sistema</h1>
-    <div class="mb-3">
-        <a href="{{route('crearRol')}}" class="btn btn-primary">Crear Rol</a>
-        <a href="{{route('usuarios')}}" class="btn btn-primary">Usuarios</a>
+    <div class="row">
+        <div class="col-9">
+            <h1 class="display-4 font-weight-bold">Lista de Roles del Sistema</h1>
+        </div>
+        <div class="col  p-3 mt-1">
+            <a href="{{route('crearRol')}}" class="btn btn-link"><i class="fa fa-plus"></i></a>
+            <a href="{{route('usuarios')}}" class="btn btn-link"><i class="fa fa-users"></i></a>
+        </div>
     </div>
-
     @if($roles->isNotEmpty())
         <table class="table table-hover table-bordered text-center">
             <thead class="thead-dark">
@@ -28,8 +30,8 @@
                         <form method="POST" action="{{route('eliminarRol',$rol)}}">
                             {{method_field('DELETE')}}
                             {!! csrf_field() !!}
-                            <a href="{{route('editarRol',$rol)}}" class="btn btn-link">Editar</a>
-                            <button class="btn btn-link" type="submit">Eliminar</button>
+                            <a href="{{route('editarRol',$rol)}}" class="btn btn-link"><i class="fa fa-edit"></i></a>
+                            <button class="btn btn-link" type="submit"><i class="fa fa-trash"></i></button>
                         </form>
                     </td>
                 </tr>

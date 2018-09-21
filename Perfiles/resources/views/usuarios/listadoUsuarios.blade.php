@@ -6,7 +6,7 @@
             <h1 class="display-4 font-weight-bold">Lista de Usuarios</h1>
         </div>
         <div class="col p-3 mt-1">
-            <a href="{{route('crearUsuario')}}" class="btn btn-link">crear usuario</a>
+            <a href="{{route('crearUsuario')}}" class="btn btn-link"><i class="fa fa-plus"></i></a>
             <a href="{{route('roles')}}" class="btn btn-link">Roles</a>
         </div>
     </div>
@@ -27,6 +27,11 @@
                     <td>{{$us->name}}</td>
                     <td>{{$us->role->nombre_rol}}</td>
                     <td>
+                        <form action="#">
+                            <a href="#" class="btn btn-link"><i class="fa fa-eye"></i></a>
+                            <a href="#" class="btn btn-link"><i class="fa fa-edit"></i></a>
+                            <button class="btn btn-link" type="submit"><i class="fa fa-trash"></i></button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
@@ -35,6 +40,4 @@
     @else
         <li>No hay usuarios</li>
     @endif
-
-
 @endsection
