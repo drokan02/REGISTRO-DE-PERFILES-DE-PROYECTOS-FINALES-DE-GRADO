@@ -9,9 +9,9 @@
     <link rel="stylesheet" href={{asset('css/font-awesome.css')}}>
     <link rel="stylesheet" href={{asset('css/AdminLTE.min.css')}}>
     <link rel="stylesheet" href={{asset('css/_all-skins.min.css')}}>
+    <link href={{asset('css/estilos.css')}} rel="stylesheet">
     <link rel="apple-touch-icon" href={{asset('img/apple-touch-icon.png')}}>
     <link rel="shortcut icon" href={{asset('img/favicon.ico')}}>
-
   </head>
   <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
@@ -86,12 +86,12 @@
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-file-text-o" aria-hidden="true"></i>
-                <span>Areas</span>
+                <span> Areas </span>
                  <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Area</a></li>
-                <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Area</a></li>
+                <li><a href="{{route('registrarArea')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Area</a></li>
+                <li><a href="{{route('listarAreas')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Area</a></li>
                 <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Subareas</a></li>
                 <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Subareas</a></li>
               </ul>
@@ -197,5 +197,8 @@
 
     <script src={{asset('js/app.min.js')}}></script>
     
+    <script src={{asset('js/parsley.min.js')}}></script>
+
+    <script src={{asset('js/jQuery.dataTable.js')}}></script>
   </body>
 </html>
