@@ -6,9 +6,16 @@
             <h1 class="display-4 font-weight-bold">Lista de Roles del Sistema</h1>
         </div>
         <div class="col  p-3 mt-1">
-            <a href="{{route('crearRol')}}" class="btn btn-link"><i class="fa fa-plus"></i></a>
-            <a href="{{route('usuarios')}}" class="btn btn-link"><i class="fa fa-users"></i></a>
+            <a href="{{route('crearRol')}}" class="btn btn-link btn-lg" data-toggle="tooltip" data-placement="right" title="añadir"><i class="fa fa-plus"></i></a>
+            <a href="{{route('usuarios')}}" class="btn btn-link btn-lg" data-toggle="tooltip" data-placement="right" title="Usuarios"><i class="fa fa-users"></i></a>
         </div>
+    </div>
+    <div class="alert-danger">
+        @foreach($errors->all() as $errors)
+            <ul>
+                <li>{{$errors}}</li>
+            </ul>
+        @endforeach
     </div>
     @if($roles->isNotEmpty())
         <table class="table table-hover table-bordered text-center">
@@ -30,8 +37,8 @@
                         <form method="POST" action="{{route('eliminarRol',$rol)}}">
                             {{method_field('DELETE')}}
                             {!! csrf_field() !!}
-                            <a href="{{route('editarRol',$rol)}}" class="btn btn-link"><i class="fa fa-edit"></i></a>
-                            <button class="btn btn-link" type="submit"><i class="fa fa-trash"></i></button>
+                            <a href="{{route('editarRol',$rol)}}" class="btn btn-link btn-lg" data-toggle="tooltip" data-placement="right" title="Editar"><i class="fa fa-edit"></i></a>
+                            <button class="btn btn-link btn-lg" type="submit"><i class="fa fa-trash"></i></button>
                         </form>
                     </td>
                 </tr>
