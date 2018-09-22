@@ -7,11 +7,14 @@
             @if($errors ->any())
                 <div class="alert-danger">
                     <h3>Se tiene los siguientes errores en el formulario</h3>
-                    <ul>
-                        @foreach($errors->all() as $errors)
-                            <li>{{$errors}}</li>
-                        @endforeach
-                    </ul>
+                    <div class="alert-danger">
+                        <ul>
+                            @foreach($errors->all() as $errors)
+                                <li>{{$errors}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+
                 </div>
             @endif
             <form method="POST" action="{{route('guardarRol')}}">
@@ -29,7 +32,8 @@
                         <option>bajo</option>
                     </select>
                 </div>
-                <button class=" btn btn-outline-primary btn-block ">Crear</button>
+                <a href="{{route('roles')}}" class="btn btn-outline-primary btn-lg">Lista Roles</a>
+                <button type="submit" class="btn btn-outline-primary btn-lg">Crear</button>
             </form>
         </div>
     </div>

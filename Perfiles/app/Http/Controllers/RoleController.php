@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Role;
+use function MongoDB\BSON\toJSON;
 
 class RoleController extends Controller
 {
@@ -35,7 +36,13 @@ class RoleController extends Controller
         return redirect()->route('roles');
     }
     public function eliminar(Role $role){
-        $role->delete();
-        return redirect()->route('roles');
+        if($role->user->toArray() != []){ //para no eliminar un rol que tiene usuarios
+            return back()->withErrors('no se puede eliminar el rol porque hay
+             usuarios con este rol');
+        }
+        else{
+            $role->delete();
+            return redirect()->route('roles');
+        }
     }
 }
