@@ -54,5 +54,5 @@
   
 </Form>
 
-{!!Form::close()!!}
+<!---->
 @endsection
