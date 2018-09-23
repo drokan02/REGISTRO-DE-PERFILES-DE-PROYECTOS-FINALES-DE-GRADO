@@ -15,7 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 })->name('inicio');
 
-Route::get('/inicio/listarAreas', 'menuController@listarAreas')->name('listarAreas');
 //Roles
 Route::get('/menu','menuController@index')->name('menu');
 Route::get('/roles','RoleController@index')->name('roles');
@@ -27,14 +26,15 @@ Route::delete('/roles/{role}/eliminar','RoleController@eliminar')->name('elimina
 
 //usuarios
 Route::get('/usuarios','usuarioController@index')->name('usuarios');
-Route::get('/usuarios/crear','usuarioController@crear')->name('crearUsuario');
-Route::post('/usuarios/guardar','usuarioController@guardar')->name('guardarUsuario');
-
 
 //Areas
-Route::get('area','AreaController@index')->name('areas');
-Route::get('area/registrarArea','AreaController@registrar')->name('registrarArea');
-Route::post('area/guardarArea','AreaController@registrar')->name('guardarArea');
+Route::get('/areas','AreaController@index')->name('Areas');
+Route::get('/areas/registrar','AreaController@registrar')->name('registrarArea');
+Route::post('/areas/registrar/almacenar','AreaController@almacenar')->name('almacenarArea');
+Route::post('/areas/editar','AreaController@editar')->name('editarArea');
+Route::post('/areas/editar/modificar','AreaController@modificar')->name('modificarArea');
+Route::any('/areas/buscar', 'AreaController@index')->name('buscarArea');
 
 
-
+Route::get('/prueba','AreaController@prueba')->name('prueba');
+Route::get('/prueba/ver','AreaController@probar')->name('pruebaVer');
