@@ -52,13 +52,5 @@ class AreaController extends Controller
         return redirect('area');
 	}
 
-	public function prueba(){
-		return view('area.prueba');
-	}
-
-	public function probar(Request $request){
-		$nombre = $request->get('nombre');
-		return view('area.prueba',['error'=> $nombre ,'nombre'=> $nombre]);
-	}
 
 }
