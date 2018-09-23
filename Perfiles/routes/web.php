@@ -26,26 +26,15 @@ Route::delete('/roles/{role}/eliminar','RoleController@eliminar')->name('elimina
 
 //usuarios
 Route::get('/usuarios','usuarioController@index')->name('usuarios');
-<<<<<<< HEAD
 
 //Areas
-
-Route::get('areas','AreaController@index')->name('Areas');
-Route::get('areas/registrarArea','AreaController@registrar')->name('registrarArea');
-Route::post('areas/guardarArea','AreaController@registrar')->name('guardarArea');
+Route::get('/areas','AreaController@index')->name('Areas');
+Route::get('/areas/registrar','AreaController@registrar')->name('registrarArea');
+Route::post('/areas/registrar/almacenar','AreaController@almacenar')->name('almacenarArea');
+Route::post('/areas/editar','AreaController@editar')->name('editarArea');
+Route::post('/areas/editar/modificar','AreaController@modificar')->name('modificarArea');
 Route::any('/areas/buscar', 'AreaController@index')->name('buscarArea');
-Route::any('prueba','areaController@prueba')->name('prueba');
-Route::any('prueba/ver','areaController@index')->name('prueba');
-=======
-Route::get('/usuarios/crear','usuarioController@crear')->name('crearUsuario');
-Route::post('/usuarios/guardar','usuarioController@guardar')->name('guardarUsuario');
 
 
-//Areas
-Route::get('area','AreaController@index')->name('areas');
-Route::get('area/registrarArea','AreaController@registrar')->name('registrarArea');
-Route::post('area/guardarArea','AreaController@registrar')->name('guardarArea');
-
-
-
->>>>>>> fd79d5fbf20f8ef1e3701a67325406221af6feb9
+Route::get('/prueba','AreaController@prueba')->name('prueba');
+Route::get('/prueba/ver','AreaController@probar')->name('pruebaVer');

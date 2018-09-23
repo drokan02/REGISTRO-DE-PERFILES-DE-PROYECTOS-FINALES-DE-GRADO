@@ -104,7 +104,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="{{route('crearUsuario')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Nuevo Usuario</a></li>
+                <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Nuevo Usuario</a></li>
                 <li><a href="{{route('usuarios')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Usuarios</a></li>
                 <li><a href="{{route('roles')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Roles de Usuarios</a></li>
               </ul>

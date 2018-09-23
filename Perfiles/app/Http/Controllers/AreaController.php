@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\AreaFormRequest;
+use Validator;
 use App\Area;
 use DB;
 class AreaController extends Controller
@@ -23,16 +25,17 @@ class AreaController extends Controller
 	}
 
 	public function registrar(){
-		return view('area.registrarArea');
+		return view('area.registrarArea',['codigo'=>null,'nombre'=>null,'descripcion'=>null]);
 	}
 
-	public function guardar(AreaFormRequest $request){
+	
+	public function almacenar(AreaFormRequest $request){
+
 		$area = new Area;
-		$area->nombre = $request->get('nombre');
-		$area->descripsion = $request->get('descripsion');
-		$area->save();
-		return Redirect::to('area.listarAreas');
+		$area->create($request->all());
+		return redirect()->route('Areas');
 	}
+
 
 	public function editar($id){
 		$area=Areas::findOrFail($id);
@@ -40,7 +43,7 @@ class AreaController extends Controller
 	
 	}
 
-	public function actualizar(Request $request,$id){
+	public function modificar(Request $request,$id){
 		Area::findOrFail($id)->update($request->all());
         return redirect('area');
 	}
@@ -49,14 +52,13 @@ class AreaController extends Controller
         return redirect('area');
 	}
 
-	public function buscar(Request $request){
-		dd('dasd');
+	public function prueba(){
+		return view('area.prueba');
 	}
 
-	public function prueba(Request $request){
-			$buscar = $request->get('buscar');			
-			$areas = Area::buscar($buscar)
-			->orderBy('id','DESC');
-			return view('area.listarAreas',['areas'=> $areas,'buscar'=>$buscar ]);
+	public function probar(Request $request){
+		$nombre = $request->get('nombre');
+		return view('area.prueba',['error'=> $nombre ,'nombre'=> $nombre]);
 	}
+
 }

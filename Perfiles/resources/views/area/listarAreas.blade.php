@@ -29,10 +29,10 @@
       <tbody>
         @foreach ($areas as $area)
             <tr>
-                <td>{{$area->id_area}}</td>
+                <td>{{$area->id}}</td>
                 <td>{{$area->codigo}}</td>
                 <td>{{$area->nombre}}</td>
-                <td>{{$area->descripsion}}</td>
+                <td>{{$area->descripcion}}</td>
                 <td>
                     <div class="text-center">
                         <a href='#' data-toggle="tooltip" data-placement="right" title="Editar">
@@ -52,9 +52,4 @@
     </table>
 </div>
 </Form>
-<<<<<<< HEAD
-=======
-
-<!---->
->>>>>>> fd79d5fbf20f8ef1e3701a67325406221af6feb9
 @endsection
