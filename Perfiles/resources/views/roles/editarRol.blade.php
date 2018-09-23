@@ -32,7 +32,8 @@
                         <option>bajo</option>
                     </select>
                 </div>
-                <button class=" btn btn-outline-primary btn-block ">Editar</button>
+                <a href="{{route('roles')}}" class="btn btn-outline-primary btn-lg">Lista Roles</a>
+                <button type="submit" class=" btn btn-outline-primary btn-lg">Editar</button>
             </form>
         </div>
     </div>
