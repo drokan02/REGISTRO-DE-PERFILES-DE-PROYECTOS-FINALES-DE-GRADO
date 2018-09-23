@@ -91,7 +91,7 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="{{route('registrarArea')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Area</a></li>
-                <li><a href="{{route('listarAreas')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Area</a></li>
+                <li><a href="{{route('Areas')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Area</a></li>
                 <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Subareas</a></li>
                 <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Subareas</a></li>
               </ul>

@@ -24,8 +24,10 @@ class AreaFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre'=> 'required|max:50';
-			'descripcion'=> 'max:250';
+            'id_area'=>'string',
+            'codigo'=> 'required|string|min:1',
+            'nombre'=> 'required|string|min:3',
+            'descripsion'=> 'required|string|min:3',
         ];
     }
 }

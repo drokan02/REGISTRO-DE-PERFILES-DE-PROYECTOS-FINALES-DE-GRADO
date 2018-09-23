@@ -10,7 +10,4 @@ class menuController extends Controller
    		return view('layouts.menu');
    }
 
-   public function listarAreas(){
-        return view('area.listarAreas');
-   }
 }

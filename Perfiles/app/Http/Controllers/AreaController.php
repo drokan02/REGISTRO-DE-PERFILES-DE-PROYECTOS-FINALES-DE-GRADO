@@ -12,15 +12,14 @@ class AreaController extends Controller
 	}
 	
 	public function index(Request $request){
-
-		/*if($request){
-			$buscar = trim($request->get('buscarTexto'));
-			$areas = DB::table('area')->where('nombre',' ','descripsion','LIKE','%',$buscar,'%');
-			return view('area.listaAreas',["areas"=>$areas],'buscarTexto'=>$buscar);
+		if($request->get('buscar') != null){
+			$buscar = $request->get('buscar');			
+			$areas = Area::buscar($buscar)->get();
+			return view('area.listarAreas',['areas'=> $areas,'buscar'=>$buscar ]);	
+		}else{
+			$areas = Area::all();
+			return view('area.listarAreas',['areas'=> $areas]);
 		}
-		*/
-		 $data = Area::all();
-		return view('area.lista',['areas'=> $data ]);
 	}
 
 	public function registrar(){
@@ -32,7 +31,7 @@ class AreaController extends Controller
 		$area->nombre = $request->get('nombre');
 		$area->descripsion = $request->get('descripsion');
 		$area->save();
-		return Redirect::to('area');
+		return Redirect::to('area.listarAreas');
 	}
 
 	public function editar($id){
@@ -48,5 +47,16 @@ class AreaController extends Controller
 	public function eliminar(){
 		 Area::findOrFail($id)->delete();
         return redirect('area');
+	}
+
+	public function buscar(Request $request){
+		dd('dasd');
+	}
+
+	public function prueba(Request $request){
+			$buscar = $request->get('buscar');			
+			$areas = Area::buscar($buscar)
+			->orderBy('id','DESC');
+			return view('area.listarAreas',['areas'=> $areas,'buscar'=>$buscar ]);
 	}
 }
