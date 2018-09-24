@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Role;
-use function MongoDB\BSON\toJSON;
 
 class RoleController extends Controller
 {
@@ -29,7 +28,7 @@ class RoleController extends Controller
     }
     public function actualizar(Role $role){
         $this->validate(request(), [
-            'nombre_rol' => ['required','Alpha'],
+            'nombre_rol' => ['required'],
             'privilegios'=> ['required','not_in:seleccione una opcion']
         ]);
         $role->update($_REQUEST);

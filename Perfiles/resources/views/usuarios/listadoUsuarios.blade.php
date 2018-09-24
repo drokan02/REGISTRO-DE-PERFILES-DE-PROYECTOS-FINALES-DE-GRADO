@@ -11,8 +11,8 @@
         </div>
     </div>
     @if($users->isNotEmpty())
-        <table class="table table-hover table-bordered text-center">
-            <thead class="thead-dark">
+        <table class="table table-hover table-bordered-primary text-center">
+            <thead class="thead-primary">
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Nombre</th>
@@ -25,11 +25,13 @@
                 <tr>
                     <th scope="row">{{$us->id}}</th>
                     <td>{{$us->name}}</td>
-                    <td>{{$us->role->nombre_rol}}</td>
+                    <td>{{$us->roles->pluck('nombre_rol')->implode(' - ')}}</td>
                     <td>
-                        <form action="#">
-                            <a href="#" class="btn btn-link btn-lg" data-toggle="tooltip" data-placement="right" title="Datos Usuario"><i class="fa fa-eye"></i></a>
-                            <a href="#" class="btn btn-link btn-lg" data-toggle="tooltip" data-placement="right" title="Editar"><i class="fa fa-edit"></i></a>
+                        <form method="POST" action="{{route('eliminarUsuario',$us)}}">
+                            {{method_field('DELETE')}}
+                            {!! csrf_field() !!}
+                            <a href="{{route('detalleUsuario',['id'=>$us->id])}}" class="btn btn-link btn-lg" data-toggle="tooltip" data-placement="right" title="Datos Usuario"><i class="fa fa-eye"></i></a>
+                            <a href="{{route('editarUsuario',$us)}}" class="btn btn-link btn-lg" data-toggle="tooltip" data-placement="right" title="Editar"><i class="fa fa-edit"></i></a>
                             <button class="btn btn-link btn-lg" type="submit"><i class="fa fa-trash"></i></button>
                         </form>
                     </td>
