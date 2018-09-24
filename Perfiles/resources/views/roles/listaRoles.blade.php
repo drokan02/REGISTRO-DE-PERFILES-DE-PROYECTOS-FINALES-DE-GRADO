@@ -6,7 +6,7 @@
             <h1 class="display-4 font-weight-bold">Lista de Roles del Sistema</h1>
         </div>
         <div class="col  p-3 mt-1">
-            <a href="{{route('crearRol')}}" class="btn btn-link btn-lg" data-toggle="tooltip" data-placement="right" title="añadir"><i class="fa fa-plus"></i></a>
+            <a href="#" class="btn btn-link btn-lg" data-toggle="tooltip" data-placement="right" title="añadir"><i class="fa fa-plus"></i></a>
             <a href="{{route('usuarios')}}" class="btn btn-link btn-lg" data-toggle="tooltip" data-placement="right" title="Usuarios"><i class="fa fa-users"></i></a>
         </div>
     </div>

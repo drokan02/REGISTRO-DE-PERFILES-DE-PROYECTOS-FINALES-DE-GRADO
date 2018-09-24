@@ -25,7 +25,7 @@ class AreaController extends Controller
 	}
 
 	public function registrar(){
-		return view('area.registrarArea',['codigo'=>null,'nombre'=>null,'descripcion'=>null]);
+		return view('area.registrarArea',['descripcion'=>null]);
 	}
 
 	

@@ -2,13 +2,9 @@
 @section('titulo','REGISTRAR AREA')
 @section('contenido')
 
-
-<div class="container col-sm-4">
-	<div></div>
-	@include('layouts.error')
-	<div></div>					
-</div>
-	
+<!--ERRORES-->
+	@include('complementos.error')				
+<!--FIN ERRORES-->
 	<div class= "container" >
 		<form method="POST" action="{{route('almacenarArea')}}">
 			{!! csrf_field() !!}
@@ -36,7 +32,7 @@
 						<label for="descripcion" class="col-sm-2 col-form-label">Descripcion</label>
 						<div class="col-sm-8">
 							<textarea class="form-control" placeholder="descripcion no obligatoria" autocomplete="off"
-							name="descripcion" rows="5">{{$descripcion}}</textarea>
+							name="descripcion" rows="5">{{old('descripcion')}}</textarea>
 						</div>
 						
 					</div>
@@ -44,8 +40,8 @@
 					<div class = "form-group row"> 
 						<div class="col-sm-2"></div>
 						<div class="col-8">
-								
-								<button type="submit" class='btn btn-success'>Registrar</button>
+							<a href="{{ route('registrarArea') }}" class="btn btn-danger">Cancel</a>	
+							<button type="submit" class='btn btn-success'>Registrar</button>
 						</div>
 						
 							

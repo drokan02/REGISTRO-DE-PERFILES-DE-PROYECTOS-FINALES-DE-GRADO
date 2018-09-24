@@ -26,7 +26,7 @@ Route::delete('/roles/{role}/eliminar','RoleController@eliminar')->name('elimina
 
 //usuarios
 Route::get('/usuarios','usuarioController@index')->name('usuarios');
-
+Route::get('/roles/crear','UsuarioController@crear')->name('crearUsuario');
 //Areas
 Route::get('/areas','AreaController@index')->name('Areas');
 Route::get('/areas/registrar','AreaController@registrar')->name('registrarArea');

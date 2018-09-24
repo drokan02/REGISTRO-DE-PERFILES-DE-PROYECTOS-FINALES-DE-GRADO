@@ -18,7 +18,7 @@ class CreateAreasTable extends Migration
             $table->string('codigo');
             $table->string('nombre');
             $table->string('descripcion');
-            $table->int('id_subarea');
+            $table->integer('id_subarea');
             $table->foreign('id_subarea')->references('id')->on('areas');
             $table->timestamps();
         });

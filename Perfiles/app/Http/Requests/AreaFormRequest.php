@@ -38,7 +38,7 @@ class AreaFormRequest extends FormRequest
             'nombre.required' => 'no ingreso el nombre del Area',
             'nombre.regex' => 'solo se permiten espacios y letras en el nombre',
             'nombre.unique'   => 'esa aria ya se encuentra registrada',
-            'descripcion.min' => 'min numero de caracteres de la descripcion es de 20 o nada',
+            'descripcion.min' => 'minimo numero de caracteres de la descripcion es de 20 o nada',
   
            
         ];
