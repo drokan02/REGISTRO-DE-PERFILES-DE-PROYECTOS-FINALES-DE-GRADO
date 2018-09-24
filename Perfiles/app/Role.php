@@ -10,11 +10,9 @@ class Role extends Model
         'nombre_rol','privilegios'
     ];
 
-    public function scopeBuscar($query, $buscar){
-		return $query->where(DB::raw("CONCAT(nombre_rol,' ',privilegios)"), "LIKE", '%' .$buscar. '%');
-	}
+
     public function user(){
-        return $this->hasMany(User::class);
+        return $this->belongsToMany(User::class,'asignacion_rol_user');
     }
 
 }

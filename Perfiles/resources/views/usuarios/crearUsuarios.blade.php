@@ -32,14 +32,13 @@
                     <label for="password">Contraseña</label>
                     <input type="password" class="form-control" name="password" id="password" value="{{old('password')}}">
                 </div>
-                <div class="form-group mb-4">
-                    <label for="role_id">Rol del Usuario</label>
-                    <select class="form-control" id="role_id" name="role_id">
-                        <option>seleccione una opcion</option>
-                        @foreach($roles as $rol)
-                            <option>{{$rol}}</option>
-                        @endforeach
-                    </select>
+                <div class="form-group checkbox mb-4">
+                    @foreach($roles as $id=>$nombre_rol)
+                        <label for="roles">
+                            <input type="checkbox" value="{{$id}}" name="roles[]">
+                            {{$nombre_rol}}
+                        </label>
+                    @endforeach
                 </div>
                 <button class=" btn btn-outline-primary btn-block ">Crear</button>
             </form>

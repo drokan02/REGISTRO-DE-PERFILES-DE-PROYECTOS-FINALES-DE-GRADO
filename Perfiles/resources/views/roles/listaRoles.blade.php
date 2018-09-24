@@ -18,8 +18,8 @@
         @endforeach
     </div>
     @if($roles->isNotEmpty())
-        <table class="table table-hover table-bordered text-center">
-            <thead class="thead-dark">
+        <table class="table table-hover table-bordered-primary text-center">
+            <thead class="thead-primary">
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Nombre Rol</th>

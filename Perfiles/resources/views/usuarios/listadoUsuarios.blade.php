@@ -11,8 +11,8 @@
         </div>
     </div>
     @if($users->isNotEmpty())
-        <table class="table table-hover table-bordered text-center">
-            <thead class="thead-dark">
+        <table class="table table-hover table-bordered-primary text-center">
+            <thead class="thead-primary">
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Nombre</th>
@@ -25,7 +25,7 @@
                 <tr>
                     <th scope="row">{{$us->id}}</th>
                     <td>{{$us->name}}</td>
-                    <td>{{$us->role->nombre_rol}}</td>
+                    <td>{{$us->roles->pluck('nombre_rol')->implode(' - ')}}</td>
                     <td>
                         <form method="POST" action="{{route('eliminarUsuario',$us)}}">
                             {{method_field('DELETE')}}

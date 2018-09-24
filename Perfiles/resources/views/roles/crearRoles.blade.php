@@ -35,7 +35,7 @@
                     </select>
                 </div>
                 <a href="{{route('roles')}}" class="btn btn-outline-primary btn-lg">Lista Roles</a>
-                <button type="submit" class="btn btn-outline-primary btn-lg">Crear</button>
+                <button type="submit" class="btn btn-outline-success btn-lg">Crear</button>
             </form>
         </div>
     </div>

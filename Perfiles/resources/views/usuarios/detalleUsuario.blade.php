@@ -16,7 +16,7 @@
             </tr>
             <tr>
                 <td>Rol del usuario</td>
-                <td>{{$user->role->nombre_rol}}</td>
+                <td>{{$user->roles->pluck('nombre_rol')->implode(' - ')}}</td>
             </tr>
         </tbody>
     </table>

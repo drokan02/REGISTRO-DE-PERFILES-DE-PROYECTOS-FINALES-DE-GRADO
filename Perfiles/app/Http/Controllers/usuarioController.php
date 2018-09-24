@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Role;
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class usuarioController extends Controller
@@ -25,7 +26,7 @@ class usuarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function crear(){
-        $roles=Role::all()->pluck('nombre_rol');
+        $roles=Role::all()->pluck('nombre_rol','id');
         return view('usuarios/crearUsuarios',compact('roles'));
     }
 
@@ -37,18 +38,20 @@ class usuarioController extends Controller
      */
     public function guardar(Request $request)
     {
-
         $this->validate(request(), [
             'name' => ['required'],
             'user_name' => ['required','unique:users,user_name'],
             'email' => ['required','email','unique:users,email'],
             'password' => ['required'],
-            'role_id'=> ['required','not_in:seleccione una opcion']
+            'roles'=>'required'
         ]);
-        $rol_id=Role::query()->where('nombre_rol',$request['role_id'])->value('id');
-        $request['role_id']=$rol_id;
-        $user=new User();
-        $user->create($request->all());
+        $request['password']=bcrypt($request['password']);
+        DB::transaction(function () use($request) {
+            $user=new User();
+            $user->create($request->all());
+            $iduser=User::query()->where('email',$request['email'])->value('id');
+            $user->roles()->attach($request['roles'],['user_id'=>$iduser]);
+        });
         return redirect()->route('usuarios');
     }
 
