@@ -34,4 +34,3 @@ Route::post('/areas/registrar/almacenar','AreaController@almacenar')->name('alma
 Route::post('/areas/editar','AreaController@editar')->name('editarArea');
 Route::post('/areas/editar/modificar','AreaController@modificar')->name('modificarArea');
 Route::any('/areas/buscar', 'AreaController@index')->name('buscarArea');
-

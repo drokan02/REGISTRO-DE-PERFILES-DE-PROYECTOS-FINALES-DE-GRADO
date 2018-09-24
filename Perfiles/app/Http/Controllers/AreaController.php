@@ -52,6 +52,5 @@ class AreaController extends Controller
         return redirect('area');
 	}
 
-	
 
 }
