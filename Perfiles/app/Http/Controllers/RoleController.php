@@ -28,14 +28,20 @@ class RoleController extends Controller
     }
     public function actualizar(Role $role){
         $this->validate(request(), [
-            'nombre_rol' => ['required','Alpha'],
+            'nombre_rol' => ['required'],
             'privilegios'=> ['required','not_in:seleccione una opcion']
         ]);
         $role->update($_REQUEST);
         return redirect()->route('roles');
     }
     public function eliminar(Role $role){
-        $role->delete();
-        return redirect()->route('roles');
+        if($role->user->toArray() != []){ //para no eliminar un rol que tiene usuarios
+            return back()->withErrors('no se puede eliminar el rol porque hay
+             usuarios con este rol');
+        }
+        else{
+            $role->delete();
+            return redirect()->route('roles');
+        }
     }
 }

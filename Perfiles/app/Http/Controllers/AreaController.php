@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\AreaFormRequest;
+use Validator;
 use App\Area;
 use DB;
 class AreaController extends Controller
@@ -12,28 +14,28 @@ class AreaController extends Controller
 	}
 	
 	public function index(Request $request){
-
-		/*if($request){
-			$buscar = trim($request->get('buscarTexto'));
-			$areas = DB::table('area')->where('nombre',' ','descripsion','LIKE','%',$buscar,'%');
-			return view('area.listaAreas',["areas"=>$areas],'buscarTexto'=>$buscar);
+		if($request->get('buscar') != null){
+			$buscar = $request->get('buscar');			
+			$areas = Area::buscar($buscar)->get();
+			return view('area.listarAreas',['areas'=> $areas,'buscar'=>$buscar ]);	
+		}else{
+			$areas = Area::all();
+			return view('area.listarAreas',['areas'=> $areas]);
 		}
-		*/
-		 $data = Area::all();
-		return view('area.lista',['areas'=> $data ]);
 	}
 
 	public function registrar(){
-		return view('area.registrarArea');
+		return view('area.registrarArea',['codigo'=>null,'nombre'=>null,'descripcion'=>null]);
 	}
 
-	public function guardar(AreaFormRequest $request){
+	
+	public function almacenar(AreaFormRequest $request){
+
 		$area = new Area;
-		$area->nombre = $request->get('nombre');
-		$area->descripsion = $request->get('descripsion');
-		$area->save();
-		return Redirect::to('area');
+		$area->create($request->all());
+		return redirect()->route('Areas');
 	}
+
 
 	public function editar($id){
 		$area=Areas::findOrFail($id);
@@ -41,7 +43,7 @@ class AreaController extends Controller
 	
 	}
 
-	public function actualizar(Request $request,$id){
+	public function modificar(Request $request,$id){
 		Area::findOrFail($id)->update($request->all());
         return redirect('area');
 	}
@@ -49,4 +51,6 @@ class AreaController extends Controller
 		 Area::findOrFail($id)->delete();
         return redirect('area');
 	}
+
+
 }

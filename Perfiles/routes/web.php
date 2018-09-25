@@ -15,7 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 })->name('inicio');
 
-Route::get('/inicio/listarAreas', 'menuController@listarAreas')->name('listarAreas');
 //Roles
 Route::get('/menu','menuController@index')->name('menu');
 Route::get('/roles','RoleController@index')->name('roles');
@@ -27,17 +26,25 @@ Route::delete('/roles/{role}/eliminar','RoleController@eliminar')->name('elimina
 
 //usuarios
 Route::get('/usuarios','usuarioController@index')->name('usuarios');
-//<<<<<<< HEAD
-
-//Areas
-Route::get('area','AreaController@index')->name('areas');
-Route::get('area/registrarArea','AreaController@registrar')->name('registrarArea');
-Route::post('area/guardarArea','AreaController@registrar')->name('guardarArea');
-//=======
 Route::get('/usuarios/crear','usuarioController@crear')->name('crearUsuario');
 Route::post('/usuarios/guardar','usuarioController@guardar')->name('guardarUsuario');
+<<<<<<< HEAD
 //>>>>>>> c8a3dbd378f54b057566cc0c63f538b61c250beb
 //tutores
 Route::get('profesionales','tutores@index')->name('profesionales');
 Route::get('profesionales/registrotutor','tutores@registrar')->name('registrotutor');
 Route::post('profesionales/listarTutor','tutores@listarTutor')->name('listarTutor');
+=======
+Route::get('/usuarios/{user}','usuarioController@detalle')->name('detalleUsuario');
+Route::get('/usuarios/{user}/editar','usuarioController@editar')->name('editarUsuario');
+Route::put('/usuarios/{user}','usuarioController@actualizar')->name('actualizarUsuario');//put metodo para actualizar
+Route::delete('/usuarios/{user}/eliminar','usuarioController@eliminar')->name('eliminarUsuario');
+
+//Areas
+Route::get('/areas','AreaController@index')->name('Areas');
+Route::get('/areas/registrar','AreaController@registrar')->name('registrarArea');
+Route::post('/areas/registrar/almacenar','AreaController@almacenar')->name('almacenarArea');
+Route::post('/areas/editar','AreaController@editar')->name('editarArea');
+Route::post('/areas/editar/modificar','AreaController@modificar')->name('modificarArea');
+Route::any('/areas/buscar', 'AreaController@index')->name('buscarArea');
+>>>>>>> d987537add4de8029d441940e355f74b421db180
