@@ -1,11 +1,14 @@
 @extends('layouts.menu')
-@section('titulo','ROLES')
+@section('titulo','Lista de Roles del Sistema')
 @section('contenido')
-    <div class="row">
-        <div class="col-9">
-            <h1 class="display-4 font-weight-bold">Lista de Roles del Sistema</h1>
+    <div class="row mb-3">
+        <div class="col-8 offset-1">
+            <form method="GET" action="{{route('roles')}}" class="form-inline">
+                <input class="form-control" name="name" placeholder="Buscar">
+                <button type="submit" class=" btn btn-success">Buscar</button>
+            </form>
         </div>
-        <div class="col  p-3 mt-1">
+        <div class="col ">
             <a href="{{route('crearRol')}}" class="btn btn-link btn-lg" data-toggle="tooltip" data-placement="right" title="añadir"><i class="fa fa-plus"></i></a>
             <a href="{{route('usuarios')}}" class="btn btn-link btn-lg" data-toggle="tooltip" data-placement="right" title="Usuarios"><i class="fa fa-users"></i></a>
         </div>

@@ -11,8 +11,13 @@ class Role extends Model
     ];
 
 
-    public function user(){
+    public function users(){
         return $this->belongsToMany(User::class,'asignacion_rol_user');
+    }
+    public function scopeName($query,$nombre_rol){
+        if (trim($nombre_rol) != ""){
+            $query->where('nombre_rol','like',"%$nombre_rol%");
+        }
     }
 
 }

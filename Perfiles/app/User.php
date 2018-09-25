@@ -32,4 +32,9 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class,'asignacion_rol_user');
 
     }
+    public function scopeName($query,$name){
+        if (trim($name) != ""){
+            $query->where('name','like',"%$name%");
+        }
+    }
 }
