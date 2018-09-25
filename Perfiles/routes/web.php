@@ -37,3 +37,7 @@ Route::post('area/guardarArea','AreaController@registrar')->name('guardarArea');
 Route::get('/usuarios/crear','usuarioController@crear')->name('crearUsuario');
 Route::post('/usuarios/guardar','usuarioController@guardar')->name('guardarUsuario');
 //>>>>>>> c8a3dbd378f54b057566cc0c63f538b61c250beb
+//tutores
+Route::get('profesionales','tutores@index')->name('profesionales');
+Route::get('profesionales/registrotutor','tutores@registrar')->name('registrotutor');
+Route::post('profesionales/listarTutor','tutores@listarTutor')->name('listarTutor');

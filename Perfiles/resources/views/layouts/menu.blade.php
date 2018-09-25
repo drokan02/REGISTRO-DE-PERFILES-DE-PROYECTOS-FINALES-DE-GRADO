@@ -132,8 +132,11 @@
               <ul class="treeview-menu">
                 <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Profesional</a></li>
                 <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Profesionales</a></li>
+                <li><a href="{{route('registrotutor')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Tutor</a></li>
+                <li><a href="{{route('listarTutor')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Tutor</a></li>
               </ul>
             </li>
+
 
 
             <!-- Menu ESTUDIANTES-->
