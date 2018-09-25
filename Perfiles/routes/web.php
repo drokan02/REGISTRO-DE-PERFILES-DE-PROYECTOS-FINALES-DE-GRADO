@@ -36,5 +36,12 @@ Route::get('area','AreaController@index')->name('areas');
 Route::get('area/registrarArea','AreaController@registrar')->name('registrarArea');
 Route::post('area/guardarArea','AreaController@registrar')->name('guardarArea');
 
+//Modalidades
+Route::get('modadelidad','modalidades@index')->name('modadelidad');
+Route::get('modadelidad/registrarmodalidad','modalidades@registrar')->name('registrarmodalidad');
+Route::post('modadelidad/listaModalidad','modalidades@registrar')->name('listaModalidad');
+Route::get('/inicio/listaModalidad', 'menuController@listaModalidad')->name('listaModalidad');
 
+
+//
 
