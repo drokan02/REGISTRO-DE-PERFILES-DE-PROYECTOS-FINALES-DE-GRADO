@@ -12,27 +12,23 @@ class usuarioController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index(){
-        $users=User::all();
+    public function index(Request $request){
+        $users=User::name($request->get('name'))->get();
         return view('usuarios/listadoUsuarios',compact('users'));
     }
-
     /**
      * Show the form for creating a new resource.
-     *
      * @return \Illuminate\Http\Response
      */
     public function crear(){
         $roles=Role::all()->pluck('nombre_rol','id');
         return view('usuarios/crearUsuarios',compact('roles'));
     }
-
     /**
      * Store a newly created resource in storage.
-     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -54,7 +50,6 @@ class usuarioController extends Controller
         });
         return redirect()->route('usuarios');
     }
-
     /**
      * Display the specified resource.
      * @param User $user
@@ -63,51 +58,48 @@ class usuarioController extends Controller
     public function detalle(User $user){
         return view('usuarios/detalleUsuario',compact('user'));
     }
-
     /**
      * Show the form for editing the specified resource.
      * @param User $user
      * @return \Illuminate\Http\Response
      */
     public function editar(User $user){
-        $roles=Role::all()->pluck('nombre_rol');
+        $roles=Role::all()->pluck('nombre_rol','id');
         return view('usuarios/editarUsuario',compact('user','roles'));
     }
-
     /**
      * Update the specified resource in storage.
-     *
      * @param  \Illuminate\Http\Request $request
      * @param User $user
      * @return \Illuminate\Http\Response
      */
     public function actualizar(Request $request, User $user){
+        //dd($request->all());
         $this->validate(request(), [
             'name' => ['required'],
             'user_name' => ['required',Rule::unique('users')->ignore($user->id)],
             'email'=>['required','email',Rule::unique('users')->ignore($user->id)],
             'password' => '',
-            'role_id'=> ['required']
+            'roles'=> ['required']
         ]);
-        $rol_id=Role::query()->where('nombre_rol',$request['role_id'])->value('id');
-        $request['role_id']=$rol_id;
         if ($request['password'] != null){
             $request['password']=bcrypt($request['password']);
         }else{
             unset($request['password']);
         }
-        $user->update($request->all());
+        DB::transaction(function () use($request,$user) {
+            $user->update($request->all());
+            $iduser=User::query()->where('email',$request['email'])->value('id');
+            $user->roles()->sync($request['roles'],['user_id'=>$iduser]);
+        });
         return redirect()->route('usuarios');
     }
-
     /**
      * Remove the specified resource from storage.
-     *
      * @param User $user
      * @return \Illuminate\Http\Response
      */
-    public function eliminar(User $user)
-    {
+    public function eliminar(User $user){
         $user->delete();
         return redirect()->route('usuarios');
     }

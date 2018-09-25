@@ -1,11 +1,16 @@
 @extends('layouts.menu')
-@section('titulo','USUARIOS')
+@section('titulo','LISTA DE USUARIOS DEL SISTEMA')
 @section('contenido')
-    <div class="row ">
-        <div class="col-8">
-            <h1 class="display-4 font-weight-bold">Lista de Usuarios</h1>
+    <div class="row mb-3">
+        <div class="col-8 offset-1">
+            <form method="GET" action="{{route('usuarios')}}" class="form-inline">
+                <div class="form-group">
+                    <input class="form-control" name="name" placeholder="Buscar">
+                    <button type="submit" class=" btn btn-success">Buscar</button>
+                </div>
+            </form>
         </div>
-        <div class="col p-3 mt-1">
+        <div class="col">
             <a href="{{route('crearUsuario')}}" class="btn btn-link btn-lg" data-toggle="tooltip" data-placement="right" title="Añadir"><i class="fa fa-plus"></i></a>
             <a href="{{route('roles')}}" class="btn btn-link btn-lg">Roles</a>
         </div>

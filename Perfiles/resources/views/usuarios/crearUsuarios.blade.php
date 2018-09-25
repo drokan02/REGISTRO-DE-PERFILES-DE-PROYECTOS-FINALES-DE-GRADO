@@ -32,15 +32,16 @@
                     <label for="password">Contraseña</label>
                     <input type="password" class="form-control" name="password" id="password" value="{{old('password')}}">
                 </div>
-                <div class="form-group checkbox mb-4">
+                <div class="form-group  mb-2 checkbox">
                     @foreach($roles as $id=>$nombre_rol)
-                        <label for="roles">
+                        <label for="roles" class="btn btn-outline-dark">
                             <input type="checkbox" value="{{$id}}" name="roles[]">
                             {{$nombre_rol}}
                         </label>
                     @endforeach
                 </div>
-                <button class=" btn btn-outline-primary btn-block ">Crear</button>
+                <a href="{{route('usuarios')}}" class="btn btn-outline-primary btn-lg">Lista Usuarios</a>
+                <button type="submit" class="btn btn-outline-success btn-lg">Crear</button>
             </form>
         </div>
     </div>

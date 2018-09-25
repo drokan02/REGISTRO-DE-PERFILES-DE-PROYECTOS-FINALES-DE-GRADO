@@ -34,15 +34,19 @@
                     <input type="password" class="form-control" name="password" id="password" value="{{old('password')}}">
                 </div>
                 <div class="form-group mb-4">
-                    <label for="role_id">Rol del Usuario</label>
-                    <select class="form-control" id="role_id" name="role_id">
-                        <option>{{$user->role->nombre_rol}}</option>
-                        @foreach($roles as $rol)
-                            <option>{{$rol}}</option>
+                    <div class="form-group checkbox mb-4">
+                        @foreach($roles as $id=>$nombre_rol)
+                            <label for="roles" class="btn btn-outline-dark">
+                                <input type="checkbox" value="{{$id}}" name="roles[]"
+                                       {{$user->roles->pluck('id')->contains($id) ? 'checked': ''}}
+                                >
+                                {{$nombre_rol}}
+                            </label>
                         @endforeach
-                    </select>
+                    </div>
                 </div>
-                <button class=" btn btn-outline-primary btn-block ">Editar</button>
+                <a href="{{route('usuarios')}}" class="btn btn-outline-primary btn-lg">Lista Usuarios</a>
+                <button type="submit" class="btn btn-outline-success btn-lg">Editar</button>
             </form>
         </div>
     </div>

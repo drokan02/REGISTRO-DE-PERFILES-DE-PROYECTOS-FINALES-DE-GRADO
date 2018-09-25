@@ -1,9 +1,8 @@
 @extends('layouts.menu')
-@section('titulo','REGISTRAR ROL')
+@section('titulo','AÑADIR UN NUEVO ROL')
 @section('contenido')
     <div class="row justify-content-center mt-4">
         <div class="col-6">
-            <h1 class="mb-3">Añadir un Nuevo Rol</h1>
             @if($errors ->any())
                 <div class="alert-danger">
                     <h3>Se tiene los siguientes errores en el formulario</h3>
