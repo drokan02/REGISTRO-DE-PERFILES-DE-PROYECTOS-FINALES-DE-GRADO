@@ -40,3 +40,9 @@ Route::post('/areas/registrar/almacenar','AreaController@almacenar')->name('alma
 Route::post('/areas/editar','AreaController@editar')->name('editarArea');
 Route::post('/areas/editar/modificar','AreaController@modificar')->name('modificarArea');
 Route::any('/areas/buscar', 'AreaController@index')->name('buscarArea');
+
+//Modalidades
+
+Route::get('/modadelidad','modalidades@index')->name('modadelidad');
+Route::get('/modadelidad/registrarmodalidad','modalidades@registrar')->name('registrarmodalidad');
+Route::get('/modadelidad/listaModalidad','menuController@listaModalidad')->name('listaModalidad');
