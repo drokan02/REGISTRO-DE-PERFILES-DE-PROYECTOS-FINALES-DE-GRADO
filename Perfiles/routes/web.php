@@ -51,3 +51,8 @@ Route::get('profesionales/registrotutor','tutores@registrar')->name('registrotut
 
 Route::get('profesionales/listarTutor','menuController@listarTutor')->name('listarTutor');
 //>>>>>>>>>
+//Modalidades
+
+Route::get('/modadelidad','modalidades@index')->name('modadelidad');
+Route::get('/modadelidad/registrarmodalidad','modalidades@registrar')->name('registrarmodalidad');
+Route::get('/modadelidad/listaModalidad','menuController@listaModalidad')->name('listaModalidad');
