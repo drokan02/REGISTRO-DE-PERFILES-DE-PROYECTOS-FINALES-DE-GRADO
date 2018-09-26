@@ -10,4 +10,9 @@ class menuController extends Controller
    		return view('layouts.menu');
    }
 
+   //listarturor
+
+   public function listarTutor(){
+       return view('profesionales.listarTutor');
+   }
 }
