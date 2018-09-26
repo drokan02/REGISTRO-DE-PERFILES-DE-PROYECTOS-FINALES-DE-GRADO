@@ -9,8 +9,8 @@
             </form>
         </div>
         <div class="col ">
-            <a href="{{route('crearRol')}}" class="btn btn-link btn-lg" data-toggle="tooltip" data-placement="right" title="añadir"><i class="fa fa-plus"></i></a>
-            <a href="{{route('usuarios')}}" class="btn btn-link btn-lg" data-toggle="tooltip" data-placement="right" title="Usuarios"><i class="fa fa-users"></i></a>
+            <a href="{{route('crearRol')}}" class="btn btn-link" data-toggle="tooltip" data-placement="right" title="añadir"><i class="fa fa-plus fa-2x"></i></a>
+            <a href="{{route('usuarios')}}" class="btn btn-link" data-toggle="tooltip" data-placement="right" title="Usuarios"><i class="fa fa-users fa-2x"></i></a>
         </div>
     </div>
     <div class="alert-danger">
@@ -40,8 +40,8 @@
                         <form method="POST" action="{{route('eliminarRol',$rol)}}">
                             {{method_field('DELETE')}}
                             {!! csrf_field() !!}
-                            <a href="{{route('editarRol',$rol)}}" class="btn btn-link btn-lg" data-toggle="tooltip" data-placement="right" title="Editar"><i class="fa fa-edit"></i></a>
-                            <button class="btn btn-link btn-lg" type="submit"><i class="fa fa-trash"></i></button>
+                            <a href="{{route('editarRol',$rol)}}" class="btn btn-link" data-toggle="tooltip" data-placement="right" title="Editar"><i class="fa fa-edit fa-2x"></i></a>
+                            <button class="btn btn-link" type="submit"><i class="fa fa-trash fa-2x"></i></button>
                         </form>
                     </td>
                 </tr>

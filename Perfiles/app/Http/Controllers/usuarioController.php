@@ -100,6 +100,7 @@ class usuarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function eliminar(User $user){
+        $user->roles()->detach(); //eliminar datos en tabla intermedia
         $user->delete();
         return redirect()->route('usuarios');
     }

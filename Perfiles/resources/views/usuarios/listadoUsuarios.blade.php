@@ -11,7 +11,7 @@
             </form>
         </div>
         <div class="col">
-            <a href="{{route('crearUsuario')}}" class="btn btn-link btn-lg" data-toggle="tooltip" data-placement="right" title="Añadir"><i class="fa fa-plus"></i></a>
+            <a href="{{route('crearUsuario')}}" class="btn btn-link" data-toggle="tooltip" data-placement="right" title="Añadir"><i class="fa fa-user-plus fa-2x"></i></a>
             <a href="{{route('roles')}}" class="btn btn-link btn-lg">Roles</a>
         </div>
     </div>
@@ -35,9 +35,9 @@
                         <form method="POST" action="{{route('eliminarUsuario',$us)}}">
                             {{method_field('DELETE')}}
                             {!! csrf_field() !!}
-                            <a href="{{route('detalleUsuario',['id'=>$us->id])}}" class="btn btn-link btn-lg" data-toggle="tooltip" data-placement="right" title="Datos Usuario"><i class="fa fa-eye"></i></a>
-                            <a href="{{route('editarUsuario',$us)}}" class="btn btn-link btn-lg" data-toggle="tooltip" data-placement="right" title="Editar"><i class="fa fa-edit"></i></a>
-                            <button class="btn btn-link btn-lg" type="submit"><i class="fa fa-trash"></i></button>
+                            <a href="{{route('detalleUsuario',['id'=>$us->id])}}" class="btn btn-link" data-toggle="tooltip" data-placement="right" title="Datos Usuario"><i class="fa fa-eye fa-2x"></i></a>
+                            <a href="{{route('editarUsuario',$us)}}" class="btn btn-link" data-toggle="tooltip" data-placement="right" title="Editar"><i class="fa fa-edit fa-2x"></i></a>
+                            <button class="btn btn-link" type="submit"><i class="fa fa-trash fa-2x"></i></button>
                         </form>
                     </td>
                 </tr>

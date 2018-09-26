@@ -16,7 +16,7 @@ class RoleController extends Controller
     }
     public function guardar(Request $request){
         $this->validate(request(), [
-            'nombre_rol' => ['required','Alpha'],
+            'nombre_rol' => ['required'],
             'privilegios'=> ['required','not_in:seleccione una opcion']
         ]);
         $rol=new Role();

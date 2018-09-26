@@ -14,6 +14,7 @@ class AsignacionRolUser extends Migration
     public function up()
     {
         Schema::create('asignacion_rol_user', function (Blueprint $table) {
+            $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('role_id');
             $table->timestamps();
