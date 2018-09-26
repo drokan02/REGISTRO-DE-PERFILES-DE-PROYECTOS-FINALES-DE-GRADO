@@ -15,4 +15,11 @@ class menuController extends Controller
    public function listarTutor(){
        return view('profesionales.listarTutor');
    }
+   public function listarAreas(){
+        return view('area.listarAreas');
+   }
+
+   public function listaModalidad(){
+    return view('modadelidad.listaModalidad');
+   }   
 }

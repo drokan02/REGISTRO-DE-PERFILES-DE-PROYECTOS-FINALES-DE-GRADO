@@ -6,8 +6,16 @@
   <div class="container"> 
       <div class="form-group row">
               <div class="col-3"></div>
+<<<<<<< HEAD
+              <div class="col-sm-4">
+                  <input type="text" class="form-control" placeholder="Buscar" id="buscar_area" value="{{old('buscar_area')}}">
+              </div> 
+              <div class="col-sm-5">
+                <button type="submit" class="btn btn-success"> Buscar</button>
+=======
               <div class="col-4">
                   <input type="text" class="form-control" placeholder="Buscar"  name="buscar" value="{{old('buscar')}}">
+>>>>>>> d987537add4de8029d441940e355f74b421db180
               </div>
               <span class="input-group-btn">
                 <button class="btn btn-success"> Buscar</button>
