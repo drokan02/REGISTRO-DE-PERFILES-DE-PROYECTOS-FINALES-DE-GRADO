@@ -26,10 +26,10 @@
                 <td>{{$area->descripcion}}</td>
                 <td>
                     <div class="text-center">
-                        <a href='#' data-toggle="tooltip" data-placement="right" title="Editar">
+                    <a href='{{ route('editarArea',$area->id)}}' data-toggle="tooltip" data-placement="right" title="Editar">
                             <i class="fa fa-pencil-square-o fa-2x" ></i>
                           </a>
-                          <a href='#' data-toggle="tooltip" data-placement="right" title="eliminar">
+                          <a href='{{ route('eliminarArea',$area->id)}}' data-toggle="tooltip" data-placement="right" title="eliminar">
                               <i class="fa fa-minus-square fa-2x" ></i>
                           </a>
                           <a href='#' data-toggle="tooltip" data-placement="right" title="Agregar Subarea">

@@ -20,12 +20,12 @@ class AreaController extends Controller
 			return view('area.listarAreas',['areas'=> $areas,'buscar'=>$buscar ]);	
 		}else{
 			$areas = Area::all();
-			return view('area.listarAreas',['areas'=> $areas]);
+			return view('area.listar',['areas'=> $areas]);
 		}
 	}
 
 	public function registrar(){
-		return view('area.registrarArea',['descripcion'=>null]);
+		return view('area.registrar',['descripcion'=>null]);
 	}
 
 	
@@ -38,18 +38,18 @@ class AreaController extends Controller
 
 
 	public function editar($id){
-		$area=Areas::findOrFail($id);
+		$area=Area::findOrFail($id);
 		return view('area.editar',['area'=>$area]);
 	
 	}
 
 	public function modificar(Request $request,$id){
 		Area::findOrFail($id)->update($request->all());
-        return redirect('area');
+        return redirect()->route('Areas');
 	}
-	public function eliminar(){
+	public function eliminar($id){
 		 Area::findOrFail($id)->delete();
-        return redirect('area');
+		 return redirect()->route('Areas');
 	}
 
 	

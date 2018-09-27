@@ -1,12 +1,12 @@
 @extends('layouts.menu')
-@section('titulo','REGISTRAR AREA')
+@section('titulo','EDITAR AREA')
 @section('contenido')
 
 <!--ERRORES-->
 	@include('complementos.error')				
 <!--FIN ERRORES-->
 	<div class= "container" >
-		<form method="POST" action="{{route('almacenarArea')}}">
+		<form method="POST" action="{{route('modificarArea',$area->id)}}">
 			{!! csrf_field() !!}
 			<div class = "form-group row">
 				<div class="col-2"></div>
@@ -16,7 +16,7 @@
 						<label for="codigo" class="col-sm-2 col-form-label">Codigo</label>
 						<div class="col-sm-8">
 							<input type="text" class="form-control" placeholder="codigo area" name="codigo" autocomplete="off"
-							value="{{old('codigo')}}">
+							value= {{$area->codigo}}>
 						</div>
 					</div>
 					<!--Nombre area -->
@@ -24,7 +24,7 @@
 						<label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
 						<div class="col-sm-8">
 							<input type="text" class="form-control" placeholder="nombre area" name="nombre" autocomplete="off"
-							value="{{old('nombre')}}">
+							value="{{$area->nombre}}">
 						</div>
 					</div>
 		
@@ -32,7 +32,7 @@
 						<label for="descripcion" class="col-sm-2 col-form-label">Descripcion</label>
 						<div class="col-sm-8">
 							<textarea class="form-control" placeholder="descripcion no obligatoria" autocomplete="off"
-							name="descripcion" rows="5">{{old('descripcion')}}</textarea>
+							name="descripcion" rows="5">{{$area->descripcion}}</textarea>
 						</div>
 						
 					</div>
@@ -40,8 +40,8 @@
 					<div class = "form-group row"> 
 						<div class="col-sm-2"></div>
 						<div class="col-8">
-							<a href="{{ route('registrarArea') }}" class="btn btn-danger">Cancel</a>	
-							<button type="submit" class='btn btn-success'>Registrar</button>
+							<a href="{{ route('Areas') }}" class="btn btn-danger">Cancel</a>	
+							<button type="submit" class='btn btn-success'>Modificar</button>
 						</div>
 						
 							

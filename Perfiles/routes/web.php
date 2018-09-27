@@ -30,8 +30,8 @@ Route::get('/roles/crear','UsuarioController@crear')->name('crearUsuario');
 //Areas
 Route::get('/areas','AreaController@index')->name('Areas');
 Route::get('/areas/registrar','AreaController@registrar')->name('registrarArea');
-Route::post('/areas/registrar/almacenar','AreaController@almacenar')->name('almacenarArea');
-Route::post('/areas/editar','AreaController@editar')->name('editarArea');
-Route::post('/areas/editar/modificar','AreaController@modificar')->name('modificarArea');
+Route::any('/areas/registrar/almacenar','AreaController@almacenar')->name('almacenarArea');
+Route::any('/areas/editar/{id}','AreaController@editar')->name('editarArea');
+Route::any('/areas/editar/modificar/{id}','AreaController@modificar')->name('modificarArea');
 Route::any('/areas/buscar', 'AreaController@index')->name('buscarArea');
 
