@@ -3,26 +3,10 @@
 @section('contenido')
 
 <Form method="GET" action="{{route('buscarArea')}}">
-  <div class="container"> 
-      <div class="form-group row">
-              <div class="col-3"></div>
-<<<<<<< HEAD
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" placeholder="Buscar" id="buscar_area" value="{{old('buscar_area')}}">
-              </div> 
-              <div class="col-sm-5">
-                <button type="submit" class="btn btn-success"> Buscar</button>
-=======
-              <div class="col-4">
-                  <input type="text" class="form-control" placeholder="Buscar"  name="buscar" value="{{old('buscar')}}">
->>>>>>> d987537add4de8029d441940e355f74b421db180
-              </div>
-              <span class="input-group-btn">
-                <button class="btn btn-success"> Buscar</button>
-              </span>
-      </div>
-  </div>
-
+    <!--BUSCADOR -->
+   @include('complementos.busqueda')
+   <!--FIN BUSCADOR -->
+   
   <div class="table-responsive">
       <table class="tabla" id="listaArea">
           <thead class ="columnas">
@@ -43,10 +27,10 @@
                 <td>{{$area->descripcion}}</td>
                 <td>
                     <div class="text-center">
-                        <a href='#' data-toggle="tooltip" data-placement="right" title="Editar">
+                    <a href='{{ route('editarArea',$area->id)}}' data-toggle="tooltip" data-placement="right" title="Editar">
                             <i class="fa fa-pencil-square-o fa-2x" ></i>
                           </a>
-                          <a href='#' data-toggle="tooltip" data-placement="right" title="eliminar">
+                          <a href='{{ route('eliminarArea',$area->id)}}' data-toggle="tooltip" data-placement="right" title="eliminar">
                               <i class="fa fa-minus-square fa-2x" ></i>
                           </a>
                           <a href='#' data-toggle="tooltip" data-placement="right" title="Agregar Subarea">

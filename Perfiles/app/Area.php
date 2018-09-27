@@ -9,7 +9,8 @@ class Area extends Model
     protected $fillable = [
         'codigo',
         'nombre',
-        'descripsion'
+        'descripsion',
+        ''
     ];
 
     public function scopeBuscar($query, $buscar){

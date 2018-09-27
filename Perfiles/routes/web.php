@@ -26,6 +26,9 @@ Route::delete('/roles/{role}/eliminar','RoleController@eliminar')->name('elimina
 
 //usuarios
 Route::get('/usuarios','usuarioController@index')->name('usuarios');
+<<<<<<< HEAD
+Route::get('/roles/crear','UsuarioController@crear')->name('crearUsuario');
+=======
 Route::get('/usuarios/crear','usuarioController@crear')->name('crearUsuario');
 Route::post('/usuarios/guardar','usuarioController@guardar')->name('guardarUsuario');
 Route::get('/usuarios/{user}','usuarioController@detalle')->name('detalleUsuario');
@@ -33,14 +36,17 @@ Route::get('/usuarios/{user}/editar','usuarioController@editar')->name('editarUs
 Route::put('/usuarios/{user}','usuarioController@actualizar')->name('actualizarUsuario');//put metodo para actualizar
 Route::delete('/usuarios/{user}/eliminar','usuarioController@eliminar')->name('eliminarUsuario');
 
+>>>>>>> master
 //Areas
 Route::get('/areas','AreaController@index')->name('Areas');
 Route::get('/areas/registrar','AreaController@registrar')->name('registrarArea');
-Route::post('/areas/registrar/almacenar','AreaController@almacenar')->name('almacenarArea');
-Route::post('/areas/editar','AreaController@editar')->name('editarArea');
-Route::post('/areas/editar/modificar','AreaController@modificar')->name('modificarArea');
+Route::any('/areas/registrar/almacenar','AreaController@almacenar')->name('almacenarArea');
+Route::any('/areas/editar/{id}','AreaController@editar')->name('editarArea');
+Route::any('/areas/editar/modificar/{id}','AreaController@modificar')->name('modificarArea');
 Route::any('/areas/buscar', 'AreaController@index')->name('buscarArea');
 
+<<<<<<< HEAD
+=======
 
 //tutores
 Route::get('profesionales','tutores@index')->name('profesionales');
@@ -53,3 +59,4 @@ Route::get('profesionales/listarTutor','menuController@listarTutor')->name('list
 Route::get('/modadelidad','modalidades@index')->name('modadelidad');
 Route::get('/modadelidad/registrarmodalidad','modalidades@registrar')->name('registrarmodalidad');
 Route::get('/modadelidad/listaModalidad','menuController@listaModalidad')->name('listaModalidad');
+>>>>>>> master

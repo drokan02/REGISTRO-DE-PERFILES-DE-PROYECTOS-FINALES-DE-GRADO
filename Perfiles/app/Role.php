@@ -10,7 +10,9 @@ class Role extends Model
         'nombre_rol','privilegios'
     ];
 
-
+    public function user(){
+        return $this->hasMany(User::class);
+    }
     public function users(){
         return $this->belongsToMany(User::class,'asignacion_rol_user');
     }
