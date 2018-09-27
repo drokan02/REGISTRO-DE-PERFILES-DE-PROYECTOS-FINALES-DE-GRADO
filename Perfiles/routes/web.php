@@ -40,6 +40,7 @@ Route::get('/areas/registrar','AreaController@registrar')->name('registrarArea')
 Route::any('/areas/registrar/almacenar','AreaController@almacenar')->name('almacenarArea');
 Route::any('/areas/editar/{id}','AreaController@editar')->name('editarArea');
 Route::any('/areas/editar/modificar/{id}','AreaController@modificar')->name('modificarArea');
+Route::any('/areas/eliminar/{id}','AreaController@modificar')->name('eliminarArea');
 Route::any('/areas/buscar', 'AreaController@index')->name('buscarArea');
 
 //tutores
@@ -51,4 +52,3 @@ Route::get('profesionales/listarTutor','menuController@listarTutor')->name('list
 Route::get('/modadelidad','modalidades@index')->name('modadelidad');
 Route::get('/modadelidad/registrarmodalidad','modalidades@registrar')->name('registrarmodalidad');
 Route::get('/modadelidad/listaModalidad','menuController@listaModalidad')->name('listaModalidad');
-
