@@ -1,13 +1,22 @@
 @extends('layouts.menu')
-@section('titulo','ROLES')
+@section('titulo','Lista de Roles del Sistema')
 @section('contenido')
-    <div class="row">
-        <div class="col-9">
-            <h1 class="display-4 font-weight-bold">Lista de Roles del Sistema</h1>
+    <div class="row mb-3">
+        <div class="col-8 offset-1">
+            <form method="GET" action="{{route('roles')}}" class="form-inline">
+                <input class="form-control" name="name" placeholder="Buscar">
+                <button type="submit" class=" btn btn-success">Buscar</button>
+            </form>
         </div>
+<<<<<<< HEAD
         <div class="col  p-3 mt-1">
             <a href="#" class="btn btn-link btn-lg" data-toggle="tooltip" data-placement="right" title="añadir"><i class="fa fa-plus"></i></a>
             <a href="{{route('usuarios')}}" class="btn btn-link btn-lg" data-toggle="tooltip" data-placement="right" title="Usuarios"><i class="fa fa-users"></i></a>
+=======
+        <div class="col ">
+            <a href="{{route('crearRol')}}" class="btn btn-link" data-toggle="tooltip" data-placement="right" title="añadir"><i class="fa fa-plus fa-2x"></i></a>
+            <a href="{{route('usuarios')}}" class="btn btn-link" data-toggle="tooltip" data-placement="right" title="Usuarios"><i class="fa fa-users fa-2x"></i></a>
+>>>>>>> master
         </div>
     </div>
     <div class="alert-danger">
@@ -18,8 +27,8 @@
         @endforeach
     </div>
     @if($roles->isNotEmpty())
-        <table class="table table-hover table-bordered text-center">
-            <thead class="thead-dark">
+        <table class="table table-hover table-bordered-primary text-center">
+            <thead class="thead-primary">
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Nombre Rol</th>
@@ -37,8 +46,8 @@
                         <form method="POST" action="{{route('eliminarRol',$rol)}}">
                             {{method_field('DELETE')}}
                             {!! csrf_field() !!}
-                            <a href="{{route('editarRol',$rol)}}" class="btn btn-link btn-lg" data-toggle="tooltip" data-placement="right" title="Editar"><i class="fa fa-edit"></i></a>
-                            <button class="btn btn-link btn-lg" type="submit"><i class="fa fa-trash"></i></button>
+                            <a href="{{route('editarRol',$rol)}}" class="btn btn-link" data-toggle="tooltip" data-placement="right" title="Editar"><i class="fa fa-edit fa-2x"></i></a>
+                            <button class="btn btn-link" type="submit"><i class="fa fa-trash fa-2x"></i></button>
                         </form>
                     </td>
                 </tr>

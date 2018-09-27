@@ -6,6 +6,7 @@
     <!--BUSCADOR -->
    @include('complementos.busqueda')
    <!--FIN BUSCADOR -->
+   
   <div class="table-responsive">
       <table class="tabla" id="listaArea">
           <thead class ="columnas">

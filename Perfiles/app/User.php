@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name','user_name', 'email', 'password','role_id'
+        'id','name','user_name', 'email', 'password'
     ];
 
     /**
@@ -28,8 +28,13 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function role(){
-        return $this->belongsTo(Role::class);//no funciona si tiene null    nombreTablaSingular_id
+    public function roles(){
+        return $this->belongsToMany(Role::class,'asignacion_rol_user');
 
+    }
+    public function scopeName($query,$name){
+        if (trim($name) != ""){
+            $query->where('name','like',"%$name%");
+        }
     }
 }

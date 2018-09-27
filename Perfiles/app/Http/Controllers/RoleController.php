@@ -4,12 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Role;
-use function MongoDB\BSON\toJSON;
 
 class RoleController extends Controller
 {
-    public function index(){
-        $roles=Role::all();
+    public function index(Request $request){
+        $roles=Role::name($request->get('name'))->get();
         return view('roles/listaRoles',compact('roles'));
     }
     public function crear(){
@@ -17,7 +16,7 @@ class RoleController extends Controller
     }
     public function guardar(Request $request){
         $this->validate(request(), [
-            'nombre_rol' => ['required','Alpha'],
+            'nombre_rol' => ['required'],
             'privilegios'=> ['required','not_in:seleccione una opcion']
         ]);
         $rol=new Role();
@@ -29,18 +28,17 @@ class RoleController extends Controller
     }
     public function actualizar(Role $role){
         $this->validate(request(), [
-            'nombre_rol' => ['required','Alpha'],
+            'nombre_rol' => ['required'],
             'privilegios'=> ['required','not_in:seleccione una opcion']
         ]);
         $role->update($_REQUEST);
         return redirect()->route('roles');
     }
     public function eliminar(Role $role){
-        if($role->user->toArray() != []){ //para no eliminar un rol que tiene usuarios
+        if($role->users->toArray() != []){ //para no eliminar un rol que tiene usuarios
             return back()->withErrors('no se puede eliminar el rol porque hay
-             usuarios con este rol');
-        }
-        else{
+            usuarios con este rol');
+        } else{
             $role->delete();
             return redirect()->route('roles');
         }
