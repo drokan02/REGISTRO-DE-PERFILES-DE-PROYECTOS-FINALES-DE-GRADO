@@ -43,7 +43,6 @@ Route::any('/areas/editar/modificar/{id}','AreaController@modificar')->name('mod
 Route::any('/areas/eliminar/{id}','AreaController@modificar')->name('eliminarArea');
 Route::any('/areas/buscar', 'AreaController@index')->name('buscarArea');
 
-
 //tutores
 Route::get('profesionales','tutores@index')->name('profesionales');
 Route::get('profesionales/registrotutor','tutores@registrar')->name('registrotutor');
