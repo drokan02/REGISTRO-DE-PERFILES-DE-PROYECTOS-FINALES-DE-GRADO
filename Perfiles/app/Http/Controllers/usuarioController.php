@@ -102,7 +102,7 @@ class usuarioController extends Controller
     }
     public function guardarContraseña(Request $request,User $user){
         $this->validate(request(), [
-            'password' => ['required','confirmed'],
+            'password' => ['required','confirmed','min:6'],
         ]);
         $request['password']=bcrypt($request['password']);
         $user->password=$request['password'];
