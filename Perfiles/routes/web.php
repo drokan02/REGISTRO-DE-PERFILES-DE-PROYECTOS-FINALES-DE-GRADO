@@ -32,6 +32,8 @@ Route::get('/usuarios/{user}','usuarioController@detalle')->name('detalleUsuario
 Route::get('/usuarios/{user}/editar','usuarioController@editar')->name('editarUsuario');
 Route::put('/usuarios/{user}','usuarioController@actualizar')->name('actualizarUsuario');//put metodo para actualizar
 Route::delete('/usuarios/{user}/eliminar','usuarioController@eliminar')->name('eliminarUsuario');
+Route::get('/cambiar_contraseña/{user}','usuarioController@cambiarContraseña')->name('cambiarContraseña');
+Route::post('/guardar_contraseña/{user}','usuarioController@guardarContraseña')->name('guardarContraseña');
 
 //Areas
 Route::get('/areas','AreaController@index')->name('Areas');
