@@ -8,10 +8,11 @@ use Illuminate\Http\Request;
 class CarreraController extends Controller
 {
     /**Display a listing of the resource.
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index(){
-        $carreras=Carrera::all();
+    public function index(Request $request){
+        $carreras=Carrera::name($request->get('name'))->get();
         return view('carreras/listaCarreras',compact('carreras'));
     }
     /**Show the form for creating a new resource.

@@ -4,7 +4,7 @@
     <div class="row mb-3">
         <div class="col-8 offset-1">
             <form method="GET" action="{{route('carreras')}}" class="form-inline">
-                <input class="form-control" name="name" placeholder="Buscar">
+                <input class="form-control" name="name" placeholder="Buscar por carrera">
                 <button type="submit" class=" btn btn-success">Buscar</button>
             </form>
         </div>
