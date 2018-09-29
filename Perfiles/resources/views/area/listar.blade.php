@@ -2,40 +2,46 @@
 @section('titulo','LISTAR AREAS')
 @section('contenido')
 
-<Form method="GET" action="{{route('buscarArea')}}">
+<Form method="GET" action="{{route('Areas')}}">
     <!--BUSCADOR -->
    @include('complementos.busqueda')
    <!--FIN BUSCADOR -->
-   
+   @include('complementos.error')
   <div class="table-responsive">
       <table class="tabla" id="listaArea">
           <thead class ="columnas">
         <tr>
-          <th style="width: 35px; text-align: center;">N°</th>
-          <th style="width: 100px;">Codigo</th>
-          <th style="width: 200px;">Nombre</th>
-          <th style="width: 500px;">Descripcion</th>
-          <th style="width: 90px;"></th>
+          <th style="width: 5%; text-align: center;">N°</th>
+          <th style="width: 10%;">Codigo</th>
+          <th style="width: 25%;">Nombre</th>
+          <th style="width: 45%; ">Descripcion</th>
+          <th style="width: 15%;"></th>
         </tr>
       </thead>
       <tbody>
+           
         @foreach ($areas as $area)
             <tr>
-                <td>{{$area->id}}</td>
+                
+                <td style="text-align: right;">{{$fila++}}</td>
                 <td>{{$area->codigo}}</td>
                 <td>{{$area->nombre}}</td>
-                <td>{{$area->descripcion}}</td>
+                <td style="width: 45%;" >{{$area->descripcion}}</td>
                 <td>
                     <div class="text-center">
-                    <a href='{{ route('editarArea',$area->id)}}' data-toggle="tooltip" data-placement="right" title="Editar">
-                            <i class="fa fa-pencil-square-o fa-2x" ></i>
-                          </a>
-                          <a href='{{ route('eliminarArea',$area->id)}}' data-toggle="tooltip" data-placement="right" title="eliminar">
-                              <i class="fa fa-minus-square fa-2x" ></i>
-                          </a>
-                          <a href='#' data-toggle="tooltip" data-placement="right" title="Agregar Subarea">
-                                <i class="fa fa-plus fa-2x" aria-hidden="true"  ></i>
-                          </a>
+                        <a href='{{ route('verArea',$area->id)}}' data-toggle="tooltip" data-placement="right" title="Ver Area">
+                                    <i class="col-sm-3 fa fa-eye fa-2x" ></i>
+                         </a>
+                        <a href='{{ route('editarArea',$area->id)}}' data-toggle="tooltip" data-placement="right" title="Editar">
+                            <i class="col-sm-3 fa fa-pencil-square-o fa-2x" ></i>
+                         </a>
+                        <a href='{{ route('eliminarArea',$area->id)}}' onclick="return confirm('¿Esta seguro de eliminar esta Area?')" 
+                        data-toggle="tooltip" data-placement="right" title="eliminar" >
+                              <i class="col-sm-3 fa fa-minus-square fa-2x" ></i>
+                        </a>
+                    <a href='{{ route('subareas',$area)}}' data-toggle="tooltip" data-placement="right" title="Agregar Subarea">
+                                <i class="col-sm-2 fa fa-plus fa-2x" aria-hidden="true"  ></i>
+                        </a>
                     </div>
                 </td>
             </tr>   

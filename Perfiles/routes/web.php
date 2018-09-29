@@ -26,7 +26,7 @@ Route::delete('/roles/{role}/eliminar','RoleController@eliminar')->name('elimina
 
 //usuarios
 Route::get('/usuarios','usuarioController@index')->name('usuarios');
-Route::get('/roles/crear','UsuarioController@crear')->name('crearUsuario');
+Route::get('/usuarios/crear','UsuarioController@crear')->name('crearUsuario');
 Route::get('/usuarios/crear','usuarioController@crear')->name('crearUsuario');
 Route::post('/usuarios/guardar','usuarioController@guardar')->name('guardarUsuario');
 Route::get('/usuarios/{user}','usuarioController@detalle')->name('detalleUsuario');
@@ -40,8 +40,17 @@ Route::get('/areas/registrar','AreaController@registrar')->name('registrarArea')
 Route::any('/areas/registrar/almacenar','AreaController@almacenar')->name('almacenarArea');
 Route::any('/areas/editar/{id}','AreaController@editar')->name('editarArea');
 Route::any('/areas/editar/modificar/{id}','AreaController@modificar')->name('modificarArea');
-Route::any('/areas/eliminar/{id}','AreaController@modificar')->name('eliminarArea');
+Route::any('/areas/eliminar/{id}','AreaController@eliminar')->name('eliminarArea');
 Route::any('/areas/buscar', 'AreaController@index')->name('buscarArea');
+Route::any('/areas/ver/{id}','AreaController@ver')->name('verArea');
+
+//Subareas
+Route::get('areas/subareas/{area}','SubareaController@index')->name('subareas');
+Route::get('areas/subareas/registrar/{area}','SubareaController@registrar')->name('registrarSubarea');
+Route::post('areas/subareas/almacenar/{area}','SubareaController@almacenar')->name('almacenarSubarea');
+Route::any('/areas/subareas/editar/{id}','SubareaController@editar')->name('editarSubarea');
+Route::post('areas/subareas/modificar/{id}','SubareaController@modificar')->name('modificarSubarea');
+Route::post('areas/subareas/eliminar/{id}','SubareaControler@eliminar')->name('eliminarSubarea');
 
 //tutores
 Route::get('profesionales','tutores@index')->name('profesionales');
