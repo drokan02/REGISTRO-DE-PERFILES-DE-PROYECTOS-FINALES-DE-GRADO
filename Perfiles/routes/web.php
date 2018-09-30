@@ -71,3 +71,6 @@ Route::post('/carreras/guardar','CarreraController@guardar')->name('guardarCarre
 Route::get('/carreras/{carrera}/editar','CarreraController@editar')->name('editarCarrera');
 Route::put('/carreras/{carrera}','CarreraController@actualizar')->name('actualizarCarrera');//put metodo para actualizar
 Route::delete('/carreras/{carrera}/eliminar','CarreraController@eliminar')->name('eliminarCarrera');
+
+//docentes
+Route::gte('/docentes','DocenteController@index')->name('docentes');
