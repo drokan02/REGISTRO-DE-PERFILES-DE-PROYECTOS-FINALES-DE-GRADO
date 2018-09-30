@@ -1,16 +1,15 @@
 @extends('layouts.menu')
-@section('titulo','Lista de Roles del Sistema')
+@section('titulo','LISTA DE CARRERAS')
 @section('contenido')
     <div class="row mb-3">
         <div class="col-8 offset-1">
-            <form method="GET" action="{{route('roles')}}" class="form-inline">
-                <input class="form-control" name="name" placeholder="Buscar">
+            <form method="GET" action="{{route('carreras')}}" class="form-inline">
+                <input class="form-control" name="name" placeholder="Buscar por carrera">
                 <button type="submit" class=" btn btn-success">Buscar</button>
             </form>
         </div>
         <div class="col ">
-            <a href="{{route('crearRol')}}" class="btn btn-link" data-toggle="tooltip" data-placement="right" title="añadir"><i class="fa fa-plus fa-2x"></i></a>
-            <a href="{{route('usuarios')}}" class="btn btn-link" data-toggle="tooltip" data-placement="right" title="Usuarios"><i class="fa fa-users fa-2x"></i></a>
+            <a href="{{route('crearCarrera')}}" class="btn btn-link" data-toggle="tooltip" data-placement="right" title="añadir"><i class="fa fa-plus fa-2x"></i></a>
         </div>
     </div>
     <div class="alert-danger">
@@ -20,27 +19,27 @@
             </ul>
         @endforeach
     </div>
-    @if($roles->isNotEmpty())
+    @if($carreras->isNotEmpty())
         <table class="table table-hover table-bordered-primary text-center">
             <thead class="thead-primary">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Nombre Rol</th>
-                <th scope="col">privilegios</th>
+                <th scope="col">Codigo Carrera</th>
+                <th scope="col">Carrera</th>
                 <th scope="col">Acciones</th>
             </tr>
             </thead>
             <tbody>
-            @foreach($roles as $rol)
+            @foreach($carreras as $carrera)
                 <tr>
-                    <th scope="row">{{$rol->id}}</th>
-                    <td>{{$rol->nombre_rol}}</td>
-                    <td>{{$rol->privilegios}}</td>
+                    <th scope="row">{{$carrera->id}}</th>
+                    <td>{{$carrera->codigo_carrera}}</td>
+                    <td>{{$carrera->nombre_carrera}}</td>
                     <td>
-                        <form method="POST" action="{{route('eliminarRol',$rol)}}">
+                        <form method="POST" action="{{route('eliminarCarrera',$carrera)}}">
                             {{method_field('DELETE')}}
                             {!! csrf_field() !!}
-                            <a href="{{route('editarRol',$rol)}}" class="btn btn-link" data-toggle="tooltip" data-placement="right" title="Editar"><i class="fa fa-edit fa-2x"></i></a>
+                            <a href="{{route('editarCarrera',$carrera)}}" class="btn btn-link" data-toggle="tooltip" data-placement="right" title="Editar"><i class="fa fa-edit fa-2x"></i></a>
                             <button class="btn btn-link" type="submit"><i class="fa fa-trash fa-2x"></i></button>
                         </form>
                     </td>
@@ -49,7 +48,6 @@
             </tbody>
         </table>
     @else
-        <li>No hay Roles</li>
+        <li>No hay Carreras</li>
     @endif
-
 @endsection

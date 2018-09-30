@@ -10,7 +10,16 @@ class menuController extends Controller
    		return view('layouts.menu');
    }
 
+   //listarturor
+
+   public function listarTutor(){
+       return view('profesionales.listarTutor');
+   }
    public function listarAreas(){
         return view('area.listarAreas');
    }
+
+   public function listaModalidad(){
+    return view('modadelidad.listaModalidad');
+   }   
 }

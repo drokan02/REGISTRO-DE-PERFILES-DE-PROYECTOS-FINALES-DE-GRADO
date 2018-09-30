@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\AreaFormRequest;
+use Validator;
 use App\Area;
 use DB;
 class AreaController extends Controller
@@ -11,42 +13,54 @@ class AreaController extends Controller
 	
 	}
 	
-	public function index(Request $request){
 
-		/*if($request){
-			$buscar = trim($request->get('buscarTexto'));
-			$areas = DB::table('area')->where('nombre',' ','descripsion','LIKE','%',$buscar,'%');
-			return view('area.listaAreas',["areas"=>$areas],'buscarTexto'=>$buscar);
+	public function index(Request $request){
+		$buscar = $request->get('buscar');
+		if($buscar != null){			
+			$areas = Area::buscar($buscar)->get();
+			return view('area.listar',['areas'=> $areas,'buscar'=>$buscar , 'fila'=>1]);	
+		}else{
+			$areas = Area::buscar('')->get();
+			return view('area.listar',['areas'=> $areas,'buscar'=>null,'fila'=>1]);
 		}
-		*/
-		 $data = Area::all();
-		return view('area.lista',['areas'=> $data ]);
 	}
 
 	public function registrar(){
-		return view('area.registrarArea');
+		return view('area.registrar');
 	}
 
-	public function guardar(AreaFormRequest $request){
+	
+	public function almacenar(AreaFormRequest $request){
 		$area = new Area;
-		$area->nombre = $request->get('nombre');
-		$area->descripsion = $request->get('descripsion');
-		$area->save();
-		return Redirect::to('area');
+		$area->create($request->all());
+		return redirect()->route('Areas');
 	}
+
 
 	public function editar($id){
-		$area=Areas::findOrFail($id);
+		$area=Area::findOrFail($id);
 		return view('area.editar',['area'=>$area]);
 	
 	}
 
-	public function actualizar(Request $request,$id){
+	public function modificar(AreaFormRequest $request,$id){
 		Area::findOrFail($id)->update($request->all());
-        return redirect('area');
+        return redirect()->route('Areas');
 	}
-	public function eliminar(){
-		 Area::findOrFail($id)->delete();
-        return redirect('area');
+
+	public function eliminar($id){
+		$subareas = Area::subareas($id,'')->get();
+		if($subareas != []){
+			return back()->withErrors('No se puede eliminar la Area por que existen SubAreas asociadas a este');
+		} else {
+			/*Area::findOrFail($id)->delete();
+			return redirect()->route('Areas');*/
+		}
+	}
+	
+	public function ver($id){
+		$area=Area::findOrFail($id);
+		$subareas = $area->subareas($id)->get();
+		return view('area.ver',['area'=>$area,'subareas'=>$subareas]);
 	}
 }

@@ -1,18 +1,23 @@
 @extends('layouts.menu')
-@section('titulo','USUARIOS')
+@section('titulo','LISTA DE USUARIOS DEL SISTEMA')
 @section('contenido')
-    <div class="row ">
-        <div class="col-8">
-            <h1 class="display-4 font-weight-bold">Lista de Usuarios</h1>
+    <div class="row mb-3">
+        <div class="col-8 offset-1">
+            <form method="GET" action="{{route('usuarios')}}" class="form-inline">
+                <div class="form-group">
+                    <input class="form-control" name="name" placeholder="Buscar">
+                    <button type="submit" class=" btn btn-success">Buscar</button>
+                </div>
+            </form>
         </div>
-        <div class="col p-3 mt-1">
-            <a href="{{route('crearUsuario')}}" class="btn btn-link"><i class="fa fa-plus"></i></a>
-            <a href="{{route('roles')}}" class="btn btn-link">Roles</a>
+        <div class="col">
+            <a href="{{route('crearUsuario')}}" class="btn btn-link" data-toggle="tooltip" data-placement="right" title="Añadir"><i class="fa fa-user-plus fa-2x"></i></a>
+            <a href="{{route('roles')}}" class="btn btn-link btn-lg">Roles</a>
         </div>
     </div>
     @if($users->isNotEmpty())
-        <table class="table table-hover table-bordered text-center">
-            <thead class="thead-dark">
+        <table class="table table-hover table-bordered-primary text-center">
+            <thead class="thead-primary">
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Nombre</th>
@@ -25,12 +30,14 @@
                 <tr>
                     <th scope="row">{{$us->id}}</th>
                     <td>{{$us->name}}</td>
-                    <td>{{$us->role->nombre_rol}}</td>
+                    <td>{{$us->roles->pluck('nombre_rol')->implode(' - ')}}</td>
                     <td>
-                        <form action="#">
-                            <a href="#" class="btn btn-link"><i class="fa fa-eye"></i></a>
-                            <a href="#" class="btn btn-link"><i class="fa fa-edit"></i></a>
-                            <button class="btn btn-link" type="submit"><i class="fa fa-trash"></i></button>
+                        <form method="POST" action="{{route('eliminarUsuario',$us)}}">
+                            {{method_field('DELETE')}}
+                            {!! csrf_field() !!}
+                            <a href="{{route('detalleUsuario',['id'=>$us->id])}}" class="btn btn-link" data-toggle="tooltip" data-placement="right" title="Datos Usuario"><i class="fa fa-eye fa-2x"></i></a>
+                            <a href="{{route('editarUsuario',$us)}}" class="btn btn-link" data-toggle="tooltip" data-placement="right" title="Editar"><i class="fa fa-edit fa-2x"></i></a>
+                            <button class="btn btn-link" type="submit"><i class="fa fa-trash fa-2x"></i></button>
                         </form>
                     </td>
                 </tr>
