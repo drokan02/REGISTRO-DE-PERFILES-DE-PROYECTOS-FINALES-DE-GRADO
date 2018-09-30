@@ -28,6 +28,9 @@ Route::delete('/roles/{role}/eliminar','RoleController@eliminar')->name('elimina
 Route::get('/usuarios','usuarioController@index')->name('usuarios');
 Route::get('/usuarios/crear','usuarioController@crear')->name('crearUsuario');
 Route::post('/usuarios/guardar','usuarioController@guardar')->name('guardarUsuario');
+//>>>>>>> c8a3dbd378f54b057566cc0c63f538b61c250beb
+
+
 Route::get('/usuarios/{user}','usuarioController@detalle')->name('detalleUsuario');
 Route::get('/usuarios/{user}/editar','usuarioController@editar')->name('editarUsuario');
 Route::put('/usuarios/{user}','usuarioController@actualizar')->name('actualizarUsuario');//put metodo para actualizar
@@ -46,3 +49,10 @@ Route::any('/areas/buscar', 'AreaController@index')->name('buscarArea');
 Route::get('/modadelidad','modalidades@index')->name('modadelidad');
 Route::get('/modadelidad/registrarmodalidad','modalidades@registrar')->name('registrarmodalidad');
 Route::get('/modadelidad/listaModalidad','menuController@listaModalidad')->name('listaModalidad');
+
+//tutores
+Route::get('profesionales','tutores@index')->name('profesionales');
+Route::get('profesionales/registrotutor','tutores@registrar')->name('registrotutor');
+
+Route::get('profesionales/listarTutor','menuController@listarTutor')->name('listarTutor');
+//>>>>>>>>>

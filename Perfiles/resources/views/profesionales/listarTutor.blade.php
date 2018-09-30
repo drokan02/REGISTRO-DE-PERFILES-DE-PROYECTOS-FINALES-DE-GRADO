@@ -1,5 +1,5 @@
 @extends('layouts.menu')
-@section('titulo','LISTAR MODALIDAD')
+@section('titulo','LISTAR TUTOR')
 @section('contenido')
 
 <Form>
@@ -7,7 +7,7 @@
       <div class="form-group row">
               <div class="col-3"></div>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" placeholder="Buscar" id="buscar_modal" value="{{old('buscar_modal')}}">
+                  <input type="text" class="form-control" placeholder="Buscar" id="buscar_profesionales" value="{{old('buscar_profesionales')}}">
               </div>
               <div class="col-sm-5">
                 <button type="submit" class="btn btn-success"> Buscar</button>
@@ -17,7 +17,7 @@
   
   
     <div class="table-responsive">
-            <table class="tabla" id="listaModal">
+            <table class="tabla" id="listaPrefesion">
                 <thead class ="columnas">
               <tr>
                 <th style="width: 35px; text-align: center;">N°</th>
@@ -29,8 +29,8 @@
             <tbody>
               <tr>
                 <td style="text-align: right;" >1</td>
-                <td>trabajo dirigido</td>
-                <td>tesis</td>
+                <td>Marcos</td>
+                <td>Otto</td>
                 <td>
                   <div>
                       <a href='#' data-toggle="tooltip" data-placement="right" title="Editar">

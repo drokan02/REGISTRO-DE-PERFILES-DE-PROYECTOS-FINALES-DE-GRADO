@@ -17,4 +17,9 @@ class menuController extends Controller
    public function listaModalidad(){
     return view('modadelidad.listaModalidad');
    }   
+   //listarturor
+
+   public function listarTutor(){
+       return view('profesionales.listarTutor');
+   }
 }
