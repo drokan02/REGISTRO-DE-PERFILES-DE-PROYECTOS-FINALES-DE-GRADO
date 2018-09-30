@@ -26,13 +26,14 @@ Route::delete('/roles/{role}/eliminar','RoleController@eliminar')->name('elimina
 
 //usuarios
 Route::get('/usuarios','usuarioController@index')->name('usuarios');
-Route::get('/usuarios/crear','UsuarioController@crear')->name('crearUsuario');
 Route::get('/usuarios/crear','usuarioController@crear')->name('crearUsuario');
 Route::post('/usuarios/guardar','usuarioController@guardar')->name('guardarUsuario');
 Route::get('/usuarios/{user}','usuarioController@detalle')->name('detalleUsuario');
 Route::get('/usuarios/{user}/editar','usuarioController@editar')->name('editarUsuario');
 Route::put('/usuarios/{user}','usuarioController@actualizar')->name('actualizarUsuario');//put metodo para actualizar
 Route::delete('/usuarios/{user}/eliminar','usuarioController@eliminar')->name('eliminarUsuario');
+Route::get('/cambiar_contraseña/{user}','usuarioController@cambiarContraseña')->name('cambiarContraseña');
+Route::post('/guardar_contraseña/{user}','usuarioController@guardarContraseña')->name('guardarContraseña');
 
 //Areas
 Route::get('/areas','AreaController@index')->name('Areas');
@@ -61,3 +62,12 @@ Route::get('profesionales/listarTutor','menuController@listarTutor')->name('list
 Route::get('/modadelidad','modalidades@index')->name('modadelidad');
 Route::get('/modadelidad/registrarmodalidad','modalidades@registrar')->name('registrarmodalidad');
 Route::get('/modadelidad/listaModalidad','menuController@listaModalidad')->name('listaModalidad');
+
+//carreras
+Route::get('/carreras','CarreraController@index')->name('carreras');
+Route::get('/carreras/crear','CarreraController@crear')->name('crearCarrera');
+Route::post('/carreras/guardar','CarreraController@guardar')->name('guardarCarrera');
+//Route::get('/carreras/{carrera}','CarreraController@detalle')->name('detalleCarrera');
+Route::get('/carreras/{carrera}/editar','CarreraController@editar')->name('editarCarrera');
+Route::put('/carreras/{carrera}','CarreraController@actualizar')->name('actualizarCarrera');//put metodo para actualizar
+Route::delete('/carreras/{carrera}/eliminar','CarreraController@eliminar')->name('eliminarCarrera');

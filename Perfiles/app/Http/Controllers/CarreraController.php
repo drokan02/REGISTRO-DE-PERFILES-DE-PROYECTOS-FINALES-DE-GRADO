@@ -8,16 +8,17 @@ use Illuminate\Http\Request;
 class CarreraController extends Controller
 {
     /**Display a listing of the resource.
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index(){
-        $carreras=Carrera::all();
+    public function index(Request $request){
+        $carreras=Carrera::name($request->get('name'))->get();
         return view('carreras/listaCarreras',compact('carreras'));
     }
     /**Show the form for creating a new resource.
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function crear()
     {
         return view('carreras/crearCarrera');
     }
@@ -25,7 +26,7 @@ class CarreraController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request){
+    public function guardar(Request $request){
         $this->validate(request(), [
             'codigo_carrera' => ['required'],
             'nombre_carrera'=> ['required'],
@@ -39,14 +40,14 @@ class CarreraController extends Controller
      * @param  \App\Carrera  $carrera
      * @return \Illuminate\Http\Response
      */
-    public function show(Carrera $carrera){
+    public function detalle(Carrera $carrera){
         //
     }
     /**Show the form for editing the specified resource.
      * @param  \App\Carrera  $carrera
      * @return \Illuminate\Http\Response
      */
-    public function edit(Carrera $carrera){
+    public function editar(Carrera $carrera){
         return view('carreras/editarCarrera',compact('carrera'));
     }
     /**Update the specified resource in storage.
@@ -54,7 +55,7 @@ class CarreraController extends Controller
      * @param  \App\Carrera  $carrera
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Carrera $carrera)
+    public function actualizar(Request $request, Carrera $carrera)
     {
         $this->validate(request(), [
             'codigo_carrera' => ['required'],
@@ -68,7 +69,7 @@ class CarreraController extends Controller
      * @param  \App\Carrera  $carrera
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Carrera $carrera)
+    public function eliminar(Carrera $carrera)
     {
         $carrera->delete();
         return redirect()->route('carreras');

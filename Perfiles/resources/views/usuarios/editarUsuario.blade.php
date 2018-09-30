@@ -29,10 +29,12 @@
                     <label for="email">Email</label>
                     <input type="email" class="form-control" name="email" id="email" value="{{old('email',$user->email)}}">
                 </div>
+                <!--
                 <div class="form-group">
                     <label for="password">Contraseña</label>
                     <input type="password" class="form-control" name="password" id="password" value="{{old('password')}}">
                 </div>
+                -->
                 <div class="form-group mb-4">
                     <div class="form-group checkbox mb-4">
                         @foreach($roles as $id=>$nombre_rol)

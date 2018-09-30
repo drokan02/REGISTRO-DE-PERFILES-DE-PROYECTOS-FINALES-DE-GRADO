@@ -19,7 +19,7 @@
         <!-- Logo -->
         <a href="#" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><b>AD</b>P</span>
+          <span class="logo-mini"><b>RPPG</b></span>
           <!--------------------- LOGO DEL SISTEMA --------------------------------->
           <span class="logo-lg"><b>ADMINISTRACION</b></span>
         </a>
@@ -78,6 +78,9 @@
                 </li>
                 <li>
                   <a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Guia par el llenado <br> de formulario </a>
+                </li>
+                <li>
+                  <a href="{{route('carreras')}}"><i class="fa fa-caret-right" aria-hidden="true"></i>Carreras</a>
                 </li>
               </ul>
             </li>
