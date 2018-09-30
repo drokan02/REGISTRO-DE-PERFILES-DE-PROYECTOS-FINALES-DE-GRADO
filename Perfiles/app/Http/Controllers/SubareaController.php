@@ -36,7 +36,6 @@ class SubareaController extends Controller
 
 
 	public function editar($id){
-		
 		$subarea = Area::findOrFail($id);
 		$area = Area::findOrFail($subarea->id_area);
 		return view('subarea.editar',['area'=>$area,'subarea'=>$subarea]);
@@ -50,7 +49,10 @@ class SubareaController extends Controller
 	}
 
 	public function eliminar($id){
-		 Area::findOrFail($id)->delete();
-		 return redirect()->route('Areas');
+		//falta condicionar la eliminacion
+		$subarea = Area::findOrFail($id);
+		$area = Area::findOrFail($subarea->id_area);
+		$subarea->delete();
+		return redirect()->route('subareas',['area'=>$area]);
 	}
 }
