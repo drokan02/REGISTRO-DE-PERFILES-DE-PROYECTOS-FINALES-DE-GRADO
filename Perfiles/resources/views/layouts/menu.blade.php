@@ -135,7 +135,7 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Docente</a></li>
-                <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar docetes</a></li>
+                <li><a href="{{route('docentes')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar docetes</a></li>
               </ul>
             </li>
 
