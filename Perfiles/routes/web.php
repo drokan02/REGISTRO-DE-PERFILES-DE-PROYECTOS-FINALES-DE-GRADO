@@ -36,6 +36,7 @@ Route::get('/cambiar_contraseña/{user}','usuarioController@cambiarContraseña')
 Route::post('/guardar_contraseña/{user}','usuarioController@guardarContraseña')->name('guardarContraseña');
 
 //Areas
+Route::resource('area', 'UserController');
 Route::get('/areas','AreaController@index')->name('Areas');
 Route::get('/areas/registrar','AreaController@registrar')->name('registrarArea');
 Route::any('/areas/registrar/almacenar','AreaController@almacenar')->name('almacenarArea');
