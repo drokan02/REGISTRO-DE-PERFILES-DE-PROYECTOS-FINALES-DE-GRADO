@@ -9,7 +9,7 @@ use App\Role;
 class User extends Authenticatable
 {
     use Notifiable;
-    public $timestamps=false;
+    //public $timestamps=false;
 
 
     /**
