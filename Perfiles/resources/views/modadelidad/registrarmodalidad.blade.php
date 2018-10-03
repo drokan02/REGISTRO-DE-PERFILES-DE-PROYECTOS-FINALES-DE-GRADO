@@ -10,23 +10,23 @@
 				
 				<!--Nombre Modalidad -->
 				<div class = "form-group row"> 
-					<label for="cod_moddal" class="col-sm-2 col-form-label">Nombre</label>
+					<label for="nombre_mod" class="col-sm-2 col-form-label">Nombre</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" id="cod_moddal" value="{{old('cod_moddal')}}">
+						<input type="text" class="form-control" mane="nombre_mod" value="{{old('nombre_mod')}}">
 					</div>
 				</div>
 
 				<div class = "form-group row"> 
-					<label for="cod_moddal" class="col-sm-2 col-form-label">Codigo</label>
+					<label for="codigo_mod" class="col-sm-2 col-form-label">Codigo</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" id="cod_moddal" value="{{old('cod_moddal')}}">
+						<input type="text" class="form-control" id="codigo_mod" value="{{old('codigo_mod')}}">
 					</div>
 				</div>
 	
 				<div class = "form-group row">
-					<label for="desc_moddal" class="col-sm-2 col-form-label">Descripsion</label>
+					<label for="descripsion_mod" class="col-sm-2 col-form-label">Descripsion</label>
 					<div class="col-sm-8">
-					<input type="text" class="form-control" id="cod_area" value="{{old('cod_moddal')}}">
+					<input type="text" class="form-control" name="descripsion_mod" value="{{old('descripsion_mod')}}">
 					</div>
 					
 				</div>
