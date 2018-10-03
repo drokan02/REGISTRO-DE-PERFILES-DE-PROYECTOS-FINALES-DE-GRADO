@@ -48,6 +48,10 @@
         @endforeach
       </tbody>
     </table>
+    
+     {!! $areas->render() !!}
+    
 </div>
+
 </Form>
 @endsection

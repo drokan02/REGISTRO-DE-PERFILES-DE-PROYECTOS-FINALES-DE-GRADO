@@ -16,13 +16,11 @@ class AreaController extends Controller
 
 	public function index(Request $request){
 		$buscar = $request->get('buscar');
-		if($buscar != null){			
-			$areas = Area::buscar($buscar)->get();
-			return view('area.listar',['areas'=> $areas,'buscar'=>$buscar , 'fila'=>1]);	
-		}else{
-			$areas = Area::buscar('')->get();
-			return view('area.listar',['areas'=> $areas,'buscar'=>null,'fila'=>1]);
-		}
+		$areas = Area::buscar($buscar)
+				->orderBy('id','ASC')
+				->paginate(5);
+		return view('area.listar',['areas'=> $areas,'buscar'=>$buscar , 'fila'=>1]);	
+		
 	}
 
 	public function registrar(){

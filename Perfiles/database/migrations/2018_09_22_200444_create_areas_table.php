@@ -19,6 +19,7 @@ class CreateAreasTable extends Migration
             $table->string('nombre');
             $table->string('descripcion')->nullable();
             $table->integer('id_area')->nullable();
+            $table->integer('carrera_id');
            // $table->foreign('id_subarea')->references('id')->on('areas');
             $table->timestamps();
         });
