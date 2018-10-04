@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Carrera;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class CarreraController extends Controller
 {
@@ -28,7 +29,7 @@ class CarreraController extends Controller
      */
     public function guardar(Request $request){
         $this->validate(request(), [
-            'codigo_carrera' => ['required'],
+            'codigo_carrera' => ['required','unique:carreras,codigo_carrera'],
             'nombre_carrera'=> ['required'],
             'descripcion'=>'required'
         ]);
@@ -58,7 +59,7 @@ class CarreraController extends Controller
     public function actualizar(Request $request, Carrera $carrera)
     {
         $this->validate(request(), [
-            'codigo_carrera' => ['required'],
+            'codigo_carrera' => ['required',Rule::unique('carreras')->ignore($carrera->id)],
             'nombre_carrera'=> ['required'],
             'descripcion'=>'required'
         ]);
