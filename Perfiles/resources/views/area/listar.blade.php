@@ -50,7 +50,7 @@
     </table>
     
      {!! $areas->render() !!}
-    
+
 </div>
 
 </Form>
