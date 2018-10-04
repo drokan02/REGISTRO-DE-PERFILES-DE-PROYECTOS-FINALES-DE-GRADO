@@ -30,7 +30,7 @@
               <tr>
                 <td style="text-align: right;" >1</td>
                 <td>trabajo dirigido</td>
-                <td>Ott</td>
+                <td>tesis</td>
                 <td>
                   <div>
                       <a href='#' data-toggle="tooltip" data-placement="right" title="Editar">

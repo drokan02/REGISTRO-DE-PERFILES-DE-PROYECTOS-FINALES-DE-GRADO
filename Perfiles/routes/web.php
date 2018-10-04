@@ -53,6 +53,11 @@ Route::post('areas/subareas/almacenar/{area}','SubareaController@almacenar')->na
 Route::any('/areas/subareas/editar/{id}','SubareaController@editar')->name('editarSubarea');
 Route::post('areas/subareas/modificar/{id}','SubareaController@modificar')->name('modificarSubarea');
 Route::post('areas/subareas/eliminar/{id}','SubareaControler@eliminar')->name('eliminarSubarea');
+//Modalidades
+
+Route::get('/modadelidad','modalidades@index')->name('modadelidad');
+Route::get('/modadelidad/registrarmodalidad','modalidades@registrar')->name('registrarmodalidad');
+Route::get('/modadelidad/listaModalidad','menuController@listaModalidad')->name('listaModalidad');
 
 //tutores
 Route::get('profesionales','tutores@index')->name('profesionales');
@@ -72,3 +77,8 @@ Route::post('/carreras/guardar','CarreraController@guardar')->name('guardarCarre
 Route::get('/carreras/{carrera}/editar','CarreraController@editar')->name('editarCarrera');
 Route::put('/carreras/{carrera}','CarreraController@actualizar')->name('actualizarCarrera');//put metodo para actualizar
 Route::delete('/carreras/{carrera}/eliminar','CarreraController@eliminar')->name('eliminarCarrera');
+
+//docentes
+Route::get('/docentes','docenteController@index')->name('docentes');
+
+

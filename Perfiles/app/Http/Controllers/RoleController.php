@@ -16,7 +16,7 @@ class RoleController extends Controller
     }
     public function guardar(Request $request){
         $this->validate(request(), [
-            'nombre_rol' => ['required'],
+            'nombre_rol' => ['required','regex:/^[\pL\s]+$/u'],
             'privilegios'=> ['required','not_in:seleccione una opcion']
         ]);
         $rol=new Role();
@@ -28,7 +28,7 @@ class RoleController extends Controller
     }
     public function actualizar(Role $role){
         $this->validate(request(), [
-            'nombre_rol' => ['required'],
+            'nombre_rol' => ['required','regex:/^[\pL\s]+$/u'],
             'privilegios'=> ['required','not_in:seleccione una opcion']
         ]);
         $role->update($_REQUEST);

@@ -22,4 +22,7 @@ class menuController extends Controller
    public function listaModalidad(){
     return view('modadelidad.listaModalidad');
    }   
+   //listarturor
+
+   
 }
