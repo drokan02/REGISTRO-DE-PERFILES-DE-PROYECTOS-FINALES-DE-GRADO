@@ -31,7 +31,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title"> @yield('titulo')</h3>
                       <!--  Revisar --->
-                      <div class="box-tools pull-right"></div>
+                      <div class=""></div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -69,6 +69,6 @@
     
     <script src={{asset('js/parsley.min.js')}}></script>
 
-    <script src={{asset('js/jQuery.dataTable.js')}}></script>
+    <script src={{asset('js/ajax.js')}}></script>
   </body>
 </html>

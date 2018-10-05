@@ -61,4 +61,20 @@ class AreaController extends Controller
 		$subareas = $area->subareas($id)->get();
 		return view('area.ver',['area'=>$area,'subareas'=>$subareas]);
 	}
+
+	//metodo para mostras interfaz para subir archivo excel
+	public function subirExcel(){
+		return view('area.importar');
+	}
+
+	//metodo para importar los datos de excel a la base de datos
+	public function importar(Request $request){
+		$archivo = $request->file('archivo');
+		$nombre=$archivo;
+		if($request->ajax()){
+			 return response()->json([
+				 "mensaje" => $nombre
+			 ]);
+		}
+	}
 }
