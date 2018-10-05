@@ -12,6 +12,7 @@
     <link href={{asset('css/estilos.css')}} rel="stylesheet">
     <link rel="apple-touch-icon" href={{asset('img/apple-touch-icon.png')}}>
     <link rel="shortcut icon" href={{asset('img/favicon.ico')}}>
+    
   </head>
   <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
@@ -143,10 +144,8 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Profesional</a></li>
-                <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Profesionales</a></li>
-                <li><a href="{{route('registrotutor')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Tutor</a></li>
-                <li><a href="{{route('listarTutor')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Tutor</a></li>
+                <li><a href="{{route('registroProfesional')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Profesional</a></li>
+                <li><a href="{{route('listarProfesional')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Profesional</a></li>
               </ul>
             </li>
 
