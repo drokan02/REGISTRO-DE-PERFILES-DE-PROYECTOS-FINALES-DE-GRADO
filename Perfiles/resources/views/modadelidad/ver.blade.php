@@ -1,5 +1,5 @@
 @extends('layouts.menu')
-@section('titulo','Modal')
+@section('titulo','MODALIDAD')
 @section('contenido')
     
     <div class="container">
@@ -13,7 +13,7 @@
         </div>
 
         <div class="form-group row">
-                <label class="col-sm-12 col-form-label" style="font-size:25px"> <b>Descripcion:</b> <p style="font-size:25px" width ="70%"> {{$modadelidad->description_mod}}</p></label>
+                <label class="col-sm-12 col-form-label" style="font-size:25px"> <b>Descripcion:</b> <p style="font-size:25px" width ="70%"> {{$modadelidad->descripsion_mod}}</p></label>
         </div>
     </div >
 @endsection

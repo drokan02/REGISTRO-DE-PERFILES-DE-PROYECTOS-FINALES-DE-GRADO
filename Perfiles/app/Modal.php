@@ -18,6 +18,8 @@ class Modal extends Model
         'id','codigo_mod','nombre_mod', 'descripsion_mod'
     ];
 
+    protected $table='modalidad';
+    public $timestamps=false;
 	
 
     public function scopeBuscar($query, $buscar){
@@ -28,4 +30,3 @@ class Modal extends Model
 	}
 
 }
-    

@@ -16,14 +16,17 @@ class modalidades extends Controller
 	
 	
 	public function index(Request $request){
-		$buscar = $request->get('buscar');
-		if($buscar != null){			
-			$modalidad = Modal::buscar($buscar)->get();
-			return view('modadelidad.listaModalidad',['modalidad'=> $modalidad,'buscar'=>$buscar , 'fila'=>1]);	
-		}else{
-			$modalidad = Modal::buscar('')->get();
-			return view('modadelidad.listaModalidad',['modalidad'=> $modalidad,'buscar'=>null,'fila'=>1]);
-		}
+		//$buscar = $request->get('buscar');
+		//if($buscar != null){			
+		//	$modalidad = Modal::buscar($buscar)->get();
+		//	return view('modadelidad.listaModalidad',['modalidad'=> $modalidad,'buscar'=>$buscar , 'fila'=>1]);	
+		//}else{
+		//	$modalidad = Modal::buscar('')->get();
+		//	return view('modadelidad.listaModalidad',['modalidad'=> $modalidad,'buscar'=>null,'fila'=>1]);
+		//}
+		$modalidades=Modal::all();
+		
+		return view('modadelidad/listaModalidad',compact('modalidades'));
 	}
 	  
 	public function registrar(Request $request){
@@ -31,28 +34,51 @@ class modalidades extends Controller
         return view('modadelidad.registrarmodalidad');
     }
 	
-	public function almacenar(moddal $request){
+	public function almacenar(Request $request){
+
+
+
+		$this->validate(request(), [
+			'nombre_mod'=>['required'],
+			'codigo_mod' => ['required'],
+            'descripsion_mod'=> ['required']
+        ]);
 		$modadelidad = new Modal;
 		$modadelidad->create($request->all());
 		return redirect()->route('modalidad');
 	}
-
-
-	public function editar($id){
-		$modadelida=Modal::findOrFail($id);
-		return view('modadelidad.editarmodal',['modadelidad'=>$modadelidad]);
-	
+	 
+	/**
+     * Show the form for editing the specified resource.
+     * @param Modal $user
+     * @return \Illuminate\Http\Response
+     */
+    public function editar(Modal $modalidad){
+       $modadelidad=Modal::findOrFail($modalidad);
+      return view('modadelidad/editarmodal',compact('modalidad','modadelidad'));
 	}
+	
 
-	public function modificar(moddal $request,$id){
-		Modal::findOrFail($id)->update($request->all());
-        return redirect()->route('modalidad');
+	public function modificar(moddal $request,$modalidad){
+		Modal::findOrFail($modalidad)->update($request->all());
+        return redirect()->route('modalidadd');
 	}
 
 	
 	
 	public function ver($id){
-		$modadelida=Modal::findOrFail($id);
-		return view('modadelidad.ver',['modadelidad'=>$modadelidad]);
+		$modadelidad=Modal::findOrFail($id);
+		return view('modadelidad/ver',compact('id','modadelidad'));
 	}
+
+	/**
+     * Remove the specified resource from storage.
+     * @param Modal $user
+     * @return \Illuminate\Http\Response
+     */
+    public function eliminar(Modal $modalidad){
+		$modalidad->delete();               //eliminar datos en tabla intermedia
+	
+        return redirect()->route('modalidad');
+    }
 }

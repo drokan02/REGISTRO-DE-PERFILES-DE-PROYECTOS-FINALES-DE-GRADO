@@ -109,7 +109,7 @@
               </a>
               <ul class="treeview-menu">
                <li><a href="{{route('registrarmodalidad')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Modalidad</a></li>
-               <li><a href="{{route('listaModalidad')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Modalidad</a></li>
+               <li><a href="{{route('modalidad')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Modalidad</a></li>
               </ul>
             </li>
 

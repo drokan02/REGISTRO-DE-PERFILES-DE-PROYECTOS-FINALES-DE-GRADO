@@ -2,11 +2,14 @@
 @section('titulo','LISTAR MODADELIDAD')
 @section('contenido')
 
-<Form method="GET" action="{{route('modañ')}}">
+<Form method="GET" action="{{route('modalidad')}}">
+
     <!--BUSCADOR -->
-   @include('complementos.busqueda')
-   <!--FIN BUSCADOR -->
-   @include('complementos.error')
+   
+   <!--FIN BUSCADOR 
+   @include('complementos.error')-->
+ 
+   @if($modalidades->isNotEmpty())
   <div class="table-responsive">
       <table class="tabla" id="listaModall">
           <thead class ="columnas">
@@ -20,22 +23,22 @@
       </thead>
       <tbody>
            
-        @foreach ($modadelidad)
+        @foreach ($modalidades as $modalidad)
             <tr>
                 
-                <td style="text-align: right;">{{$fila++}}</td>
-                <td>{{$modadelidad->codigo}}</td>
-                <td>{{$modadelidad->nombre}}</td>
-                <td style="width: 45%;" >{{$modadelidad->descripcion}}</td>
+                <td style="text-align: right;">{{$modalidad->id}}</td>
+                <td>{{$modalidad->codigo_mod}}</td>
+                <td>{{$modalidad->nombre_mod}}</td>
+                <td style="width: 45%;" >{{$modalidad->descripsion_mod}}</td>
                 <td>
                     <div class="text-center">
-                        <a href='{{ route('verModalidad',$modadelidad->id)}}' data-toggle="tooltip" data-placement="right" title="Ver Modalidad">
+                        <a href='{{ route('ver',$modalidad->id)}}' data-toggle="tooltip" data-placement="right" title="Ver">
                                     <i class="col-sm-3 fa fa-eye fa-2x" ></i>
                          </a>
-                        <a href='{{ route('editarModalidad',$modadelidad->id)}}' data-toggle="tooltip" data-placement="right" title="Editar">
+                        <a href='{{ route('editar',$modalidad->id)}}' data-toggle="tooltip" data-placement="right" title="Editar">
                             <i class="col-sm-3 fa fa-pencil-square-o fa-2x" ></i>
                          </a>
-                        <a href='{{ route('eliminarModalidad',$modadelidad->id)}}' onclick="return confirm('¿Esta seguro de eliminar esta Modalidad?')" 
+                        <a href='{{ route('eliminar',$modalidad->id)}}' onclick="return confirm('¿Esta seguro de eliminar esta Modalidad?')" 
                         data-toggle="tooltip" data-placement="right" title="eliminar" >
                               <i class="col-sm-3 fa fa-minus-square fa-2x" ></i>
                         </a>
@@ -46,6 +49,11 @@
         @endforeach
       </tbody>
     </table>
+    @else
+        <li>No hay Modalidades</li>
+    @endif
 </div>
+
 </Form>
+
 @endsection

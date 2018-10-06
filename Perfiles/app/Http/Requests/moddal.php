@@ -24,7 +24,7 @@ class moddal extends FormRequest
     public function rules()
     {
         $ruta = $this->route()->getName();
-        if($ruta == 'modificarModalidad'){
+        if($ruta == 'almacenar' || $ruta == 'modifcarModalidad'){
        
             return [
                 'codigo_mod'=> ['required','alpha_num','min:2','max:5', Rule::unique( 'codigo_mod')->ignore($this->{'id'})],
@@ -46,7 +46,7 @@ class moddal extends FormRequest
     {
         global $tipo;
         $ruta = $this->route()->getName();
-        if( $ruta == 'almacenarModalidad' || $ruta == 'modifcarModalidad'){
+        if( $ruta == 'almacenar' || $ruta == 'modifcarModalidad'){
             $tipo = 'Modal';
         }else{
             $tipo = '';
