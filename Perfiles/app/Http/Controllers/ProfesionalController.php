@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Tutor;
+use App\Profesional;
 use App\Area;
 use App\Titulo;
 use DB;
@@ -15,7 +15,7 @@ class ProfesionalController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $profesionales = Tutor::all();
+        $profesionales = Profesional::all();
     
         return view('profesionales/ListarProfesionales',compact('profesionales'));
     }
@@ -35,7 +35,7 @@ class ProfesionalController extends Controller
      */
     public function store(Request $request){
         dd($request->all());
-        //Tutor::create($request->all());
+        //Profesional::create($request->all());
         //return redirect()->route('listarProfesional');
     }
     /**
