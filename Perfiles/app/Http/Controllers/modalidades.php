@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\moddal;
-use Validator;
+use Illuminate\Validation\Rule;
+//use Validator;
 use App\Modal;
-use DB;
+//use DB;
 
 class modalidades extends Controller
 {
@@ -35,33 +36,35 @@ class modalidades extends Controller
     }
 	
 	public function almacenar(Request $request){
-
-
-
 		$this->validate(request(), [
-			'nombre_mod'=>['required'],
-			'codigo_mod' => ['required'],
+			'nombre_mod'=>['required','regex:/^[\pL\s]+$/u'],
+			'codigo_mod' => ['required','alpha_num','unique:modalidad,codigo_mod'],
             'descripsion_mod'=> ['required']
         ]);
 		$modadelidad = new Modal;
 		$modadelidad->create($request->all());
 		return redirect()->route('modalidad');
 	}
-	 
-	/**
+
+    /**
      * Show the form for editing the specified resource.
-     * @param Modal $user
+     * @param Modal $modalidad
      * @return \Illuminate\Http\Response
+     * @internal param Modal $user
      */
     public function editar(Modal $modalidad){
-       $modadelidad=Modal::findOrFail($modalidad);
-      return view('modadelidad/editarmodal',compact('modalidad','modadelidad'));
+      return view('modadelidad/editarmodal',compact('modalidad'));
 	}
 	
 
-	public function modificar(moddal $request,$modalidad){
-		Modal::findOrFail($modalidad)->update($request->all());
-        return redirect()->route('modalidadd');
+	public function modificar(Request $request,Modal $modalidad){
+        $this->validate(request(), [
+            'codigo_mod' => ['required','alpha_num',Rule::unique('modalidad')->ignore($modalidad->id)],
+            'nombre_mod'=>['required','regex:/^[\pL\s]+$/u'],
+            'descripsion_mod'=> ['required']
+        ]);
+		$modalidad->update($request->all());
+        return redirect()->route('modalidad');
 	}
 
 	
