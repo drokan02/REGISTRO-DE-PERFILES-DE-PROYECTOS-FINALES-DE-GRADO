@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Tutor;
+use App\Area;
+use App\Titulo;
 use DB;
 class ProfesionalController extends Controller
 {
@@ -19,7 +21,11 @@ class ProfesionalController extends Controller
     }
 
     public function create(){
-        return view('profesionales/registroprofesional');
+        
+       $areas = Area::areas()->get();
+        $subareas = Area::subareas()->get();
+        $titulos = Titulo::all();
+        return view('profesionales/registroprofesional',['areas'=>$areas, 'subareas'=>$subareas, 'titulos'=>$titulos ]);
     }
 
     /**
@@ -29,8 +35,8 @@ class ProfesionalController extends Controller
      */
     public function store(Request $request){
         dd($request->all());
-        Tutor::create($request->all());
-        return redirect()->route('listarProfesional');
+        //Tutor::create($request->all());
+        //return redirect()->route('listarProfesional');
     }
     /**
      * Store a newly created resource in storage.

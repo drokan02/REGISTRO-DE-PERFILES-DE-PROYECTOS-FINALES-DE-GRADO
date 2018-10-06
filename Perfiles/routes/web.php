@@ -80,13 +80,6 @@ Route::any('/modadelidad/ver/{id}','modalidades@ver')->name('ver');
 
 ///
 
-//tutores
-Route::get('profesionales','tutores@index')->name('profesionales');
-Route::get('profesionales/registrotutor','tutores@registrar')->name('registrotutor');
-Route::get('profesionales/listarTutor','menuController@listarTutor')->name('listarTutor');
-
-
-
 //carreras
 Route::get('/carreras','CarreraController@index')->name('carreras');
 Route::get('/carreras/crear','CarreraController@crear')->name('crearCarrera');

@@ -15,6 +15,7 @@
                     </ul>
                 </div>
             @endif-->
+             
             <form method="POST" action="{{route('storeProfesional')}}">
                 {!! csrf_field() !!}
 
@@ -67,9 +68,14 @@
 
                 
 				<div class = "form-group row"> 
-					<label for="perfil" class="col-sm-2 col-form-label">Perfil</label>
-					<div class="col-sm-4">
-						<input type="text" class="form-control" name="perfil" value="{{old('perfil')}}">
+					<label for="perfil" class="col-sm-2 col-form-label">Titulo</label>
+					<div class="col-sm-4 row-fluid">
+						<select class="selectpicker" name="titulo" data-show-subtext="true" data-live-search="true">
+							@foreach($areas as $area)
+				            	<option  value="{{$area->id}}">{{$area->nombre}}</option>	
+							@endforeach	
+						</select>
+
 					</div>
 				
 					<!--<label for="titulo" class="col-sm-2 col-form-label">Titulo</label>
@@ -79,14 +85,14 @@
 				</div>
 
 				<div class = "form-group row"> 
-					<label for="cargahoraria" class="col-sm-2 col-form-label">Carga Horaria</label>
+					<label for="cargahoraria" class="col-sm-2 col-form-label">Area</label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" id="cargahoraria" value="{{old('cargahoraria')}}">
 					</div>
 				</div>
 
 				<div class = "form-group row"> 
-					<label for="codigosis" class="col-sm-2 col-form-label">CodigoSIS</label>
+					<label for="codigosis" class="col-sm-2 col-form-label">Subarea</label>
 					<div class="col-sm-4">
 						<input type="num" class="form-control" id="codigosis" value="{{old('codigosis')}}">
 					</div>

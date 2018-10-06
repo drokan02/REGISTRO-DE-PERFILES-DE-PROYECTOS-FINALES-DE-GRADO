@@ -50,16 +50,15 @@
 
       <!-- menu MODALIDADES -->
       <li class="treeview">
-        <a href="#">
-          <i class="fa fa-file-text-o" aria-hidden="true"></i>
-          <span> Modalidades </span>
-           <i class="fa fa-angle-left pull-right"></i>
-        </a>
-        <ul class="treeview-menu">
-         <li><a href="{{route('registrarmodalidad')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Modalidad</a></li>
-         <li><a href="{{route('listaModalidad')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Modalidad</a></li>
-        </ul>
-      </li>
+              <a href="#">
+                <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                <span> Modalidades </span>
+                 <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+               <li><a href="{{route('registrarmodalidad')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Modalidad</a></li>
+               <li><a href="{{route('modalidad')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Modalidad</a></li>
+              </ul>
 
       <!-- Menu Usuarios-->
       <li class="treeview {{ request()->segment(1) == 'usuarios'? 'active open':'' }}">
@@ -93,19 +92,18 @@
         </ul>
       </li>
 
-      <!-- Menu PROFESIONALES-->
-      <li class="treeview">
-        <a href="#">
-          <i class="fa fa-users" aria-hidden="true"></i> <span>Profesionales</span>
-          <i class="fa fa-angle-left pull-right"></i>
-        </a>
-        <ul class="treeview-menu">
-          <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Profesional</a></li>
-          <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Profesionales</a></li>
-          <li><a href="{{route('registrotutor')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Tutor</a></li>
-          <li><a href="{{route('listarTutor')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Tutor</a></li>
-        </ul>
-      </li>
+      
+       <!-- Menu PROFESIONALES-->
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-users" aria-hidden="true"></i> <span>Profesionales</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="{{route('registroProfesional')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Profesional</a></li>
+                <li><a href="{{route('listarProfesional')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Profesional</a></li>
+              </ul>
+            </li>
 
 
 
