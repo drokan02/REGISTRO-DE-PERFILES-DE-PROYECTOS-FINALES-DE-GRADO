@@ -16,7 +16,7 @@ class AreaController extends Controller
 
 	public function index(Request $request){
 		$buscar = $request->get('buscar');
-		$areas = Area::buscar($buscar)
+		$areas = Area::buscarAreas($buscar)
 				->orderBy('id','ASC')
 				->paginate(5);
 		return view('area.listar',['areas'=> $areas,'buscar'=>$buscar , 'fila'=>1]);	
@@ -60,5 +60,21 @@ class AreaController extends Controller
 		$area=Area::findOrFail($id);
 		$subareas = $area->subareas($id)->get();
 		return view('area.ver',['area'=>$area,'subareas'=>$subareas]);
+	}
+
+	//metodo para mostras interfaz para subir archivo excel
+	public function subirExcel(){
+		return view('area.importar');
+	}
+
+	//metodo para importar los datos de excel a la base de datos
+	public function importar(Request $request){
+		$archivo = $request->file('archivo');
+		$nombre=$archivo;
+		if($request->ajax()){
+			 return response()->json([
+				 "mensaje" => $nombre
+			 ]);
+		}
 	}
 }

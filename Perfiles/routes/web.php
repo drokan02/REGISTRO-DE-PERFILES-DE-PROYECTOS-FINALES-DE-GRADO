@@ -36,7 +36,6 @@ Route::get('/cambiar_contraseña/{user}','usuarioController@cambiarContraseña')
 Route::post('/guardar_contraseña/{user}','usuarioController@guardarContraseña')->name('guardarContraseña');
 
 //Areas
-Route::resource('area', 'UserController');
 Route::get('/areas','AreaController@index')->name('Areas');
 Route::get('/areas/registrar','AreaController@registrar')->name('registrarArea');
 Route::any('/areas/registrar/almacenar','AreaController@almacenar')->name('almacenarArea');
@@ -45,6 +44,8 @@ Route::any('/areas/editar/modificar/{id}','AreaController@modificar')->name('mod
 Route::any('/areas/eliminar/{id}','AreaController@eliminar')->name('eliminarArea');
 Route::any('/areas/buscar', 'AreaController@index')->name('buscarArea');
 Route::any('/areas/ver/{id}','AreaController@ver')->name('verArea');
+Route::any('/areas/subir_Excel', 'AreaController@subirExcel')->name('subirAreas');
+Route::any('/areas/subir_Excel/importar', 'AreaController@importar')->name('importarAreas');
 
 //Subareas
 Route::get('areas/subareas/{area}','SubareaController@index')->name('subareas');
