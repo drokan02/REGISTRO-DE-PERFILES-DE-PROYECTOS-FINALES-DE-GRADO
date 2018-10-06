@@ -35,10 +35,10 @@ class usuarioController extends Controller
     public function guardar(Request $request)
     {
         $this->validate(request(), [
-            'name' => ['required'],
-            'user_name' => ['required','unique:users,user_name'],
+            'name' => ['required','regex:/^[\pL\s]+$/u'],
+            'user_name' => ['required','unique:users,user_name','alpha_num'],
             'email' => ['required','email','unique:users,email'],
-            'password' => ['required'],
+            'password' => ['required','min:6'],
             'roles'=>'required'
         ]);
         $request['password']=bcrypt($request['password']);
@@ -74,19 +74,12 @@ class usuarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function actualizar(Request $request, User $user){
-        //dd($request->all());
         $this->validate(request(), [
-            'name' => ['required'],
-            'user_name' => ['required',Rule::unique('users')->ignore($user->id)],
+            'name' => ['required','regex:/^[\pL\s]+$/u'],
+            'user_name' => ['required',Rule::unique('users')->ignore($user->id),'alpha_num'],
             'email'=>['required','email',Rule::unique('users')->ignore($user->id)],
-            'password' => '',
             'roles'=> ['required']
         ]);
-        if ($request['password'] != null){
-            $request['password']=bcrypt($request['password']);
-        }else{
-            unset($request['password']);
-        }
         DB::transaction(function () use($request,$user) {
             $user->update($request->all());
             $iduser=User::query()->where('email',$request['email'])->value('id');
@@ -104,4 +97,23 @@ class usuarioController extends Controller
         $user->delete();
         return redirect()->route('usuarios');
     }
+    public function cambiarContraseña(User $user){
+        return view('usuarios/cambiarPassword',compact('user'));
+    }
+
+    /**
+     * @param Request $request
+     * @param User $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function guardarContraseña(Request $request, User $user){
+        $this->validate(request(), [
+            'password' => ['required','confirmed','min:6'],
+        ]);
+        $request['password']=bcrypt($request['password']);
+        $user->password=$request['password'];
+        $user->save();
+        return view('usuarios/detalleUsuario',compact('user'));
+    }
+
 }

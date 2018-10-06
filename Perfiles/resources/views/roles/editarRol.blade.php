@@ -1,8 +1,6 @@
 @extends('layouts.menu')
 @section('titulo','Editar ROL')
 @section('contenido')
-
-
     <div class="row justify-content-center mt-4">
         <div class="col-6">
             <h1 class="mb-3">Editar el Rol seleccionado</h1>

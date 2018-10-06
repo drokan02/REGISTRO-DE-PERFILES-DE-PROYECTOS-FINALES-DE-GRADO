@@ -1,7 +1,20 @@
 @extends('layouts.menu')
 @section('titulo','Informacion del usuario')
 @section('contenido')
-    <h1>Detalle del Usuario</h1>
+
+
+    <ul class="nav justify-content-end ">
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('editarUsuario',$user)}}">Modifica tus datos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('cambiarContraseña',$user)}}">Cambiar Contraseña</a>
+        </li>
+    </ul>
+
+
+
+
     <table class="table">
         <thead>
             <tr>
@@ -42,5 +55,4 @@
         </tr>
         </tbody>
     </table>
-
 @endsection

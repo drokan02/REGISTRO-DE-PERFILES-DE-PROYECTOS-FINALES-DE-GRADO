@@ -16,11 +16,16 @@
   </head>
   <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
+      
+      <!--BARRA DEL ENCABEZADO-->
+      @include('layouts.header')
+      <!-- BARRA DE MENU -->
+      @include('layouts.sidebar')
       <header class="main-header">
         <!-- Logo -->
         <a href="#" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><b>AD</b>P</span>
+          <span class="logo-mini"><b>RPPG</b></span>
           <!--------------------- LOGO DEL SISTEMA --------------------------------->
           <span class="logo-lg"><b>ADMINISTRACION</b></span>
         </a>
@@ -80,6 +85,9 @@
                 <li>
                   <a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Guia par el llenado <br> de formulario </a>
                 </li>
+                <li>
+                  <a href="{{route('carreras')}}"><i class="fa fa-caret-right" aria-hidden="true"></i>Carreras</a>
+                </li>
               </ul>
             </li>
 
@@ -107,7 +115,7 @@
               </a>
               <ul class="treeview-menu">
                <li><a href="{{route('registrarmodalidad')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Modalidad</a></li>
-               <li><a href="{{route('listaModalidad')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Modalidad</a></li>
+               <li><a href="{{route('modalidad')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Modalidad</a></li>
               </ul>
             </li>
 
@@ -133,7 +141,7 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Docente</a></li>
-                <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar docetes</a></li>
+                <li><a href="{{route('docentes')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar docetes</a></li>
               </ul>
             </li>
 
@@ -177,7 +185,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title"> @yield('titulo')</h3>
                       <!--  Revisar --->
-                      <div class="box-tools pull-right"></div>
+                      <div class=""></div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -215,6 +223,6 @@
     
     <script src={{asset('js/parsley.min.js')}}></script>
 
-    <script src={{asset('js/jQuery.dataTable.js')}}></script>
+    <script src={{asset('js/ajax.js')}}></script>
   </body>
 </html>

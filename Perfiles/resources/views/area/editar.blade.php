@@ -16,7 +16,7 @@
 						<label for="codigo" class="col-sm-2 col-form-label">Codigo</label>
 						<div class="col-sm-8">
 							<input type="text" class="form-control" placeholder="codigo area" name="codigo" autocomplete="off"
-							value= {{$area->codigo}}>
+							value= {{old('codigo',$area->codigo)}}>
 						</div>
 					</div>
 					<!--Nombre area -->
@@ -24,7 +24,7 @@
 						<label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
 						<div class="col-sm-8">
 							<input type="text" class="form-control" placeholder="nombre area" name="nombre" autocomplete="off"
-							value="{{$area->nombre}}">
+							value="{{old('nombre',$area->nombre)}}">
 						</div>
 					</div>
 		
@@ -32,7 +32,7 @@
 						<label for="descripcion" class="col-sm-2 col-form-label">Descripcion</label>
 						<div class="col-sm-8">
 							<textarea class="form-control" placeholder="descripcion no obligatoria" autocomplete="off"
-							name="descripcion" rows="5">{{$area->descripcion}}</textarea>
+							name="descripcion" rows="5">{{old('descripcion',$area->descripcion)}}</textarea>
 						</div>
 						
 					</div>

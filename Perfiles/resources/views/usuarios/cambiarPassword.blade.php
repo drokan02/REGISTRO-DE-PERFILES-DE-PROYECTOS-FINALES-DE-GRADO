@@ -1,0 +1,30 @@
+@extends('layouts.menu')
+@section('titulo','CAMBIAR CONTRASEÑA DEL USUARIO: '.$user->name)
+@section('contenido')
+    <div class="row justify-content-center mt-4">
+        @if($errors ->any())
+            <div class="alert-danger">
+                <h3>Se tiene los siguientes errores en el formulario</h3>
+                <ul>
+                    @foreach($errors->all() as $errors)
+                        <li>{{$errors}}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <div class="col-6">
+            <form method="POST" action="{{route('guardarContraseña',$user)}}">
+                {!! csrf_field() !!}
+                <div class="form-group">
+                    <label for="password">Introduce Nueva Contraseña</label>
+                    <input type="password" class="form-control" name="password" id="password">
+                </div>
+                <div class="form-group">
+                    <label for="password_confirmation">Repite la Contraseña</label>
+                    <input type="password" class="form-control" name="password_confirmation" id="password_confirmation">
+                </div>
+                <button type="submit" class="btn btn-outline-success btn-lg">Aceptar</button>
+            </form>
+        </div>
+    </div>
+@endsection

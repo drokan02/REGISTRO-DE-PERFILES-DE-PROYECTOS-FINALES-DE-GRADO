@@ -13,24 +13,22 @@ class AreaController extends Controller
 	
 	}
 	
+
 	public function index(Request $request){
-		if($request->get('buscar') != null){
-			$buscar = $request->get('buscar');			
-			$areas = Area::buscar($buscar)->get();
-			return view('area.listarAreas',['areas'=> $areas,'buscar'=>$buscar ]);	
-		}else{
-			$areas = Area::all();
-			return view('area.listar',['areas'=> $areas]);
-		}
+		$buscar = $request->get('buscar');
+		$areas = Area::buscarAreas($buscar)
+				->orderBy('id','ASC')
+				->paginate(5);
+		return view('area.listar',['areas'=> $areas,'buscar'=>$buscar , 'fila'=>1]);	
+		
 	}
 
 	public function registrar(){
-		return view('area.registrar',['descripcion'=>null]);
+		return view('area.registrar');
 	}
 
 	
 	public function almacenar(AreaFormRequest $request){
-
 		$area = new Area;
 		$area->create($request->all());
 		return redirect()->route('Areas');
@@ -43,15 +41,40 @@ class AreaController extends Controller
 	
 	}
 
-	public function modificar(Request $request,$id){
+	public function modificar(AreaFormRequest $request,$id){
 		Area::findOrFail($id)->update($request->all());
         return redirect()->route('Areas');
 	}
+
 	public function eliminar($id){
-		 Area::findOrFail($id)->delete();
-		 return redirect()->route('Areas');
+		$subareas = Area::subareas($id,'')->get();
+		if($subareas != []){
+			return back()->withErrors('No se puede eliminar la Area por que existen SubAreas asociadas a este');
+		} else {
+			/*Area::findOrFail($id)->delete();
+			return redirect()->route('Areas');*/
+		}
+	}
+	
+	public function ver($id){
+		$area=Area::findOrFail($id);
+		$subareas = $area->subareas($id)->get();
+		return view('area.ver',['area'=>$area,'subareas'=>$subareas]);
 	}
 
-	
+	//metodo para mostras interfaz para subir archivo excel
+	public function subirExcel(){
+		return view('area.importar');
+	}
 
+	//metodo para importar los datos de excel a la base de datos
+	public function importar(Request $request){
+		$archivo = $request->file('archivo');
+		$nombre=$archivo;
+		if($request->ajax()){
+			 return response()->json([
+				 "mensaje" => $nombre
+			 ]);
+		}
+	}
 }

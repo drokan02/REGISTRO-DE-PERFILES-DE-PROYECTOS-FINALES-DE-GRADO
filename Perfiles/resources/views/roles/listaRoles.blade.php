@@ -8,9 +8,12 @@
                 <button type="submit" class=" btn btn-success">Buscar</button>
             </form>
         </div>
+<<<<<<< HEAD
         <div class="col  p-3 mt-1">
             <a href="#" class="btn btn-link btn-lg" data-toggle="tooltip" data-placement="right" title="añadir"><i class="fa fa-plus"></i></a>
             <a href="{{route('usuarios')}}" class="btn btn-link btn-lg" data-toggle="tooltip" data-placement="right" title="Usuarios"><i class="fa fa-users"></i></a>
+=======
+>>>>>>> 0c5d669bfc36022496626dc44b332a8060a04ca6
         <div class="col ">
             <a href="{{route('crearRol')}}" class="btn btn-link" data-toggle="tooltip" data-placement="right" title="añadir"><i class="fa fa-plus fa-2x"></i></a>
             <a href="{{route('usuarios')}}" class="btn btn-link" data-toggle="tooltip" data-placement="right" title="Usuarios"><i class="fa fa-users fa-2x"></i></a>
