@@ -26,10 +26,7 @@ Route::delete('/roles/{role}/eliminar','RoleController@eliminar')->name('elimina
 
 //usuarios
 Route::get('/usuarios','usuarioController@index')->name('usuarios');
-<<<<<<< HEAD
 Route::get('/roles/crear','UsuarioController@crear')->name('crearUsuario');
-=======
->>>>>>> 0c5d669bfc36022496626dc44b332a8060a04ca6
 Route::get('/usuarios/crear','usuarioController@crear')->name('crearUsuario');
 Route::post('/usuarios/guardar','usuarioController@guardar')->name('guardarUsuario');
 Route::get('/usuarios/{user}','usuarioController@detalle')->name('detalleUsuario');
@@ -51,7 +48,6 @@ Route::any('/areas/ver/{id}','AreaController@ver')->name('verArea');
 Route::any('/areas/subir_Excel', 'AreaController@subirExcel')->name('subirAreas');
 Route::any('/areas/subir_Excel/importar', 'AreaController@importar')->name('importarAreas');
 
-<<<<<<< HEAD
 
 //tutores
 Route::get('/profesionales','ProfesionalController@index')->name('listarProfesional');
@@ -63,7 +59,6 @@ Route::post('/profesionales/store','ProfesionalController@store')->name('storePr
 Route::get('/modadelidad','modalidades@index')->name('modadelidad');
 Route::get('/modadelidad/registrarmodalidad','modalidades@registrar')->name('registrarmodalidad');
 Route::get('/modadelidad/listaModalidad','menuController@listaModalidad')->name('listaModalidad');
-=======
 //Subareas
 Route::get('areas/subareas/{area}','SubareaController@index')->name('subareas');
 Route::get('areas/subareas/registrar/{area}','SubareaController@registrar')->name('registrarSubarea');
@@ -105,4 +100,3 @@ Route::delete('/carreras/{carrera}/eliminar','CarreraController@eliminar')->name
 Route::get('/docentes','docenteController@index')->name('docentes');
 
 
->>>>>>> 0c5d669bfc36022496626dc44b332a8060a04ca6
