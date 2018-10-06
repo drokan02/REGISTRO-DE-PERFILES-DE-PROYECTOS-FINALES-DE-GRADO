@@ -49,8 +49,7 @@ class ProfesionalController extends Controller
             'titulo_id' => 'required',
             'direc_prof' => ['required'],
             'perfil_prof' => ['required'],
-            'created_at' => ['required'],
-            'updated' => ['required'],
+
             'roles'=>'required'
         ]);
        

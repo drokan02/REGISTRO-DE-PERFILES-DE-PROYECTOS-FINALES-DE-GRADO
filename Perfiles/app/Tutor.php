@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Tutor extends Authenticatable
 {
     use Notifiable;
+    public $timestamps=false;
 
     /**
      * The attributes that are mass assignable.

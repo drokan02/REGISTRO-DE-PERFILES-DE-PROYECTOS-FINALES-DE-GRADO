@@ -4,7 +4,7 @@
 
    <div class="row justify-content-center mt-4">
         <div class="col-6">
-            <h1 class="mb-3">Añadir un Nuevo Usuario</h1>
+            <h1 class="mb-3">Profesional</h1>
            <!-- @if($errors ->any())
                 <div class="alert-danger">
                     <h3>Se tiene los siguientes errores en el formulario</h3>
@@ -99,7 +99,7 @@
 					</div>
 				</div>
 
-				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Agregar</button>
+			<!--	<button type="button" class="btn btn-info" data-toggle="modal"     data-target="#myModal">Agregar</button>
           			<input type="hidden" id="ListaTitulos" name="ListaTitulos" value="" required />
           			<br>
 				 <table id="tableTitulos" class="table">
@@ -110,12 +110,11 @@
 		                    <th>Acción</th>
 		                </tr>
 		            </thead>
-		            <tbody id="tableTitulosData"><!--Ingreso un id al tbody-->
-		                <tr>
+		            <tbody id="tableTitulosData">
 		             		
 		                </tr>
 		            </tbody>
-		        </table>
+		        </table>-->
 				
 
 				<div class = "form-group row"> 
@@ -132,75 +131,6 @@
 		</div>
 	
 	</div>
-
-		
-
-
-
-
-		 <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Agregar titulo a la lista</h4>
-                    </div>
-                    <div class="modal-body">
-                         <div class="form-group">
-                         	<label>Nombre titulo</label>
-							<input type="text" class="form-control" id="nombre_titulo" name="nombre_titulo" value="{{old('nombre')}}">
-
-							<label>Descripcion</label>
-							<input type="text" class="form-control" id="descripcion" name="nombre_titulo" value="{{old('nombre')}}">
-                		</div>
-                    </div>
-                    <div class="modal-footer">
-                        <!--Uso la funcion onclick para llamar a la funcion en javascript-->
-                        <button type="button" onclick="agregarProducto()" class="btn btn-default" data-dismiss="modal">Agregar</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
 @endsection
 
-<script type="text/javascript">
-	function agregarProducto() {
 
-		var nombre_titulo = $("#nombre_titulo").val();
-		var descripcion = $("#descripcion").val();
-	    
-	    var newtr = '<tr class="item"  data-id="'+nombre_titulo+'">';
-	    newtr = newtr + '<td class="iProduct" id="nombre">' + nombre_titulo + '</td>';
-	    newtr = newtr + '<td class="iProduct" id="descripcion">' + descripcion + '</td>';
-	    newtr = newtr + '<td><button type="button" class="btn btn-danger btn-xs remove-item"><i class="fa fa-times"></i></button></td></tr>';
-	    
-	    $('#tableTitulosData').append(newtr);	    
-	    RefrescaProducto();
-	        
-	    $('.remove-item').off().click(function(e) {
-	        $(this).parent('td').parent('tr').remove();
-	        if ($('#tableTitulosData tr.item').length == 0)
-	            $('#tableTitulosData .no-item').slideDown(300); 
-	        RefrescaProducto();
-	    });        
-	   $('.iProduct').off().change(function(e) {
-	        RefrescaProducto();
-	   });
-    }
-
-	function RefrescaProducto(){
-        var ip = [];
-
-        $('.iProduct').each(function(index, element) {
-        	var datos = element;
-            ip.push({ 
-            	nombre_titulo : element.innerText, 
-            	descripcion : element.innerText ,
-            });
-        });
-
-        var ipt = JSON.stringify(ip);
-        $('#ListaTitulos').val(ipt);
-    }
-</script>
