@@ -85,5 +85,15 @@ Route::delete('/carreras/{carrera}/eliminar','CarreraController@eliminar')->name
 
 //docentes
 Route::get('/docentes','docenteController@index')->name('docentes');
-
+Route::get('/docentes','docenteController@index')->name('Docentes');
+Route::post('/docentes/registrar', 'docenteController@registrar')->name('registrarDocente');
+//Route::get('/docentes/registrar',function(){
+ //   return view('docentes/registrarDocentes');
+//})->name('registrarDocenteGet');
+Route::any('/docentes/registrar/almacenar','docenteController@almacenar')->name('almacenarDocentes');
+Route::any('//docentes/{id}','docenteController@editar')->name('editarDocente');
+Route::any('/docentes/editar/modificar/{id}','docenteController@modificar')->name('modificarDocente');
+Route::any('/docentes/eliminar/{id}','AreaController@eliminar')->name('eliminarDocente');
+Route::any('/docentes/buscar', 'docenteController@index')->name('buscarDocente');
+Route::any('/docentes/ver/{id}','docenteController@ver')->name('verDocente');
 
