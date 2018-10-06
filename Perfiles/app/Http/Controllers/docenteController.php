@@ -35,7 +35,13 @@ class docenteController extends Controller
 
 
         $profecional->save();
-        $id = Profecional::last();
+        $id = Profesional::where('nombre_prof',$datos-> nombre)->value('id');
+        $docente = new Docente;
+        $docente->profecional_id = $id;
+        $docente->carga_horaria = $datos->carga_horaria;
+        $docente->carga_horaria = $datos->codigo_sis;
+        $docente->save();
+        
 
     }
 

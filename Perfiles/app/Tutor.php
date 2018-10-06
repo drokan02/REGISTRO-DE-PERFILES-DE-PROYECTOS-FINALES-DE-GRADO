@@ -8,7 +8,7 @@ use App\Role;
 class Tutor extends Authenticatable
 {
     use Notifiable;
-
+    protected $table = 'profesional';
     /**
      * The attributes that are mass assignable.
      *
