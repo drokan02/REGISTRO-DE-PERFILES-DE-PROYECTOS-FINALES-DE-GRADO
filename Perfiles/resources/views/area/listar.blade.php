@@ -2,8 +2,9 @@
 @section('titulo','LISTAR AREAS')
 @section('contenido')
 
+
 <Form method="GET" action="{{route('Areas')}}">
-    <!--BUSCADOR -->
+    @if($areas->isNotEmpty())   <!--BUSCADOR -->
    @include('complementos.busqueda')
    <!--FIN BUSCADOR -->
    @include('complementos.error')
@@ -50,6 +51,9 @@
     </table>
     
      {!! $areas->render() !!}
+     @else
+        <li>No hay Areas registradas</li>
+    @endif
 
 </div>
 

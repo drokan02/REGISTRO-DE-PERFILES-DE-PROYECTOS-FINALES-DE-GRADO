@@ -31,10 +31,10 @@
                 <div class="box-header with-border">
                   <h3 class="box-title"> @yield('titulo')</h3>
                       <!--  Revisar --->
-                      <div class=""></div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
+                  
                   <div class="row">
                     <div class="col-md-12">
                         <!--Contenido-->

@@ -1,23 +1,24 @@
 @extends('layouts.menu')
-@section('titulo','LISTA DE SUBAREAS')
+@section('titulo','LISTA DE SUBAREAS DE LA AREA: '.$area->nombre)
 @section('contenido')
 
 <Form method="GET" action="{{route('subareas',['area'=>$area])}}">
-    <!--BUSCADOR -->
-   @include('complementos.busqueda')
-   <!--FIN BUSCADOR -->
-  
+   @if($subareas->isNotEmpty())   
+        <!--BUSCADOR --> <!--BUSCADOR -->
+         @include('complementos.busqueda')
+         <!--FIN BUSCADOR -->
+  @endif
   <div class="table-responsive">
         
     
-    <div class="col-sm-12">
-            <h4> <b>Subareas pertenecientes a la Area :</b>  {{$area->nombre}}
+    <div class="container col-sm-11">
+            
                     <a href='{{route('registrarSubarea',$area)}}' >
-                            <i class=" fa fa-plus fa-2x fa-2x pull-right" data-toggle="tooltip" data-placement="right" title="Agregar nueva Subarea" ></i>                 
+                            <!--class=pull-right  para poner el boton al extremo derecho-->
+                            <i class=" fa fa-plus fa-2x fa-3x pull-right" data-toggle="tooltip" data-placement="right" title="Agregar nueva Subarea" ></i>                 
                     </a>
-            </h4>
     </div>   
-      
+    @if($subareas->isNotEmpty())   <!--BUSCADOR -->
       <table class="tabla" id="listaArea">
           <thead class ="columnas">
         <tr>
@@ -51,6 +52,10 @@
         @endforeach
       </tbody>
     </table>
+    {!! $subareas->render() !!}
+     @else
+        <li>No hay Subareas registradas</li>
+    @endif
 </div>
 </Form>
 @endsection
