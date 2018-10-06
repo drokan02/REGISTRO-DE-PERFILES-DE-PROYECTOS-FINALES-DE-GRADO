@@ -8,14 +8,11 @@ use App\Area;
 class SubareaController extends Controller
 {
     public function index(Request $request,Area $area){
-		if($request->get('buscar') != null){
-			$buscar = $request->get('buscar');		
-			$subareas = Area::subareas($area->id,$buscar)->get();
-			return view('subarea.listar',['area'=> $area,'subareas'=>$subareas,'buscar'=>$buscar , 'fila'=>1]);	
-		}else{
-			$subareas =Area::subareas($area->id,' ')->get();
-			return view('subarea.listar',['area'=>$area,'subareas'=>$subareas,'buscar'=> null,'fila'=>1]);
-		}
+		$buscar = $request->get('buscar');
+		$subareas = Area::buscarsubareas($area->id,$buscar)
+						->orderBy('id','ASC')
+						->paginate(5);
+		return view('subarea.listar',['area'=> $area,'subareas'=>$subareas,'buscar'=>$buscar , 'fila'=>1]);	
 	}
 
 	public function registrar(Area $area){

@@ -16,17 +16,24 @@ class Area extends Model
     ];
 
 
-    public function scopeSubareas($query,$id,$buscar){
+    public function scopeAreas($query){
+        return $query->whereNull('id_area');
+    }
+
+    public function scopeSubareas($query){
+        return $query->whereNotNull('id_area');
+    }
+
+    public function scopeBuscarSubareas($query,$id,$buscar){
         if($buscar){
             return $query->where('id_area',$id)
-                        ->where(DB::raw("CONCAT(codigo,' ',nombre)"), "LIKE", "%$buscar%")
-                        ->ordenBy('id','ASC');
+                        ->where(DB::raw("CONCAT(codigo,' ',nombre)"), "LIKE", "%$buscar%");
         }else{
             return $query->where('id_area',$id);
         }
     }
 
-    public function scopeBuscar($query, $buscar){
+    public function scopeBuscarAreas($query, $buscar){
         if($buscar){
             return $query->whereNull('id_area')
                         ->where(DB::raw("CONCAT(codigo,' ',nombre)"), "LIKE", "%$buscar%");
@@ -35,9 +42,6 @@ class Area extends Model
         }
     }
     
-    public function scopeArea($query, $codigo,$nombre){
-        return $query->where('codigo',$codigo)
-                     ->orwhere('nombre',$nombre);
-    }
+   
 
 }

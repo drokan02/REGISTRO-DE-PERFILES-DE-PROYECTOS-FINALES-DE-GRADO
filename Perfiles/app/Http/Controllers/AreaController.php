@@ -16,7 +16,7 @@ class AreaController extends Controller
 
 	public function index(Request $request){
 		$buscar = $request->get('buscar');
-		$areas = Area::buscar($buscar)
+		$areas = Area::buscarAreas($buscar)
 				->orderBy('id','ASC')
 				->paginate(5);
 		return view('area.listar',['areas'=> $areas,'buscar'=>$buscar , 'fila'=>1]);	
