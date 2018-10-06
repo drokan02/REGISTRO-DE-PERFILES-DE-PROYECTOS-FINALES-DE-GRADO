@@ -26,6 +26,7 @@ Route::delete('/roles/{role}/eliminar','RoleController@eliminar')->name('elimina
 
 //usuarios
 Route::get('/usuarios','usuarioController@index')->name('usuarios');
+Route::get('/roles/crear','UsuarioController@crear')->name('crearUsuario');
 Route::get('/usuarios/crear','usuarioController@crear')->name('crearUsuario');
 Route::post('/usuarios/guardar','usuarioController@guardar')->name('guardarUsuario');
 Route::get('/usuarios/{user}','usuarioController@detalle')->name('detalleUsuario');
@@ -47,6 +48,17 @@ Route::any('/areas/ver/{id}','AreaController@ver')->name('verArea');
 Route::any('/areas/subir_Excel', 'AreaController@subirExcel')->name('subirAreas');
 Route::any('/areas/subir_Excel/importar', 'AreaController@importar')->name('importarAreas');
 
+
+//tutores
+Route::get('/profesionales','ProfesionalController@index')->name('listarProfesional');
+Route::get('/profesionales/registrar_profesional','ProfesionalController@create')->name('registroProfesional');
+Route::post('/profesionales/store','ProfesionalController@store')->name('storeProfesional');
+//>>>>>>>>>
+//Modalidades
+
+Route::get('/modadelidad','modalidades@index')->name('modadelidad');
+Route::get('/modadelidad/registrarmodalidad','modalidades@registrar')->name('registrarmodalidad');
+Route::get('/modadelidad/listaModalidad','menuController@listaModalidad')->name('listaModalidad');
 //Subareas
 Route::get('areas/subareas/{area}','SubareaController@index')->name('subareas');
 Route::get('areas/subareas/registrar/{area}','SubareaController@registrar')->name('registrarSubarea');
@@ -67,13 +79,6 @@ Route::any('/modadelidad/buscar', 'modalidades@index')->name('buscarModal');
 Route::any('/modadelidad/ver/{id}','modalidades@ver')->name('ver');
 
 ///
-
-//tutores
-Route::get('profesionales','tutores@index')->name('profesionales');
-Route::get('profesionales/registrotutor','tutores@registrar')->name('registrotutor');
-Route::get('profesionales/listarTutor','menuController@listarTutor')->name('listarTutor');
-
-
 
 //carreras
 Route::get('/carreras','CarreraController@index')->name('carreras');
