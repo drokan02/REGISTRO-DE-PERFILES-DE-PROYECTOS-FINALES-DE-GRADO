@@ -56,19 +56,24 @@ Route::post('areas/subareas/modificar/{id}','SubareaController@modificar')->name
 Route::post('areas/subareas/eliminar/{id}','SubareaControler@eliminar')->name('eliminarSubarea');
 //Modalidades
 
-Route::get('/modadelidad','modalidades@index')->name('modadelidad');
+Route::get('/modadelidad','modalidades@index')->name('modalidad');
 Route::get('/modadelidad/registrarmodalidad','modalidades@registrar')->name('registrarmodalidad');
-Route::get('/modadelidad/listaModalidad','menuController@listaModalidad')->name('listaModalidad');
+//Route::get('/modadelidad/listaModalidad','menuController@listaModalidad')->name('listaModalidad');
+Route::any('/modadelidad/registrar/almacenar','modalidades@almacenar')->name('almacenarModalidad');
+Route::any('/modadelidad/editarmodal/{modalidad}','modalidades@editar')->name('editar');
+Route::any('/modadelidad/editarmodal/modificar/{modalidad}','modalidades@modificar')->name('modificarModalidad');
+Route::any('/modadelidad/eliminar/{modalidad}','modalidades@eliminar')->name('eliminar');
+Route::any('/modadelidad/buscar', 'modalidades@index')->name('buscarModal');
+Route::any('/modadelidad/ver/{id}','modalidades@ver')->name('ver');
+
+///
 
 //tutores
 Route::get('profesionales','tutores@index')->name('profesionales');
 Route::get('profesionales/registrotutor','tutores@registrar')->name('registrotutor');
 Route::get('profesionales/listarTutor','menuController@listarTutor')->name('listarTutor');
 
-//Modalidades
-Route::get('/modadelidad','modalidades@index')->name('modadelidad');
-Route::get('/modadelidad/registrarmodalidad','modalidades@registrar')->name('registrarmodalidad');
-Route::get('/modadelidad/listaModalidad','menuController@listaModalidad')->name('listaModalidad');
+
 
 //carreras
 Route::get('/carreras','CarreraController@index')->name('carreras');
