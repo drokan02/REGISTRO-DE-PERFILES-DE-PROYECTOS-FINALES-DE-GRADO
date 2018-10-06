@@ -5,7 +5,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 
-class Tutor extends Authenticatable
+class Profesional extends Authenticatable
 {
     use Notifiable;
     public $timestamps=false;
