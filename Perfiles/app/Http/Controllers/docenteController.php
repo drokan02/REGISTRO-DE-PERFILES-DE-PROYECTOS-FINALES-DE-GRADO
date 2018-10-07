@@ -42,13 +42,17 @@ class docenteController extends Controller
                 
          
         }
-           public function registrar(Request $datosDeDocente){
+          /* public function registrar(Request $datosDeDocente){
             $nombre = $datosDeDocente->input('nombreDoc');
             $apellido = $datosDeDocente->input('apellidosDoc');
             DB::query("insert into docentes(nombre, apellido) values ($nombre, $apellido);");
             echo "".$nombre." ".$apellido;
         
+    }*/
+    public function registrar(){
+      return view('docentes.registrarDocentes');
     }
+  
 
     public function almacenar(DocenteRequest $request){
         $datos = $request->all();
