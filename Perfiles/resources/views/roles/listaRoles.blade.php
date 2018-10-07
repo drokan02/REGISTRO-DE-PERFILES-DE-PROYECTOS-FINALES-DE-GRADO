@@ -50,7 +50,11 @@
                 @endforeach
                 </tbody>
             </table>
+<<<<<<< HEAD
         </div >
+=======
+        </div>
+>>>>>>> master
     @else
         <li>No hay Roles</li>
     @endif

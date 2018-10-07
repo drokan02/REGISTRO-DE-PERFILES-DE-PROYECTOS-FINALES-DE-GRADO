@@ -52,12 +52,6 @@ Route::any('/areas/subir_Excel/importar', 'AreaController@importar')->name('impo
 Route::get('/profesionales','ProfesionalController@index')->name('listarProfesional');
 Route::get('/profesionales/registrar_profesional','ProfesionalController@create')->name('registroProfesional');
 Route::post('/profesionales/store','ProfesionalController@store')->name('storeProfesional');
-//>>>>>>>>>
-//Modalidades
-
-Route::get('/modadelidad','modalidades@index')->name('modadelidad');
-Route::get('/modadelidad/registrarmodalidad','modalidades@registrar')->name('registrarmodalidad');
-Route::get('/modadelidad/listaModalidad','menuController@listaModalidad')->name('listaModalidad');
 
 //Subareas
 Route::get('areas/subareas/{area}','SubareaController@index')->name('subareas');
@@ -66,19 +60,18 @@ Route::post('areas/subareas/almacenar/{area}','SubareaController@almacenar')->na
 Route::any('/areas/subareas/editar/{id}','SubareaController@editar')->name('editarSubarea');
 Route::post('areas/subareas/modificar/{id}','SubareaController@modificar')->name('modificarSubarea');
 Route::any('areas/subareas/eliminar/{id}','SubareaController@eliminar')->name('eliminarSubarea');
-//Modalidades
 
+
+//Modalidades
 Route::get('/modadelidad','modalidades@index')->name('modalidad');
 Route::get('/modadelidad/registrarmodalidad','modalidades@registrar')->name('registrarmodalidad');
-//Route::get('/modadelidad/listaModalidad','menuController@listaModalidad')->name('listaModalidad');
 Route::any('/modadelidad/registrar/almacenar','modalidades@almacenar')->name('almacenarModalidad');
-Route::any('/modadelidad/editarmodal/{modalidad}','modalidades@editar')->name('editar');
-Route::any('/modadelidad/editarmodal/modificar/{modalidad}','modalidades@modificar')->name('modificarModalidad');
-Route::any('/modadelidad/eliminar/{modalidad}','modalidades@eliminar')->name('eliminar');
+Route::get('/modadelidad/editarmodal/{modalidad}','modalidades@editar')->name('editarModalidad');
+Route::put('/modadelidad/{modalidad}','modalidades@modificar')->name('modificarModalidad');
+Route::delete('/modadelidad/eliminar/{modalidad}','modalidades@eliminar')->name('eliminarModalidad');
 Route::any('/modadelidad/buscar', 'modalidades@index')->name('buscarModal');
 Route::any('/modadelidad/ver/{id}','modalidades@ver')->name('ver');
 
-///
 
 //carreras
 Route::get('/carreras','CarreraController@index')->name('carreras');
