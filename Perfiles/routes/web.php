@@ -59,7 +59,8 @@ Route::get('areas/subareas/registrar/{area}','SubareaController@registrar')->nam
 Route::post('areas/subareas/almacenar/{area}','SubareaController@almacenar')->name('almacenarSubarea');
 Route::any('/areas/subareas/editar/{id}','SubareaController@editar')->name('editarSubarea');
 Route::post('areas/subareas/modificar/{id}','SubareaController@modificar')->name('modificarSubarea');
-Route::post('areas/subareas/eliminar/{id}','SubareaControler@eliminar')->name('eliminarSubarea');
+Route::any('areas/subareas/eliminar/{id}','SubareaController@eliminar')->name('eliminarSubarea');
+
 
 //Modalidades
 Route::get('/modadelidad','modalidades@index')->name('modalidad');
@@ -71,7 +72,6 @@ Route::delete('/modadelidad/eliminar/{modalidad}','modalidades@eliminar')->name(
 Route::any('/modadelidad/buscar', 'modalidades@index')->name('buscarModal');
 Route::any('/modadelidad/ver/{id}','modalidades@ver')->name('ver');
 
-///
 
 //carreras
 Route::get('/carreras','CarreraController@index')->name('carreras');

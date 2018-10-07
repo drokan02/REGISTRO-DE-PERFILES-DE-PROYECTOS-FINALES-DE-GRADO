@@ -2,12 +2,27 @@
 @section('titulo','LISTAR AREAS')
 @section('contenido')
 
-<Form method="GET" action="{{route('Areas')}}">
-    <!--BUSCADOR -->
-   @include('complementos.busqueda')
+
+<Form method="GET" action="{{route('Areas')}}" >
+    @if($areas->isNotEmpty()) <!--BUSCADOR -->
+    <div class="centrar col-sm-10 ">
+        
+            <div class="row">
+                <div class="col-sm-3"></div>
+                
+                <div class=" col-sm-4">       
+                                <input type="search" placeholder="&#xF002; Buscar" style="font-family:Time, FontAwesome" class="form-control" 
+                                name="buscar" autofocus value="{{$buscar}}" autocomplete="off" onfocus="var temp_value=this.value; this.value=''; this.value=temp_value">   
+                </div>          
+                <div class="col-4">
+                                <button class=" btn btn-success pull-left"> Buscar</button>
+                </div>
+            </div>
+             
+    </div>
    <!--FIN BUSCADOR -->
    @include('complementos.error')
-  <div class="table-responsive">
+  <div  class="centrar table-responsive col-sm-10 ">
       <table class="tabla" id="listaArea">
           <thead class ="columnas">
         <tr>
@@ -50,6 +65,9 @@
     </table>
     
      {!! $areas->render() !!}
+     @else
+        <li>No hay Areas registradas</li>
+    @endif
 
 </div>
 

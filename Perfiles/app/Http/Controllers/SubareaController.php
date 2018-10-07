@@ -50,6 +50,6 @@ class SubareaController extends Controller
 		$subarea = Area::findOrFail($id);
 		$area = Area::findOrFail($subarea->id_area);
 		$subarea->delete();
-		return redirect()->route('subareas',['area'=>$area]);
+		return redirect()->route('subareas',compact('area'));
 	}
 }

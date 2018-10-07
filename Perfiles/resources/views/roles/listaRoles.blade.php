@@ -21,8 +21,9 @@
         @endforeach
     </div>
     @if($roles->isNotEmpty())
-        <div class="container">
-            <table class="table table-hover table-bordered-primary text-center">
+    
+       <div class="container col-sm-8">
+            <table class="table-hover table-bordered-primary text-center">
                 <thead class="thead-primary">
                 <tr>
                     <th scope="col">#</th>
@@ -49,7 +50,11 @@
                 @endforeach
                 </tbody>
             </table>
+<<<<<<< HEAD
+        </div >
+=======
         </div>
+>>>>>>> master
     @else
         <li>No hay Roles</li>
     @endif
