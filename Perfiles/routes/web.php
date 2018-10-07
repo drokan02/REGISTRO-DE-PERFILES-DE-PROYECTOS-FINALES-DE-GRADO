@@ -26,7 +26,6 @@ Route::delete('/roles/{role}/eliminar','RoleController@eliminar')->name('elimina
 
 //usuarios
 Route::get('/usuarios','usuarioController@index')->name('usuarios');
-Route::get('/roles/crear','UsuarioController@crear')->name('crearUsuario');
 Route::get('/usuarios/crear','usuarioController@crear')->name('crearUsuario');
 Route::post('/usuarios/guardar','usuarioController@guardar')->name('guardarUsuario');
 Route::get('/usuarios/{user}','usuarioController@detalle')->name('detalleUsuario');
@@ -53,12 +52,7 @@ Route::any('/areas/subir_Excel/importar', 'AreaController@importar')->name('impo
 Route::get('/profesionales','ProfesionalController@index')->name('listarProfesional');
 Route::get('/profesionales/registrar_profesional','ProfesionalController@create')->name('registroProfesional');
 Route::post('/profesionales/store','ProfesionalController@store')->name('storeProfesional');
-//>>>>>>>>>
-//Modalidades
 
-Route::get('/modadelidad','modalidades@index')->name('modadelidad');
-Route::get('/modadelidad/registrarmodalidad','modalidades@registrar')->name('registrarmodalidad');
-Route::get('/modadelidad/listaModalidad','menuController@listaModalidad')->name('listaModalidad');
 //Subareas
 Route::get('areas/subareas/{area}','SubareaController@index')->name('subareas');
 Route::get('areas/subareas/registrar/{area}','SubareaController@registrar')->name('registrarSubarea');
@@ -66,15 +60,14 @@ Route::post('areas/subareas/almacenar/{area}','SubareaController@almacenar')->na
 Route::any('/areas/subareas/editar/{id}','SubareaController@editar')->name('editarSubarea');
 Route::post('areas/subareas/modificar/{id}','SubareaController@modificar')->name('modificarSubarea');
 Route::post('areas/subareas/eliminar/{id}','SubareaControler@eliminar')->name('eliminarSubarea');
-//Modalidades
 
+//Modalidades
 Route::get('/modadelidad','modalidades@index')->name('modalidad');
 Route::get('/modadelidad/registrarmodalidad','modalidades@registrar')->name('registrarmodalidad');
-//Route::get('/modadelidad/listaModalidad','menuController@listaModalidad')->name('listaModalidad');
 Route::any('/modadelidad/registrar/almacenar','modalidades@almacenar')->name('almacenarModalidad');
-Route::any('/modadelidad/editarmodal/{modalidad}','modalidades@editar')->name('editar');
-Route::any('/modadelidad/editarmodal/modificar/{modalidad}','modalidades@modificar')->name('modificarModalidad');
-Route::any('/modadelidad/eliminar/{modalidad}','modalidades@eliminar')->name('eliminar');
+Route::get('/modadelidad/editarmodal/{modalidad}','modalidades@editar')->name('editarModalidad');
+Route::put('/modadelidad/{modalidad}','modalidades@modificar')->name('modificarModalidad');
+Route::delete('/modadelidad/eliminar/{modalidad}','modalidades@eliminar')->name('eliminarModalidad');
 Route::any('/modadelidad/buscar', 'modalidades@index')->name('buscarModal');
 Route::any('/modadelidad/ver/{id}','modalidades@ver')->name('ver');
 
