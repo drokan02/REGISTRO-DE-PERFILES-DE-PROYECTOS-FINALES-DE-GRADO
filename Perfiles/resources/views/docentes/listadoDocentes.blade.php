@@ -4,7 +4,7 @@
 
 <Form method="GET" action="{{route('Docentes')}}">
     <!--BUSCADOR -->
-  
+    @include('complementos.busqueda')
    <!--FIN BUSCADOR -->
    @include('complementos.error')
   <div class="table-responsive">
