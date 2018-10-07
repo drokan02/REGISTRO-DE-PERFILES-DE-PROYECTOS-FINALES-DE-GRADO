@@ -90,7 +90,7 @@ Route::put('/carreras/{carrera}','CarreraController@actualizar')->name('actualiz
 Route::delete('/carreras/{carrera}/eliminar','CarreraController@eliminar')->name('eliminarCarrera');
 
 //docentes
-Route::get('/docentes','docenteController@index')->name('docentes');
+//Route::get('/docentes','docenteController@index')->name('docentes');
 Route::get('/docentes','docenteController@index')->name('Docentes');
 Route::post('/docentes/registrar', 'docenteController@registrar')->name('registrarDocente');
 //Route::get('/docentes/registrar',function(){
