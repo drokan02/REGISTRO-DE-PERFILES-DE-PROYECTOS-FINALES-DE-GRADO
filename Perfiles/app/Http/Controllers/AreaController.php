@@ -58,7 +58,7 @@ class AreaController extends Controller
 	
 	public function ver($id){
 		$area=Area::findOrFail($id);
-		$subareas = $area->subareas($id)->get();
+		$subareas = $area->subareasarea($id)->get();
 		return view('area.ver',['area'=>$area,'subareas'=>$subareas]);
 	}
 

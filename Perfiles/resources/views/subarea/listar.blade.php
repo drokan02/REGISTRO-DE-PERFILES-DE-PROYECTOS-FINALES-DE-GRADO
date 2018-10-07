@@ -3,21 +3,42 @@
 @section('contenido')
 
 <Form method="GET" action="{{route('subareas',['area'=>$area])}}">
-   @if($subareas->isNotEmpty())   
+
+
+   
         <!--BUSCADOR --> <!--BUSCADOR -->
-         @include('complementos.busqueda')
+
          <!--FIN BUSCADOR -->
-  @endif
-  <div class="table-responsive">
+  
+
+  <div class="centrar col-sm-10 ">
         
-    
-    <div class="container col-sm-11">
-            
+                <div class="row">
+                    <div class="col-sm-3"></div>
+                    
+                    <div class=" col-sm-4">
+                            @if($subareas->isNotEmpty() or $buscar) 
+                                    <input type="search" placeholder="&#xF002; Buscar" style="font-family:Time, FontAwesome" class="form-control" 
+                                    name="buscar" autofocus value="{{$buscar}}" autocomplete="off" onfocus="var temp_value=this.value; this.value=''; this.value=temp_value">
+
+                             @endif      
+                    </div>          
+                    <div class="col-4">
+                            @if($subareas->isNotEmpty() or $buscar) 
+                                    <button class=" btn btn-success pull-left"> Buscar</button>
+                             @endif
+                    </div>
+                    
                     <a href='{{route('registrarSubarea',$area)}}' >
                             <!--class=pull-right  para poner el boton al extremo derecho-->
-                            <i class=" fa fa-plus fa-2x fa-3x pull-right" data-toggle="tooltip" data-placement="right" title="Agregar nueva Subarea" ></i>                 
-                    </a>
-    </div>   
+                            <i class=" fa fa-plus fa-2x fa-3x pull-left" data-toggle="tooltip" data-placement="right" title="Agregar nueva Subarea" ></i>                 
+                    </a> 
+                </div>
+                 
+  </div>
+
+  
+  <div class="centrar col-sm-10 table-responsive">
     @if($subareas->isNotEmpty())   <!--BUSCADOR -->
       <table class="tabla" id="listaArea">
           <thead class ="columnas">
@@ -54,7 +75,7 @@
     </table>
     {!! $subareas->render() !!}
      @else
-        <li>No hay Subareas registradas</li>
+        <li>No hay Subareas encontradas</li>
     @endif
 </div>
 </Form>
