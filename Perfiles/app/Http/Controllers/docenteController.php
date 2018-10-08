@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Requests\DocenteFormRequest;
+use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\docentes;
 use App\Profesional;
+use Validator;
 use DB;
 
 
@@ -54,7 +56,7 @@ class docenteController extends Controller
     }
   
 
-    public function almacenar(DocenteRequest $request){
+    public function almacenar(DocenteFormRequest $request){
        /* $datos = $request->all();
         $profecional = new Profecional;
         $profecional->nombre_prof = $datos->nombre;
