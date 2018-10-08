@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+//use Illuminate\Support\Facades\Input; 
 use App\Profesional;
 use App\Area;
 use App\Titulo;
@@ -16,15 +17,17 @@ class ProfesionalController extends Controller
      */
     public function index(){
         $profesionales = Profesional::all();
+        $fila = 1;
     
-        return view('profesionales/ListarProfesionales',compact('profesionales'));
+        return view('profesionales/ListarProfesionales',compact('profesionales', 'fila'));
     }
 
     public function create(){
         
-       $areas = Area::areas()->get();
+        $areas = Area::areas()->get();
         $subareas = Area::subareas()->get();
         $titulos = Titulo::all();
+
         return view('profesionales/registroprofesional',['areas'=>$areas, 'subareas'=>$subareas, 'titulos'=>$titulos ]);
     }
 
@@ -34,9 +37,11 @@ class ProfesionalController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
-        dd($request->all());
-        //Profesional::create($request->all());
-        //return redirect()->route('listarProfesional');
+          
+        $input = $request->all();
+
+        profesional::create($request->all());
+        return redirect()->route('listarProfesional');
     }
     /**
      * Store a newly created resource in storage.
@@ -45,19 +50,23 @@ class ProfesionalController extends Controller
      */
     public function guardar(Request $request)
     {
+        //dd($request ->all());
         $this->validate(request(), [
+
             'ci_prof' => ['required'],
             'nombre_prof' => ['required'],
             'ap_pa_prof' => ['required'],
             'ap_ma_prof' => ['required'],
-            'correo_prof' => ['required','correo_prof','unique:profesionales,correo_prof'],
+            'correo_prof' => ['required'],
             'telef_prof' => ['required'],
             'titulo_id' => 'required',
             'direc_prof' => ['required'],
             'perfil_prof' => ['required'],
 
-            'roles'=>'required'
+            
         ]);
+       
+        return redirect()->route('profesionales');
        
     }
     
