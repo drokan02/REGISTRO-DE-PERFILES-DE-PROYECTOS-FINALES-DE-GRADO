@@ -50,12 +50,12 @@ class docenteController extends Controller
         
     }*/
     public function registrar(){
-      return view('docentes.registrarDocentes');
+       return view('docentes.registrarDocentes');
     }
   
 
     public function almacenar(DocenteRequest $request){
-        $datos = $request->all();
+       /* $datos = $request->all();
         $profecional = new Profecional;
         $profecional->nombre_prof = $datos->nombre;
 
@@ -66,7 +66,10 @@ class docenteController extends Controller
         $docente->profecional_id = $id;
         $docente->carga_horaria = $datos->carga_horaria;
         $docente->carga_horaria = $datos->codigo_sis;
-        $docente->save();
+        $docente->save();*/
+        $docente = new docentes;
+		$docente->create($request->all());
+		return redirect()->route('Docentes');
         
 
     }
