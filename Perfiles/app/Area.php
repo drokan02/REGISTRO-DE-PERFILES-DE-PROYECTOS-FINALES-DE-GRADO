@@ -42,6 +42,8 @@ class Area extends Model
         }
     }
     
-   
+    public function scopeSubareasArea($query,$id){
+        return $query->where('id_area',$id);
+    }
 
 }

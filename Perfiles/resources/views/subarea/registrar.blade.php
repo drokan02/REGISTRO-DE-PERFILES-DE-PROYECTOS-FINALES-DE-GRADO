@@ -1,5 +1,5 @@
 @extends('layouts.menu')
-@section('titulo','Registrar SubaArea')
+@section('titulo','REGISTRAR NUEVA SUBAREA DE LA AREA:    '.$area->nombre)
 @section('contenido')
 
 <!--ERRORES-->
