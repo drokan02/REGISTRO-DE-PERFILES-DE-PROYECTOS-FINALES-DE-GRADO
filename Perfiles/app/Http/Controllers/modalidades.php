@@ -80,8 +80,8 @@ class modalidades extends Controller
      * @return \Illuminate\Http\Response
      */
     public function eliminar(Modal $modalidad){
-		$modalidad->delete();               //eliminar datos en tabla intermedia
-	
-        return redirect()->route('modalidad');
+		//$modalidad->delete();               //eliminar datos en tabla intermedia
+		dd($modalidad);
+        //return redirect()->route('modalidad');
     }
 }
