@@ -53,6 +53,7 @@ Route::get('/profesionales','ProfesionalController@index')->name('listarProfesio
 Route::get('/profesionales/registrar_profesional','ProfesionalController@create')->name('registroProfesional');
 Route::post('/profesionales/store','ProfesionalController@store')->name('storeProfesional');
 
+
 //Subareas
 Route::get('areas/subareas/{area}','SubareaController@index')->name('subareas');
 Route::get('areas/subareas/registrar/{area}','SubareaController@registrar')->name('registrarSubarea');
