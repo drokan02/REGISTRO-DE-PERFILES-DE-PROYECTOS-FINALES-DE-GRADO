@@ -99,7 +99,7 @@ Route::get('/docentes/registrar', 'docenteController@registrar')->name('registra
 Route::any('/docentes/registrar/almacenar','docenteController@almacenar')->name('almacenarDocente');
 Route::any('//docentes/{id}','docenteController@editar')->name('editarDocente');
 Route::any('/docentes/editar/modificar/{id}','docenteController@modificar')->name('modificarDocente');
-Route::any('/docentes/eliminar/{id}','AreaController@eliminar')->name('eliminarDocente');
+Route::any('/docentes/eliminar/{id}','docenteController@eliminar')->name('eliminarDocente');
 Route::any('/docentes/buscar', 'docenteController@index')->name('buscarDocente');
 Route::any('/docentes/ver/{id}','docenteController@ver')->name('verDocente');
 

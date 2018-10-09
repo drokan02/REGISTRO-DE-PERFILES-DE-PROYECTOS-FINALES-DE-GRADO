@@ -4,15 +4,17 @@ namespace App;
 ///\Illuminate\Database\Eloquent\Relations\BelongsTo
 use Illuminate\Database\Eloquent\Model;
 use App\Profesional;
+use DB;
 
 class docentes extends Model
 {
     protected $table='docente';
     protected $fillable = [
         
-        'profesional_id',
+        'codigo_sis',
         'carga_horaria',
-         'codigo_sis'
+         'profesional_id'
+        
     ];
     /* public  function profesional(){
          return $this->belongsTO('Profesional');
@@ -25,7 +27,7 @@ class docentes extends Model
     }
     */
    public function scopeDocentes($query){
-        return $query->whereNull('codigo_sis');
+        return $query->whereNull('id');
     }
 
    
@@ -34,10 +36,9 @@ class docentes extends Model
 
     public function scopeBuscarDocentes($query, $buscar){
         if($buscar){
-            return $query->whereNull('codigo_sis')
-                        ->where(DB::raw("CONCAT(,'profesional_id,' ',carga_horaria)"), "LIKE", "%$buscar%");
+            return $query->where(DB::raw("CONCAT(codigo_sis,' ',carga_horaria,'',profesional_id)"), "LIKE", "%$buscar%");
         }else{
-            return $query->whereNull('codigo_sis');
+            return null;
         }
     }
 }

@@ -15,7 +15,7 @@
 					<div class = "form-group row"> 
 						<label for="codigo" class="col-sm-2 col-form-label">Codigo_sis</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" placeholder="codigo area" name="codigo_sis" autocomplete="off"
+							<input type="text" class="form-control" placeholder="codigo sis" name="codigo_sis" autocomplete="off"
 							value= {{old('codigo',$docente->codigo_sis)}}>
 						</div>
 					</div>
@@ -29,10 +29,10 @@
 					</div>
 		
 					<div class = "form-group row">
-						<label for="descripcion" class="col-sm-2 col-form-label">profesion</label>
+						<label for="profesional_id" class="col-sm-2 col-form-label">profesion</label>
 						<div class="col-sm-8">
-							<textarea class="form-control" placeholder="descripcion no obligatoria" autocomplete="off"
-							name="profesion_id" rows="5">{{old('descripcion',$docente->profesion_id)}}</textarea>
+							<input type="text" class="form-control" placeholder="obligatoria" name="profesional_id" autocomplete="off"
+							value="{{old('profesional_id',$docente->profesional_id)}}">
 						</div>
 						
 					</div>
@@ -40,7 +40,7 @@
 					<div class = "form-group row"> 
 						<div class="col-sm-2"></div>
 						<div class="col-8">
-							<a href="{{ route('Areas') }}" class="btn btn-danger">Cancel</a>	
+							<a href="{{ route('Docentes') }}" class="btn btn-danger">Cancel</a>	
 							<button type="submit" class='btn btn-success'>Modificar</button>
 						</div>
 						

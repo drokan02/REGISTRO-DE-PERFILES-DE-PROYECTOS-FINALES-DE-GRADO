@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Http\Requests\DocenteFormRequest;
-use App\Http\Requests;
+//use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\docentes;
 use App\Profesional;
@@ -77,7 +77,7 @@ class docenteController extends Controller
     }
     public function ver($id){
 		$docente=docentes::findOrFail($id);
-		//$subareas = $area->subareas($id)->get();
+		
 		return view('docentes.ver',['docente'=>$docente]);
     }
     public function editar($id){
@@ -90,8 +90,8 @@ class docenteController extends Controller
     }
     public function eliminar($id){
 		
-			Area::findOrFail($id)->delete();
-			return redirect()->route('Areas');
+			docentes::findOrFail($id)->delete();
+			return redirect()->route('Docentes');
     }
 
 }
