@@ -47,12 +47,12 @@ class AreaController extends Controller
 	}
 
 	public function eliminar($id){
-		$subareas = Area::subareas($id,'')->get();
-		if($subareas != []){
+		$subareas = Area::subareasarea($id)->get();
+		if($subareas->toArray()){
 			return back()->withErrors('No se puede eliminar la Area por que existen SubAreas asociadas a este');
-		} else {
-			/*Area::findOrFail($id)->delete();
-			return redirect()->route('Areas');*/
+		} else { 
+			Area::findOrFail($id)->delete();
+			return redirect()->route('Areas');
 		}
 	}
 	
