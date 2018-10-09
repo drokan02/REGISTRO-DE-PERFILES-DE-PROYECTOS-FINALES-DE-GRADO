@@ -101,7 +101,7 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="{{route('registroProfesional')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Profesional</a></li>
-                <li><a href="{{route('listarProfesional')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Profesional</a></li>
+                <li><a href="{{route('listarProfesionales')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Profesional</a></li>
               </ul>
             </li>
 

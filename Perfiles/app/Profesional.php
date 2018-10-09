@@ -33,7 +33,17 @@ class Profesional extends Model
         'titulo_id',
          ];
 
-    public function scopeProfesionales($query){
-        return $query->whereNull('id');
+    public function areas(){
+        return $this->belongsToMany(Area::class,'profesional_area')->withTimestamps();  
+    }
+
+    public function titulo(){
+        return $this->belongsTo(Titulo::class);
+    }
+
+    public function scopeBuscar($query,$buscar){
+        if($buscar){
+            return $query->where(DB::raw("CONCAT(nombre_prof,' ',ap_pa_prof,' ',ap_ma_prof)"), "LIKE", "%$buscar%");
+        }
     }
 }

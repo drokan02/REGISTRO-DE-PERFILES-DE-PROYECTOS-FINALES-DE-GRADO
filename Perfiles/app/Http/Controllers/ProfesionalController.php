@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-//use Illuminate\Support\Facades\Input; 
+use App\Http\Requests\ProfesionalRequest;
+use Validator;
 use App\Profesional;
 use App\Area;
 use App\Titulo;
@@ -15,59 +16,32 @@ class ProfesionalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
-        $profesionales = Profesional::all();
-        $fila = 1;
-    
-        return view('profesionales/ListarProfesionales',compact('profesionales', 'fila'));
+    public function index(Request $request){
+       $buscar = $request->$buscar;
+        $profesionales = Profesional::all()//Profesional::buscarProfesional($buscar)
+;
+        return view('profesionales.listarProfesionales',compact('profesionales'));
     }
 
-    public function create(){
+    public function registrar(){
         
         $areas = Area::areas()->get();
         $subareas = Area::subareas()->get();
         $titulos = Titulo::all();
 
-        return view('profesionales/registroprofesional',['areas'=>$areas, 'subareas'=>$subareas, 'titulos'=>$titulos ]);
+        return view('profesionales.registroprofesional',['areas'=>$areas, 'subareas'=>$subareas, 'titulos'=>$titulos ]);
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request){
-          
-        $input = $request->all();
-
-        profesional::create($request->all());
-        return redirect()->route('listarProfesional');
+    
+    public function almacenar(ProfesionalRequest $request){
+            $area_id = $request->area_id;
+            $subarea_id = $request->subarea_id;
+            $profecional = new Profesional;
+            $profecional->create($request->all());
+            $prof_id = Profesional::all()->last()->value('id');
+            $profecional->areas()->attach($area_id,['profesional_id'=>$prof_id]);
     }
-    /**
-     * Store a newly created resource in storage.
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function guardar(Request $request)
-    {
-        //dd($request ->all());
-        $this->validate(request(), [
-
-            'ci_prof' => ['required'],
-            'nombre_prof' => ['required'],
-            'ap_pa_prof' => ['required'],
-            'ap_ma_prof' => ['required'],
-            'correo_prof' => ['required'],
-            'telef_prof' => ['required'],
-            'titulo_id' => 'required',
-            'direc_prof' => ['required'],
-            'perfil_prof' => ['required'],
-
-            
-        ]);
-       
-        return redirect()->route('profesionales');
-       
-    }
+   
+    
     
 }
