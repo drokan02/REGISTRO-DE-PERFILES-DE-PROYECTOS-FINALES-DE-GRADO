@@ -1,49 +1,93 @@
 @extends('layouts.menu')
-@section('titulo','LISTA DE TUTOR')
+@section('titulo','LISTA DE PROFESIONALES')
 @section('contenido')
-    <div class="row mb-3">
-        <div class="col-8 offset-1">
 
-        </div>
-    </div>
-    @if($profesionales->isNotEmpty())
-        <table class="table table-hover table-bordered-primary text-center">
-            <thead class="thead-primary">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Apellido Paterno</th>
-                <th scope="col">Apellido Materno</th>
-                <th scope="col">ci</th>
-                <th scope="col">Telefono</th>
-                <th scope="col">Direccion</th>
-                <th scope="col">Perfil</th>
-                <th scope="col">Email</th>
-                <th scope="col">Titulo</th>
+
+
+
+<Form method="GET" action="{{route('listarProfesionales')}}" >
+    @if($profesionales->isNotEmpty()) <!--BUSCADOR -->
+    <div class="centrar col-sm-10 ">
+            <div class="row">
+                <div class="col-sm-3"></div>
                 
-            </tr>
-            </thead>
-            <tbody>
-                @foreach ($profesionales as $profesional)
-                    <tr>
-                        <td style="text-align: right;">{{$fila++}}</td>
-                        <td>{{$profesional->nombre_prof}}</td>
-                        <td>{{$profesional->ap_pa_prof}}</td>
-                        <td>{{$profesional->ap_ma_prof}}</td>
-                        <td>{{$profesional->ci_prof}}</td>
-                        <td>{{$profesional->telef_prof}}</td>
-                        <td>{{$profesional->direc_prof}}</td>
-                        <td>{{$profesional->perfil_prof}}</td>
-                        <td>{{$profesional->correo_prof}}</td>
-                        <td>{{DB::table('titulos')->where('id', $profesional->titulo_id)->get()}}</td>
-                        <td>
-                            
-                        </td>
-                    </tr>   
-                @endforeach
-            </tbody>
-        </table>
-    @else
-        <li>No hay Tutor</li>
+                <div class=" col-sm-4">       
+                                <input type="search" placeholder="&#xF002; Buscar" style="font-family:Time, FontAwesome" class="form-control" 
+                                name="buscar" autofocus value="{{$buscar}}" autocomplete="off" onfocus="var temp_value=this.value; this.value=''; this.value=temp_value">   
+                </div>          
+                <div class="col-4">
+                                <button class=" btn btn-success pull-left"> Buscar</button>
+                </div>
+            </div>
+             
+    </div>
+   <!--FIN BUSCADOR -->
+   @include('complementos.error')
+   <div  class="centrar table-responsive col-sm-11 ">
+      <table class="table table-hover text-center" id="listaProfesionales">
+          <thead class ="columnas">
+        <tr>
+          <th style="width: 5%; text-align: center;">N°</th>
+          <th style="width: 10%;">Nombres</th>
+          <th style="width: 15%;">Apellidos</th>
+          <th style="width: 8%; ">Titulo</th>
+          <th style="width: 8%;">Telefono</th>
+          <th style="width: 12%;">Correo</th>
+          <th style="width: 10%;">Area</th>
+          <th style="width: 10%;">Sub Area</th>
+          <th style="width: 5%;">Opsiones</th>
+        </tr>
+      </thead>
+      <tbody>
+           
+        @foreach ($profesionales as $profesional)
+            <tr>  
+                <td style="text-align: right;">{{$fila++}}</td>
+                <td>{{$profesional->nombre_prof}}</td>
+                <td style="width: 15%;">{{$profesional->ap_pa_prof}}&nbsp;&nbsp;{{$profesional->ap_ma_prof}}</td>
+                <td style="width: 8%;">{{$profesional->titulo->pluck('nombre')[0]}}</td>
+                <td style="width: 8%;">{{$profesional->telef_prof}}</td>
+                <td style="width: 12%;">{{$profesional->correo_prof}}</td>
+                @if (!$profesional->areas->pluck('id_area')[0])
+                    <td style="width: 10%;">{{$profesional->areas->pluck('nombre')[0]}}</td>
+                    <td style="width: 10%;">{{$profesional->areas->pluck('nombre')[1]}}</td>    
+                @else
+                    <td style="width: 10%;">{{$profesional->areas->pluck('nombre')[1]}}</td>
+                    <td style="width: 10%;">{{$profesional->areas->pluck('nombre')[0]}}</td>
+                @endif
+                
+                <td style="width: 5%;"  class="dropdown dropleft text-center">
+                    <a href="#" data-toggle="dropdown"  data-placement="right" title="opsiones">
+                        <i class="fa fa-ellipsis-v fa-2x" aria-hidden="true"></i>
+                    </a>
+                    <ul id="contextMenu" class="dropdown-menu text-center" role="menu">    
+                        <li >
+                                
+                            <a href='{{ route('editarProfesional',$profesional->id)}}' tabindex="-1"  class="payLink">
+                                    <i class="fa fa-pencil-square-o fa-2x " style="color: #3390FF" ></i>
+                                    <span class="hidden-xs">&nbsp;&nbsp; Editar</span>
+                            </a>
+                        </li>
+                        <li >
+                            <a href='{{ route('eliminarProfesional',$profesional)}}' onclick="return confirm('¿Esta seguro de eliminar el Profesional?')" tabindex="-1"  class="payLink">
+                                    <i class="fa fa-minus-square fa-2x" style="color: #3390FF"></i>
+                                    <span class="hidden-xs">Eliminar</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                </td>
+            </tr>   
+        @endforeach
+      </tbody>
+    </table>
+    
+     {!! $profesionales->render() !!}
+     @else
+        <li>No se encontro un Profesional con esa descripcion</li>
     @endif
+    
+</div>
+
+</Form>
 @endsection

@@ -2,42 +2,40 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
-
+use DB;
 use App\Titulo;
 
 
 class Profesional extends Model
 {
-    use Notifiable;
-    
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $table = 'profesional';
-    protected $primaryKey ='id';
-    protected $fillable = [
-        'id','ci_prof','nombre_prof', 'ap_ap_prof','ap_ma_prof','correo_prof','telef_prof','direc_prof','perfil_prof'
-    ];
-    public function docentes(){
-        return $this->hasOne(docentes::class,'profesional_id');
+     protected $table = 'profesional';
+     protected $fillable = [
+        'ci_prof',
+        'nombre_prof', 
+        'ap_pa_prof',
+        'ap_ma_prof',
+        'correo_prof',
+        'telef_prof',
+        'direc_prof',
+        'perfil_prof',
+        'titulo_id',
+         ];
+
+    public function areas(){
+        return $this->belongsToMany(Area::class,'profesional_area');  
     }
-public function scopeTitulo(){
-    return $this->belongsTo('Titulo');
-}
-public function scopeDocentes(){
-    return $this->hasMany('\App\docentes');
-}
-public function scopeBuscarProfesional($query,$buscar){
-    if($buscar)
-        {
-            $query->where(\DB::raw("CONCAT(nombre_prof,'',ap_pa_prof,'',ap_ma_prof)"),"LIKE","$buscar%");
+
+    public function titulo(){
+        return $this->belongsTo(Titulo::class);
+    }
+
+    public function scopeBuscarProfesional($query,$buscar){
+        if($buscar){
+            return $query->where(DB::raw("CONCAT(nombre_prof,' ',ap_pa_prof,' ',ap_ma_prof)"), "LIKE", "%$buscar%");
+        }else {
+            return $query;
         }
-    else{
-        return null;
     }
 }
 }

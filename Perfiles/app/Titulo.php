@@ -11,7 +11,7 @@ class Titulo extends Model
 
 
 
-    protected $table = 'titulos';
+    protected $table = 'titulo';
     
     protected $fillable = [
         'id', 'nombre'
