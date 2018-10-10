@@ -1,9 +1,9 @@
 @extends('layouts.menu')
-@section('titulo','LISTA DE TUTOR')
+@section('titulo','LISTA DE PROFESIONALES')
 @section('contenido')
 
 
-<div  class="centrar table-responsive col-sm-11 ">
+
 
 <Form method="GET" action="{{route('listarProfesionales')}}" >
     @if($profesionales->isNotEmpty()) <!--BUSCADOR -->
@@ -23,8 +23,8 @@
     </div>
    <!--FIN BUSCADOR -->
    @include('complementos.error')
- 
-      <table class="table table-hover" id="listaProfesionales">
+   <div  class="centrar table-responsive col-sm-11 ">
+      <table class="table table-hover text-center" id="listaProfesionales">
           <thead class ="columnas">
         <tr>
           <th style="width: 5%; text-align: center;">N°</th>
@@ -44,42 +44,38 @@
             <tr>  
                 <td style="text-align: right;">{{$fila++}}</td>
                 <td>{{$profesional->nombre_prof}}</td>
-                <td>{{$profesional->ap_pa_prof}}&nbsp;&nbsp;{{$profesional->ap_ma_prof}}</td>
-                <td>{{$profesional->titulo->pluck('nombre')[0]}}</td>
-                <td>{{$profesional->telef_prof}}</td>
-                <td>{{$profesional->correo_prof}}</td>
+                <td style="width: 15%;">{{$profesional->ap_pa_prof}}&nbsp;&nbsp;{{$profesional->ap_ma_prof}}</td>
+                <td style="width: 8%;">{{$profesional->titulo->pluck('nombre')[0]}}</td>
+                <td style="width: 8%;">{{$profesional->telef_prof}}</td>
+                <td style="width: 12%;">{{$profesional->correo_prof}}</td>
                 @if (!$profesional->areas->pluck('id_area')[0])
-                    <td>{{$profesional->areas->pluck('nombre')[0]}}</td>
-                    <td>{{$profesional->areas->pluck('nombre')[1]}}</td>    
+                    <td style="width: 10%;">{{$profesional->areas->pluck('nombre')[0]}}</td>
+                    <td style="width: 10%;">{{$profesional->areas->pluck('nombre')[1]}}</td>    
                 @else
-                    <td>{{$profesional->areas->pluck('nombre')[1]}}</td>
-                    <td>{{$profesional->areas->pluck('nombre')[0]}}</td>
+                    <td style="width: 10%;">{{$profesional->areas->pluck('nombre')[1]}}</td>
+                    <td style="width: 10%;">{{$profesional->areas->pluck('nombre')[0]}}</td>
                 @endif
                 
-                <td class="dropdown dropleft text-center">
+                <td style="width: 5%;"  class="dropdown dropleft text-center">
                     <a href="#" data-toggle="dropdown"  data-placement="right" title="opsiones">
                         <i class="fa fa-ellipsis-v fa-2x" aria-hidden="true"></i>
                     </a>
-                    <ul id="contextMenu" class="dropdown-menu" role="menu">    
-                        <li>
+                    <ul id="contextMenu" class="dropdown-menu text-center" role="menu">    
+                        <li >
+                                
                             <a href='{{ route('editarProfesional',$profesional->id)}}' tabindex="-1"  class="payLink">
-                                <h5><i class="fa fa-pencil-square-o fa-2x" style="color: #3390FF" ></i>&nbsp;&nbsp; Editar</h5>
+                                    <i class="fa fa-pencil-square-o fa-2x " style="color: #3390FF" ></i>
+                                    <span class="hidden-xs">&nbsp;&nbsp; Editar</span>
                             </a>
                         </li>
-                        <li>
+                        <li >
                             <a href='{{ route('eliminarProfesional',$profesional)}}' onclick="return confirm('¿Esta seguro de eliminar el Profesional?')" tabindex="-1"  class="payLink">
-                                <h5><i class="fa fa-minus-square fa-2x" style="color: #3390FF"></i>&nbsp;&nbsp; Eliminar</h5>
+                                    <i class="fa fa-minus-square fa-2x" style="color: #3390FF"></i>
+                                    <span class="hidden-xs">Eliminar</span>
                             </a>
                         </li>
-                        <li>
-                            <a href='{{ route('verProfesional',$profesional)}}' tabindex="-1" class="payLink">
-                                <h5> <i class="fa fa-plus fa-2x" style="color: #3390FF" ></i> &nbsp;&nbsp; Ver </h5> 
-                            </a>
-                        </li>   
                     </ul>
 
-                   
-                          </div>
                 </td>
             </tr>   
         @endforeach

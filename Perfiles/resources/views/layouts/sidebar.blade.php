@@ -49,17 +49,21 @@
       </li>
 
       <!-- menu MODALIDADES -->
-      <li class="treeview">
+      <li class="treeview {{ request()->segment(1) == 'modalidad'? 'active open':'' }}">
               <a href="#">
                 <i class="fa fa-file-text-o" aria-hidden="true"></i>
-                <span> Modalidades </span>
-                 <i class="fa fa-angle-left pull-right"></i>
+                    <span> Modalidades </span>
+                <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-               <li><a href="{{route('registrarmodalidad')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Modalidad</a></li>
-               <li><a href="{{route('modalidad')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Modalidad</a></li>
+                <li class="{{ request()->routeIs('registrarmodalidad')? 'active':'' }}">
+                  <a href="{{route('registrarmodalidad')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Modalidad</a>
+                </li>
+                <li class="{{ request()->routeIs('modalidad')? 'active':'' }}">
+                  <a href="{{route('modalidad')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Modalidad</a>
+                </li>
               </ul>
-
+      </li>
       <!-- Menu Usuarios-->
       <li class="treeview {{ request()->segment(1) == 'usuarios'? 'active open':'' }}">
         <a href="#">
@@ -94,14 +98,18 @@
 
       
        <!-- Menu PROFESIONALES-->
-            <li class="treeview">
+            <li class="treeview {{ request()->segment(1) == 'profesionales'? 'active open':'' }}">
               <a href="#">
                 <i class="fa fa-users" aria-hidden="true"></i> <span>Profesionales</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="{{route('registroProfesional')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Profesional</a></li>
-                <li><a href="{{route('listarProfesionales')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Profesional</a></li>
+                <li class="{{ request()->routeIs('registroProfesional')? 'active':'' }}">
+                   <a href="{{route('registroProfesional')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Profesional</a>
+                  </li>
+                <li class="{{ request()->routeIs('listarProfesionales')? 'active':'' }}">
+                   <a href="{{route('listarProfesionales')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Profesional</a>
+                </li>
               </ul>
             </li>
 

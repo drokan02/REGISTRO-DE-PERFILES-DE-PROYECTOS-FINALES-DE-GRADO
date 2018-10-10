@@ -68,14 +68,14 @@ Route::any('areas/subareas/eliminar/{id}','SubareaController@eliminar')->name('e
 
 
 //Modalidades
-Route::get('/modadelidad','modalidades@index')->name('modalidad');
-Route::get('/modadelidad/registrarmodalidad','modalidades@registrar')->name('registrarmodalidad');
-Route::any('/modadelidad/registrar/almacenar','modalidades@almacenar')->name('almacenarModalidad');
-Route::get('/modadelidad/editarmodal/{modalidad}','modalidades@editar')->name('editarModalidad');
-Route::put('/modadelidad/{modalidad}','modalidades@modificar')->name('modificarModalidad');
-Route::delete('/modadelidad/eliminar/{modalidad}','modalidades@eliminar')->name('eliminarModalidad');
-Route::any('/modadelidad/buscar', 'modalidades@index')->name('buscarModal');
-Route::any('/modadelidad/ver/{id}','modalidades@ver')->name('ver');
+Route::get('/modalidad','modalidades@index')->name('modalidad');
+Route::get('/modalidad/registrarmodalidad','modalidades@registrar')->name('registrarmodalidad');
+Route::any('/modalidad/registrar/almacenar','modalidades@almacenar')->name('almacenarModalidad');
+Route::get('/modalidad/editarmodal/{modalidad}','modalidades@editar')->name('editarModalidad');
+Route::put('/modalidad/{modalidad}','modalidades@modificar')->name('modificarModalidad');
+Route::delete('/modalidad/eliminar/{modalidad}','modalidades@eliminar')->name('eliminarModalidad');
+Route::any('/modalidad/buscar', 'modalidades@index')->name('buscarModal');
+Route::any('/modalidad/ver/{id}','modalidades@ver')->name('ver');
 
 
 //carreras
