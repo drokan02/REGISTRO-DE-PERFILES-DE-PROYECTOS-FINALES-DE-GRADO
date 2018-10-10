@@ -47,4 +47,3 @@ class CreateProfesionales extends Migration
         Schema::drop('profesional');
     }
 }
-*/
