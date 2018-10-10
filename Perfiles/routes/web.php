@@ -87,3 +87,13 @@ Route::delete('/carreras/{carrera}/eliminar','CarreraController@eliminar')->name
 Route::get('/docentes','docenteController@index')->name('docentes');
 
 
+
+
+
+
+
+
+
+//registro
+Route::get('register','Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('register','Auth\RegisterController@register')->name('registerPost');
