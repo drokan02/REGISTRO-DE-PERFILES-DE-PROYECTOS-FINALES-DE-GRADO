@@ -19,7 +19,7 @@
       <ul class="nav navbar-nav">
         <!-- Messages: style can be found in dropdown.less-->
         <!-- CUENTA DEL USUARIO -->
-        <li class="dropdown user user-menu">
+        <li class="dropdown">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                   <span class="hidden-xs">USUARIO</span>
               </a>

@@ -15,6 +15,10 @@ class Area extends Model
         'carrera_id'
     ];
 
+    public function profesionales(){    
+         return $this->belongsToMany(Profesional::class,'profesional_area')->withTimestamps();   
+    }
+
 
     public function scopeAreas($query){
         return $query->whereNull('id_area');
