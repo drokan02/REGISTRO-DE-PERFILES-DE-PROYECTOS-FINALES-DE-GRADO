@@ -17,28 +17,14 @@ class docenteController extends Controller
 	}
     public function index(Request $request){
   
- /*
-          $profesionales=new Profesional;
-          $profesionales=Profesional::all();
-          foreach($profesionales as $pro){
-            echo $pro->nombre_prof;
-         }
-          $buscar=docentes::BuscarProfesional($request->name)
-           ->leftjoin('profesional','docente.profesional_id','=','profesional.id')
-           ->select('docente.*','Profesional.nombre_prof as profesionales','Profesional.ap_pa_prof as profesionales')
-           ->paginate(4);
-           return view ('docentes.listarDocentes',Compact('docentes')); 
-          // $profesional=docentes::all()->profesional;
-        //   echo  $profesional;*/
-       // $profesionales=new Profesional;
-        //$profesionales=Profesional::all();
-        $fila=1;
-        $buscar = $request->get('buscar');
-       // $docentes = docentes::buscarDocentes($buscar)
-        $profesionales=Profesional::buscarProfesional($buscar)
-         ->orderBy('id','ASC')
-            ->paginate(5);
-        return view('docentes.listadoDocentes',Compact('docentes','profesionales','buscar','fila'));
+
+       
+       $buscar = $request->get('buscar');
+        $docentes = docentes::buscarDocentes($buscar)
+        ->orderBy('id','ASC')
+				->paginate(5);
+			
+		return view('docentes.listadoDocentes',['docentes'=> $docentes,'buscar'=>$buscar , 'fila'=>1]);
        
         
     }
