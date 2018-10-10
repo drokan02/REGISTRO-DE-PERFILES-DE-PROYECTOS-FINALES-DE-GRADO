@@ -36,13 +36,11 @@ class ProfesionalController extends Controller
 
     
     public function almacenar(ProfesionalRequest $request){
-        $area_id = $request->area_id;
-        $subarea_id = $request->subarea_id;
-        $profecional = new Profesional;
-        $profecional->create($request->all());
-        $prof_id = Profesional::all()->last()->value('id');
-        $profecional->areas()->attach($area_id,['profesional_id'=>$prof_id]);
-        $profecional->areas()->attach($subarea_id,['profesional_id'=>$prof_id]);
+        $areas = [$request->area_id,$request->subarea_id];
+        $profesional = new Profesional;
+        $profesional->create($request->all());
+        $prof_id = Profesional::where('ci_prof',$request['ci_prof'])->value('id');
+        $profesional->areas()->attach($areas,['profesional_id'=>$prof_id]);
     }
    
     public function editar($id){
@@ -55,17 +53,19 @@ class ProfesionalController extends Controller
     }
 
     public function modificar(ProfesionalRequest $request,$id){
-        $area_id = $request->area_id;
-        $subarea_id = $request->subarea_id;
+        $areas = [$request->area_id,$request->subarea_id];
         $profesional = new Profesional;
         $profesional->findOrFail($id)->update($request->all());
-        $profesional->areas()->sync();//elimina todos los registro de la tabla relaccion y ingresa uno nuevo
+        $prof_id = Profesional::where('ci_prof',$request['ci_prof'])->value('id');
+        $profesional->areas()->sync($areas,['profesional_id'=>$prof_id]);//elimina todos los registro de la tabla relaccion y ingresa uno nuevo
         //$profesional->areas()->attach($subarea_id,['profesional_id'=>$id]);
         
     }
 
-    public function eliminar($id){
-        
+    public function eliminar(Profesional $profesional){
+        $profesional->areas()->detach(); //eliminar datos en tabla intermedia
+        $profesional->delete();
+        return redirect()->route('listarProfesionales');
     }
 
     public function ver(Profesional $profesional){

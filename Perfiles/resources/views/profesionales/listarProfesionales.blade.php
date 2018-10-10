@@ -67,7 +67,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href='{{ route('eliminarProfesional',$profesional->id)}}' tabindex="-1"  class="payLink">
+                            <a href='{{ route('eliminarProfesional',$profesional)}}' onclick="return confirm('¿Esta seguro de eliminar el Profesional?')" tabindex="-1"  class="payLink">
                                 <h5><i class="fa fa-minus-square fa-2x" style="color: #3390FF"></i>&nbsp;&nbsp; Eliminar</h5>
                             </a>
                         </li>
