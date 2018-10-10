@@ -15,7 +15,7 @@
 					<div class = "form-group row"> 
 						<label for="codigo" class="col-sm-2 col-form-label">Codigo</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" placeholder="codigo area" name="codigo" autocomplete="off"
+							<input type="text" class="form-control" placeholder="codito area" name="codigo" autocomplete="off"
 							value="{{old('codigo')}}">
 						</div>
 					</div>
