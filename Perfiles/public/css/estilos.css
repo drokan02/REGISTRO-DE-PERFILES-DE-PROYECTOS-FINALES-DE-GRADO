@@ -34,16 +34,32 @@ table{
 thead{
     text-align: center;
     background-color: #6495ED;
-    border-bottom: solid 1px #0000FF;
+    border-bottom: #0000FF;
 }
 
 td , th {
     border: solid 1px #6495ED;
     padding: 5px;
+}
+
+.truncate {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+
+h1.truncated {
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.descripcion{
+    
     overflow:hidden; 
     white-space:nowrap; 
     text-overflow: ellipsis;
 }
+
 tr:hover td{
     background-color: #ddd;
 

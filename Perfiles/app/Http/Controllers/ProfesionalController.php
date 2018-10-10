@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-//use Illuminate\Support\Facades\Input; 
+use App\Http\Requests\ProfesionalRequest;
+use Validator;
 use App\Profesional;
 use App\Area;
 use App\Titulo;
@@ -15,59 +16,60 @@ class ProfesionalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
-        $profesionales = Profesional::all();
-        $fila = 1;
-    
-        return view('profesionales/ListarProfesionales',compact('profesionales', 'fila'));
+    public function index(Request $request){
+       $buscar = $request->get('buscar');
+       $profesionales = Profesional::buscarprofesional($buscar)
+                                 ->orderBy('id','ASC')
+                                 ->paginate(10);
+       
+        return view('profesionales.listarProfesionales',['profesionales'=>$profesionales,'buscar'=>$buscar,'fila'=>1]);
     }
 
-    public function create(){
+    public function registrar(){
         
         $areas = Area::areas()->get();
         $subareas = Area::subareas()->get();
         $titulos = Titulo::all();
 
-        return view('profesionales/registroprofesional',['areas'=>$areas, 'subareas'=>$subareas, 'titulos'=>$titulos ]);
+        return view('profesionales.registroprofesional',['areas'=>$areas, 'subareas'=>$subareas, 'titulos'=>$titulos ]);
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request){
-          
-        $input = $request->all();
-
-        profesional::create($request->all());
-        return redirect()->route('listarProfesional');
+    
+    public function almacenar(ProfesionalRequest $request){
+        $areas = [$request->area_id,$request->subarea_id];
+        $profesional = new Profesional;
+        $profesional->create($request->all());
+        $prof_id = Profesional::where('ci_prof',$request['ci_prof'])->value('id');
+        $profesional->areas()->attach($areas,['profesional_id'=>$prof_id]);
     }
-    /**
-     * Store a newly created resource in storage.
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function guardar(Request $request)
-    {
-        //dd($request ->all());
-        $this->validate(request(), [
+   
+    public function editar($id){
+        $profesional = Profesional::findOrFail($id);
+        $areas = Area::areas()->get();
+        $subareas = Area::subareas()->get();
+        $titulos = Titulo::all();
+        //dd($profesional->toArray());
+        return view('profesionales.editarProfesional',compact('profesional','areas','subareas','titulos'));
+    }
 
-            'ci_prof' => ['required'],
-            'nombre_prof' => ['required'],
-            'ap_pa_prof' => ['required'],
-            'ap_ma_prof' => ['required'],
-            'correo_prof' => ['required'],
-            'telef_prof' => ['required'],
-            'titulo_id' => 'required',
-            'direc_prof' => ['required'],
-            'perfil_prof' => ['required'],
+    public function modificar(ProfesionalRequest $request,$id){
+        $areas = [$request->area_id,$request->subarea_id];
+        $profesional = new Profesional;
+        $profesional->findOrFail($id)->update($request->all());
+        $prof_id = Profesional::where('ci_prof',$request['ci_prof'])->value('id');
+        $profesional->areas()->sync($areas,['profesional_id'=>$prof_id]);//elimina todos los registro de la tabla relaccion y ingresa uno nuevo
+        //$profesional->areas()->attach($subarea_id,['profesional_id'=>$id]);
+        
+    }
 
-            
-        ]);
-       
-        return redirect()->route('profesionales');
-       
+    public function eliminar(Profesional $profesional){
+        $profesional->areas()->detach(); //eliminar datos en tabla intermedia
+        $profesional->delete();
+        return redirect()->route('listarProfesionales');
+    }
+
+    public function ver(Profesional $profesional){
+
     }
     
 }

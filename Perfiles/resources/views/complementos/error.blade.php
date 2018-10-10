@@ -1,4 +1,4 @@
-<div class="container col-sm-4">
+<div class="container col-sm-7">
     @if(count($errors))
         <div class="alert alert-danger">
             <button type="button" class="close" data-dismiss='alert' style="color: white">

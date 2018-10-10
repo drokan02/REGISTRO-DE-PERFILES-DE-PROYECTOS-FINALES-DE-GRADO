@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProfesionales extends Migration
+class CreateProfesionalesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateProfesionales extends Migration
      */
     public function up()
     {
-        Schema::create('profesional', function (Blueprint $table) {
+        Schema::create('profesionales', function (Blueprint $table) {
             $table->increments('id');
             $table->string('ci_prof');
             $table->string('nombre_prof');
@@ -26,14 +26,7 @@ class CreateProfesionales extends Migration
             $table->timestamps();
         });
         
-        Schema::create('titulo_profesional', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('profesional_id');
-            $table->string('nombre');
-            $table->timestamps();
-
-            $table->foreign('profesional_id')->references('id')->on('profesional');
-        });
+        
     }
 
     /**
@@ -43,8 +36,7 @@ class CreateProfesionales extends Migration
      */
     public function down()
     {
-        Schema::drop('titulo_profesional');
-        Schema::drop('profesional');
+
+        Schema::drop('profesionales');
     }
 }
-*/
