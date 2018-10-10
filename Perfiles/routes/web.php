@@ -53,7 +53,7 @@ Route::get('/profesionales','ProfesionalController@index')->name('listarProfesio
 Route::get('/profesionales/registrar','ProfesionalController@registrar')->name('registroProfesional');
 Route::post('/profesionales/almacenar','ProfesionalController@almacenar')->name('almacenarProfesional');
 Route::any('/profesionales/editar/{id}','ProfesionalController@editar')->name('editarProfesional');
-Route::post('/profesionales/editar/modificar/{id}','ProfesionalController@modificar')->name('modificarProfesional');
+Route::post('/profesionales/editar/modificar/{profesional}','ProfesionalController@modificar')->name('modificarProfesional');
 Route::any('/profesionales/eliminar/{profesional}','ProfesionalController@eliminar')->name('eliminarProfesional');
 Route::any('/profesionales/ver/{profesional}','ProfesionalController@ver')->name('verProfesional');
 
