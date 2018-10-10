@@ -15,21 +15,24 @@
           <th style="width: 15%;">Nombre</th>
           <th style="width: 15%;">Apellido P</th>
           <th style="width: 15%; ">Apellido M</th>
-          <th style="width: 15%;">Titulo</th>
+       <!--   <th style="width: 15%;">Titulo</th>
           <th style="width: 30%; ">C Horaria</th>
           <th style="width: 30%; ">Area</th>
-          <th style="width: 30%; ">Subarea</th>
+          <th style="width: 30%; ">Subarea</th> -->
         </tr>
       </thead>
       <tbody>
-           
+       
         @foreach ($docentes as $docente)
             <tr>
                 
                 <td style="text-align: right;">{{$fila++}}</td>
-                <td>{{$docente->codigo_sis}}</td>
+               <!-- <td>{$docente->nombre->pluck(nombre_prof)[0]}}</td>
                 <td>{{$docente->carga_horaria}}</td>
-                <td >{{$docente->profesional_id}}</td>
+                <td>{{$docente->profesional_id}}</td>
+               <!-- <td>{$profesional->codigo_sis}}</td>
+                <td>{$profesional->carga_horaria}}</td>
+                <td>{$profesional->profesional_id}}</td> -->
                 <td>
                     <div class="text-center">
                         <a href='{{ route('verDocente',$docente->id)}}' data-toggle="tooltip" data-placement="right" title="Ver Docente">
@@ -50,7 +53,7 @@
       </tbody>
     </table>
     
-     {!! $docentes->render() !!}
+  {!! $docentes->render() !!}
 
 </div>
 

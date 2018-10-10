@@ -88,7 +88,7 @@
         </a>
         <ul class="treeview-menu">
           <li><a href="{{route('registrarDocente')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Docente</a></li>
-          <li><a href="{{route('Docentes')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar docetes</a></li>
+          <li><a href="{{route('Docentes')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar docentes</a></li>
         </ul>
       </li>
 

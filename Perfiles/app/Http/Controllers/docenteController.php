@@ -16,15 +16,8 @@ class docenteController extends Controller
 	
 	}
     public function index(Request $request){
-    
-       /* $busqueda = $request->input('name');
-        //  $consulta_ejm = DB::select("select 'me llamo Adrian';");
-         //dd($consulta_ejm);
-         // return view('docentes/listadoDocentes',compact('docente'))
-          $docente=docentes::all();
-          foreach($docente as $docentes){
-            echo $docentes->profesional_id;
-        }
+  
+ /*
           $profesionales=new Profesional;
           $profesionales=Profesional::all();
           foreach($profesionales as $pro){
@@ -34,23 +27,21 @@ class docenteController extends Controller
            ->leftjoin('profesional','docente.profesional_id','=','profesional.id')
            ->select('docente.*','Profesional.nombre_prof as profesionales','Profesional.ap_pa_prof as profesionales')
            ->paginate(4);
-           return view ('docentes.listadoDocentes',Compact('docentes')); */
-         $buscar = $request->get('buscar');
-        // dd($buscar);
-          $docentes = docentes::BuscarDocentes($buscar)
-                  ->orderBy('id','ASC')
-                  ->paginate(5);
-          return view('docentes.listadoDocentes',['docentes'=> $docentes,'buscar'=>$buscar , 'fila'=>1]);
-                
-         
-        }
-          /* public function registrar(Request $datosDeDocente){
-            $nombre = $datosDeDocente->input('nombreDoc');
-            $apellido = $datosDeDocente->input('apellidosDoc');
-            DB::query("insert into docentes(nombre, apellido) values ($nombre, $apellido);");
-            echo "".$nombre." ".$apellido;
+           return view ('docentes.listarDocentes',Compact('docentes')); 
+          // $profesional=docentes::all()->profesional;
+        //   echo  $profesional;*/
+       // $profesionales=new Profesional;
+        //$profesionales=Profesional::all();
+        $fila=1;
+        $buscar = $request->get('buscar');
+       // $docentes = docentes::buscarDocentes($buscar)
+        $profesionales=Profesional::buscarProfesional($buscar)
+         ->orderBy('id','ASC')
+            ->paginate(5);
+        return view('docentes.listadoDocentes',Compact('docentes','profesionales','buscar','fila'));
+       
         
-    }*/
+    }
     public function registrar(){
        return view('docentes.registrarDocentes');
     }

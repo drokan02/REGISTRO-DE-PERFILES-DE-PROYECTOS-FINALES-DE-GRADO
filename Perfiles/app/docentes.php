@@ -26,14 +26,28 @@ class docentes extends Model
         }
     }
     */
+    public function Profesional()
+    {
+        return $this->belongsTo(Profesional::class);
+    }
    public function scopeDocentes($query){
         return $query->whereNull('id');
     }
+    public function esAdmin(){
+        return $this->id==1;
+    }
 
    
-
+    public function scopeBuscarProfesional($query,$buscar){
+        if($buscar)
+            {
+                $query->where(\DB::raw("CONCAT(nombre_prof,'',ap_pa_prof,'',ap_ma_prof)"),"LIKE","$buscar%");
+            }
+        else{
+            return null;
+        }
    
-
+    }
     public function scopeBuscarDocentes($query, $buscar){
         if($buscar){
             return $query->where(DB::raw("CONCAT(codigo_sis,' ',carga_horaria,'',profesional_id)"), "LIKE", "%$buscar%");
