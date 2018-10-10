@@ -4,7 +4,8 @@
 
 
 <Form method="GET" action="{{route('Areas')}}" >
-    @if($areas->isNotEmpty()) <!--BUSCADOR -->
+    <!--BUSCADOR -->
+    @if ($areas->isNotEmpty() or $buscar)
     <div class="centrar col-sm-10 ">
         
             <div class="row">
@@ -19,8 +20,12 @@
                 </div>
             </div>
              
-    </div>
+    </div>  
+    @endif
    <!--FIN BUSCADOR -->
+
+
+   @if($areas->isNotEmpty())
    @include('complementos.error')
   <div  class="centrar table-responsive col-sm-10 ">
       <table class="tabla" id="listaArea">
@@ -41,7 +46,7 @@
                 <td style="text-align: right;">{{$fila++}}</td>
                 <td>{{$area->codigo}}</td>
                 <td>{{$area->nombre}}</td>
-                <td style="width: 45%;" >{{$area->descripcion}}</td>
+                <td class="descripcion" style="width: 45%;" >{{$area->descripcion}}</td>
                 <td>
                     <div class="text-center">
                         <a href='{{ route('verArea',$area->id)}}' data-toggle="tooltip" data-placement="right" title="Ver Area">

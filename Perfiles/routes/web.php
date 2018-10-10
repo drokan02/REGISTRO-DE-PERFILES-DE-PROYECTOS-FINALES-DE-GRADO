@@ -52,6 +52,10 @@ Route::any('/areas/subir_Excel/importar', 'AreaController@importar')->name('impo
 Route::get('/profesionales','ProfesionalController@index')->name('listarProfesionales');
 Route::get('/profesionales/registrar','ProfesionalController@registrar')->name('registroProfesional');
 Route::post('/profesionales/almacenar','ProfesionalController@almacenar')->name('almacenarProfesional');
+Route::any('/profesionales/editar/{id}','ProfesionalController@editar')->name('editarProfesional');
+Route::post('/profesionales/editar/modificar/{id}','ProfesionalController@modificar')->name('modificarProfesional');
+Route::any('/profesionales/eliminar/{id}','ProfesionalController@eliminar')->name('eliminarProfesional');
+Route::any('/profesionales/ver/{profesional}','ProfesionalController@ver')->name('verProfesional');
 
 
 //Subareas

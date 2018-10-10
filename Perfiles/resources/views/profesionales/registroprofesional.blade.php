@@ -64,6 +64,7 @@
 					<label for="titulo_id" class="col-sm-2 col-form-label">Titulo</label>
 					<div class="col-sm-4 row-fluid" >
 						<select name="titulo_id" id="titulo_id" class="form-control" >
+							<option disabled selected > -- seleccione una Titulo -- </option>
 							@foreach ($titulos as $titulo)
 								<option value="{{$titulo->id}}">{{$titulo->nombre}}</option>
 							@endforeach
@@ -76,6 +77,7 @@
 					<label for="area_id" class="col-sm-2 col-form-label">Area</label>
 					<div class="col-sm-4">
 						<select name="area_id" id="area_id" class="form-control" >
+							<option disabled selected > -- seleccione una Area -- </option>
 							@foreach ($areas as $area)
 								<option value="{{$area->id}}">{{$area->nombre}}</option>
 							@endforeach
@@ -85,6 +87,7 @@
 					<label for="subarea_id" class="col-sm-2 col-form-label">Sub Area</label>
 					<div class="col-sm-4">
 						<select name="subarea_id" id="subarea_id" class="form-control" >
+							<option disabled selected > -- seleccione una Sub Area -- </option>
 							@foreach ($subareas as $subarea)
 								<option value="{{$subarea->id}}">{{$subarea->nombre}}</option>
 							@endforeach
