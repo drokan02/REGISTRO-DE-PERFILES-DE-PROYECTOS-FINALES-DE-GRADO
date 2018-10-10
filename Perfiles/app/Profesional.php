@@ -19,18 +19,22 @@ class Profesional extends Authenticatable
     protected $fillable = [
         'id','ci_prof','nombre_prof', 'ap_ap_prof','ap_ma_prof','correo_prof','telef_prof','direc_prof','perfil_prof'
     ];
+    public function docentes(){
+        return $this->hasOne(docentes::class,'profesional_id');
+    }
 public function scopeTitulo(){
     return $this->belongsTo('Titulo');
 }
 public function scopeDocentes(){
     return $this->hasMany('\App\docentes');
 }
-public function scopeBuscar($query,$name){
-    if(trim($name)!="")
+public function scopeBuscarProfesional($query,$buscar){
+    if($buscar)
         {
-            $query->where(\DB::raw("CONCAT(nombre_prof,'',ap_pa_prof,'',ap_ma_prof)"),"LIKE","$name%");
+            $query->where(\DB::raw("CONCAT(nombre_prof,'',ap_pa_prof,'',ap_ma_prof)"),"LIKE","$buscar%");
         }
+    else{
+        return null;
+    }
 }
-
-    
 }
