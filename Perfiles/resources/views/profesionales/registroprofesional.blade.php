@@ -1,10 +1,10 @@
 @extends('layouts.menu')
-@section('titulo','REGISTRAR TUTOR')
+@section('titulo','REGISTRAR PROFESIONAL')
 @section('contenido')
 
    <div class="row justify-content-center mt-4">
         <div class="col-6">
-            <h1 class="mb-3">Profesional</h1>
+            
            <!-- @if($errors ->any())
                 <div class="alert-danger">
                     <h3>Se tiene los siguientes errores en el formulario</h3>
@@ -26,14 +26,14 @@
 				<div class = "form-group row"> 
 					<label for="nombre" class="col-sm col-form-label">Nombre</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" name="nombre" value="{{old('nombre')}}">
+						<input type="text" class="form-control" name="nombre_prof" value="{{old('nombre_prof')}}">
 						
 					</div>
 
 					 
 					<label for="ci" class="col-sm-2 col-form-label">CI</label>
 					<div class="col-sm-4">
-						<input type="ci" class="form-control" num="ci" id="ci" value="{{old('ci')}}">
+						<input type="ci" class="form-control" name="ci_prof"  id="ci" value="{{old('ci_prof')}}">
 					</div>
 				</div>
                 
@@ -42,12 +42,12 @@
 				<div class = "form-group row"> 
 					<label for="apellidoparterno" class="col-sm-2 col-form-label">Apellido Paterno</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" name="apellidopaterno" value="{{old('apellidopaterno')}}">
+						<input type="text" class="form-control" name="ap_pa_prof" value="{{old('ap_pa_prof')}}">
 					</div>
 
 					<label for="telefono" class="col-sm-2 col-form-label">Telefono</label>
 					<div class="col-sm-4">
-						<input type="telefono" class="form-control" name="telefono" id="telefono" value="{{old('telefono')}}">
+						<input type="telefono" class="form-control" name="telef_prof" id="telefono" value="{{old('telef_prof')}}">
 					</div>
 				</div>
 				
@@ -56,13 +56,25 @@
 				<div class = "form-group row"> 
 					<label for="apellidomaterno" class="col-sm-2 col-form-label">Apellido Maternos</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" name="apellidomaterno" value="{{old('apellidomaterno')}}">
+						<input type="text" class="form-control" name="ap_ma_prof" value="{{old('ap_ma_prof')}}">
 					</div>
 
 					 
 					<label for="direccion" class="col-sm-2 col-form-label">Direccion</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" name="direccion" value="{{old('direccion')}}">
+						<input type="text" class="form-control" name="direc_prof" value="{{old('direc_prof')}}">
+					</div>
+				</div>
+
+				<div class = "form-group row"> 
+					<label for="email" class="col-sm-2 col-form-label">Email</label>
+					<div class="col-sm-4">
+						<input type="email" class="form-control" name="correo_prof" id="correo_prof" value="{{old('correo_prof')}}">
+					</div>
+
+					<label for="perfil" class="col-sm-2 col-form-label">Perfil</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" name="perfil_prof" value="{{old('perfil_prof')}}">
 					</div>
 				</div>
 
@@ -70,59 +82,40 @@
 				<div class = "form-group row"> 
 					<label for="perfil" class="col-sm-2 col-form-label">Titulo</label>
 					<div class="col-sm-4 row-fluid">
-						<select class="selectpicker" name="titulo" data-show-subtext="true" data-live-search="true">
-							@foreach($areas as $area)
-				            	<option  value="{{$area->id}}">{{$area->nombre}}</option>	
+						<select class="selectpicker" name="titulo_id" data-show-subtext="true" data-live-search="true">
+							@foreach($titulos as $titulo)
+				            	<option  value="{{$titulo->id}}">{{$titulo->nombre}}</option>	
 							@endforeach	
 						</select>
 
 					</div>
 				
-					<!--<label for="titulo" class="col-sm-2 col-form-label">Titulo</label>
-					<div class="col-sm-4">
-						<input type="text" class="form-control" name="titulo" value="{{old('titulo')}}">
-					</div>-->
+					
 				</div>
 
-				<div class = "form-group row"> 
-					<label for="cargahoraria" class="col-sm-2 col-form-label">Area</label>
+				<!--<div class = "form-group row"> 
+					<label for="area" class="col-sm-2 col-form-label">Area</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" id="cargahoraria" value="{{old('cargahoraria')}}">
+						<select class="selectpicker" name="area" data-show-subtext="true" data-live-search="true">
+							@foreach($areas as $area)
+				            	<option  value="{{$area->id}}">{{$area->nombre}}</option>	
+							@endforeach	
+						</select>
 					</div>
 				</div>
 
 				<div class = "form-group row"> 
-					<label for="codigosis" class="col-sm-2 col-form-label">Subarea</label>
+					<label for="subarea" class="col-sm-2 col-form-label">Subarea</label>
 					<div class="col-sm-4">
-						<input type="num" class="form-control" id="codigosis" value="{{old('codigosis')}}">
+						<select class="selectpicker" name="subarea" data-show-subtext="true" data-live-search="true">
+							@foreach($subareas as $subarea)
+				            	<option  value="{{$subarea->id}}">{{$subarea->nombre}}</option>	
+							@endforeach	
+						</select>
 					</div>
 				</div>
 
-	            <div class = "form-group row"> 
-					<label for="email" class="col-sm-2 col-form-label">Email</label>
-					<div class="col-sm-6">
-						<input type="email" class="form-control" name="email" id="email" value="{{old('email')}}">
-					</div>
-				</div>
-
-			<!--	<button type="button" class="btn btn-info" data-toggle="modal"     data-target="#myModal">Agregar</button>
-          			<input type="hidden" id="ListaTitulos" name="ListaTitulos" value="" required />
-          			<br>
-				 <table id="tableTitulos" class="table">
-		            <thead>
-		                <tr>
-		                    <th>Nombre</th>
-		                    <th>Descripcion</th>
-		                    <th>Acción</th>
-		                </tr>
-		            </thead>
-		            <tbody id="tableTitulosData">
-		             		
-		                </tr>
-		            </tbody>
-		        </table>-->
-				
-
+	        -->    
 				<div class = "form-group row"> 
 					<div class="col-sm-2"></div>
 					<div class="col-8">

@@ -18,29 +18,29 @@
                 <th scope="col">Telefono</th>
                 <th scope="col">Direccion</th>
                 <th scope="col">Perfil</th>
-                <th scope="col">Codigosis</th>
-                <th scope="col">Titulo</th>
                 <th scope="col">Email</th>
+                <th scope="col">Titulo</th>
                 
             </tr>
             </thead>
             <tbody>
-           <!-- @foreach($users as $us)
-                <tr>
-                    <th scope="row">{{$us->id}}</th>
-                    <td>{{$us->name}}</td>
-                    <td>{{$us->roles->pluck('nombre')->implode(' - ')}}</td>
-                    <td>
-                        <form method="POST" action="{{route('eliminarTutor',$us)}}">
-                            {{method_field('DELETE')}}
-                            {!! csrf_field() !!}
-                            <a href="{{route('detalleUsuario',['id'=>$us->id])}}" class="btn btn-link" data-toggle="tooltip" data-placement="right" title="Datos Usuario"><i class="fa fa-eye fa-2x"></i></a>
-                            <a href="{{route('editarUsuario',$us)}}" class="btn btn-link" data-toggle="tooltip" data-placement="right" title="Editar"><i class="fa fa-edit fa-2x"></i></a>
-                            <button class="btn btn-link" type="submit"><i class="fa fa-trash fa-2x"></i></button> 
-                        </form>
-                    </td>
-                </tr>
-            @endforeach-->
+                @foreach ($profesionales as $profesional)
+                    <tr>
+                        <td style="text-align: right;">{{$fila++}}</td>
+                        <td>{{$profesional->nombre_prof}}</td>
+                        <td>{{$profesional->ap_pa_prof}}</td>
+                        <td>{{$profesional->ap_ma_prof}}</td>
+                        <td>{{$profesional->ci_prof}}</td>
+                        <td>{{$profesional->telef_prof}}</td>
+                        <td>{{$profesional->direc_prof}}</td>
+                        <td>{{$profesional->perfil_prof}}</td>
+                        <td>{{$profesional->correo_prof}}</td>
+                        <td>{{DB::table('titulos')->where('id', $profesional->titulo_id)->get()}}</td>
+                        <td>
+                            
+                        </td>
+                    </tr>   
+                @endforeach
             </tbody>
         </table>
     @else

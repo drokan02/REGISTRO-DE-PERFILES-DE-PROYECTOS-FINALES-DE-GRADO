@@ -74,14 +74,14 @@ class modalidades extends Controller
 		return view('modadelidad/ver',compact('id','modadelidad'));
 	}
 
-	/**
+    /**
      * Remove the specified resource from storage.
-     * @param Modal $user
+     * @param Modal $modalidad
      * @return \Illuminate\Http\Response
+     * @internal param Modal $user
      */
     public function eliminar(Modal $modalidad){
 		$modalidad->delete();               //eliminar datos en tabla intermedia
-	
         return redirect()->route('modalidad');
     }
 }
