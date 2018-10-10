@@ -42,7 +42,7 @@
           <li class="{{ request()->routeIs('registrarArea')? 'active':'' }}">
             <a href="{{route('registrarArea')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Area</a>
           </li>
-          <li >
+          <li class="{{ request()->routeIs('Areas')? 'active':'' }}">
             <a href="{{route('Areas')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Area</a>
           </li>
         </ul>

@@ -11,7 +11,7 @@ class CreateTituloTable extends Migration
      *
      * @return void
      */
-    public function up()
+   public function up()
     {
         Schema::create('titulo', function (Blueprint $table) {
             $table->increments('id');

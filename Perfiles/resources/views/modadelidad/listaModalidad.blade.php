@@ -17,8 +17,8 @@
           <th style="width: 5%; text-align: center;">N°</th>
           <th style="width: 10%;">Codigo</th>
           <th style="width: 25%;">Nombre</th>
-          <th style="width: 45%; ">Descripcion</th>
-          <th style="width: 15%;"></th>
+          <th style="width: 43%; ">Descripcion</th>
+          <th style="width: 17%;"></th>
         </tr>
       </thead>
       <tbody>
@@ -29,21 +29,25 @@
                 <td style="text-align: right;">{{$modalidad->id}}</td>
                 <td>{{$modalidad->codigo_mod}}</td>
                 <td>{{$modalidad->nombre_mod}}</td>
-                <td style="width: 45%;" >{{$modalidad->descripsion_mod}}</td>
+                <td style="width: 43%;" >{{$modalidad->descripsion_mod}}</td>
                 <td>
-                    <div class="text-center">
-                        <a href='{{ route('ver',$modalidad->id)}}' data-toggle="tooltip" data-placement="right" title="Ver">
-                                    <i class="col-sm-3 fa fa-eye fa-2x" ></i>
-                         </a>
-                        <a href='{{ route('editar',$modalidad->id)}}' data-toggle="tooltip" data-placement="right" title="Editar">
-                            <i class="col-sm-3 fa fa-pencil-square-o fa-2x" ></i>
-                         </a>
-                        <a href='{{ route('eliminar',$modalidad->id)}}' onclick="return confirm('¿Esta seguro de eliminar esta Modalidad?')" 
-                        data-toggle="tooltip" data-placement="right" title="eliminar" >
-                              <i class="col-sm-3 fa fa-minus-square fa-2x" ></i>
-                        </a>
-                        
-                    </div>
+                    <form method="POST" action="{{route('eliminarModalidad',$modalidad)}}">
+                        {{method_field('DELETE')}}
+                            {!! csrf_field() !!}
+                        <div class="text-center">
+                            <a href='{{ route('ver',$modalidad->id)}}' class="btn btn-link" data-toggle="tooltip" data-placement="right" title="Ver">
+                                        <i class="fa fa-eye fa-2x" ></i>
+                             </a>
+                            <a href='{{ route('editarModalidad',$modalidad)}}' class="btn btn-link" data-toggle="tooltip" data-placement="right" title="Editar">
+                                <i class="fa fa-pencil-square-o fa-2x" ></i>
+                             </a>
+                            <button type="submit" class="btn btn-link" onclick="return confirm('¿Esta seguro de eliminar esta Modalidad?')"
+                            data-toggle="tooltip" data-placement="right" title="eliminar" >
+                                  <i class=" fa fa-minus-square fa-2x" ></i>
+                            </button>
+
+                        </div>
+                    </form>
                 </td>
             </tr>   
         @endforeach

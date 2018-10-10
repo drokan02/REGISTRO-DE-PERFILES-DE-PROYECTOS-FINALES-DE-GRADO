@@ -4,7 +4,7 @@ titulo{
 }
 
 .container{
-    margin: 20px auto;
+    margin: auto;
     
 }
 
@@ -13,6 +13,22 @@ table{
     background-color: white;
     width: 100%;
     border: solid 1px #6495ED;
+    
+}
+
+.centrar{
+    margin: auto;
+}
+
+#buscador{
+    margin: auto;
+}
+
+#scroll {
+    width:2000px;
+    height:800px;
+    background:url(../Images/contenido.jpg);
+    overflow:auto;
 }
 
 thead{

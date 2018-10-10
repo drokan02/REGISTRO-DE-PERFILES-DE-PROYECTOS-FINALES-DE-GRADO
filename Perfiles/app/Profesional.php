@@ -1,11 +1,14 @@
 <?php
+
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
+
+use App\Titulo;
 
 
-class Profesional extends Authenticatable
+class Profesional extends Model
 {
     use Notifiable;
     
