@@ -57,7 +57,7 @@
                 <td style="text-align: right;">{{$fila++}}</td>
                 <td>{{$subarea->codigo}}</td>
                 <td>{{$subarea->nombre}}</td>
-                <td style="width: 45%;" >{{$subarea->descripcion}}</td>
+                <td class="descripcion" style="width: 45%;" >{{$subarea->descripcion}}</td>
                 <td>
                     <div class="text-center">
                         <a href='{{route('editarSubarea',$subarea->id)}}' data-toggle="tooltip" data-placement="right" title="Editar">

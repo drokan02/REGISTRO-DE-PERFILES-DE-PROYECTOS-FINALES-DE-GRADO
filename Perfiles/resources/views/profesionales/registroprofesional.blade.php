@@ -3,119 +3,97 @@
 @section('contenido')
 
    <div class="row justify-content-center mt-4">
-        <div class="col-6">
+        <div class="col-sm-8">
             
-           <!-- @if($errors ->any())
-                <div class="alert-danger">
-                    <h3>Se tiene los siguientes errores en el formulario</h3>
-                    <ul>
-                        @foreach($errors->all() as $errors)
-                            <li>{{$errors}}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif-->
-             
-            <form method="POST" action="{{route('storeProfesional')}}">
+           @include('complementos.error')
+            <form method="POST" action="{{route('almacenarProfesional')}}">
                 {!! csrf_field() !!}
 
-
-	
 				
-				<!--Nombre tutor -->
-				<div class = "form-group row"> 
-					<label for="nombre" class="col-sm col-form-label">Nombre</label>
+				<div class = "form-group row "> 
+					<label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" name="nombre_prof" value="{{old('nombre_prof')}}">
-						
-					</div>
-
-					 
-					<label for="ci" class="col-sm-2 col-form-label">CI</label>
-					<div class="col-sm-4">
-						<input type="ci" class="form-control" name="ci_prof"  id="ci" value="{{old('ci_prof')}}">
+						<input type="text" id="nombre" class="form-control" name="nombre_prof" value="{{old('nombre_prof')}}">
 					</div>
 				</div>
+								
+				<!--Nombre tutor -->
                 
-				
 
 				<div class = "form-group row"> 
-					<label for="apellidoparterno" class="col-sm-2 col-form-label">Apellido Paterno</label>
+					<label for="ap_pa" class="col-sm-2 col-form-label">Apellido Paterno</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" name="ap_pa_prof" value="{{old('ap_pa_prof')}}">
-					</div>
-
-					<label for="telefono" class="col-sm-2 col-form-label">Telefono</label>
-					<div class="col-sm-4">
-						<input type="telefono" class="form-control" name="telef_prof" id="telefono" value="{{old('telef_prof')}}">
+						<input type="text" id="ape_pa" class="form-control" name="ap_pa_prof" value="{{old('ap_pa_prof')}}">
 					</div>
 				</div>
 				
 
                
 				<div class = "form-group row"> 
-					<label for="apellidomaterno" class="col-sm-2 col-form-label">Apellido Maternos</label>
+					<label for="ap_ma_prof" class="col-sm-2 col-form-label">Apellido Maternos</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" name="ap_ma_prof" value="{{old('ap_ma_prof')}}">
-					</div>
-
-					 
-					<label for="direccion" class="col-sm-2 col-form-label">Direccion</label>
-					<div class="col-sm-4">
-						<input type="text" class="form-control" name="direc_prof" value="{{old('direc_prof')}}">
+						<input type="text" id="ape_ma_prof" class="form-control" name="ap_ma_prof" value="{{old('ap_ma_prof')}}">
 					</div>
 				</div>
 
 				<div class = "form-group row"> 
-					<label for="email" class="col-sm-2 col-form-label">Email</label>
+					<label for="ci_prof" class="col-sm-2 col-form-label">CI</label>
 					<div class="col-sm-4">
-						<input type="email" class="form-control" name="correo_prof" id="correo_prof" value="{{old('correo_prof')}}">
-					</div>
-
-					<label for="perfil" class="col-sm-2 col-form-label">Perfil</label>
-					<div class="col-sm-4">
-						<input type="text" class="form-control" name="perfil_prof" value="{{old('perfil_prof')}}">
+						<input type="text"  class="form-control" name="ci_prof" id="ci_prof" value="{{old('ci_prof')}}">
 					</div>
 				</div>
 
-                
+                <div class = "form-group row"> 
+					<label for="telef_prof" class="col-sm-2 col-form-label">Telefono</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" name="telef_prof" id="telef_prof" value="{{old('telef_prof')}}">
+					</div>
+
+					<label for="correo_prof" class="col-sm-2 col-form-label">Correo</label>
+					<div class="col-sm-4">
+						<input type="email"  class="form-control" name="correo_prof" value="{{old('correo_prof')}}">
+					</div>
+				</div>
+
 				<div class = "form-group row"> 
-					<label for="perfil" class="col-sm-2 col-form-label">Titulo</label>
-					<div class="col-sm-4 row-fluid">
-						<select class="selectpicker" name="titulo_id" data-show-subtext="true" data-live-search="true">
-							@foreach($titulos as $titulo)
-				            	<option  value="{{$titulo->id}}">{{$titulo->nombre}}</option>	
-							@endforeach	
+					<label for="direc_prof" class="col-sm-2 col-form-label">Direccion</label>
+					<div class="col-sm-4">
+						<input type="text" id="direccion" class="form-control" name="direc_prof" id="direc_prof" value="{{old('direc_prof')}}">
+					</div>
+
+					<label for="titulo_id" class="col-sm-2 col-form-label">Titulo</label>
+					<div class="col-sm-4 row-fluid" >
+						<select name="titulo_id" id="titulo_id" class="form-control" >
+							<option disabled selected > -- seleccione una Titulo -- </option>
+							@foreach ($titulos as $titulo)
+								<option value="{{$titulo->id}}">{{$titulo->nombre}}</option>
+							@endforeach
 						</select>
-
 					</div>
+				</div>
+
 				
-					
-				</div>
-
-				<!--<div class = "form-group row"> 
-					<label for="area" class="col-sm-2 col-form-label">Area</label>
-					<div class="col-sm-4">
-						<select class="selectpicker" name="area" data-show-subtext="true" data-live-search="true">
-							@foreach($areas as $area)
-				            	<option  value="{{$area->id}}">{{$area->nombre}}</option>	
-							@endforeach	
-						</select>
-					</div>
-				</div>
-
 				<div class = "form-group row"> 
-					<label for="subarea" class="col-sm-2 col-form-label">Subarea</label>
+					<label for="area_id" class="col-sm-2 col-form-label">Area</label>
 					<div class="col-sm-4">
-						<select class="selectpicker" name="subarea" data-show-subtext="true" data-live-search="true">
-							@foreach($subareas as $subarea)
-				            	<option  value="{{$subarea->id}}">{{$subarea->nombre}}</option>	
-							@endforeach	
+						<select name="area_id" id="area_id" class="form-control" >
+							<option disabled selected > -- seleccione una Area -- </option>
+							@foreach ($areas as $area)
+								<option value="{{$area->id}}">{{$area->nombre}}</option>
+							@endforeach
 						</select>
 					</div>
-				</div>
 
-	        -->    
+					<label for="subarea_id" class="col-sm-2 col-form-label">Sub Area</label>
+					<div class="col-sm-4">
+						<select name="subarea_id" id="subarea_id" class="form-control" >
+							<option disabled selected > -- seleccione una Sub Area -- </option>
+							@foreach ($subareas as $subarea)
+								<option value="{{$subarea->id}}">{{$subarea->nombre}}</option>
+							@endforeach
+						</select>
+					</div>
+				</div>   
 				<div class = "form-group row"> 
 					<div class="col-sm-2"></div>
 					<div class="col-8">
