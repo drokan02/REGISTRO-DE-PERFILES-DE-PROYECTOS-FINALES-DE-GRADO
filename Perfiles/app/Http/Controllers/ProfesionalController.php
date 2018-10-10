@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\ProfesionalRequest;
+use Illuminate\Support\Facades\DB;
 use Validator;
 use App\Profesional;
 use App\Area;
 use App\Titulo;
-use DB;
 class ProfesionalController extends Controller
 {
     /**
@@ -41,6 +41,7 @@ class ProfesionalController extends Controller
         $profesional->create($request->all());
         $prof_id = Profesional::where('ci_prof',$request['ci_prof'])->value('id');
         $profesional->areas()->attach($areas,['profesional_id'=>$prof_id]);
+        return redirect()->route('listarProfesionales');
     }
    
     public function editar($id){
@@ -52,13 +53,14 @@ class ProfesionalController extends Controller
         return view('profesionales.editarProfesional',compact('profesional','areas','subareas','titulos'));
     }
 
-    public function modificar(ProfesionalRequest $request,$id){
-        $areas = [$request->area_id,$request->subarea_id];
-        $profesional = new Profesional;
-        $profesional->findOrFail($id)->update($request->all());
-        $prof_id = Profesional::where('ci_prof',$request['ci_prof'])->value('id');
-        $profesional->areas()->sync($areas,['profesional_id'=>$prof_id]);//elimina todos los registro de la tabla relaccion y ingresa uno nuevo
-        //$profesional->areas()->attach($subarea_id,['profesional_id'=>$id]);
+    public function modificar(ProfesionalRequest $request,Profesional $profesional){
+        DB::transaction(function () use($request,$profesional) {
+            $areas = [$request->area_id,$request->subarea_id];
+            $profesional->update($request->all());
+            $prof_id = Profesional::query()->where('ci_prof',$request['ci_prof'])->value('id');
+            $profesional->areas()->sync($areas,['profesional_id'=>$prof_id]);//elimina todos los registro de la tabla relaccion y ingresa uno nuevo
+        });
+        return redirect()->route('listarProfesionales');
         
     }
 
