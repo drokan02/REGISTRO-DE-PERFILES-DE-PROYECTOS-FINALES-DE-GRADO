@@ -93,6 +93,6 @@ Route::get('/docentes/registrar', 'docenteController@registrar')->name('registra
 Route::any('/docentes/registrar/almacenar','docenteController@almacenar')->name('almacenarDocente');
 Route::any('/docentes/editar/{docente}','docenteController@editar')->name('editarDocente');
 Route::any('/docentes/editar/modificar/{docente}','docenteController@modificar')->name('modificarDocente');
-Route::any('/docentes/eliminar/{docente},docenteController@eliminar')->name('eliminarDocente');
+Route::any('/docentes/eliminar/{docente}','docenteController@eliminar')->name('eliminarDocente');
 Route::any('/docentes/ver/{docente}','docenteController@ver')->name('verDocente');
 

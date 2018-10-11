@@ -72,10 +72,16 @@ class docenteController extends Controller
         $docente->update($request->all());
         return redirect()->route('Docentes');
     }
-    public function eliminar($id){
-		
-			docentes::findOrFail($id)->delete();
-			return redirect()->route('Docentes');
+
+    //todos los metos eliminar con el tiempo se tendra que validar con registros de BD
+    public function eliminar(Docente $docente){
+        $datosDocente  = $docente->toArray();
+        $prof_id = $datosDocente['profesional_id'];
+        $docente->delete();
+        $profesional = Profesional::findOrFail($prof_id);
+		$profesional->areas()->detach(); //eliminar datos en tabla intermedia
+        $profesional->delete();
+        return redirect()->route('Docentes');
     }
 
 }
