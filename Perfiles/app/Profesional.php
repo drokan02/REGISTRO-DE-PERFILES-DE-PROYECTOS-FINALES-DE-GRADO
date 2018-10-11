@@ -4,12 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use App\Docente;
 use App\Titulo;
 
 
 class Profesional extends Model
 {
-     protected $table = 'profesional';
+     protected $table = 'profesionales';
      protected $fillable = [
         'ci_prof',
         'nombre_prof', 
@@ -22,6 +23,11 @@ class Profesional extends Model
         'titulo_id',
          ];
 
+
+    public function docentes()
+    {
+        return $this->hasOne(Docente::class,'profesional_id');    
+    }
     public function areas(){
         return $this->belongsToMany(Area::class,'profesional_area');  
     }
@@ -37,5 +43,4 @@ class Profesional extends Model
             return $query;
         }
     }
-}
 }
