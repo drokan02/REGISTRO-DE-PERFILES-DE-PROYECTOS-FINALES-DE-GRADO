@@ -40,15 +40,15 @@ class DocenteFormRequest extends FormRequest
 
             ];
         }else{
-            $aux = $this->{'profesional'};
-            $prof = $aux->toArray();
+            $aux = $this->{'docente'};
+            $docente= $aux->toArray();
             return [
                 'nombre_prof'   => ['required','regex:/^[\pL\s]+$/u','min:3'],
                 'ap_pa_prof'    => ['required','alpha','min:3'],
                 'ap_ma_prof'    => ['required','alpha','min:3'],
-                'ci_prof'       => ['required','numeric','digits_between:6,8',Rule::unique('profesionales', 'ci_prof')->ignore($prof['id'])],
-                'telef_prof'    => ['required','numeric','digits_between:7,8',Rule::unique('profesionales', 'telef_prof')->ignore($prof['id'])],
-                'correo_prof'   => ['email',Rule::unique('profesionales', 'correo_prof')->ignore($prof['id'])],
+                'ci_prof'       => ['required','numeric','digits_between:6,8',Rule::unique('profesionales', 'ci_prof')->ignore($docente['profesional_id'])],
+                'telef_prof'    => ['required','numeric','digits_between:7,8',Rule::unique('profesionales', 'telef_prof')->ignore($docente['profesional_id'])],
+                'correo_prof'   => ['email',Rule::unique('profesionales', 'correo_prof')->ignore($docente['profesional_id'])],
                 'direc_prof'    => 'min:7',
                 'codigo_sis'    => 'required|numeric|digits_between:6,8|unique:profesionales,ci_prof',
                 'carga_horaria' => 'required',

@@ -88,12 +88,11 @@ Route::put('/carreras/{carrera}','CarreraController@actualizar')->name('actualiz
 Route::delete('/carreras/{carrera}/eliminar','CarreraController@eliminar')->name('eliminarCarrera');
 
 
-Route::get('/docente','docenteController@index')->name('Docentes');
+Route::get('/docentes','docenteController@index')->name('Docentes');
 Route::get('/docentes/registrar', 'docenteController@registrar')->name('registrarDocente');
 Route::any('/docentes/registrar/almacenar','docenteController@almacenar')->name('almacenarDocente');
-Route::any('//docentes/{id}','docenteController@editar')->name('editarDocente');
-Route::any('/docentes/editar/modificar/{id}','docenteController@modificar')->name('modificarDocente');
-Route::any('/docentes/eliminar/{id}','docenteController@eliminar')->name('eliminarDocente');
-Route::any('/docentes/buscar', 'docenteController@index')->name('buscarDocente');
-Route::any('/docentes/ver/{id}','docenteController@ver')->name('verDocente');
+Route::any('/docentes/editar/{docente}','docenteController@editar')->name('editarDocente');
+Route::any('/docentes/editar/modificar/{docente}','docenteController@modificar')->name('modificarDocente');
+Route::any('/docentes/eliminar/{docente},docenteController@eliminar')->name('eliminarDocente');
+Route::any('/docentes/ver/{docente}','docenteController@ver')->name('verDocente');
 

@@ -1,12 +1,11 @@
 @extends('layouts.menu')
-@section('titulo','LISTAR DOCENTES')
+@section('titulo','LISTA DE DOCENTES')
 @section('contenido')
 
 
-<Form method="GET" action="{{route('Docentes')}}" >
-    @if($docentes->isNotEmpty()) <!--BUSCADOR -->
-    <div class="centrar col-sm-10 ">
-        
+<Form method="GET" action="{{route('listarProfesionales')}}" >
+    @if ($docentes->isNotEmpty() or $buscar)
+        <div class="centrar col-sm-8">
             <div class="row">
                 <div class="col-sm-3"></div>
                 
@@ -17,53 +16,69 @@
                 <div class="col-4">
                                 <button class=" btn btn-success pull-left"> Buscar</button>
                 </div>
-            </div>
-             
-    </div>
-   <!--FIN BUSCADOR -->
+            </div>    
+        </div>     
+    @endif
+    <!--BUSCADOR -->
+    
+   @if($docentes->isNotEmpty())
    @include('complementos.error')
-  <div  class="centrar table-responsive col-sm-10 ">
-      <table class="tabla" id="listaDocente">
+   <div  class="centrar table-responsive col-sm-12 ">
+      <table class="table table-hover text-center" id="listaProfesionales">
           <thead class ="columnas">
         <tr>
-          <th style="width: 5%; text-align: center;">N°</th>
-          <th style="width: 25%;">Nombre</th>
-          <th style="width: 45%; ">ApellidoP</th>
-          <th style="width: 15%;">ApellidoM</th>
-          <th style="width: 15%;">Titulo</th>
-          <th style="width: 15%;">CHoraria</th>
-          <th style="width: 15%;">Area</th>
-          <th style="width: 15%;">SubArea</th>
+          <th style="width: 3%; text-align: center;">N°</th>
+          <th style="width: 10%;">Nombres</th>
+          <th style="width: 10%;">Apellidos</th>
+          <th style="width: 8%; ">Titulo</th>
+          <th style="width: 6%;">Telefono</th>
+          <th style="width: 10%;">Correo</th>
+          <th style="width: 10%;">Area</th>
+          <th style="width: 10%;">Sub Area</th>
+          <th style="width: 10%;">Carga horaria</th>
+          <th style="width: 5%;">Opsiones</th>
         </tr>
       </thead>
       <tbody>
            
         @foreach ($docentes as $docente)
-            <tr>
-               
-                <td style="text-align: right;">{{$fila++}}</td>
-                <td>{{$docente->profesional->pluck('nombre_prof')[0]}}</td>
-                <td>{{$docente->profesional->pluck('ap_pa_prof')[0]}}</td>
-                <td>{{$docente->profesional->pluck('ap_ma_prof')[0]}}</td>
-                <td>{{$docente->profesional->pluck('titulo_id')[0]}}</td>
-                <td>{{$docente->carga_horaria}}</td>
-                <td>{{$docente->area}}</td>
-                <td>{{$docente->SubArea}}</td>
-               
-                <td>
-                    <div class="text-center">
-                        <a href='{{ route('verDocente',$docente->id)}}' data-toggle="tooltip" data-placement="right" title="Ver Docente">
-                                    <i class="col-sm-3 fa fa-eye fa-2x" ></i>
-                         </a>
-                        <a href='{{ route('editarDocente',$docente->id)}}' data-toggle="tooltip" data-placement="right" title="Editar">
-                            <i class="col-sm-3 fa fa-pencil-square-o fa-2x" ></i>
-                         </a>
-                        <a href='{{ route('eliminarDocente',$docente->id)}}' onclick="return confirm('¿Esta seguro de eliminar esta Docente?')" 
-                        data-toggle="tooltip" data-placement="right" title="eliminar" >
-                              <i class="col-sm-3 fa fa-minus-square fa-2x" ></i>
-                        </a>
-                   
-                    </div>
+            <tr>  
+                
+                    <td style="text-align: right;">{{$fila++}}</td>
+                    <td>{{$docente->profesional->nombre_prof}}</td>
+                    <td>{{$docente->profesional->ap_pa_prof}}&nbsp;{{$docente->profesional->ap_ma_prof}}</td>
+                    <td>{{$docente->profesional->titulo->pluck('nombre')[0]}}</td>
+                    <td>{{$docente->profesional->telef_prof}}</td>
+                    <td>{{$docente->profesional->correo_prof}}</td>
+                    @if (!$docente->profesional->areas->pluck('id_area')[0])
+                        <td>{{$docente->profesional->areas->pluck('nombre')[0]}}</td>
+                        <td>{{$docente->profesional->areas->pluck('nombre')[1]}}</td>   
+                    @else
+                        <td>{{$docente->profesional->areas->pluck('nombre')[1]}}</td>
+                        <td>{{$docente->profesional->areas->pluck('nombre')[0]}}</td>
+                    @endif
+                    <td>{{$docente->carga_horaria}}</td>
+                
+                <td style="width: 5%;"  class="dropdown dropleft text-center">
+                    <a href="#" data-toggle="dropdown"  data-placement="right" title="opsiones">
+                        <i class="fa fa-ellipsis-v fa-2x" aria-hidden="true"></i>
+                    </a>
+                    <ul id="contextMenu" class="dropdown-menu text-center" role="menu">    
+                        <li >
+                                
+                            <a href='{{ route('editarDocente',$docente)}}' tabindex="-1"  class="payLink">
+                                    <i class="fa fa-pencil-square-o fa-2x " style="color: #3390FF" ></i>
+                                    <span class="hidden-xs">&nbsp;&nbsp; Editar</span>
+                            </a>
+                        </li>
+                        <li >
+                            <a href='{{ route('eliminarDocente',$docente)}}' onclick="return confirm('¿Esta seguro de eliminar el Profesional?')" tabindex="-1"  class="payLink">
+                                    <i class="fa fa-minus-square fa-2x" style="color: #3390FF"></i>
+                                    <span class="hidden-xs">Eliminar</span>
+                            </a>
+                        </li>
+                    </ul>
+
                 </td>
             </tr>   
         @endforeach
@@ -72,9 +87,9 @@
     
      {!! $docentes->render() !!}
      @else
-        <li>No hay Docentes registradas</li>
+        <li>No se encontro un Profesional con esa descripcion</li>
     @endif
-
+    
 </div>
 
 </Form>

@@ -19,9 +19,10 @@ class docenteController extends Controller
 	}
     public function index(Request $request){
        $buscar = $request->get('buscar');
-       $docentes = docentes::buscarDocentes($buscar)
-                           ->orderBy('id','ASC')
-				                   ->paginate(5);		
+       $profesionales = Profesional::all();
+       $docentes = Docente::buscarprofesional($buscar)->with('profesional')
+                          ->orderBy('id','ASC')
+                          ->paginate(10);	
 	   	return view('docentes.listadoDocentes',['docentes'=> $docentes,'buscar'=>$buscar , 'fila'=>1]);     
     }
 
@@ -30,7 +31,7 @@ class docenteController extends Controller
         $subareas = Area::subareas()->get();
         $titulos = Titulo::all();
 
-        return view('docentes.registrarDocentes',['areas'=>$areas, 'subareas'=>$subareas, 'titulos'=>$titulos ]);
+        return view('docentes.registrarDocentes',compact('docente','subareas','areas','titulos'));
     }
   
 
@@ -46,20 +47,29 @@ class docenteController extends Controller
         $docente->codigo_sis = $request->codigo_sis;
         $docente->save();
 		    return redirect()->route('Docentes');
-        
+    }
 
+    public function editar(Docente $docente){
+        $horarios = ['tiempo_parsial'=>"Tiempo Parcial", 'tiempo_total'=>"Tiempo Total"];
+        $areas = Area::areas()->get();
+        $subareas = Area::subareas()->get();
+        $titulos = Titulo::all();
+        return view('docentes.editarDocente',compact('docente','subareas','areas','titulos','horarios'));
     }
     public function ver($id){
 		$docente=docentes::findOrFail($id);
 		
 		return view('docentes.ver',['docente'=>$docente]);
     }
-    public function editar($id){
-		$docente=docentes::findOrFail($id);
-		return view('docentes.editar',['docente'=>$docente]);
-    }
-    public function modificar(DocenteFormRequest $request,$id){
-		docentes::findOrFail($id)->update($request->all());
+   
+    public function modificar(DocenteFormRequest $request,Docente $docente){
+        $datosDocente  = $docente->toArray();
+        $prof_id = $datosDocente['profesional_id'];
+        $areas = [$request->area_id,$request->subarea_id];
+        $profesional = Profesional::findOrFail($prof_id);
+        $profesional->areas()->sync($areas,['profesional_id'=>$prof_id]);
+        $profesional->update($request->all());
+        $docente->update($request->all());
         return redirect()->route('Docentes');
     }
     public function eliminar($id){

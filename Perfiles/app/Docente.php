@@ -17,7 +17,7 @@ class Docente extends Model
         
     ];
    
-    public function Profesional()
+    public function profesional()
     {
         return $this->belongsTo(Profesional::class);
     }

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use App\Docente;
 use App\Titulo;
 
 
@@ -22,6 +23,11 @@ class Profesional extends Model
         'titulo_id',
          ];
 
+
+    public function docentes()
+    {
+        return $this->hasOne(Docente::class,'profesional_id');    
+    }
     public function areas(){
         return $this->belongsToMany(Area::class,'profesional_area');  
     }
