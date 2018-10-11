@@ -87,13 +87,9 @@ Route::get('/carreras/{carrera}/editar','CarreraController@editar')->name('edita
 Route::put('/carreras/{carrera}','CarreraController@actualizar')->name('actualizarCarrera');//put metodo para actualizar
 Route::delete('/carreras/{carrera}/eliminar','CarreraController@eliminar')->name('eliminarCarrera');
 
-//docentes
-//Route::get('/docentes','docenteController@index')->name('docentes');
+
 Route::get('/docente','docenteController@index')->name('Docentes');
 Route::get('/docentes/registrar', 'docenteController@registrar')->name('registrarDocente');
-//Route::get('/docentes/registrar',function(){
-  // return view('docentes/registrarDocentes');
-//})->name('registrarDocente');
 Route::any('/docentes/registrar/almacenar','docenteController@almacenar')->name('almacenarDocente');
 Route::any('//docentes/{id}','docenteController@editar')->name('editarDocente');
 Route::any('/docentes/editar/modificar/{id}','docenteController@modificar')->name('modificarDocente');

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DocenteFormRequest;
 //use App\Http\Requests;
 use Illuminate\Http\Request;
-use App\docentes;
+use App\Docente;
 use App\Profesional;
+use App\Area;
+use App\Titulo;
 use Validator;
 use DB;
 
@@ -16,39 +18,34 @@ class docenteController extends Controller
 	
 	}
     public function index(Request $request){
-  
-
-       
        $buscar = $request->get('buscar');
-        $docentes = docentes::buscarDocentes($buscar)
-        ->orderBy('id','ASC')
-				->paginate(5);
-			
-		return view('docentes.listadoDocentes',['docentes'=> $docentes,'buscar'=>$buscar , 'fila'=>1]);
-       
-        
+       $docentes = docentes::buscarDocentes($buscar)
+                           ->orderBy('id','ASC')
+				                   ->paginate(5);		
+	   	return view('docentes.listadoDocentes',['docentes'=> $docentes,'buscar'=>$buscar , 'fila'=>1]);     
     }
+
     public function registrar(){
-       return view('docentes.registrarDocentes');
+        $areas = Area::areas()->get();
+        $subareas = Area::subareas()->get();
+        $titulos = Titulo::all();
+
+        return view('docentes.registrarDocentes',['areas'=>$areas, 'subareas'=>$subareas, 'titulos'=>$titulos ]);
     }
   
 
     public function almacenar(DocenteFormRequest $request){
-       /* $datos = $request->all();
-        $profecional = new Profecional;
-        $profecional->nombre_prof = $datos->nombre;
-
-
-        $profecional->save();
-        $id = profesional::where('nombre_prof',$datos-> nombre)->value('id');
+        $areas = [$request->area_id,$request->subarea_id];
+        $profesional = new Profesional;
         $docente = new Docente;
-        $docente->profecional_id = $id;
-        $docente->carga_horaria = $datos->carga_horaria;
-        $docente->carga_horaria = $datos->codigo_sis;
-        $docente->save();*/
-        $docente = new docentes;
-		$docente->create($request->all());
-		return redirect()->route('Docentes');
+        $profesional->create($request->all());
+        $prof_id = Profesional::where('ci_prof',$request['ci_prof'])->value('id');
+        $profesional->areas()->attach($areas,['profesional_id'=>$prof_id]);
+        $docente->profesional_id = $prof_id;
+        $docente->carga_horaria = $request->carga_horaria;
+        $docente->codigo_sis = $request->codigo_sis;
+        $docente->save();
+		    return redirect()->route('Docentes');
         
 
     }

@@ -38,13 +38,15 @@ class ProfesionalRequest extends FormRequest
 
             ];
         }else{
+            $aux = $this->{'profesional'};
+            $prof = $aux->toArray();
             return [
                 'nombre_prof' => ['required','regex:/^[\pL\s]+$/u','min:3'],
                 'ap_pa_prof'  => ['required','alpha','min:3'],
                 'ap_ma_prof'  => ['required','alpha','min:3'],
-                'ci_prof'     => ['required','numeric','digits_between:6,8',Rule::unique('profesionales', 'ci_prof')->ignore($this->{'id'})],
-                'telef_prof'   => ['required','numeric','digits_between:7,8',Rule::unique('profesionales', 'telef_prof')->ignore($this->{'id'})],
-                'correo_prof' => ['email',Rule::unique('profesionales', 'correo_prof')->ignore($this->{'id'})],
+                'ci_prof'     => ['required','numeric','digits_between:6,8',Rule::unique('profesionales', 'ci_prof')->ignore($prof['id'])],
+                'telef_prof'   => ['required','numeric','digits_between:7,8',Rule::unique('profesionales', 'telef_prof')->ignore($prof['id'])],
+                'correo_prof' => ['email',Rule::unique('profesionales', 'correo_prof')->ignore($prof['id'])],
                 'direc_prof'  => 'min:7',
                 'titulo_id'   => 'required',
                 'area_id'     => 'required',
@@ -57,13 +59,13 @@ class ProfesionalRequest extends FormRequest
     {
         return [
             'nombre_prof.required' => 'No ingreso el nombre ',
-            'nombre_prof.rege'     => 'El Nombre solo puede tener espacios y letras',
+            'nombre_prof.regex'     => 'El Nombre solo puede tener espacios y letras',
             'nombre_prof.min'      => 'El Nombre debe tener almenos 3 caracteres',
             'ap_pa_prof.required'  => 'No ingreso el Apellido Paterno',
-            'ap_pa_prof.rege'      => 'El Apellido Paterno solo permite letras',
+            'ap_pa_prof.alpha'      => 'El Apellido Paterno solo permite letras',
             'ap_pa_prof.min'       => 'El Apellido Paterno debe tener al menos 3 caracteres',
             'ap_ma_prof.required'  => 'No ingreso el Apellido Materno',
-            'ap_ma_prof.rege'      => 'El Apellido Materno solo permite letras',
+            'ap_ma_prof.alpha'      => 'El Apellido Materno solo permite letras',
             'ap_ma_prof.min'       => 'El Apellido Materno debe tener almenos 3 caracteres',
             'ci_prof.required'     => 'No ingreso el C.I.',
             'ci_prof.numeric'      => 'La C.I solo puede tener numeros',

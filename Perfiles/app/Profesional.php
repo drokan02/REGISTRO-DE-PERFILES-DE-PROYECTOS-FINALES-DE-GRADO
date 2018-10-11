@@ -9,7 +9,7 @@ use App\Titulo;
 
 class Profesional extends Model
 {
-     protected $table = 'profesional';
+     protected $table = 'profesionales';
      protected $fillable = [
         'ci_prof',
         'nombre_prof', 
@@ -37,5 +37,4 @@ class Profesional extends Model
             return $query;
         }
     }
-}
 }
