@@ -6,22 +6,26 @@
 
 
 <Form method="GET" action="{{route('listarProfesionales')}}" >
-    @if($profesionales->isNotEmpty()) <!--BUSCADOR -->
-    <div class="centrar col-sm-10 ">
-            <div class="row">
-                <div class="col-sm-3"></div>
-                
-                <div class=" col-sm-4">       
-                                <input type="search" placeholder="&#xF002; Buscar" style="font-family:Time, FontAwesome" class="form-control" 
-                                name="buscar" autofocus value="{{$buscar}}" autocomplete="off" onfocus="var temp_value=this.value; this.value=''; this.value=temp_value">   
-                </div>          
-                <div class="col-4">
-                                <button class=" btn btn-success pull-left"> Buscar</button>
-                </div>
+     <!--BUSCADOR -->
+     @if($profesionales->isNotEmpty() or $buscar)
+     <div class="centrar col-sm-10 ">
+        <div class="row">
+            <div class="col-sm-3"></div>
+            
+            <div class=" col-sm-4">       
+                            <input type="search" placeholder="&#xF002; Buscar" style="font-family:Time, FontAwesome" class="form-control" 
+                            name="buscar" autofocus value="{{$buscar}}" autocomplete="off" onfocus="var temp_value=this.value; this.value=''; this.value=temp_value">   
+            </div>          
+            <div class="col-4">
+                            <button class=" btn btn-success pull-left"> Buscar</button>
             </div>
-             
+        </div>
+         
     </div>
+    @endif
+    
    <!--FIN BUSCADOR -->
+   @if($profesionales->isNotEmpty())
    @include('complementos.error')
    <div  class="centrar table-responsive col-sm-11 ">
       <table class="table table-hover text-center" id="listaProfesionales">

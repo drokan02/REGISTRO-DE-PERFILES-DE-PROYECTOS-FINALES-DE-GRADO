@@ -53,7 +53,7 @@ Route::get('/profesionales','ProfesionalController@index')->name('listarProfesio
 Route::get('/profesionales/registrar','ProfesionalController@registrar')->name('registroProfesional');
 Route::post('/profesionales/almacenar','ProfesionalController@almacenar')->name('almacenarProfesional');
 Route::any('/profesionales/editar/{id}','ProfesionalController@editar')->name('editarProfesional');
-Route::post('/profesionales/editar/modificar/{id}','ProfesionalController@modificar')->name('modificarProfesional');
+Route::post('/profesionales/editar/modificar/{profesional}','ProfesionalController@modificar')->name('modificarProfesional');
 Route::any('/profesionales/eliminar/{profesional}','ProfesionalController@eliminar')->name('eliminarProfesional');
 Route::any('/profesionales/ver/{profesional}','ProfesionalController@ver')->name('verProfesional');
 
@@ -87,9 +87,14 @@ Route::get('/carreras/{carrera}/editar','CarreraController@editar')->name('edita
 Route::put('/carreras/{carrera}','CarreraController@actualizar')->name('actualizarCarrera');//put metodo para actualizar
 Route::delete('/carreras/{carrera}/eliminar','CarreraController@eliminar')->name('eliminarCarrera');
 
-//docentes
-Route::get('/docentes','docenteController@index')->name('docentes');
 
+Route::get('/docentes','docenteController@index')->name('Docentes');
+Route::get('/docentes/registrar', 'docenteController@registrar')->name('registrarDocente');
+Route::any('/docentes/registrar/almacenar','docenteController@almacenar')->name('almacenarDocente');
+Route::any('/docentes/editar/{docente}','docenteController@editar')->name('editarDocente');
+Route::any('/docentes/editar/modificar/{docente}','docenteController@modificar')->name('modificarDocente');
+Route::any('/docentes/eliminar/{docente}','docenteController@eliminar')->name('eliminarDocente');
+Route::any('/docentes/ver/{docente}','docenteController@ver')->name('verDocente');
 
 
 
