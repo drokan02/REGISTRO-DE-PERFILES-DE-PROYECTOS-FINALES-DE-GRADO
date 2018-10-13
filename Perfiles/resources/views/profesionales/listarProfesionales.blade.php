@@ -2,9 +2,6 @@
 @section('titulo','LISTA DE PROFESIONALES')
 @section('contenido')
 
-
-
-
 <Form method="GET" action="{{route('listarProfesionales')}}" >
      <!--BUSCADOR -->
      @if($profesionales->isNotEmpty() or $buscar)
@@ -13,7 +10,7 @@
             <div class="col-sm-3"></div>
             
             <div class=" col-sm-4">       
-                            <input type="search" placeholder="&#xF002; Buscar" style="font-family:Time, FontAwesome" class="form-control" 
+                            <input id="buscarProf" type="search" placeholder="&#xF002; Buscar" style="font-family:Time, FontAwesome" class="form-control buscar" 
                             name="buscar" autofocus value="{{$buscar}}" autocomplete="off" onfocus="var temp_value=this.value; this.value=''; this.value=temp_value">   
             </div>          
             <div class="col-4">
@@ -25,9 +22,10 @@
     @endif
     
    <!--FIN BUSCADOR -->
-   @if($profesionales->isNotEmpty())
+  
    @include('complementos.error')
-   <div  class="centrar table-responsive col-sm-11 ">
+   <div  class="centrar table-responsive col-sm-11 listaDatos">
+      @if($profesionales->isNotEmpty())
       <table class="table table-hover text-center" id="listaProfesionales">
           <thead class ="columnas">
         <tr>
@@ -42,7 +40,7 @@
           <th style="width: 5%;">Opsiones</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="datos">
            
         @foreach ($profesionales as $profesional)
             <tr>  
@@ -73,7 +71,7 @@
                             </a>
                         </li>
                         <li >
-                            <a href='{{ route('eliminarProfesional',$profesional)}}' onclick="return confirm('¿Esta seguro de eliminar el Profesional?')" tabindex="-1"  class="payLink">
+                            <a   href='{{ route('eliminarProfesional',$profesional)}}'  tabindex="-1"  class="eliminar">
                                     <i class="fa fa-minus-square fa-2x" style="color: #3390FF"></i>
                                     <span class="hidden-xs">Eliminar</span>
                             </a>
@@ -88,6 +86,7 @@
     
      {!! $profesionales->render() !!}
      @else
+        <br>
         <li>No se encontro un Profesional con esa descripcion</li>
     @endif
     

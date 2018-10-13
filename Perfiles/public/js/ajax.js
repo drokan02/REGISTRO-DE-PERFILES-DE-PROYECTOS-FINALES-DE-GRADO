@@ -1,65 +1,76 @@
-//si el formulario tiene class=importarDatos
-/*$(document).on("submit",".importarDatos",function(e){
+//funciona tanto para registrar como eliminar 
+$('.registrar').click(function(e){
     e.preventDefault();
-    var form = $(this);
-    var nombreForm=$(this).attr("id");
-    var token = $("#token").val();
-    var dato = $("#archivo").val();
+    form = $(this).parents('form');
+    url  = form.attr('action');
+    datos = form.serialize();
+    $.post(url,datos,function(res){
+        alertify.alert(res.mensaje).set('basic', true); 
+          form.submit();
+    }).fail(function(ress,status,error){
+        var errores="";
+        var cont = 6;
+       // $('#mensajeError').show();//muestra los mensajes
+        $.each($.parseJSON(ress.responseText), function (ind, elem) {     
+                errores += "<li>"+elem+"</li>"
+                alertify.error(""+elem,cont++);
+        });
+       /* $('#errores').html(
+            errores    
+        );*/
+        
+    });
+})
 
+$('.eliminar').click(function(e){
+    e.preventDefault();
+    var fila = $(this).parents('tr');
+    var url  = $(this).attr('href');
+    alertify.confirm("Esta seguro de eliminar el Profesional",
+        function(){
+            $.get(url,[],function(res){
+                fila.fadeOut();
+                alertify.alert(res.mensaje).set('basic', true); 
+            }).fail(function(){
+                    alertify.set('notifier','position', 'top-center');
+                    alertify.error('UPS no se pudo eliminar');  
+            })
+        },
+        function(){ 
+    });
+})
+
+$('#btnMensaje').click(function(){
+    //oculta los mensajes
+    $("#mensajeError").hide();
+});
+
+
+$('.buscar').keyup(function(e){
+    e.preventDefault();
+    var divLista = $('.listaDatos');
+    form = $(this).parents('form');
+    url = form.attr('action');
+    $.get(url,form.serialize(),function(res){ 
+        divLista.empty();
+        divLista.html(res);
+    });
+});
+
+
+$(document).on('click','.pagination a',function(e){
+    e.preventDefault();
+    var divLista = $('.listaDatos');
+    var aux = $(this).attr('href').split('?page=');
+    var pag = aux[1];
+    var url = aux[0];
     $.ajax({
-        route: nombreForm,
-        headers : {"X-CSRF-TOKEN": token},
-        type: 'POST',
-        data: {archivo:dato},
-        function(result){
-            alert(result.mensaje);
-            //se cambia el valor de un input
-            $("#nombre").val(result.mensaje);
+        url: url,
+        data:{page: pag},
+        type: 'GET',
+        dataType: 'json',
+        success: function(res){
+            divLista.html(res);
         }
     })
-})*/
-
-/*$(document).ready(function(){
-    //ocultar un elemento con ajax
-   // $("#nombre").hide();
-    //el boton tiene como class=importarDatos
-    $(".importarDatos").click(function(e){
-        e.preventDefault();
-        var form = $(this).parents('form');
-        var ruta = form.attr('action');
-        $.post(ruta,form.serialize(),function(result){
-            alert(result.mensaje);
-            //se cambia el valor de un input
-            $("#nombre").val(result.mensaje);
-        });
-
-    });
-    //
-});*/
-
-//$(document).ready(function(){
-    //ocultar un elemento con ajax
-   // $("#nombre").hide();
-    //el boton tiene como class=importarDatos
-    $(".importarDatos").click(function(e){
-        e.preventDefault();
-        var form = $(this).parents('form');
-        var ruta = form.attr('action');
-        var nombreForm = form.attr('name');
-        alert(nombreForm)
-        var data = new FormData($("#"+nombreForm+"")[0]);
-        var token = $("#token").val();
-    
-        $.ajax({
-            url: ruta,
-            headers : {"X-CSRF-TOKEN": token},
-            type: 'POST',
-            data: data,
-            cache: false,
-            contentType: false,
-            processData: false,
-        })
-
-    });
-    //
-//});
+})

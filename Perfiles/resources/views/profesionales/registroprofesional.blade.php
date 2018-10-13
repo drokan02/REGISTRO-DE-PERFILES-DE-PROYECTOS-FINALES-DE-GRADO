@@ -4,7 +4,7 @@
 
    <div class="row justify-content-center mt-4">
         <div class="col-sm-8">
-            
+           @include('complementos.errorAjax')
            @include('complementos.error')
             <form method="POST" action="{{route('almacenarProfesional')}}">
                 {!! csrf_field() !!}
@@ -98,7 +98,7 @@
 					<div class="col-sm-2"></div>
 					<div class="col-8">
 							<button type="submit" class='btn btn-danger'>Cancelar</button>
-							<button type="submit" class='btn btn-success'>Registrar</button>
+							<button  type="submit" class='btn btn-success registrar'>Registrar</button>
 					</div>
 					
 						

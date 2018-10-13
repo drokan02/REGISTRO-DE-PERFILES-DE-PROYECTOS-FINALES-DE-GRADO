@@ -6,6 +6,9 @@
     <title>Administracion de Perfiles</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet"href={{asset('css/estilos.css')}}>
+    <link rel="stylesheet"href={{asset('css/sweetalert.css')}}>
+    <link rel="stylesheet"href={{asset('css/alertify.min.css')}}>
+    <link rel="stylesheet"href={{asset('css/default.min.css')}}>
     <link rel="stylesheet" href={{asset('css/bootstrap.min.css')}}>
     <link rel="stylesheet" href={{asset('css/font-awesome.min.css')}}>
     <link rel="stylesheet" href={{asset('css/AdminLTE.min.css')}}>
@@ -63,9 +66,11 @@
   
     <script src={{asset('js/jQuery-3.3.1.min.js')}}></script>
     <script src={{asset('js/bootstrap.min.js')}}></script>
+    <script src={{asset('js/sweetalert.min.js')}}></script>
+    <script src={{asset('js/alertify.min.js')}}></script>
     <script src={{asset('js/parsley.min.js')}}></script>
     <script src={{asset('js/app.min.js')}}></script>
     <script src={{asset('js/ajax.js')}}></script>
-    
+    <
   </body>
 </html>

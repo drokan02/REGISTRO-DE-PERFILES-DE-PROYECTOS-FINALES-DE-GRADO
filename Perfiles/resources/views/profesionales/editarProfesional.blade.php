@@ -5,8 +5,8 @@
     
    <div class="row justify-content-center mt-4">
         <div class="col-sm-8">
-            {{$profesional->id}}
-           @include('complementos.error')
+		   @include('complementos.error')
+		   @include('complementos.errorAjax')
             <form method="POST" action="{{route('modificarProfesional',['id'=>$profesional->id])}}">
                 {!! csrf_field() !!}
 
@@ -114,7 +114,7 @@
 					<div class="col-sm-2"></div>
 					<div class="col-8">
 							<a href="{{ route('listarProfesionales') }}" class="btn btn-danger">Cancel</a>
-							<button type="submit" class='btn btn-success'>Registrar</button>
+							<button  type="submit" class='btn btn-success registrar'>Modificar</button>
 					</div>
 					
 						
