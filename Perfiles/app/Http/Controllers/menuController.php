@@ -6,7 +6,11 @@ use Illuminate\Http\Request;
 
 class menuController extends Controller
 {
-   public function index(){
+    function __construct(){
+        $this->middleware('auth');
+    }
+
+    public function index(){
    		return view('layouts.menu');
    }
 

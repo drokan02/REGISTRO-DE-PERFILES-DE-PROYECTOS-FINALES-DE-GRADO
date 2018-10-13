@@ -123,7 +123,7 @@
         </a>
         <ul class="treeview-menu">
           <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar</a></li>
-          <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar</a></li>
+          <li><a href="{{route('estudiantes')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Lista Estudiantes</a></li>
         </ul>
       </li>
     </ul>

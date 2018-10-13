@@ -15,4 +15,7 @@ class Carrera extends Model
             $query->where(DB::raw("CONCAT(codigo_carrera,' ',nombre_carrera)"),'like',"%$name%");
         }
     }
+    public function estudiantes(){
+        return $this->hasMany(Estudiante::class);
+    }
 }
