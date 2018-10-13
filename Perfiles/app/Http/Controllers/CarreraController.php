@@ -8,6 +8,9 @@ use Illuminate\Validation\Rule;
 
 class CarreraController extends Controller
 {
+    function __construct(){
+        $this->middleware('auth');
+    }
     /**Display a listing of the resource.
      * @param Request $request
      * @return \Illuminate\Http\Response

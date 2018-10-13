@@ -7,6 +7,9 @@ use App\Role;
 
 class RoleController extends Controller
 {
+    function __construct(){
+        $this->middleware('auth');
+    }
     public function index(Request $request){
         $roles=Role::name($request->get('name'))->get();
         return view('roles/listaRoles',compact('roles'));

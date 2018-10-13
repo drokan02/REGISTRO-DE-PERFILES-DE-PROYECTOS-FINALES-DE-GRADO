@@ -39,4 +39,12 @@ class User extends Authenticatable
             $query->where('name','like',"%$name%");
         }
     }
+    public function hasRoles(array $roles){
+        return $this->roles()->pluck('nombre_rol')->intersect($roles)->count();
+    }
+    public function estudiante(){
+        $estudiante=App\Estudiante::query()->where('email',auth()->user()->email)->get();
+        return $estudiante;
+
+    }
 }

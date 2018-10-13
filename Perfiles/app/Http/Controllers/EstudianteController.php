@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 class EstudianteController extends Controller
 {
+    function __construct(){
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +17,8 @@ class EstudianteController extends Controller
      */
     public function index()
     {
-        //
+        $estudiantes=Estudiante::all();
+        return view('estudiantes/listaEstudiantes',compact('estudiantes'));
     }
 
     /**
@@ -44,9 +48,9 @@ class EstudianteController extends Controller
      * @param  \App\Estudiante  $estudiante
      * @return \Illuminate\Http\Response
      */
-    public function show(Estudiante $estudiante)
+    public function detalle(Estudiante $estudiante)
     {
-        //
+        return view('estudiantes/detalleEstudiante',compact('estudiante'));
     }
 
     /**

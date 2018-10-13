@@ -15,18 +15,8 @@
     {!! csrf_field() !!}<!--siempre añadir el token--->
         <div class="form-group row">
             <div class="col">
-                <label for="nombre">Nombres</label>
+                <label for="nombre">Nombre Completo</label>
                 <input type="text" class="form-control" name="nombre" id="nombre" value="{{old('nombre')}}">
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col">
-                <label for="apellido_paterno">Apellido Paterno</label>
-                <input type="text" class="form-control" name="apellido_paterno" id="apellido_paterno" value="{{old('apellido_paterno')}}">
-            </div>
-            <div class="col">
-                <label for="apellido_materno">Apellido Materno</label>
-                <input type="text" class="form-control" name="apellido_materno" id="apellido_materno" value="{{old('apellido_materno')}}">
             </div>
         </div>
 

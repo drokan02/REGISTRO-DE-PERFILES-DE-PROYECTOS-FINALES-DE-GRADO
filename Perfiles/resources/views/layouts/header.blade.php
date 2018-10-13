@@ -1,3 +1,4 @@
+
 <header class="main-header">
   <!-- Logo -->
   <a href="#" class="logo">
@@ -21,7 +22,7 @@
         <!-- CUENTA DEL USUARIO -->
         <li class="dropdown">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                  <span class="hidden-xs">USUARIO</span>
+                  <span class="hidden-xs">{{auth()->user()->name}}</span>
               </a>
               <div class="dropdown-menu profile-dropdown-menu" aria-labelledby="dropdownMenu1">
                       <a class="dropdown-item" href="#">
@@ -29,7 +30,7 @@
                       <a class="dropdown-item" href="#">
                           <i class="fa fa-gear icon"></i> Editar cuenta </a>
                       <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#">
+                          <a class="dropdown-item" href="{{route('logout')}}">
                               <i class="fa fa-power-off icon"></i> Cerrar sesion </a>
               </div>
         </li>

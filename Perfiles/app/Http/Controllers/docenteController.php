@@ -14,9 +14,9 @@ use DB;
 
 class docenteController extends Controller
 {
-    public function __contruct(){
-	
-	}
+    function __construct(){
+        $this->middleware('auth');
+    }
     public function index(Request $request){
        $buscar = $request->get('buscar');
        $profesionales = Profesional::all();
@@ -31,7 +31,7 @@ class docenteController extends Controller
         $subareas = Area::subareas()->get();
         $titulos = Titulo::all();
 
-        return view('docentes.registrarDocentes',compact('docente','subareas','areas','titulos'));
+        return view('docentes.registrarDocente',compact('docente','subareas','areas','titulos'));
     }
   
 
