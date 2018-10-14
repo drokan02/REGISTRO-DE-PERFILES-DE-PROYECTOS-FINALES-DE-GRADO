@@ -43,8 +43,6 @@ class User extends Authenticatable
         return $this->roles()->pluck('nombre_rol')->intersect($roles)->count();
     }
     public function estudiante(){
-        $estudiante=App\Estudiante::query()->where('email',auth()->user()->email)->get();
-        return $estudiante;
-
+        return $this->belongsToMany(Estudiante::class);
     }
 }

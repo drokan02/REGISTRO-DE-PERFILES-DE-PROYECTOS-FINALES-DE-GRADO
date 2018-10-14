@@ -52,7 +52,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'nombre' => 'required|max:255',
+            'nombres' => 'required|max:255',
             'user_name' => ['required','unique:users,user_name','unique:estudiantes,user_name','alpha_num'],
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
@@ -72,7 +72,7 @@ class RegisterController extends Controller
         DB::transaction(function () use($data) {
             $user =new User();
             $user->create([
-                'name' => $data['nombre'],
+                'name' => $data['nombres'],
                 'user_name' => $data['user_name'],
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
@@ -82,7 +82,7 @@ class RegisterController extends Controller
             $data['carrera']=$idcarrera;
             $estudiante=new Estudiante();
             $estudiante->create([
-                'nombres' => $data['nombre'],
+                'nombres' => $data['nombres'],
                 'user_name' => $data['user_name'],
                 'email' => $data['email'],
                 'password' => $data['password'],
@@ -91,7 +91,9 @@ class RegisterController extends Controller
             ]);
             $role_id=Role::query()->where('nombre_rol','estudiante')->value('id');
             $iduser=User::query()->where('email',$data['email'])->value('id');
+            $idEstudiante=Estudiante::query()->where('email',$data['email'])->value('id');
             $user->roles()->attach($role_id,['user_id'=>$iduser]);
+            $user->estudiante()->attach($idEstudiante,['user_id'=>$iduser]);
             return $user;
         });
     }

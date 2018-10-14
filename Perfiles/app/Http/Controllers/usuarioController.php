@@ -35,6 +35,11 @@ class usuarioController extends Controller
      */
     public function crear(){
         $roles=Role::all()->pluck('nombre_rol','id');
+        foreach($roles as $id=>$nombre_rol){
+            if($nombre_rol=='estudiante' || $nombre_rol=='docente'){
+                $roles=array_except($roles,$id);
+            }
+        }
         return view('usuarios/crearUsuarios',compact('roles'));
     }
     /**
@@ -123,15 +128,11 @@ class usuarioController extends Controller
         }
         return redirect()->route('usuarios');
     }
+
     public function cambiarContraseña(User $user){
         return view('usuarios/cambiarPassword',compact('user'));
     }
 
-    /**
-     * @param Request $request
-     * @param User $user
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
     public function guardarContraseña(Request $request, User $user){
         $this->validate(request(), [
             'password' => ['required','confirmed','min:6'],
@@ -141,5 +142,4 @@ class usuarioController extends Controller
         $user->save();
         return view('usuarios/detalleUsuario',compact('user'));
     }
-
 }

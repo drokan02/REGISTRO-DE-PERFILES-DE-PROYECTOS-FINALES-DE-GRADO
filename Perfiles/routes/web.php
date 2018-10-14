@@ -100,7 +100,11 @@ Route::any('/docentes/ver/{docente}','docenteController@ver')->name('verDocente'
 //estudiantes
 Route::get('/estudiantes','EstudianteController@index')->name('estudiantes');
 Route::get('/estudiantes/{estudiante}','EstudianteController@detalle')->name('detalleEstudiante');
-
+Route::get('/estudiantes/{estudiante}/editar','EstudianteController@editar')->name('editarEstudiante');
+Route::put('/estudiantes/{estudiante}','EstudianteController@actualizar')->name('actualizarEstudiante');
+Route::get('/cambiar_contraseña_estudiante/{estudiante}','EstudianteController@cambiarContraseña')->name('cambiarContraseñaEstudiante');
+Route::post('/guardar_contraseña_estudiante/{estudiante}','EstudianteController@guardarContraseña')->name('guardarContraseñaEstudiante');
+Route::delete('/estudiantes/{estudiante}/eliminar','EstudianteController@eliminar')->name('eliminarEstudiante');
 
 //login
 Route::get('login','Auth\LoginController@showLoginForm')->name('login');

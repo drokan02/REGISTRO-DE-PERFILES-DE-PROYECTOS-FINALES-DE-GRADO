@@ -20,11 +20,11 @@
                         <td>{{$estudiante->nombres}}</td>
                         <td>{{$estudiante->carrera()->pluck('nombre_carrera')->implode(' - ')}}</td>
                         <td>
-                            <form method="POST" action="#">
+                            <form method="POST" action="{{route('eliminarEstudiante',$estudiante)}}">
                                 {{method_field('DELETE')}}
                                 {!! csrf_field() !!}
                                 <a href="{{route('detalleEstudiante',$estudiante)}}" class="btn btn-link" data-toggle="tooltip" data-placement="right" title="Datos estudiante"><i class="fa fa-eye fa-2x"></i></a>
-                                <a href="#" class="btn btn-link" data-toggle="tooltip" data-placement="right" title="Editar"><i class="fa fa-edit fa-2x"></i></a>
+                                <a href="{{route('editarEstudiante',$estudiante)}}" class="btn btn-link" data-toggle="tooltip" data-placement="right" title="Editar"><i class="fa fa-edit fa-2x"></i></a>
                                 <button class="btn btn-link" type="submit"><i class="fa fa-trash fa-2x"></i></button>
                             </form>
                         </td>
