@@ -1,6 +1,4 @@
-@extends('layouts.menu')
-@section('titulo','Error 404')
-@section('contenido')
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-6">
@@ -14,4 +12,3 @@
             </div>
         </div>
     </div>
-@endsection

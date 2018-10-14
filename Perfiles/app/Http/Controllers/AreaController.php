@@ -9,9 +9,9 @@ use App\Area;
 use DB;
 class AreaController extends Controller
 {
-	public function __contruct(){
-	
-	}
+    function __construct(){
+        $this->middleware('auth');
+    }
 	
 
 	public function index(Request $request){

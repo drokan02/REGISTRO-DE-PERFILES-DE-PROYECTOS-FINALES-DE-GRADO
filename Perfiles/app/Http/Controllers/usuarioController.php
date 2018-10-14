@@ -10,6 +10,9 @@ use Illuminate\Validation\Rule;
 
 class usuarioController extends Controller
 {
+    function __construct(){
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      * @param Request $request

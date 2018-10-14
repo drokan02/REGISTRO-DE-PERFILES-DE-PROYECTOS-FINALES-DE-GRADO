@@ -14,9 +14,9 @@ use DB;
 
 class docenteController extends Controller
 {
-    public function __contruct(){
-	
-	}
+    function __construct(){
+        $this->middleware('auth');
+    }
     public function index(Request $request){
        $buscar = $request->get('buscar');
        $docentes = new Docente;

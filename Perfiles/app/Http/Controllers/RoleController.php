@@ -7,6 +7,9 @@ use App\Role;
 
 class RoleController extends Controller
 {
+    function __construct(){
+        $this->middleware('auth');
+    }
     public function index(Request $request){
         $buscar = $request->get('buscar');
         $roles=Role::name($buscar)

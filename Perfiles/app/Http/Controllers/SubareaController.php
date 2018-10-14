@@ -7,6 +7,10 @@ use App\Http\Requests\AreaFormRequest;
 use App\Area;
 class SubareaController extends Controller
 {
+    function __construct(){
+        $this->middleware('auth');
+    }
+
     public function index(Request $request,Area $area){
 		$buscar = $request->get('buscar');
 		$fila = 1;

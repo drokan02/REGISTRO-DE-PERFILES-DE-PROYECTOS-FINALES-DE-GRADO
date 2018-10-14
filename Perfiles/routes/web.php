@@ -87,7 +87,7 @@ Route::get('/carreras/{carrera}/editar','CarreraController@editar')->name('edita
 Route::put('/carreras/{carrera}','CarreraController@actualizar')->name('actualizarCarrera');//put metodo para actualizar
 Route::delete('/carreras/{carrera}/eliminar','CarreraController@eliminar')->name('eliminarCarrera');
 
-
+//docentes
 Route::get('/docentes','docenteController@index')->name('Docentes');
 Route::get('/docentes/registrar', 'docenteController@registrar')->name('registrarDocente');
 Route::any('/docentes/registrar/almacenar','docenteController@almacenar')->name('almacenarDocente');
@@ -96,3 +96,17 @@ Route::any('/docentes/editar/modificar/{docente}','docenteController@modificar')
 Route::any('/docentes/eliminar/{docente}','docenteController@eliminar')->name('eliminarDocente');
 Route::any('/docentes/ver/{docente}','docenteController@ver')->name('verDocente');
 
+
+//estudiantes
+Route::get('/estudiantes','EstudianteController@index')->name('estudiantes');
+Route::get('/estudiantes/{estudiante}','EstudianteController@detalle')->name('detalleEstudiante');
+
+
+//login
+Route::get('login','Auth\LoginController@showLoginForm')->name('login');
+Route::post('login','Auth\LoginController@login')->name('loginPost');
+Route::get('logout','Auth\LoginController@logout')->name('logout');
+
+//registro
+Route::get('register','Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('register','Auth\RegisterController@register')->name('registerPost');
