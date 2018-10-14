@@ -49,13 +49,13 @@
                                     <i class="fa fa-ellipsis-v fa-2x" aria-hidden="true"></i>
                             </a>
                             <div class="dropdown-menu profile-dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <a href="{{route('detalleUsuario',['id'=>$us->id])}}" class="dropdown-item" href="#">
+                                    <a href="{{route('detalleUsuario',['id'=>$us->id])}}" class="dropdown-item">
                                             <h5><i class="col-sm-3 fa fa-eye iconMenu" >&nbsp;&nbsp;&nbsp;Datos Usuario </i></h5>
                                     </a>
-                                    <a href="{{route('editarUsuario',$us)}}" class="dropdown-item" href="#">
+                                    <a href="{{route('editarUsuario',$us)}}" class="dropdown-item">
                                             <h5><i class="col-sm-3 fa fa-pencil-square-o iconMenu">&nbsp;&nbsp;&nbsp;Editar</i></h5>
                                     </a>
-                                    <a href='{{route('eliminarUsuario',$us)}}' class="dropdown-item eliminar" href="#">
+                                    <a href='{{route('eliminarUsuario',$us)}}' class="dropdown-item eliminar">
                                             <h5> <i class="col-sm-3 fa fa-minus-square iconMenu" >&nbsp;&nbsp;&nbsp;Eliminar</i></h5>
                                     </a>                                                     
                             </div>

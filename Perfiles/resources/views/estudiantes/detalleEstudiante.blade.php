@@ -2,6 +2,17 @@
 @section('titulo','Informacion del Estudiante')
 @section('contenido')
 
+
+    <ul class="nav justify-content-end ">
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('editarEstudiante',$estudiante)}}">Modifica tus datos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('cambiarContraseñaEstudiante',$estudiante)}}">Cambiar Contraseña</a>
+        </li>
+    </ul>
+
+
     <table class="table">
         <thead>
         <tr>

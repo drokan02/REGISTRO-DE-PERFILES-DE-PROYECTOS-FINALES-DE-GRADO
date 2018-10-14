@@ -22,16 +22,27 @@
         <!-- CUENTA DEL USUARIO -->
         <li class="dropdown">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                  <span class="hidden-xs">{{auth()->user()->name}}</span>
+                  <span class="hidden-xs">{{auth()->user()->user_name}}</span>
               </a>
               <div class="dropdown-menu profile-dropdown-menu" aria-labelledby="dropdownMenu1">
-                      <a class="dropdown-item" href="#">
+                  @if(auth()->user()->hasRoles(['estudiante']))
+                      <a class="dropdown-item" href="{{route('detalleEstudiante',auth()->user()->estudiante()->first())}}">
                           <i class="fa fa-user icon"></i> Perfil </a>
-                      <a class="dropdown-item" href="#">
+                      <a class="dropdown-item" href="{{route('editarEstudiante',auth()->user()->estudiante()->first())}}">
                           <i class="fa fa-gear icon"></i> Editar cuenta </a>
                       <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="{{route('logout')}}">
-                              <i class="fa fa-power-off icon"></i> Cerrar sesion </a>
+                      <a class="dropdown-item" href="{{route('logout')}}">
+                          <i class="fa fa-power-off icon"></i> Cerrar sesion </a>
+                  @else
+                      <a class="dropdown-item" href="{{route('detalleUsuario',auth()->user())}}">
+                          <i class="fa fa-user icon"></i> Perfil </a>
+                      <a class="dropdown-item" href="{{route('editarUsuario',auth()->user())}}">
+                          <i class="fa fa-gear icon"></i> Editar cuenta </a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{{route('logout')}}">
+                          <i class="fa fa-power-off icon"></i> Cerrar sesion </a>
+                  @endif
+
               </div>
         </li>
       </ul>

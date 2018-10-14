@@ -21,4 +21,7 @@ class Estudiante extends Model
     public function carrera(){
         return $this->belongsTo(Carrera::class);
     }
+    public function usuario(){
+        return $this->belongsToMany(User::class);
+    }
 }
