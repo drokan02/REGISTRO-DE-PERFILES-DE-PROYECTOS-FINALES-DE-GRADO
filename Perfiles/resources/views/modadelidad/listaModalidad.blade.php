@@ -8,10 +8,8 @@
    
    <!--FIN BUSCADOR 
    @include('complementos.error')-->
- 
-   @if($modalidades->isNotEmpty())
-  <div class="container col-sm-8">
-      <div class="table-responsive">
+  <div class="container col-sm-8 listaDatos">
+        @if($modalidades->isNotEmpty())
           <table class="tabla" id="listaModall">
               <thead class ="columnas">
             <tr>
@@ -31,25 +29,25 @@
                     <td>{{$modalidad->codigo_mod}}</td>
                     <td>{{$modalidad->nombre_mod}}</td>
                     <td style="width: 43%;" >{{$modalidad->descripsion_mod}}</td>
+
                     <td>
-                        <form method="POST" action="{{route('eliminarModalidad',$modalidad)}}">
-                            {{method_field('DELETE')}}
-                                {!! csrf_field() !!}
-                            <div class="text-center">
-                                <a href='{{ route('ver',$modalidad->id)}}' class="btn btn-link" data-toggle="tooltip" data-placement="right" title="Ver">
-                                            <i class="fa fa-eye fa-2x" ></i>
-                                 </a>
-                                <a href='{{ route('editarModalidad',$modalidad)}}' class="btn btn-link" data-toggle="tooltip" data-placement="right" title="Editar">
-                                    <i class="fa fa-pencil-square-o fa-2x" ></i>
-                                 </a>
-                                <button type="submit" class="btn btn-link" onclick="return confirm('¿Esta seguro de eliminar esta Modalidad?')"
-                                data-toggle="tooltip" data-placement="right" title="eliminar" >
-                                      <i class=" fa fa-minus-square fa-2x" ></i>
-                                </button>
-      
-                            </div>
-                        </form>
-                    </td>
+                        <div class=" dropleft text-center">
+                                <a href="#" data-toggle="dropdown"  data-placement="right" title="opsiones">
+                                        <i class="fa fa-ellipsis-v fa-2x" aria-hidden="true"></i>
+                                </a>
+                                <div class="dropdown-menu profile-dropdown-menu" aria-labelledby="dropdownMenu1">
+                                        <a href='{{ route('ver',$modalidad->id)}}' class="dropdown-item" >
+                                                <h5><i class="col-sm-3 fa fa-eye iconMenu" >&nbsp;&nbsp;&nbsp;Ver </i></h5>
+                                        </a>
+                                        <a href='{{ route('editarModalidad',$modalidad)}}' class="dropdown-item" >
+                                                <h5><i class="col-sm-3 fa fa-pencil-square-o iconMenu">&nbsp;&nbsp;&nbsp;Editar</i></h5>
+                                        </a>
+                                        <a href="{{route('eliminarModalidad',$modalidad)}}" class="dropdown-item eliminar" >
+                                                <h5> <i class="col-sm-3 fa fa-minus-square iconMenu" >&nbsp;&nbsp;&nbsp;Eliminar</i></h5>
+                                        </a>                                                      
+                                </div>
+                        </div> 
+                        </td>
                 </tr>   
             @endforeach
           </tbody>
@@ -57,8 +55,7 @@
         @else
             <li>No hay Modalidades</li>
         @endif
-      </div>
-  </ class="container col-sm-8">
+  </div>
 
 </Form>
 

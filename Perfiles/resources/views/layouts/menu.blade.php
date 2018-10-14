@@ -6,6 +6,9 @@
     <title>Administracion de Perfiles</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet"href={{asset('css/estilos.css')}}>
+    <link rel="stylesheet"href={{asset('css/sweetalert.css')}}>
+    <link rel="stylesheet"href={{asset('css/alertify.min.css')}}>
+    <link rel="stylesheet"href={{asset('css/default.min.css')}}>
     <link rel="stylesheet" href={{asset('css/bootstrap.min.css')}}>
     <link rel="stylesheet" href={{asset('css/font-awesome.min.css')}}>
     <link rel="stylesheet" href={{asset('css/AdminLTE.min.css')}}>
@@ -28,19 +31,23 @@
         <section class="content">
           <div class="row">
             <div class="col-md-12">
+              
               <div class="box">
-                <div class="box-header with-border">
-                  <h3 class="box-title"> @yield('titulo')</h3>
-                      <!--  Revisar --->
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
+                <div class="contenido">
+                  <div class="box-header with-border text-center ">
+                    <h4> <b>@yield('titulo')</b></h4>
+                        <!--  Revisar --->
+                  </div>
+                  <!-- /.box-header -->
                   
-                  <div class="row">
-                    <div class="col-md-12">
-                        <!--Contenido-->
-                        @yield("contenido")
-                        <!--Fin Contenido-->
+                  <div class="box-body ">
+                    
+                    <div class="row">
+                      <div class="col-md-12">
+                          <!--Contenido-->
+                          @yield("contenido")
+                          <!--Fin Contenido-->
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -63,9 +70,10 @@
   
     <script src={{asset('js/jQuery-3.3.1.min.js')}}></script>
     <script src={{asset('js/bootstrap.min.js')}}></script>
+    <script src={{asset('js/sweetalert.min.js')}}></script>
+    <script src={{asset('js/alertify.min.js')}}></script>
     <script src={{asset('js/parsley.min.js')}}></script>
     <script src={{asset('js/app.min.js')}}></script>
     <script src={{asset('js/ajax.js')}}></script>
-    
   </body>
 </html>

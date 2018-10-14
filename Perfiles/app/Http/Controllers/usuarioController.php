@@ -19,8 +19,15 @@ class usuarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request){
-        $users=User::name($request->get('name'))->get();
-        return view('usuarios/listadoUsuarios',compact('users'));
+        $buscar = $request->get('buscar');
+        $users=User::name("$buscar")
+                    ->paginate(15);
+        if($request->ajax()){
+            return response()->json(
+                view('parcial.usuarios',compact('users','buscar'))->render()
+            );
+        }
+        return view('usuarios/listadoUsuarios',compact('users','buscar'));
     }
     /**
      * Show the form for creating a new resource.
@@ -44,6 +51,11 @@ class usuarioController extends Controller
             'password' => ['required','min:6'],
             'roles'=>'required'
         ]);
+        if($request->ajax()){
+            return response()->json([
+                'mensaje'=>'Usuario registrado correctamente'
+            ]);
+        }
         $request['password']=bcrypt($request['password']);
         DB::transaction(function () use($request) {
             $user=new User();
@@ -83,6 +95,11 @@ class usuarioController extends Controller
             'email'=>['required','email',Rule::unique('users')->ignore($user->id)],
             'roles'=> ['required']
         ]);
+        if($request->ajax()){
+            return response()->json([
+                'mensaje'=>'Usuario modificado correctamente'
+            ]);
+        }
         DB::transaction(function () use($request,$user) {
             $user->update($request->all());
             $iduser=User::query()->where('email',$request['email'])->value('id');
@@ -95,9 +112,15 @@ class usuarioController extends Controller
      * @param User $user
      * @return \Illuminate\Http\Response
      */
-    public function eliminar(User $user){
+    public function eliminar(Request $request,User $user){
         $user->roles()->detach(); //eliminar datos en tabla intermedia
         $user->delete();
+        if($request->ajax()){
+            return response()->json([
+                'eliminado'=>true,
+                'mensaje'=>'El Usuario se elimino correctamente'
+            ]);
+        }
         return redirect()->route('usuarios');
     }
     public function cambiarContraseña(User $user){

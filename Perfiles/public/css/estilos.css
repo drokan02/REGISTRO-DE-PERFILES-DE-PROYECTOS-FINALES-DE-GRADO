@@ -3,6 +3,9 @@ titulo{
     background: #005cbf;
 }
 
+label {
+    font-weight:bold;
+}
 .container{
     margin: auto;
     
@@ -37,11 +40,17 @@ thead{
     border-bottom: #0000FF;
 }
 
+tbody{
+    background-color: white;
+}
 td , th {
     border: solid 1px #6495ED;
     padding: 5px;
 }
 
+.iconMenu{
+    color: #6495ED;
+}
 .truncate {
     display: table;
     table-layout: fixed;
@@ -69,3 +78,14 @@ tr:hover td{
 
     text-align: right;
 }
+
+.contenido{
+    background-image: url("../img/contenido-bg.png");
+    background-color: rgb(200,200,200);
+    background-blend-mode: soft-light;
+    background-size: cover;
+    height: 760px;
+}
+
+
+

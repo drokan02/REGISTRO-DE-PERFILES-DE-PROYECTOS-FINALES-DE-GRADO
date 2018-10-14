@@ -23,22 +23,29 @@ class ProfesionalController extends Controller
        $buscar = $request->get('buscar');
        $profesionales = Profesional::buscarprofesional($buscar)
                                  ->orderBy('id','ASC')
-                                 ->paginate(10);
-       
+                                 ->paginate(15);
+        if($request->ajax()){
+            return response()->json(
+                view('parcial.profesionales',['profesionales'=>$profesionales,'buscar'=>$buscar,'fila'=>1])->render()
+            );
+        }
         return view('profesionales.listarProfesionales',['profesionales'=>$profesionales,'buscar'=>$buscar,'fila'=>1]);
     }
 
     public function registrar(){
-        
         $areas = Area::areas()->get();
         $subareas = Area::subareas()->get();
         $titulos = Titulo::all();
-
         return view('profesionales.registroprofesional',['areas'=>$areas, 'subareas'=>$subareas, 'titulos'=>$titulos ]);
     }
 
     
     public function almacenar(ProfesionalRequest $request){
+        if($request->ajax()){
+            return response()->json([
+                'mensaje'=>'Profesional registrado correctamente'
+            ]);
+        }
         $areas = [$request->area_id,$request->subarea_id];
         $profesional = new Profesional;
         $profesional->create($request->all());
@@ -57,6 +64,11 @@ class ProfesionalController extends Controller
     }
 
     public function modificar(ProfesionalRequest $request,Profesional $profesional){
+        if($request->ajax()){
+            return response()->json([
+                'mensaje'=>'Profesional modificado correctamente'
+            ]);
+        }
         DB::transaction(function () use($request,$profesional) {
             $areas = [$request->area_id,$request->subarea_id];
             $profesional->update($request->all());
@@ -67,9 +79,15 @@ class ProfesionalController extends Controller
         
     }
 
-    public function eliminar(Profesional $profesional){
+    public function eliminar(Request $request,Profesional $profesional){
         $profesional->areas()->detach(); //eliminar datos en tabla intermedia
         $profesional->delete();
+        if($request->ajax()){
+            return response()->json([
+                'eliminado'=>true,
+                'mensaje'=>'Profesional se elimino correctamente'
+            ]);
+        }
         return redirect()->route('listarProfesionales');
     }
 
@@ -77,4 +95,5 @@ class ProfesionalController extends Controller
 
     }
     
+    public function tabularDatos($datos){}
 }
