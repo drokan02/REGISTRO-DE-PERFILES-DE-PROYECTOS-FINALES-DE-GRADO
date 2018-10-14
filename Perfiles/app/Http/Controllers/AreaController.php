@@ -16,10 +16,16 @@ class AreaController extends Controller
 
 	public function index(Request $request){
 		$buscar = $request->get('buscar');
+		$fila = 1;
 		$areas = Area::buscarAreas($buscar)
 				->orderBy('id','ASC')
 				->paginate(5);
-		return view('area.listar',['areas'=> $areas,'buscar'=>$buscar , 'fila'=>1]);	
+		if($request->ajax()){
+			return response()->json(
+				view('parcial.areas',compact('areas','buscar','fila'))->render()
+			);
+		}
+		return view('area.listar',compact('areas','buscar','fila'));	
 		
 	}
 
@@ -29,6 +35,11 @@ class AreaController extends Controller
 
 	
 	public function almacenar(AreaFormRequest $request){
+		if($request->ajax()){
+            return response()->json([
+                'mensaje'=>'Area registrado correctamente'
+            ]);
+        }
 		$area = new Area;
 		$area->create($request->all());
 		return redirect()->route('Areas');
@@ -42,16 +53,35 @@ class AreaController extends Controller
 	}
 
 	public function modificar(AreaFormRequest $request,$id){
+		if($request->ajax()){
+            return response()->json([
+                'mensaje'=>'Area modificado correctamente'
+            ]);
+        }
 		Area::findOrFail($id)->update($request->all());
         return redirect()->route('Areas');
 	}
 
-	public function eliminar($id){
+	public function eliminar(Request $request,$id){
 		$subareas = Area::subareasarea($id)->get();
 		if($subareas->toArray()){
-			return back()->withErrors('No se puede eliminar la Area por que existen SubAreas asociadas a este');
+			if($request->ajax())
+			{
+				 return response()->json([
+					 'eliminado'=>false,
+					 'mensaje'=>'No se puede eliminar la Area por que existen SubAreas asociadas a este'
+				 ]);
+			 }
+			 return back()->withErrors('No se puede eliminar la Area por que existen SubAreas asociadas a este');
 		} else { 
-			Area::findOrFail($id)->delete();
+			//Area::findOrFail($id)->delete();
+			if($request->ajax())
+			{
+				 return response()->json([
+					 'eliminado'=>true,
+					 'mensaje'=>'Area se elimino correctamente'
+				 ]);
+			 }
 			return redirect()->route('Areas');
 		}
 	}

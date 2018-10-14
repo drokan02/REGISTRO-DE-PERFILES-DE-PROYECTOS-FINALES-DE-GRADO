@@ -19,11 +19,23 @@ class docenteController extends Controller
 	}
     public function index(Request $request){
        $buscar = $request->get('buscar');
-       $profesionales = Profesional::all();
-       $docentes = Docente::buscarprofesional($buscar)->with('profesional')
-                          ->orderBy('id','ASC')
-                          ->paginate(10);	
-	   	return view('docentes.listadoDocentes',['docentes'=> $docentes,'buscar'=>$buscar , 'fila'=>1]);     
+       $docentes = new Docente;
+       $fila = 1;
+       if($buscar){
+            $docentes=Docente::with('profesional')
+                                ->whereHas('profesional', function ($query) use ( $buscar){
+                                        $query->where(DB::raw("CONCAT(nombre_prof,' ',ap_pa_prof,' ',ap_ma_prof)"), "LIKE", "%$buscar%");
+                                })->orderBy('id','ASC')->paginate(10);	
+       } else{
+        $docentes=Docente::with('profesional')->has('profesional')->orderBy('id','ASC')->paginate(10);
+       }
+       
+        if($request->ajax()){
+        return response()->json(
+            view('parcial.docentes',compact('docentes','buscar','fila'))->render()
+        );
+        }
+	   	return view('docentes.listadoDocentes',compact('docentes','buscar','fila'));     
     }
 
     public function registrar(){
@@ -31,11 +43,16 @@ class docenteController extends Controller
         $subareas = Area::subareas()->get();
         $titulos = Titulo::all();
 
-        return view('docentes.registrarDocentes',compact('docente','subareas','areas','titulos'));
+        return view('docentes.registrarDocente',compact('docente','subareas','areas','titulos'));
     }
   
 
     public function almacenar(DocenteFormRequest $request){
+        if($request->ajax()){
+            return response()->json([
+                'mensaje'=>'Docente registrado correctamente'
+            ]);
+        }
         $areas = [$request->area_id,$request->subarea_id];
         $profesional = new Profesional;
         $docente = new Docente;
@@ -63,6 +80,11 @@ class docenteController extends Controller
     }
    
     public function modificar(DocenteFormRequest $request,Docente $docente){
+        if($request->ajax()){
+            return response()->json([
+                'mensaje'=>'Docente modificado correctamente'
+            ]);
+        }
         $datosDocente  = $docente->toArray();
         $prof_id = $datosDocente['profesional_id'];
         $areas = [$request->area_id,$request->subarea_id];
@@ -81,6 +103,12 @@ class docenteController extends Controller
         $profesional = Profesional::findOrFail($prof_id);
 		$profesional->areas()->detach(); //eliminar datos en tabla intermedia
         $profesional->delete();
+        {
+            return response()->json([
+                'eliminado'=>true,
+                'mensaje'=>'El Docente se elimino correctamente'
+            ]);
+        }
         return redirect()->route('Docentes');
     }
 

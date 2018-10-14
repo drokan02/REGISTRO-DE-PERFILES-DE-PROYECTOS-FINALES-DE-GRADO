@@ -20,7 +20,7 @@ class ProfesionalController extends Controller
        $buscar = $request->get('buscar');
        $profesionales = Profesional::buscarprofesional($buscar)
                                  ->orderBy('id','ASC')
-                                 ->paginate(1);
+                                 ->paginate(15);
         if($request->ajax()){
             return response()->json(
                 view('parcial.profesionales',['profesionales'=>$profesionales,'buscar'=>$buscar,'fila'=>1])->render()
@@ -81,6 +81,7 @@ class ProfesionalController extends Controller
         $profesional->delete();
         if($request->ajax()){
             return response()->json([
+                'eliminado'=>true,
                 'mensaje'=>'Profesional se elimino correctamente'
             ]);
         }

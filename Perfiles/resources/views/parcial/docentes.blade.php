@@ -1,30 +1,4 @@
-@extends('layouts.menu')
-@section('titulo','LISTA DE DOCENTES')
-@section('contenido')
-
-
-<Form method="GET" action="{{route('Docentes')}}" >
-    @if ($docentes->isNotEmpty() or $buscar)
-        <div class="centrar col-sm-8">
-            <div class="row">
-                <div class="col-sm-3"></div>
-                
-                <div class=" col-sm-4">       
-                                <input type="search" placeholder="&#xF002; Buscar" style="font-family:Time, FontAwesome" class="form-control buscar" 
-                                name="buscar" autofocus value="{{$buscar}}" autocomplete="off" onfocus="var temp_value=this.value; this.value=''; this.value=temp_value">   
-                </div>          
-                <div class="col-4">
-                                <button class=" btn btn-success pull-left"> Buscar</button>
-                </div>
-            </div>    
-        </div>     
-    @endif
-    <!--BUSCADOR -->
-    
-  
-   @include('complementos.error')
-   <div  class="centrar table-responsive col-sm-12 listaDatos">
-    @if($docentes->isNotEmpty())
+@if($docentes->isNotEmpty())
       <table class="table table-hover text-center" id="listaProfesionales">
           <thead class ="columnas">
         <tr>
@@ -59,7 +33,7 @@
                         <td>{{$docente->profesional->areas->pluck('nombre')[0]}}</td>
                     @endif
                     <td>{{$docente->carga_horaria}}</td>
-
+                
                     <td>
                         <div class=" dropleft text-center">
                                 <a href="#" data-toggle="dropdown"  data-placement="right" title="opsiones">
@@ -87,8 +61,3 @@
      @else
         <li>No hay registros de Docentes</li>
     @endif
-    
-</div>
-
-</Form>
-@endsection

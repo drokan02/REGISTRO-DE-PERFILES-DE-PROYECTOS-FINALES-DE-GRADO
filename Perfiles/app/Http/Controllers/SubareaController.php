@@ -9,10 +9,17 @@ class SubareaController extends Controller
 {
     public function index(Request $request,Area $area){
 		$buscar = $request->get('buscar');
+		$fila = 1;
 		$subareas = Area::buscarsubareas($area->id,$buscar)
 						->orderBy('id','ASC')
 						->paginate(5);
-		return view('subarea.listar',['area'=> $area,'subareas'=>$subareas,'buscar'=>$buscar , 'fila'=>1]);	
+
+		if($request->ajax()){
+			return response()->json(
+				view('parcial.subareas',compact('area', 'subareas','buscar','fila'))->render()
+			);
+		}
+		return view('subarea.listar',compact('area', 'subareas','buscar','fila'));	
 	}
 
 	public function registrar(Area $area){
@@ -21,7 +28,11 @@ class SubareaController extends Controller
 
 	
 	public function almacenar(AreaFormRequest $request,Area $area){
-
+		if($request->ajax()){
+            return response()->json([
+                'mensaje'=>'Sub Area registrado correctamente'
+            ]);
+        }
 		$subarea = new Area;
 		$subarea->codigo = $request->codigo;
 		$subarea->nombre = $request->nombre;
@@ -39,6 +50,11 @@ class SubareaController extends Controller
 	}
 
 	public function modificar(AreaFormRequest $request,$id){
+		if($request->ajax()){
+            return response()->json([
+                'mensaje'=>'Sub Area modificado correctamente'
+            ]);
+        }
 		$subarea = Area::findOrFail($id);
 		$area = Area::findOrFail($subarea->id_area);
 		$subarea->update($request->all());
@@ -50,6 +66,13 @@ class SubareaController extends Controller
 		$subarea = Area::findOrFail($id);
 		$area = Area::findOrFail($subarea->id_area);
 		$subarea->delete();
+		if($request->ajax())
+			{
+				 return response()->json([
+					 'eliminado'=>true,
+					 'mensaje'=>'Sub Area se elimino correctamente'
+				 ]);
+			 }
 		return redirect()->route('subareas',compact('area'));
 	}
 }

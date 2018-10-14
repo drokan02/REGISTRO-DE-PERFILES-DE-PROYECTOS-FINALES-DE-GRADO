@@ -31,19 +31,23 @@
         <section class="content">
           <div class="row">
             <div class="col-md-12">
+              
               <div class="box">
-                <div class="box-header with-border">
-                  <h3 class="box-title"> @yield('titulo')</h3>
-                      <!--  Revisar --->
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
+                <div class="contenido">
+                  <div class="box-header with-border text-center ">
+                    <h4> <b>@yield('titulo')</b></h4>
+                        <!--  Revisar --->
+                  </div>
+                  <!-- /.box-header -->
                   
-                  <div class="row">
-                    <div class="col-md-12">
-                        <!--Contenido-->
-                        @yield("contenido")
-                        <!--Fin Contenido-->
+                  <div class="box-body ">
+                    
+                    <div class="row">
+                      <div class="col-md-12">
+                          <!--Contenido-->
+                          @yield("contenido")
+                          <!--Fin Contenido-->
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -71,6 +75,5 @@
     <script src={{asset('js/parsley.min.js')}}></script>
     <script src={{asset('js/app.min.js')}}></script>
     <script src={{asset('js/ajax.js')}}></script>
-    <
   </body>
 </html>

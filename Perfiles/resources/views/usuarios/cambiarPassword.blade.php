@@ -12,18 +12,27 @@
                 </ul>
             </div>
         @endif
-        <div class="col-6">
+        <div class= "col-sm-9" style="left: 20px;">
             <form method="POST" action="{{route('guardarContraseña',$user)}}">
                 {!! csrf_field() !!}
-                <div class="form-group">
-                    <label for="password">Introduce Nueva Contraseña</label>
-                    <input type="password" class="form-control" name="password" id="password">
+                <div class="form-group row">
+                    <label for="password" class="col-sm-3 col-form-label">Introduce Nueva Contraseña</label>
+                    <div class="col-sm-7">
+                        <input type="password" class="form-control" name="password" id="password">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="password_confirmation">Repite la Contraseña</label>
-                    <input type="password" class="form-control" name="password_confirmation" id="password_confirmation">
+                <div class="form-group row">
+                    <label for="password_confirmation" class="col-sm-3 col-form-label">Repite la Contraseña</label>
+                    <div class="col-sm-7">
+                        <input type="password" class="form-control" name="password_confirmation" id="password_confirmation">
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-outline-success btn-lg">Aceptar</button>
+                <div class="form-group row">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-7">
+                        <button type="submit" class="btn btn-success">Aceptar</button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>

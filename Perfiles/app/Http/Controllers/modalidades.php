@@ -26,7 +26,6 @@ class modalidades extends Controller
 		//	return view('modadelidad.listaModalidad',['modalidad'=> $modalidad,'buscar'=>null,'fila'=>1]);
 		//}
 		$modalidades=Modal::all();
-		
 		return view('modadelidad/listaModalidad',compact('modalidades'));
 	}
 	  
@@ -40,7 +39,12 @@ class modalidades extends Controller
 			'nombre_mod'=>['required','regex:/^[\pL\s]+$/u'],
 			'codigo_mod' => ['required','alpha_num','unique:modalidad,codigo_mod'],
             'descripsion_mod'=> ['required']
-        ]);
+		]);
+		if($request->ajax()){
+            return response()->json([
+                'mensaje'=>'Modalidad registrado correctamente'
+            ]);
+        }
 		$modadelidad = new Modal;
 		$modadelidad->create($request->all());
 		return redirect()->route('modalidad');
@@ -62,7 +66,12 @@ class modalidades extends Controller
             'codigo_mod' => ['required','alpha_num',Rule::unique('modalidad')->ignore($modalidad->id)],
             'nombre_mod'=>['required','regex:/^[\pL\s]+$/u'],
             'descripsion_mod'=> ['required']
-        ]);
+		]);
+		if($request->ajax()){
+            return response()->json([
+                'mensaje'=>'Modalidad registrado correctamente'
+            ]);
+        }
 		$modalidad->update($request->all());
         return redirect()->route('modalidad');
 	}
@@ -81,7 +90,14 @@ class modalidades extends Controller
      * @internal param Modal $user
      */
     public function eliminar(Modal $modalidad){
-		$modalidad->delete();               //eliminar datos en tabla intermedia
+		$modalidad->delete();
+		if($request->ajax())
+			{
+				 return response()->json([
+					 'eliminado'=>true,
+					 'mensaje'=>'La Modalidad se elimino correctamente'
+				 ]);
+			 }             //eliminar datos en tabla intermedia
         return redirect()->route('modalidad');
     }
 }

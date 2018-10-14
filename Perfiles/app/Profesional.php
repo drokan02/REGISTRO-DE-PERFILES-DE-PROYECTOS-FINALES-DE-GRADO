@@ -24,7 +24,7 @@ class Profesional extends Model
          ];
 
 
-    public function docentes()
+    public function docente()
     {
         return $this->hasOne(Docente::class,'profesional_id');    
     }

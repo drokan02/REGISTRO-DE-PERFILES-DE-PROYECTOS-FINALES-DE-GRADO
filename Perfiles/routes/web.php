@@ -21,8 +21,8 @@ Route::get('/roles','RoleController@index')->name('roles');
 Route::get('/roles/crear','RoleController@crear')->name('crearRol');
 Route::post('/roles/guardar','RoleController@guardar')->name('guardarRol');
 Route::get('/roles/{role}/editar','RoleController@editar')->name('editarRol');
-Route::put('/roles/{role}','RoleController@actualizar')->name('actualizarRol');
-Route::delete('/roles/{role}/eliminar','RoleController@eliminar')->name('eliminarRol');
+Route::any('/roles/{role}','RoleController@actualizar')->name('actualizarRol');
+Route::any('/roles/{role}/eliminar','RoleController@eliminar')->name('eliminarRol');
 
 //usuarios
 Route::get('/usuarios','usuarioController@index')->name('usuarios');
@@ -31,7 +31,7 @@ Route::post('/usuarios/guardar','usuarioController@guardar')->name('guardarUsuar
 Route::get('/usuarios/{user}','usuarioController@detalle')->name('detalleUsuario');
 Route::get('/usuarios/{user}/editar','usuarioController@editar')->name('editarUsuario');
 Route::put('/usuarios/{user}','usuarioController@actualizar')->name('actualizarUsuario');//put metodo para actualizar
-Route::delete('/usuarios/{user}/eliminar','usuarioController@eliminar')->name('eliminarUsuario');
+Route::any('/usuarios/{user}/eliminar','usuarioController@eliminar')->name('eliminarUsuario');
 Route::get('/cambiar_contraseña/{user}','usuarioController@cambiarContraseña')->name('cambiarContraseña');
 Route::post('/guardar_contraseña/{user}','usuarioController@guardarContraseña')->name('guardarContraseña');
 
@@ -73,7 +73,7 @@ Route::get('/modalidad/registrarmodalidad','modalidades@registrar')->name('regis
 Route::any('/modalidad/registrar/almacenar','modalidades@almacenar')->name('almacenarModalidad');
 Route::get('/modalidad/editarmodal/{modalidad}','modalidades@editar')->name('editarModalidad');
 Route::put('/modalidad/{modalidad}','modalidades@modificar')->name('modificarModalidad');
-Route::delete('/modalidad/eliminar/{modalidad}','modalidades@eliminar')->name('eliminarModalidad');
+Route::any('/modalidad/eliminar/{modalidad}','modalidades@eliminar')->name('eliminarModalidad');
 Route::any('/modalidad/buscar', 'modalidades@index')->name('buscarModal');
 Route::any('/modalidad/ver/{id}','modalidades@ver')->name('ver');
 
