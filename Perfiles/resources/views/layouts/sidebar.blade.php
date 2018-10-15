@@ -126,6 +126,22 @@
           <li><a href="{{route('estudiantes')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Lista Estudiantes</a></li>
         </ul>
       </li>
+
+        <!-- Menu Perfiles-->
+        <li class="treeview {{ request()->segment(1) == 'perfil'? 'active open':'' }}">
+            <a href="#">
+                <i class="fa fa-book" aria-hidden="true"></i> <span>Perfiles</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li class="">
+                    <a href="{{route('seleccionarPerfil')}}"><i class="fa fa-caret-right" aria-hidden="true"></i>Registrar Perfil</a>
+                </li>
+                <li class="">
+                    <a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Lista Perfiles</a>
+                </li>
+            </ul>
+        </li>
     </ul>
   </section>
   <!-- /.sidebar -->
