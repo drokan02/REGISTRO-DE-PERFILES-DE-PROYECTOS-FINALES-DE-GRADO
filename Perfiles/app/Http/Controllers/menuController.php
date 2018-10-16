@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class menuController extends Controller
 {
     function __construct(){
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     public function index(){

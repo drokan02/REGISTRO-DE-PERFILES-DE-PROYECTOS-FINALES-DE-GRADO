@@ -12,7 +12,7 @@ use App\Titulo;
 class ProfesionalController extends Controller
 {
     function __construct(){
-        $this->middleware('auth');
+       // $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
