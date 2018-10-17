@@ -74,7 +74,7 @@ class AreaController extends Controller
 			 }
 			 return back()->withErrors('No se puede eliminar la Area por que existen SubAreas asociadas a este');
 		} else { 
-			//Area::findOrFail($id)->delete();
+			Area::findOrFail($id)->delete();
 			if($request->ajax())
 			{
 				 return response()->json([

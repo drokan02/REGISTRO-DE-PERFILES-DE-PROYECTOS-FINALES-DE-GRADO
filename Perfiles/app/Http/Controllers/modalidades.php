@@ -26,6 +26,11 @@ class modalidades extends Controller
 		//	return view('modadelidad.listaModalidad',['modalidad'=> $modalidad,'buscar'=>null,'fila'=>1]);
 		//}
 		$modalidades=Modal::all();
+		if($request->ajax()){
+			return response()->json(
+				view('parcial.modalidades',compact('modalidades'))->render()
+			);
+		}
 		return view('modadelidad/listaModalidad',compact('modalidades'));
 	}
 	  
@@ -89,7 +94,7 @@ class modalidades extends Controller
      * @return \Illuminate\Http\Response
      * @internal param Modal $user
      */
-    public function eliminar(Modal $modalidad){
+    public function eliminar(Request $request, Modal $modalidad){
 		$modalidad->delete();
 		if($request->ajax())
 			{
