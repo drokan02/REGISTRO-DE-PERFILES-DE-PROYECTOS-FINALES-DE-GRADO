@@ -41,3 +41,5 @@
      @else
         <li>No hay Subareas encontradas</li>
     @endif
+<script src={{asset('js/eliminar.js')}}></script>
+    

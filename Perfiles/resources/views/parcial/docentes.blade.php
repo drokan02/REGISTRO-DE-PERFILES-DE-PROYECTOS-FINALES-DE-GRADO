@@ -61,3 +61,4 @@
      @else
         <li>No hay registros de Docentes</li>
     @endif
+    <script src={{asset('js/eliminar.js')}}></script>

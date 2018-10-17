@@ -49,3 +49,4 @@
 @else
   <li>No hay Areas registradas</li>
 @endif
+<script src={{asset('js/eliminar.js')}}></script>

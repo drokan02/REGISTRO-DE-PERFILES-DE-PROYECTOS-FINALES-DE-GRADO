@@ -44,3 +44,4 @@
 @else
     <li>No hay Modalidades</li>
 @endif
+<script src={{asset('js/eliminar.js')}}></script>

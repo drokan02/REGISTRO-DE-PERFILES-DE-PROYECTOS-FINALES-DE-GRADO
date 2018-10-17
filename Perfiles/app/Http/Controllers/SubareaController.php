@@ -65,7 +65,7 @@ class SubareaController extends Controller
         return redirect()->route('subareas',['area'=>$area]);
 	}
 
-	public function eliminar($id){
+	public function eliminar(Request $request,$id){
 		//falta condicionar la eliminacion
 		$subarea = Area::findOrFail($id);
 		$area = Area::findOrFail($subarea->id_area);

@@ -39,3 +39,4 @@
 @else
     <li>No hay Roles</li>
 @endif
+<script src={{asset('js/eliminar.js')}}></script>

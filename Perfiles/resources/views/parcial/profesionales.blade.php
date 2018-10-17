@@ -60,3 +60,4 @@
                <br>
                <li>No se encontro Profesionales registrados</li>
            @endif
+           <script src={{asset('js/eliminar.js')}}></script>
