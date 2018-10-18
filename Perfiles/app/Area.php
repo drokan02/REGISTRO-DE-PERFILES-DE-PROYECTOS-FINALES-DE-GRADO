@@ -16,7 +16,7 @@ class Area extends Model
     ];
 
     public function profesionales(){    
-         return $this->belongsToMany(Profesional::class,'profesional_area')->withTimestamps();   
+         return $this->belongsToMany(Profesional::class,'profesional_area');
     }
 
 

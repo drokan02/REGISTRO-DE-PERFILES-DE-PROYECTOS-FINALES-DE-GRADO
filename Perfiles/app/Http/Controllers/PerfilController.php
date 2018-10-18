@@ -12,22 +12,28 @@ use Illuminate\Http\Request;
 class PerfilController extends Controller
 {
     public function seleccion(){
-        $modalidades=Modal::all();
-        return view('perfiles/seleccionFormulario',compact('modalidades'));
+        $modalidades=Modal::all()->pluck('nombre_mod');
+        $areas=Area::all()->where('id_area',null);
+        return view('perfiles/seleccionFormulario',compact('modalidades','areas'));
     }
 
     public function formulario(Request $request){
         $this->validate(request(), [
             'modalidad' => ['required','not_in:seleccione una opcion'],
+            'area' => ['required','not_in:seleccione una opcion'],
         ]);
         $docentes=Docente::all();
-        $areas=Area::all();
-        $profesionales=Profesional::all();
+        $subAreas=Area::query()->where('id_area',$request['area'])->get();
+        $areaProf=Area::find($request['area']);
+        $area=Area::query()->where('id',$request['area'])->pluck('nombre')->implode('');
+        $profesionales=$areaProf->profesionales()->get();
         $modalidad=$request['modalidad'];
-        if($modalidad=='tesis' || $modalidad=='proyecto de grado'){
-            return view('perfiles/formTesisProyGrado',compact('modalidad','docentes','areas','profesionales'));
+        $estudiante=auth()->user()->estudiante()->first();
+        //dd($area);
+        if($modalidad === "proyecto de grado" || $modalidad === "tesis"){
+            return view('perfiles/formTesisProyGrado',compact('modalidad','subAreas','area','profesionales', 'estudiante'));
         }else{
-            return view('perfiles/formAdsTrabDir',compact('modalidad','docentes','areas','profesionales'));
+            return view('perfiles/formAdsTrabDir',compact('modalidad','subAreas','area','profesionales', 'estudiante'));
         }
     }
 
@@ -67,4 +73,5 @@ class PerfilController extends Controller
     {
         //
     }
+
 }
