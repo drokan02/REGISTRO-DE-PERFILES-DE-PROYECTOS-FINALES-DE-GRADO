@@ -99,6 +99,8 @@ Route::any('/docentes/ver/{docente}','docenteController@ver')->name('verDocente'
 
 //estudiantes
 Route::get('/estudiantes','EstudianteController@index')->name('estudiantes');
+Route::get('/estudiantes/crear','EstudianteController@crear')->name('CrearEstudiantes');
+Route::post('/estudiantes/guardar','EstudianteController@guardar')->name('guardarEstudiante');
 Route::get('/estudiantes/{estudiante}','EstudianteController@detalle')->name('detalleEstudiante');
 Route::get('/estudiantes/{estudiante}/editar','EstudianteController@editar')->name('editarEstudiante');
 Route::put('/estudiantes/{estudiante}','EstudianteController@actualizar')->name('actualizarEstudiante');

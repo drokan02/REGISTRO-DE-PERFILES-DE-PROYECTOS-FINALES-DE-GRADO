@@ -5,10 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Administracion de Perfiles</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="stylesheet"href={{asset('css/estilos.css')}}>
-    <link rel="stylesheet"href={{asset('css/sweetalert.css')}}>
-    <link rel="stylesheet"href={{asset('css/alertify.min.css')}}>
-    <link rel="stylesheet"href={{asset('css/default.min.css')}}>
+    <link rel="stylesheet" href={{asset('css/estilos.css')}}>
+    <link rel="stylesheet" href={{asset('css/sweetalert.css')}}>
+    <link rel="stylesheet" href={{asset('css/alertify.min.css')}}>
+    <link rel="stylesheet" href={{asset('css/default.min.css')}}>
     <link rel="stylesheet" href={{asset('css/bootstrap.min.css')}}>
     <link rel="stylesheet" href={{asset('css/font-awesome.min.css')}}>
     <link rel="stylesheet" href={{asset('css/AdminLTE.min.css')}}>

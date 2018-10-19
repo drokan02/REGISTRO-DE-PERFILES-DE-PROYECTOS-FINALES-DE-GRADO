@@ -29,7 +29,7 @@ table{
 
 #scroll {
     width:2000px;
-    height:800px;
+    height:1100px;
     background:url(../Images/contenido.jpg);
     overflow:auto;
 }
@@ -84,7 +84,7 @@ tr:hover td{
     background-color: rgb(200,200,200);
     background-blend-mode: soft-light;
     background-size: cover;
-    height: 760px;
+    height: 1200px;
 }
 
 
