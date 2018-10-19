@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Carrera;
 use App\Estudiante;
+use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -24,6 +25,48 @@ class EstudianteController extends Controller
         $estudiantes=Estudiante::all();
         return view('estudiantes/listaEstudiantes',compact('estudiantes'));
     }
+    public function crear(){
+        $carreras=Carrera::all()->pluck('nombre_carrera');
+        return view('estudiantes/crearEstudiante',compact('carreras'));
+    }
+    public function guardar(Request $request){
+        $this->validate(request(), [
+            'nombres' => 'required|max:255',
+            'user_name' => ['required','unique:users,user_name','unique:estudiantes,user_name','alpha_num'],
+            'email' => ['required','unique:users,email','unique:estudiantes,email','email'],
+            'password' => 'required|string|min:6|confirmed',
+            'telefono' => '',
+            'carrera'=> ['required','not_in:seleccione una opcion']
+        ]);
+        DB::transaction(function () use($request) {
+            $user =new User();
+            $user->create([
+                'name' => $request['nombres'],
+                'user_name' => $request['user_name'],
+                'email' => $request['email'],
+                'password' => bcrypt($request['password']),
+            ]);
+            $request['password']=bcrypt($request['password']);
+            $idcarrera=Carrera::query()->where('nombre_carrera',$request['carrera'])->value('id');
+            $request['carrera']=$idcarrera;
+            $estudiante=new Estudiante();
+            $estudiante->create([
+                'nombres' => $request['nombres'],
+                'user_name' => $request['user_name'],
+                'email' => $request['email'],
+                'password' => $request['password'],
+                'telefono' => $request['telefono'],
+                'carrera_id'=> $request['carrera']
+            ]);
+            $role_id=Role::query()->where('nombre_rol','estudiante')->value('id');
+            $iduser=User::query()->where('email',$request['email'])->value('id');
+            $idEstudiante=Estudiante::query()->where('email',$request['email'])->value('id');
+            $user->roles()->attach($role_id,['user_id'=>$iduser]);
+            $user->estudiante()->attach($idEstudiante,['user_id'=>$iduser]);
+        });
+        return redirect()->route('estudiantes');
+    }
+
     /**
      * Display the specified resource.
      * @param  \App\Estudiante  $estudiante

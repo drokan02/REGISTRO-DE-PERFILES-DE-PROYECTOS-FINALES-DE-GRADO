@@ -38,7 +38,6 @@
                 </select>
             </div>
         </div>
-
         <div class="form-group row">
             <div class="col-5">
                 <div class="row">
@@ -57,7 +56,6 @@
                 </div>
             </div>
         </div>
-
         <div class="form-group row">
             <div class="col-5">
                 <div class="row">
@@ -76,14 +74,12 @@
                 </div>
             </div>
         </div>
-
         <div class="form-group row">
             <label for="titulo" class="col-sm-2 col-form-label">Titulo</label>
             <div class="col-9">
                 <input type="text" class="form-control" name="titulo" id="titulo" value="{{old('titulo')}}">
             </div>
         </div>
-
         <div class="form-group row">
             <div class="col-5">
                 <div class="row">
@@ -107,14 +103,12 @@
                 </div>
             </div>
         </div>
-
         <div class="form-group row">
             <label for="modalidad" class="col-sm-2 col-form-label">modalidad</label>
             <div class="col-9">
                 <input type="text" class="form-control" name="modalidad" id="modalidad" value="{{$modalidad}}" disabled>
             </div>
         </div>
-
         <div class = "form-group row">
             <label for="objetivo_gnrl" class="col-sm-2 col-form-label">objetivo general</label>
             <div class="col-sm-9">
@@ -122,7 +116,6 @@
                                   name="objetivo_gnrl" rows="5">{{old('objetivo_gnrl')}}</textarea>
             </div>
         </div>
-
         <div class = "form-group row">
             <label for="objetivo_esp" class="col-sm-2 col-form-label">objetivos especificos</label>
             <div class="col-sm-9">
@@ -130,7 +123,6 @@
                                   name="objetivo_esp" rows="5">{{old('objetivo_esp')}}</textarea>
             </div>
         </div>
-
         <div class = "form-group row">
             <label for="descripcion" class="col-sm-2 col-form-label">descripcion</label>
             <div class="col-sm-9">
@@ -138,6 +130,45 @@
                                   name="descripcion" rows="5">{{old('descripcion')}}</textarea>
             </div>
         </div>
+        <div class="form-group row">
+            <div class="col">
+                <div class="row">
+                    <label for="dir_carrera" class="col-sm-5 col-form-label">Director de carrera</label>
+                    <div class="col-7">
+                        <input type="text" class="form-control" name="dir_carrera" id="dir_carrera" value="{{old('dir_carrera')}}">
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="row">
+                    <label for="doc_materia" class="col-sm-2 col-form-label">Docente Materia</label>
+                    <div class="col-8">
+                        <input type="text" class="form-control" name="doc_materia" id="doc_materia" value="{{old('doc_materia')}}">
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="row">
+                    <label for="tutors" class="col-sm-3 col-form-label">Tutor</label>
+                    <div class="col-9">
+                        <input type="text" class="form-control" name="tutors" id="tutors" value="{{old('tutors')}}">
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <label for="estudiante" class="col-sm-4 col-form-label">estudiante</label>
+                    <div class="col-7">
+                        <input type="text" class="form-control" name="estudiante" id="estudiante" value="{{old('estudiante')}}">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col offset-5">
+                <a href="{{route('seleccionarPerfil')}}" class="btn btn-danger btn-lg">Atras</a>
+                <button type="submit" class="btn btn-success btn-lg">Registrar perfil</button>
+            </div>
+        </div>
     </form>
-
 @endsection
