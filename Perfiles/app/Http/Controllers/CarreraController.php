@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Carrera;
+use File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CarreraController extends Controller
 {
@@ -76,6 +79,33 @@ class CarreraController extends Controller
     public function eliminar(Carrera $carrera)
     {
         $carrera->delete();
+        return redirect()->route('carreras');
+    }
+    public function importar(){
+        return view('carreras/importarCarrera');
+    }
+
+
+    public function importacion(Request $request){
+        $archivo = $request->file('importar_carreras');
+        $nombre=$archivo->getClientOriginalName();
+        \Storage::disk('archivos')->put($nombre, \File::get($archivo) );
+        $ruta  =  storage_path('archivos') ."/". $nombre;
+            Excel::selectSheetsByIndex(0)->load($ruta, function ($hoja) {
+                $hoja->each(function ($fila) {
+                    $codigo=Carrera::query()->where('codigo_carrera',$fila->codigo_carrera)->get();
+                    if(count($codigo)==0){
+                        $carrera = new Carrera();
+                        $carrera->create([
+                            'codigo_carrera' => $fila->codigo_carrera,
+                            'nombre_carrera' => $fila->nombre_carrera,
+                            'descripcion' => $fila->descripcion
+                        ]);
+                    }
+                });
+
+            });
+        \Storage::disk('archivos')->delete($nombre);
         return redirect()->route('carreras');
     }
 }
