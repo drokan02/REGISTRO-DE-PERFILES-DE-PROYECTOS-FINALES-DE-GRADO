@@ -41,7 +41,7 @@ class modalidades extends Controller
 	
 	public function almacenar(Request $request){
 		$this->validate(request(), [
-			'nombre_mod'=>['required','regex:/^[\pL\s]+$/u'],
+			'nombre_mod'=>['required','regex:/^[\pL\s]+$/u','unique:modalidad,nombre_mod'],
 			'codigo_mod' => ['required','alpha_num','unique:modalidad,codigo_mod'],
             'descripsion_mod'=> ['required']
 		]);
@@ -50,6 +50,7 @@ class modalidades extends Controller
                 'mensaje'=>'Modalidad registrado correctamente'
             ]);
         }
+        $request['nombre_mod']=strtolower($request['nombre_mod']);
 		$modadelidad = new Modal;
 		$modadelidad->create($request->all());
 		return redirect()->route('modalidad');
@@ -69,7 +70,7 @@ class modalidades extends Controller
 	public function modificar(Request $request,Modal $modalidad){
         $this->validate(request(), [
             'codigo_mod' => ['required','alpha_num',Rule::unique('modalidad')->ignore($modalidad->id)],
-            'nombre_mod'=>['required','regex:/^[\pL\s]+$/u'],
+            'nombre_mod'=>['required','regex:/^[\pL\s]+$/u',Rule::unique('modalidad')->ignore($modalidad->id)],
             'descripsion_mod'=> ['required']
 		]);
 		if($request->ajax()){
@@ -77,6 +78,7 @@ class modalidades extends Controller
                 'mensaje'=>'Modalidad registrado correctamente'
             ]);
         }
+        $request['nombre_mod']=strtolower($request['nombre_mod']);
 		$modalidad->update($request->all());
         return redirect()->route('modalidad');
 	}
