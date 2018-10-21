@@ -7,6 +7,8 @@ use App\Http\Requests\moddal;
 use Illuminate\Validation\Rule;
 //use Validator;
 use App\Modal;
+use Maatwebsite\Excel\Facades\Excel;
+
 //use DB;
 
 class modalidades extends Controller
@@ -105,6 +107,32 @@ class modalidades extends Controller
 					 'mensaje'=>'La Modalidad se elimino correctamente'
 				 ]);
 			 }             //eliminar datos en tabla intermedia
+        return redirect()->route('modalidad');
+    }
+    public function importar(){
+        return view('modadelidad/importarModalidades');
+    }
+
+    public function importacion(Request $request){
+        $archivo = $request->file('importar_modalidad');
+        $nombre=$archivo->getClientOriginalName();
+        \Storage::disk('archivos')->put($nombre, \File::get($archivo) );
+        $ruta  =  storage_path('archivos') ."/". $nombre;
+        Excel::selectSheetsByIndex(0)->load($ruta, function ($hoja) {
+            $hoja->each(function ($fila) {
+                $codigo_mod=Modal::query()->where('codigo_mod',$fila->codigo_mod)->get();
+                if(count($codigo_mod)==0){
+                    $modalidad = new Modal();
+                    $modalidad->create([
+                        'codigo_mod' => $fila->codigo_mod,
+                        'nombre_mod' => $fila->nombre_mod,
+                        'descripsion_mod' => $fila->descripsion_mod
+                    ]);
+                }
+            });
+
+        });
+        \Storage::disk('archivos')->delete($nombre);
         return redirect()->route('modalidad');
     }
 }

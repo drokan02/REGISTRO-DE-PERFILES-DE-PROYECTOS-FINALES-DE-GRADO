@@ -2,28 +2,14 @@
 @section('titulo','Cargar Datos de Areas')
 @section('contenido')
 <div class="container">
-
-       
-    <form  name="importarAreas" id="importarAreas" method="POST" action="{{route('importarAreas')}}">                
-        
-         {!! csrf_field() !!}
-         <input type="hidden" name="_token" id="token"  value="{{csrf_token()}}"> 
-        <div class="box-body">
-            <div class="form-group col-xs-12"  >
-                <label>Agregar Archivo de Excel </label>
-                    <input value="{{old('archivo')}}" name="archivo" id="archivo" type="file"   class="form-control"  />
-                    <input type="text" id="nombre" class="form-control" value="{{old('nombre')}}" name="nombre">
-            </div>
-    
-        
-            <div class="box-footer" >
-                                <button class="importarDatos" type="submit" class="btn btn-primary">Cargar Datos</button>
-            </div>
+    <form method="POST" action="{{route('importarAreas')}}" enctype="multipart/form-data">
+        {!! csrf_field() !!}
+        <div class="form-group mb-4">
+            <label for="importar_area">Importar Areas</label>
+            <input type="file" class="form-control" id="importar_area" name="importar_area" value="{{old('importar_area')}}">
         </div>
-  
+        <a href="{{route('Areas')}}" class="btn btn-outline-primary btn-lg">Lista areas</a>
+        <button type="submit" class="btn btn-outline-success btn-lg">Importar</button>
     </form>
-  
-
-  
 </div>
 @endsection
