@@ -76,6 +76,8 @@ Route::put('/modalidad/{modalidad}','modalidades@modificar')->name('modificarMod
 Route::any('/modalidad/eliminar/{modalidad}','modalidades@eliminar')->name('eliminarModalidad');
 Route::any('/modalidad/buscar', 'modalidades@index')->name('buscarModal');
 Route::any('/modalidad/ver/{id}','modalidades@ver')->name('ver');
+Route::get('/modalidad/importar','modalidades@importar')->name('importarModalidad');
+Route::post('/modalidad/importacion','modalidades@importacion')->name('importacionModalidad');
 
 
 //carreras

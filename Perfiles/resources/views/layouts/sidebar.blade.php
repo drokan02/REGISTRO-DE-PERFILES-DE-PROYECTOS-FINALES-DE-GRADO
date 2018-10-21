@@ -54,17 +54,20 @@
       <!-- menu MODALIDADES -->
       <li class="treeview {{ request()->segment(1) == 'modalidad'? 'active open':'' }}">
               <a href="#">
-                <i class="fa fa-file-text-o" aria-hidden="true"></i>
-                    <span> Modalidades </span>
-                <i class="fa fa-angle-left pull-right"></i>
+                  <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                  <span> Modalidades </span>
+                  <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="{{ request()->routeIs('registrarmodalidad')? 'active':'' }}">
-                  <a href="{{route('registrarmodalidad')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Modalidad</a>
-                </li>
-                <li class="{{ request()->routeIs('modalidad')? 'active':'' }}">
-                  <a href="{{route('modalidad')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Modalidad</a>
-                </li>
+                  <li class="{{ request()->routeIs('registrarmodalidad')? 'active':'' }}">
+                      <a href="{{route('registrarmodalidad')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Modalidad</a>
+                  </li>
+                  <li class="{{ request()->routeIs('modalidad')? 'active':'' }}">
+                      <a href="{{route('modalidad')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Modalidad</a>
+                  </li>
+                  <li>
+                      <a href="{{route('importarModalidad')}}"><i class="fa fa-upload" aria-hidden="true"></i>Importar Modalidades</a>
+                  </li>
               </ul>
       </li>
       <!-- Menu Usuarios-->
