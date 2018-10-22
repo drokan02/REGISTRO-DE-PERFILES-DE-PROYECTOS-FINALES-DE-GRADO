@@ -40,37 +40,41 @@
             </div>
         </div>
         <div class="form-group row">
-            <div class="col-5">
+            <div class="col-6">
                 <div class="row">
-                    <label for="carrera" class="col-sm-5 col-form-label">Carrera</label>
+                    <label for="carrera" class="col-sm-4 col-form-label">Carrera</label>
                     <div class="col-7">
                         <input type="text" class="form-control" name="carrera" id="carrera" value="{{$estudiante->carrera()->first()->nombre_carrera}}" disabled>
                     </div>
                 </div>
             </div>
-            <div class="col-7">
+            <div class="col-6">
                 <div class="row">
-                    <label for="trabajo_conjunto" class="col-sm-3 col-form-label">Trabajo conjunto</label>
-                    <div class="col-7">
-                        <input type="text" class="form-control" name="trabajo_conjunto" id="trabajo_conjunto" value="{{old('trabajo_conjunto')}}">
+                    <label for="trabajo_conjunto" class="col-sm-4 col-form-label">Trabajo conjunto</label>
+                    <div class="col-5">
+                        <label for="trabajo_conjunto" class="btn btn-outline-info btn-block">
+                            <input type="checkbox" name="trabajo_conjunto" id="trabajo_conjunto">
+                        </label>
                     </div>
                 </div>
             </div>
         </div>
         <div class="form-group row">
-            <div class="col-5">
+            <div class="col-6">
                 <div class="row">
-                    <label for="ges_apr" class="col-sm-5 col-form-label">Gestion Aprobacion</label>
+                    <label for="ges_apr" class="col-sm-4 col-form-label">Gestion Aprobacion</label>
                     <div class="col-7">
                         <input type="text" class="form-control" name="ges_apr" id="ges_apr" value="{{old('ges_apr')}}">
                     </div>
                 </div>
             </div>
-            <div class="col-7">
+            <div class="col-6">
                 <div class="row">
-                    <label for="camb_tema" class="col-sm-3 col-form-label">Cambio de tema</label>
-                    <div class="col-7">
-                        <input type="text" class="form-control" name="camb_tema" id="camb_tema" value="{{old('camb_tema')}}">
+                    <label for="camb_tema" class="col-sm-4 col-form-label">Cambio de tema</label>
+                    <div class="col-5">
+                        <label for="camb_tema" class="btn btn-outline-info btn-block">
+                            <input type="checkbox"  name="camb_tema" id="camb_tema">
+                        </label>
                     </div>
                 </div>
             </div>

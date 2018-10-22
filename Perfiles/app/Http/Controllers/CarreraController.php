@@ -87,10 +87,11 @@ class CarreraController extends Controller
 
 
     public function importacion(Request $request){
-        $archivo = $request->file('importar_carreras');
-        $nombre=$archivo->getClientOriginalName();
-        \Storage::disk('archivos')->put($nombre, \File::get($archivo) );
-        $ruta  =  storage_path('archivos') ."/". $nombre;
+        try{
+            $archivo = $request->file('importar_carreras');
+            $nombre=$archivo->getClientOriginalName();
+            \Storage::disk('archivos')->put($nombre, \File::get($archivo) );
+            $ruta  =  storage_path('archivos') ."/". $nombre;
             Excel::selectSheetsByIndex(0)->load($ruta, function ($hoja) {
                 $hoja->each(function ($fila) {
                     $codigo=Carrera::query()->where('codigo_carrera',$fila->codigo_carrera)->get();
@@ -105,7 +106,11 @@ class CarreraController extends Controller
                 });
 
             });
-        \Storage::disk('archivos')->delete($nombre);
-        return redirect()->route('carreras');
+            \Storage::disk('archivos')->delete($nombre);
+             return redirect()->route('carreras');
+        }catch (\Exception $e){
+            return back()->withErrors('no se puede importar, los campos deben ser: 
+            codigo_carrera, nombre_carrera, descripcion');
+        }
     }
 }

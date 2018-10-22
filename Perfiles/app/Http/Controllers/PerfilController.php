@@ -24,9 +24,9 @@ class PerfilController extends Controller
         ]);
         $docentes=Docente::all();
         $subAreas=Area::query()->where('id_area',$request['area'])->get();
-        $areaProf=Area::find($request['area']);
+        //$areaProf=Area::find($request['area']);
         $area=Area::query()->where('id',$request['area'])->pluck('nombre')->implode('');
-        $profesionales=$areaProf->profesionales()->get();
+        $profesionales=Profesional::all();//$areaProf->profesionales()->get();
         $modalidad=$request['modalidad'];
         $estudiante=auth()->user()->estudiante()->first();
         //dd($area);
