@@ -107,27 +107,33 @@ class AreaController extends Controller
 		//		 "mensaje" => $nombre
 		//	 ]);
 		//}
-        $archivo = $request->file('importar_area');
-        $nombre=$archivo->getClientOriginalName();
-        \Storage::disk('archivos')->put($nombre, \File::get($archivo) );
-        $ruta  =  storage_path('archivos') ."/". $nombre;
-        Excel::selectSheetsByIndex(0)->load($ruta, function ($hoja) {
-            $hoja->each(function ($fila) {
-                $codigo=Area::query()->where('codigo',$fila->codigo)->get();
-                if(count($codigo)==0){
-                    $modalidad = new Area();
-                    $modalidad->create([
-                        'id' => $fila->id,
-                        'codigo' => $fila->codigo,
-                        'nombre' => $fila->nombre,
-                        'descripcion' => $fila->descripcion,
-                        'id_area' => $fila->id_area,
-                    ]);
-                }
-            });
+        try{
+            $archivo = $request->file('importar_area');
+            $nombre=$archivo->getClientOriginalName();
+            \Storage::disk('archivos')->put($nombre, \File::get($archivo) );
+            $ruta  =  storage_path('archivos') ."/". $nombre;
+            Excel::selectSheetsByIndex(0)->load($ruta, function ($hoja) {
+                $hoja->each(function ($fila) {
+                    $codigo=Area::query()->where('codigo',$fila->codigo)->get();
+                    $nombre=Area::query()->where('nombre',$fila->nombre)->get();
+                    if(count($codigo)==0 && count($nombre)==0){
+                        $modalidad = new Area();
+                        $modalidad->create([
+                            'id' => $fila->id,
+                            'codigo' => $fila->codigo,
+                            'nombre' => $fila->nombre,
+                            'descripcion' => $fila->descripcion,
+                            'id_area' => $fila->id_area,
+                        ]);
+                    }
+                });
 
-        });
-        \Storage::disk('archivos')->delete($nombre);
-        return redirect()->route('Areas');
+            });
+            \Storage::disk('archivos')->delete($nombre);
+            return redirect()->route('Areas');
+        }catch (\Exception $exception){
+            return back()->withErrors('no se puede importar');
+        }
+
 	}
 }
