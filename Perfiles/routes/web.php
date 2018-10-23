@@ -92,7 +92,7 @@ Route::get('/carreras/importar','CarreraController@importar')->name('importarCar
 Route::post('/carreras/importacion','CarreraController@importacion')->name('importacionCarrera');
 
 //docentes
-Route::get('/docentes/{carrera_id}','docenteController@index')->name('Docentes');
+Route::get('/docentes','docenteController@index')->name('Docentes');
 Route::get('/docentes/registrar', 'docenteController@registrar')->name('registrarDocente');
 Route::any('/docentes/registrar/almacenar','docenteController@almacenar')->name('almacenarDocente');
 Route::any('/docentes/editar/{docente}','docenteController@editar')->name('editarDocente');
