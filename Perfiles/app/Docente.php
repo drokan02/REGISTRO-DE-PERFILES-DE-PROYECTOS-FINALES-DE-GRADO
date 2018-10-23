@@ -4,6 +4,7 @@ namespace App;
 ///\Illuminate\Database\Eloquent\Relations\BelongsTo
 use Illuminate\Database\Eloquent\Model;
 use App\Profesional;
+use App\CargaHoraria;
 use DB;
 
 class Docente extends Model
@@ -12,8 +13,8 @@ class Docente extends Model
     protected $fillable = [
         
         'codigo_sis',
-        'carga_horaria',
-         'profesional_id'
+        'cargahoraria_id',
+        'profesional_id'
         
     ];
    
@@ -21,14 +22,16 @@ class Docente extends Model
     {
         return $this->belongsTo(Profesional::class);
     }
+
+    public function cargahoraria()
+    {
+        return $this->belongsTo(CargaHoraria::class);
+    }
+
    public function scopeDocentes($query){
         return $query->whereNull('id');
     }
-    public function esAdmin(){
-        return $this->id==1;
-    }
 
-   
     public function scopeBuscarProfesional($query,$buscar){
         if($buscar)
             {

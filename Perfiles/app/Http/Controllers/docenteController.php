@@ -8,6 +8,8 @@ use App\Docente;
 use App\Profesional;
 use App\Area;
 use App\Titulo;
+use App\Carrera;
+use App\CargaHoraria;
 use Validator;
 use DB;
 
@@ -42,8 +44,9 @@ class docenteController extends Controller
         $areas = Area::areas()->get();
         $subareas = Area::subareas()->get();
         $titulos = Titulo::all();
-
-        return view('docentes.registrarDocente',compact('docente','subareas','areas','titulos'));
+        $carreras = Carrera::all();
+        $horarios = CargaHoraria::all();
+        return view('docentes.registrarDocente',compact('docente','subareas','areas','titulos','carreras','horarios'));
     }
   
 
@@ -60,10 +63,10 @@ class docenteController extends Controller
         $prof_id = Profesional::where('ci_prof',$request['ci_prof'])->value('id');
         $profesional->areas()->attach($areas,['profesional_id'=>$prof_id]);
         $docente->profesional_id = $prof_id;
-        $docente->carga_horaria = $request->carga_horaria;
+        $docente->cargahoraria_id = $request->cargahoraria_id;
         $docente->codigo_sis = $request->codigo_sis;
         $docente->save();
-		    return redirect()->route('Docentes');
+		return redirect()->route('Docentes');
     }
 
     public function editar(Docente $docente){
@@ -71,7 +74,9 @@ class docenteController extends Controller
         $areas = Area::areas()->get();
         $subareas = Area::subareas()->get();
         $titulos = Titulo::all();
-        return view('docentes.editarDocente',compact('docente','subareas','areas','titulos','horarios'));
+        $carreras = Carrera::all();
+        $horarios = CargaHoraria::all();
+        return view('docentes.editarDocente',compact('docente','subareas','areas','titulos','horarios','carreras','horarios'));
     }
     public function ver($id){
 		$docente=docentes::findOrFail($id);

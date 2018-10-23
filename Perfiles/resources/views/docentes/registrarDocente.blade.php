@@ -63,12 +63,13 @@
 				</div>
 
 				<div class = "form-group row"> 
-						<label for="carga_horaria" class="col-sm-2 col-form-label">Carga Horaria</label>
+						<label for="cargahoraria_id" class="col-sm-2 col-form-label">Carga Horaria</label>
 						<div class="col-sm-4 row-fluid" >
-								<select name="carga_horaria" id="carga_horaria" class="form-control" >
+								<select name="cargahoraria_id" id="cargahoraria_id" class="form-control" >
 									<option disabled selected > -- seleccione la Carga Horaria -- </option>
-										<option value="Tiempo Parcia">Tiempo Parcia</option>
-										<option value="Tiempo Parcia">Tiempo Completo</option>
+									@foreach ($horarios as $horario)
+										<option value="{{$horario->id}}">{{$horario->carga_horaria}}</option>
+									@endforeach
 								</select>
 						</div>
 
@@ -95,8 +96,8 @@
 						<div class="col-sm-4 row-fluid" >
 							<select name="carrera_id" id="carrera_id" class="form-control" >
 								<option disabled selected > -- seleccione una Carrera-- </option>
-								@foreach ($titulos as $titulo)
-									<option value="{{$titulo->id}}">{{$titulo->nombre}}</option>
+								@foreach ($carreras as $carrera)
+									<option value="{{$carrera->id}}">{{$carrera->nombre_carrera}}</option>
 								@endforeach
 							</select>
 						</div>

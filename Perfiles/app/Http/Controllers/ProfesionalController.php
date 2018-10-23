@@ -9,6 +9,7 @@ use Validator;
 use App\Profesional;
 use App\Area;
 use App\Titulo;
+use App\Carrera;
 class ProfesionalController extends Controller
 {
     function __construct(){
@@ -35,8 +36,9 @@ class ProfesionalController extends Controller
     public function registrar(){
         $areas = Area::areas()->get();
         $subareas = Area::subareas()->get();
+        $carreras = Carrera::all();
         $titulos = Titulo::all();
-        return view('profesionales.registroprofesional',['areas'=>$areas, 'subareas'=>$subareas, 'titulos'=>$titulos ]);
+        return view('profesionales.registroprofesional',compact('areas','subareas','carreras','titulos'));
     }
 
     
@@ -59,8 +61,9 @@ class ProfesionalController extends Controller
         $areas = Area::areas()->get();
         $subareas = Area::subareas()->get();
         $titulos = Titulo::all();
+        $carreras = Carrera::all();
         //dd($profesional->toArray());
-        return view('profesionales.editarProfesional',compact('profesional','areas','subareas','titulos'));
+        return view('profesionales.editarProfesional',compact('profesional','areas','subareas','titulos','carreras'));
     }
 
     public function modificar(ProfesionalRequest $request,Profesional $profesional){

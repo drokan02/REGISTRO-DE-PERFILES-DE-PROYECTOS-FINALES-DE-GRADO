@@ -21,6 +21,7 @@ class Profesional extends Model
         'direc_prof',
         'perfil_prof',
         'titulo_id',
+        'carrera_id'
          ];
 
 
@@ -34,6 +35,10 @@ class Profesional extends Model
 
     public function titulo(){
         return $this->belongsTo(Titulo::class);
+    }
+
+    public function carrera(){
+        return $this->belongsTo(Carrera::class);
     }
 
     public function scopeBuscarProfesional($query,$buscar){

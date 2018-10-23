@@ -35,6 +35,7 @@ class ProfesionalRequest extends FormRequest
                 'direc_prof'  => 'min:7',
                 'titulo_id'   => 'required',
                 'area_id'     => 'required',
+                'carrera_id'    => 'required',
 
             ];
         }else{
@@ -50,6 +51,7 @@ class ProfesionalRequest extends FormRequest
                 'direc_prof'  => 'min:7',
                 'titulo_id'   => 'required',
                 'area_id'     => 'required',
+                'carrera_id'    => 'required',
             ];
         }
         
@@ -78,8 +80,9 @@ class ProfesionalRequest extends FormRequest
             'correo_prof.email'    => 'El correo ingresado no es valido',
             'correo_prof.unique'   => 'Ya existe un Profecional registrado con ese correo',
             'direc_prof.unique'    => 'La direccion debe tener almenos 7 caracteres',
-            'titulo_id.unique'    => 'debe seleccionar un Titulo',
-            'titulo_id.unique'    => 'debe seleccionar una Area',
+            'titulo_id.required'    => 'debe seleccionar un Titulo',
+            'area_id.required'    => 'debe seleccionar una Area',
+            'carrera_id.required'    => 'debe seleccionar una Carrera',
         ];
     }
 }

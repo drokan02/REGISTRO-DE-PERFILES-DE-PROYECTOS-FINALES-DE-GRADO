@@ -58,7 +58,7 @@
                         <td>{{$docente->profesional->areas->pluck('nombre')[1]}}</td>
                         <td>{{$docente->profesional->areas->pluck('nombre')[0]}}</td>
                     @endif
-                    <td>{{$docente->carga_horaria}}</td>
+                    <td>{{$docente->cargahoraria->pluck('carga_horaria')[0]}}</td>
 
                     <td>
                         <div class=" dropleft text-center">
