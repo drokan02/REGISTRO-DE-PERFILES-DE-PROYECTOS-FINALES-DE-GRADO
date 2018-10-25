@@ -19,7 +19,13 @@ class Area extends Model
          return $this->belongsToMany(Profesional::class,'profesional_area');
     }
 
+    public function carreras(){    
+        return $this->belongsToMany(Carrera::class,'area_carrera');
+   }
 
+    public function perfiles(){    
+         return $this->belongsToMany(Perfil::class,'perfil_area');
+    }
     public function scopeAreas($query){
         return $query->whereNull('id_area');
     }
@@ -48,6 +54,19 @@ class Area extends Model
     
     public function scopeSubareasArea($query,$id){
         return $query->where('id_area',$id);
+    }
+
+    public function scopeAreasCarrera($query,$carrera_id){
+        return $query->whereNull('id_area')->whereHas('carreras', function ($query) use ( $carrera_id){
+            $query->where('carrera_id',$carrera_id);
+        });
+    }
+
+    public function scopeSubareasCarrera($query,$carrera_id){
+        return $query->whereNotNull('id_area')
+                     ->whereHas('carreras', function ($query) use ( $carrera_id){
+                                $query->where('carrera_id',$carrera_id);
+                            });
     }
 
 }

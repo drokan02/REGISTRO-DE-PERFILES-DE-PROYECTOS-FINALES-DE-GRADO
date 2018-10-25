@@ -127,7 +127,13 @@
 						</select>
 					</div>
 				</div>   
-				
+				<div class="form-group row">   
+					<div class="col-sm-5"></div>
+					<label for="trabajo_conjunto" class="col-sm-3 col-form-label">Director de Carrera  &nbsp;
+							<input type="checkbox"  id="directorCarrera" name="director_carrera">
+							
+					</label> 
+				</div>
 				
 		
 				<div class = "form-group row"> 

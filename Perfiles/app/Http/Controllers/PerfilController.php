@@ -7,71 +7,53 @@ use App\Docente;
 use App\Modal;
 use App\Perfil;
 use App\Profesional;
+use App\Http\Requests\PerfilFormRequest;
+use Validator;
 use Illuminate\Http\Request;
 
 class PerfilController extends Controller
 {
-    public function seleccion(){
-        $modalidades=Modal::all()->pluck('nombre_mod');
-        $areas=Area::all()->where('id_area',null);
-        return view('perfiles/seleccionFormulario',compact('modalidades','areas'));
+    public function nuevoFormulario(){
+        $modalidades = Modal::all();
+        return view('perfiles.formulario',compact('modalidades'));
     }
 
-    public function formulario(Request $request){
-        $this->validate(request(), [
-            'modalidad' => ['required','not_in:seleccione una opcion'],
-            'area' => ['required','not_in:seleccione una opcion'],
-        ]);
-        $docentes=Docente::all();
-        $subAreas=Area::query()->where('id_area',$request['area'])->get();
-        $areaProf=Area::find($request['area']);
-        $area=Area::query()->where('id',$request['area'])->pluck('nombre')->implode('');
-        $profesionales=$areaProf->profesionales()->get();
-        $modalidad=$request['modalidad'];
-        $estudiante=auth()->user()->estudiante()->first();
-        //dd($area);
-        if($modalidad === "proyecto de grado" || $modalidad === "tesis"){
-            return view('perfiles/formTesisProyGrado',compact('modalidad','subAreas','area','profesionales', 'estudiante'));
-        }else{
-            return view('perfiles/formAdsTrabDir',compact('modalidad','subAreas','area','profesionales', 'estudiante'));
+    public function mostrarForm(Request $request){
+        $modalidad_id  = $request->modalidad_id;
+        $estudiante    = auth()->user()->estudiante()->first();
+        $carrera_id    = $estudiante->carrera_id;
+        $modalidad     = Modal::where('id',$modalidad_id)->value('nombre_mod');
+        $subareas      = Area::subareasCarrera($carrera_id)->get();
+        $areas         = Area::areasCarrera($carrera_id)->get();
+        $profesionales = Profesional::porCarrera($carrera_id)->get();
+        $docentes      = Docente::with('profesional')->porCarrera($carrera_id)->get();
+        $id            = Docente::directorCarrera($carrera_id)->value('id');
+        $director      = Docente::with('profesional')->findOrFail($id);
+       // $aux = $modalidad->toArray()[0];
+       // dd($aux['id']);
+        if($request->ajax()){
+            if($modalidad == "adscripcion" || $modalidad == "trabajo dirigido"){
+                
+                return response()->json(
+                    view('perfiles.formTrabajoD',compact('director','docentes','profesionales','areas','subareas','estudiante','modalidad_id'))->render()
+                );
+            }else{
+                return response()->json(
+                    view('perfiles.formTesis',compact('director','docentes','profesionales','areas','subareas','estudiante','modalidad_id'))->render()
+                );
+            } 
         }
     }
-
-    public function index()
-    {
-        //
+    
+    public function almacenar(PerfilFormRequest $request){
+        if($request->ajax()){
+            return response()->json([
+                'mensaje'=> 'Formulario del Perfil registrado correctamente'
+            ]);
+        }
+        Perfil::create($request->all());
     }
 
-
-    public function create()
-    {
-        //
-    }
-
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show(Perfil $perfil)
-    {
-        //
-    }
-
-    public function edit(Perfil $perfil)
-    {
-        //
-    }
-
-    public function update(Request $request, Perfil $perfil)
-    {
-        //
-    }
-
-    public function destroy(Perfil $perfil)
-    {
-        //
-    }
+    
 
 }

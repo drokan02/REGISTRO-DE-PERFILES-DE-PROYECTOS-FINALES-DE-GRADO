@@ -122,5 +122,7 @@ Route::get('register','Auth\RegisterController@showRegistrationForm')->name('reg
 Route::post('register','Auth\RegisterController@register')->name('registerPost');
 
 //perfiles
-Route::get('/seleccion_modalidad','PerfilController@seleccion')->name('seleccionarPerfil');
-Route::post('/seleccionarFormulario','PerfilController@formulario')->name('formularioPerfil');
+Route::get('/perfil','perfilesController@index')->name('perfiles');
+Route::get('/perfil/registrarPerfil','PerfilController@nuevoFormulario')->name('nuevoPerfil');
+Route::any('/perfil/registrarPerfil/mostrarForm','PerfilController@mostrarForm')->name('mostrarFormulario');
+Route::post('/perfil/registrarPerfil/almacenar/{datos}','PerfilController@almacenar')->name('almacenarPerfil');

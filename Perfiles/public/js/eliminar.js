@@ -27,3 +27,28 @@ $('.eliminar').click(function(e){
         function(){ 
     });
 })
+
+$('.registrar').click(function(e){
+    e.preventDefault();
+    form = $(this).parents('form');
+    url  = form.attr('action');
+    datos = form.serialize();
+    $.post(url,datos,function(res){
+        alertify.alert(res.mensaje).set('basic', true); 
+          form.submit();
+    }).fail(function(ress,status,error){
+        var errores="";
+        var cont = 18;
+       // $('#mensajeError').show();//muestra los mensajes
+        $.each($.parseJSON(ress.responseText), function (ind, elem) {     
+                errores += "<li>"+elem+"</li>"
+                alertify.set('notifier','position', 'top-right');
+                alertify.error(""+elem,cont--);
+               
+        }); 
+       /* $('#errores').html(
+            errores    
+        );*/
+        
+    });
+})

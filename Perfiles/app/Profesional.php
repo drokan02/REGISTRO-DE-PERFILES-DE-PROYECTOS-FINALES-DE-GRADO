@@ -25,10 +25,16 @@ class Profesional extends Model
          ];
 
 
+    public function Perfiles()
+    {
+        return $this->hasMany(Perfil::class);    
+    }
+
     public function docente()
     {
         return $this->hasOne(Docente::class,'profesional_id');    
     }
+
     public function areas(){
         return $this->belongsToMany(Area::class,'profesional_area');  
     }
@@ -47,5 +53,9 @@ class Profesional extends Model
         }else {
             return $query;
         }
+    }
+
+    public function scopePorCarrera($query,$carrera_id){
+        return $query->where('carrera_id',$carrera_id);
     }
 }

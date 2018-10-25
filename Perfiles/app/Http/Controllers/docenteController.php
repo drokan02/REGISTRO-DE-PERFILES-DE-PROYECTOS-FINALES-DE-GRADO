@@ -20,24 +20,28 @@ class docenteController extends Controller
        // $this->middleware('auth');
     }
     public function index(Request $request){
+       $carrera_id=0;//falta pasar como atributo
        $buscar = $request->get('buscar');
        $docentes = new Docente;
        $fila = 1;
        if($buscar){
             $docentes=Docente::with('profesional')
-                                ->whereHas('profesional', function ($query) use ( $buscar){
-                                        $query->where(DB::raw("CONCAT(nombre_prof,' ',ap_pa_prof,' ',ap_ma_prof)"), "LIKE", "%$buscar%");
-                                })->orderBy('id','ASC')->paginate(10);	
+                                ->porCarrera($carrera_id)
+                                ->buscardocentes($buscar)
+                                ->orderBy('id','ASC')
+                                ->paginate(10);	
        } else{
-        $docentes=Docente::with('profesional')->has('profesional')->orderBy('id','ASC')->paginate(10);
+        $docentes=Docente::with('profesional')->porCarrera($carrera_id)
+                                              ->orderBy('id','ASC')
+                                              ->paginate(10);
        }
-       
-        if($request->ajax()){
+    
+      if($request->ajax()){
         return response()->json(
             view('parcial.docentes',compact('docentes','buscar','fila'))->render()
         );
         }
-	   	return view('docentes.listadoDocentes',compact('docentes','buscar','fila'));     
+	   	return view('docentes.listadoDocentes',compact('docentes','buscar','fila'));
     }
 
     public function registrar(){
@@ -55,7 +59,7 @@ class docenteController extends Controller
             return response()->json([
                 'mensaje'=>'Docente registrado correctamente'
             ]);
-        }
+        }  
         $areas = [$request->area_id,$request->subarea_id];
         $profesional = new Profesional;
         $docente = new Docente;
@@ -65,6 +69,7 @@ class docenteController extends Controller
         $docente->profesional_id = $prof_id;
         $docente->cargahoraria_id = $request->cargahoraria_id;
         $docente->codigo_sis = $request->codigo_sis;
+        $docente->director_carrera = $request->director_carrera;
         $docente->save();
 		return redirect()->route('Docentes');
     }

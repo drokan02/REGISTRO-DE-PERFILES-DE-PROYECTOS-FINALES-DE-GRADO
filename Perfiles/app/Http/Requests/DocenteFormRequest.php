@@ -34,6 +34,7 @@ class DocenteFormRequest extends FormRequest
                 'correo_prof'   => 'email|min:8|unique:profesionales,correo_prof',
                 'direc_prof'    => 'min:7',
                 'codigo_sis'    => 'required|numeric|digits_between:6,10|unique:profesionales,ci_prof',
+                'director_carrera' => 'unique:docente,director_carrera',
                 'cargahoraria_id' => 'required',
                 'titulo_id'     => 'required',
                 'area_id'       => 'required',
@@ -94,6 +95,7 @@ class DocenteFormRequest extends FormRequest
             'titulo_id.required'        => 'No selecciono un Titulo',
             'carrera_id.required'        => 'No selecciono una Carrera',
             'area_id.required'             => 'debe seleccionar una Area',
+            'director_carrera.unique'         => 'la carrera Seleccionada ya tiene un Director',
            
         ];
     }
