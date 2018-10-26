@@ -22,18 +22,27 @@ class Perfil extends Model
         'objetivo_esp',
         'descripcion',
         'trabajo_conjunto',
-        'cambio_tema'
+        'cambio_tema',
+        'gestion_ini',
+        'gestion_fin'
     ];
 
-    public function modalidad(){
+    public function gestion()
+    {
+        return $this->belongsTo(Gestion::class);
+    }
+    public function modalidad()
+    {
         return $this->belongsTo(Modal::class,'modalidad_id');
     }
 
-    public function estudiantes(){
+    public function estudiantes()
+    {
         return $this->belongsToMany(Estudiante::class,'estudiante_perfil');  
     }
 
-    public function docente(){
+    public function docente()
+    {
         return $this->belongsTo(Docente::class,'docente_id');
     }
 

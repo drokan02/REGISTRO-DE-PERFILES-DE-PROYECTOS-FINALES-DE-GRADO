@@ -126,3 +126,10 @@ Route::get('/perfil','perfilesController@index')->name('perfiles');
 Route::get('/perfil/registrarPerfil','PerfilController@nuevoFormulario')->name('nuevoPerfil');
 Route::any('/perfil/registrarPerfil/mostrarForm','PerfilController@mostrarForm')->name('mostrarFormulario');
 Route::post('/perfil/registrarPerfil/almacenar','PerfilController@almacenar')->name('almacenarPerfil');
+
+//Gestion
+Route::any('/menu/Gestion', 'GestionController@index')->name('gestiones');
+Route::get('menu/Gestion/registrar', 'GestionController@registrar')->name('registrarGestion');
+Route::get('menu/Gestion/registrar/almacenar', 'GestionController@almacenar')->name('almacenarGestion');
+Route::get('menu/Gestion/editar/{gestion}', 'GestionController@editar')->name('editarGestion');
+Route::post('menu/Gestion/editar/modificar/{gestion}', 'GestionController@modificar')->name('modificarGestion');
