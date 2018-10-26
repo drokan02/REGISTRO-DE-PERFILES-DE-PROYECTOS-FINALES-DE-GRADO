@@ -20,7 +20,7 @@ class Estudiante extends Model
     ];
 
     public function perfil(){
-        return $this->hasOne(Perfil::class);
+        return $this->belongsToMany(Perfil::class,'estudiante_perfil');  
     }
     public function carrera(){
         return $this->belongsTo(Carrera::class);

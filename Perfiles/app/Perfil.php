@@ -10,7 +10,6 @@ class Perfil extends Model
 
     protected $fillable = [
         'modalidad_id',
-        'estudiante_id',
         'docente_id',
         'director_id',
         'tutor_id',
@@ -21,15 +20,17 @@ class Perfil extends Model
         'encargado',
         'objetivo_gen',
         'objetivo_esp',
-        'descripcion'
+        'descripcion',
+        'trabajo_conjunto',
+        'cambio_tema'
     ];
 
     public function modalidad(){
         return $this->belongsTo(Modal::class,'modalidad_id');
     }
 
-    public function estudiante(){
-        return $this->belongsTo(Estudiante::class,'estudiante_id');
+    public function estudiantes(){
+        return $this->belongsToMany(Estudiante::class,'estudiante_perfil');  
     }
 
     public function docente(){

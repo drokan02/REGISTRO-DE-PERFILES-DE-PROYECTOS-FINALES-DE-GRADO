@@ -21,15 +21,64 @@
     <div class="form-group row">   
         <div class="col-sm-4"></div>
         <label for="trabajo_conjunto" class="col-sm-2 col-form-label">Trabajo Conjunto  &nbsp;
-                <input type="checkbox"  id="materialChecked2" >
+                    <input class="trabajoCon" type="checkbox"  name="trabajo_conjunto" value="no">
         </label> 
 
         <div class="col-sm-1"></div>
         <label for="trabajo_conjunto" class="col-sm-2 col-form-label">Cambio de Tema  &nbsp;
-                <input type="checkbox"  id="materialChecked2" >
+                <input class="cambioTema" type="checkbox"   name="cambio_tema" value="no">
         </label> 
     </div>
     
+    <div class="form-group row">
+        <label for="name" class="col-sm-2 col-form-label">Titulo</label>
+        <div class="col-10">
+            <input type="text" class="form-control" name="titulo" id="titulo" value="{{old('trabajo_conjunto')}}" >
+        </div>
+    </div>
+
+    @if ($modalidad == 'adscripcion')
+    <div class="form-group row" >
+            <label for="name" class="col-sm-2 col-form-label">Seccion de trabajo</label>
+            <div class="col-10">
+                <input type="text" class="form-control" name="sec_trabajo" id="institucion" value="{{old('institucion')}}" >
+             </div>
+    </div>  
+    @endif
+    
+    @if ($modalidad == 'trabajo dirigido')
+    <div class="form-group row">
+        <label for="name" class="col-sm-2 col-form-label">Institución Participante</label>
+        <div class="col-10">
+            <input type="text" class="form-control" name="institucion" id="institucion" value="{{old('institucion')}}" >
+        </div>
+    </div>   
+    @endif
+    
+    <div class = "form-group row">
+        <label for="objetivo_gen" class="col-sm-2 col-form-label">Objetivo general</label>
+        <div class="col-sm-10">
+                <textarea class="form-control"  autocomplete="off" id="objetivo_gen"
+                                name="objetivo_gen" rows="5">{{old('objetivo_gnrl')}}</textarea>
+        </div>
+    </div>
+
+    <div class = "form-group row">
+        <label for="objetivo_esp" class="col-sm-2 col-form-label">Objetivos específicos</label>
+        <div class="col-sm-10">
+                <textarea class="form-control"  autocomplete="off" id="objetivo_esp"
+                                name="objetivo_esp" rows="5">{{old('objetivo_esp')}}</textarea>
+        </div>
+    </div>
+        
+    <div class = "form-group row">
+            <label for="descripcion" class="col-sm-2 col-form-label">Descripcion</label>
+            <div class="col-sm-10">
+                    <textarea class="form-control"  autocomplete="off" id="descripcion"
+                                    name="descripcion" rows="5">{{old('descripcion')}}</textarea>
+            </div>
+    </div>
+
     <div class="form-group row">
         <label for="director" class="col-sm-2 col-form-label">Director de Carrera</label>
         <div class="col-10">
@@ -67,14 +116,7 @@
             </select>
         </div>
     </div>
-
-    <div class="form-group row">
-        <label for="name" class="col-sm-2 col-form-label">Titulo</label>
-        <div class="col-10">
-            <input type="text" class="form-control" name="titulo" id="titulo" value="{{old('trabajo_conjunto')}}" >
-        </div>
-    </div>
-
+    
     <div class="form-group row">
         <label for="tutor" class="col-sm-2 col-form-label">Area</label>
         <div class="col-10">
@@ -99,44 +141,6 @@
         </div>
     </div>
 
-    <div class="form-group row">
-        <label for="name" class="col-sm-2 col-form-label">Institución Participante</label>
-        <div class="col-10">
-            <input type="text" class="form-control" name="institucion" id="institucion" value="{{old('institucion')}}" >
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label for="name" class="col-sm-2 col-form-label">Encargado</label>
-        <div class="col-10">
-            <input type="text" class="form-control" name="encargado" id="encargado" value="{{old('institucion')}}" >
-        </div>
-    </div>
-        
-    <div class = "form-group row">
-        <label for="objetivo_gen" class="col-sm-2 col-form-label">Objetivo general</label>
-        <div class="col-sm-10">
-                <textarea class="form-control"  autocomplete="off" id="objetivo_gen"
-                                name="objetivo_gen" rows="5">{{old('objetivo_gnrl')}}</textarea>
-        </div>
-    </div>
-
-    <div class = "form-group row">
-        <label for="objetivo_esp" class="col-sm-2 col-form-label">Objetivos específicos</label>
-        <div class="col-sm-10">
-                <textarea class="form-control"  autocomplete="off" id="objetivo_esp"
-                                name="objetivo_esp" rows="5">{{old('objetivo_esp')}}</textarea>
-        </div>
-    </div>
-        
-    <div class = "form-group row">
-            <label for="descripcion" class="col-sm-2 col-form-label">Descripcion</label>
-            <div class="col-sm-10">
-                    <textarea class="form-control"  autocomplete="off" id="descripcion"
-                                    name="descripcion" rows="5">{{old('descripcion')}}</textarea>
-            </div>
-    </div>
-    
     <div class = "form-group row"> 
         <div class="col-sm-2"></div>
         <div class="col-8">

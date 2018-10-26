@@ -28,7 +28,7 @@ class PerfilFormRequest extends FormRequest
         $id  = $aux['modalidad_id'];
         $modalidad = Modal::where('id',$id)->get();
         $aux = $modalidad->toArray()[0]['nombre_mod']; 
-        if($aux == "adscripcion" || $aux == "trabajo dirigido"){
+        if( $aux == "trabajo dirigido"){
             return [
                 'docente_id'   => 'required',
                 'tutor_id'     => 'required',
@@ -36,14 +36,24 @@ class PerfilFormRequest extends FormRequest
                 'subarea_id'   => 'required',
                 'titulo'       => 'required',
                 'institucion'  => 'required',
-                'encargado'    => 'required',
                 'objetivo_gen' => 'required',
                 'objetivo_esp' => 'required',
                 'descripcion'  => 'required'
             ];       
+        }else if($aux == "adscripcion"){
+            return [
+                'docente_id'   => 'required',
+                'tutor_id'     => 'required',
+                'area_id'      => 'required',
+                'subarea_id'   => 'required',
+                'titulo'       => 'required',
+                'sec_trabajo'  => 'required',
+                'objetivo_gen' => 'required',
+                'objetivo_esp' => 'required',
+                'descripcion'  => 'required'
+            ];   
         }else{
             return [
-
                 'docente_id'   => 'required',
                 'tutor_id'     => 'required',
                 'area_id'      => 'required',
@@ -53,7 +63,7 @@ class PerfilFormRequest extends FormRequest
                 'objetivo_esp' => 'required',
                 'descripcion'  => 'required'
             ];   
-        } 
+        }
     }
 
     public function messages()
@@ -65,11 +75,11 @@ class PerfilFormRequest extends FormRequest
             'subarea_id.required'   => 'debe seleccionar un Subrea de especializacio',
             'titulo.required'       => 'debe ingresar el Titulo',
             'institucion.required'  => 'debe ingresar el nombre de la Institucion ',
-            'encargado.required'    => 'debe ingresar el nombre del Encargado',
+            'sec_trabajo.required'  => 'debe ingresar la seccion de Trabajo',
             'objetivo_gen.required' => 'debe ingresar el Objetivo General',
             'objetivo_esp.required' => 'debe ingresar el objetivo Espesifico',
-            'descripcion.required'  => 'debe ingresar una Descripcion'
-           
+            'descripcion.required'  => 'debe ingresar una Descripcion',
+            'titulo.unique'         => 'ya hay un Perfil registrado con ese Titulo'
         ];
     }
 }

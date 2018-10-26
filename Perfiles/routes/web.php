@@ -125,4 +125,4 @@ Route::post('register','Auth\RegisterController@register')->name('registerPost')
 Route::get('/perfil','perfilesController@index')->name('perfiles');
 Route::get('/perfil/registrarPerfil','PerfilController@nuevoFormulario')->name('nuevoPerfil');
 Route::any('/perfil/registrarPerfil/mostrarForm','PerfilController@mostrarForm')->name('mostrarFormulario');
-Route::post('/perfil/registrarPerfil/almacenar/{datos}','PerfilController@almacenar')->name('almacenarPerfil');
+Route::post('/perfil/registrarPerfil/almacenar','PerfilController@almacenar')->name('almacenarPerfil');

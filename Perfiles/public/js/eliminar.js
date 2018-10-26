@@ -34,8 +34,14 @@ $('.registrar').click(function(e){
     url  = form.attr('action');
     datos = form.serialize();
     $.post(url,datos,function(res){
-        alertify.alert(res.mensaje).set('basic', true); 
-          form.submit();
+        if(res.registrado){
+            alertify.alert(res.mensaje).set('basic', true); 
+            form.submit();
+        }else{
+            alertify.set('notifier','position', 'top-right');
+            alertify.error(res.mensaje);
+        }
+        
     }).fail(function(ress,status,error){
         var errores="";
         var cont = 18;
@@ -51,4 +57,14 @@ $('.registrar').click(function(e){
         );*/
         
     });
+})
+
+$('.cambioTema').click(function(){
+    if(this.checked) $(this).prop('value','si');
+    else $(this).prop('value','no');
+})
+
+$('.trabajoCon').click(function(){
+    if(this.checked) $(this).prop('value','si');
+    else $(this).prop('value','no');
 })
