@@ -2,7 +2,7 @@
 @section('titulo','AREA')
 @section('contenido')
     
-    <div id="scroll" class="container">
+    <div class="container scroll">
         
         <div class="jumbotron">
                         <h1>AREA: {{$area->nombre}}</h1>
@@ -13,12 +13,13 @@
                         @endif
                 
          </div>
-         <h3>Lista de SubAreas</h3><br>
+         <h3><b>Lista de SubAreas</b></h3><br>
+
         <div class=" row marketing">
                         @if ($subareas->isNotEmpty())
                                 <div class="col-lg-12">
                                         @foreach ($subareas as $subarea)
-                                                <h4>{{$subarea->nombre}}</h4>
+                                                <h4><b>{{$subarea->nombre}}</b></h4>
                                                 @if ($subarea->descripcion)
                                                         <p>{{$subarea->descripcion}}</p>  
                                                 @else

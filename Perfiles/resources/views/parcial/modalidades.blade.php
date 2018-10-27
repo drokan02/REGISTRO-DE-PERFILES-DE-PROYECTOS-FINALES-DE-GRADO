@@ -1,7 +1,7 @@
 @if($modalidades->isNotEmpty())
-    <table class="tabla" id="listaModall">
-        <thead class ="columnas">
-    <tr>
+    <table class="table" id="listaModall">
+        <thead class ="thead">
+    <tr class="tr">
         <th style="width: 5%; text-align: center;">N°</th>
         <th style="width: 10%;">Codigo</th>
         <th style="width: 25%;">Nombre</th>
@@ -9,10 +9,10 @@
         <th style="width: 17%;"></th>
     </tr>
     </thead>
-    <tbody>
+    <tbody class="tboy">
         
     @foreach ($modalidades as $modalidad)
-        <tr>
+        <tr class="tr">
             
             <td style="text-align: right;">{{$modalidad->id}}</td>
             <td>{{$modalidad->codigo_mod}}</td>

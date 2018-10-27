@@ -26,8 +26,8 @@
    <div  class="centrar table-responsive col-sm-12 listaDatos">
     @if($docentes->isNotEmpty())
       <table class="table table-hover text-center" id="listaProfesionales">
-          <thead class ="columnas">
-        <tr>
+          <thead class ="thead">
+        <tr class="tr">
           <th style="width: 3%; text-align: center;">N°</th>
           <th style="width: 10%;">Nombres</th>
           <th style="width: 10%;">Apellidos</th>
@@ -40,10 +40,10 @@
           <th style="width: 5%;">Opsiones</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="tbody">
            
         @foreach ($docentes as $docente)
-            <tr>  
+            <tr class="tr">  
                 
                     <td style="text-align: right;">{{$fila++}}</td>
                     <td>{{$docente->profesional->nombre_prof}}</td>
@@ -58,7 +58,7 @@
                         <td>{{$docente->profesional->areas->pluck('nombre')[1]}}</td>
                         <td>{{$docente->profesional->areas->pluck('nombre')[0]}}</td>
                     @endif
-                    <td>{{$docente->carga_horaria}}</td>
+                    <td>{{$docente->cargahoraria->pluck('carga_horaria')[0]}}</td>
 
                     <td>
                         <div class=" dropleft text-center">

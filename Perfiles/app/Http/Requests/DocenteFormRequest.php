@@ -34,9 +34,11 @@ class DocenteFormRequest extends FormRequest
                 'correo_prof'   => 'email|min:8|unique:profesionales,correo_prof',
                 'direc_prof'    => 'min:7',
                 'codigo_sis'    => 'required|numeric|digits_between:6,10|unique:profesionales,ci_prof',
-                'carga_horaria' => 'required',
+                'director_carrera' => 'unique:docente,director_carrera',
+                'cargahoraria_id' => 'required',
                 'titulo_id'     => 'required',
                 'area_id'       => 'required',
+                'carrera_id'    => 'required',
 
             ];
         }else{
@@ -51,9 +53,10 @@ class DocenteFormRequest extends FormRequest
                 'correo_prof'   => ['email',Rule::unique('profesionales', 'correo_prof')->ignore($docente['profesional_id'])],
                 'direc_prof'    => 'min:7',
                 'codigo_sis'    => 'required|numeric|digits_between:6,10|unique:profesionales,ci_prof',
-                'carga_horaria' => 'required',
+                'cargahoraria_id' => 'required',
                 'titulo_id'     => 'required',
                 'area_id'       => 'required',
+                'carrera_id'    => 'required',
             ];
         }
         
@@ -88,7 +91,11 @@ class DocenteFormRequest extends FormRequest
             'codigo_sis.numeric'        => 'El Codigo SIS solo puede tener numeros',
             'codigo_sis.digits_between' => 'El Codigo SIS debe tener min:6 y max:10 digitos',
             'codigo_sis.unique'         => 'Ya existe un Docente registrado con esa C.I',
-            'carga_horaria.required'    => 'No selecciono la Carga horaria',
+            'cargahoraria_id.required'    => 'No selecciono una Carga horaria',
+            'titulo_id.required'        => 'No selecciono un Titulo',
+            'carrera_id.required'        => 'No selecciono una Carrera',
+            'area_id.required'             => 'debe seleccionar una Area',
+            'director_carrera.unique'         => 'la carrera Seleccionada ya tiene un Director',
            
         ];
     }

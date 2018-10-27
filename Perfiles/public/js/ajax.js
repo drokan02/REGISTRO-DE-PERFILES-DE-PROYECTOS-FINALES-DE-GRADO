@@ -1,4 +1,28 @@
 //funciona tanto para registrar como eliminar 
+$('.registrarForm').click(function(e){
+    e.preventDefault();
+    form = $(this).parents('form');
+    url  = form.attr('action');
+    datos = form.serialize();
+    $.post(url,datos,function(res){
+        alertify.alert(res.mensaje).set('basic', true); 
+    }).fail(function(ress,status,error){
+        var errores="";
+        var cont = 18;
+       // $('#mensajeError').show();//muestra los mensajes
+        $.each($.parseJSON(ress.responseText), function (ind, elem) {     
+                errores += "<li>"+elem+"</li>"
+                alertify.set('notifier','position', 'top-right');
+                alertify.error(""+elem,cont--);
+               
+        }); 
+       /* $('#errores').html(
+            errores    
+        );*/
+        
+    });
+})
+
 $('.registrar').click(function(e){
     e.preventDefault();
     form = $(this).parents('form');
@@ -87,4 +111,36 @@ $(document).on('click','.pagination a',function(e){
             divLista.html(res);
         }
     })
+})
+
+
+//funciones para el registro de perfiles
+$('#modalidad').change(function(e){
+    e.preventDefault();
+    id = $(this).val();
+    form = $(this).parents('form');
+    url = form.attr('action');
+    //indice 1 es el codigo
+    //indice 5 nombre modalidad
+    $.get(url,form.serialize(),function(res){
+         $('#contenidoForm').html(res);
+
+    })
+})
+
+$('#carrera_id').change(function(e){
+    e.preventDefault();
+     carrera_id = $(this).val();
+     $('#directorCarrera').prop('value',carrera_id);
+     id = $('#directorCarrera').val();
+     //alert(id);
+})
+
+$('#fecha_ini').datepicker({
+    uiLibrary: 'bootstrap4',
+});
+
+$('.prueba').click(function(e){
+    e.preventDefault();
+    alert($('#fecha_ini').val())
 })

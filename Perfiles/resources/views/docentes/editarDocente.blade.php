@@ -58,12 +58,14 @@
 				</div>
 
 				<div class = "form-group row"> 
-					<label for="carga_horaria" class="col-sm-2 col-form-label">Carga Horaria</label>
+					<label for="cargahoraria_id" class="col-sm-2 col-form-label">Carga Horaria</label>
 					<div class="col-sm-4 row-fluid" >
-							<select name="carga_horaria" id="carga_horaria" class="form-control" >
+							<select name="cargahoraria_id" id="cargahoraria_id" class="form-control" >
 								<option disabled selected > -- seleccione la Carga Horaria -- </option>
-									<option value="Tiempo Parcia">Tiempo Parcia</option>	
-									<option value="Tiempo Completo" >Tiempo Completo</option>	
+								@foreach ($horarios as $horario)
+									<option value="{{$horario->id}}" 
+											{{$docente->cargaHoraria->pluck('id')->contains($horario->id) ? 'selected':''}}>{{$horario->carga_horaria}}</option>
+								@endforeach
 
 							</select>
 					</div>
@@ -86,13 +88,13 @@
 						</select>
 					</div>
 
-					<label for="titulo_id" class="col-sm-2 col-form-label">Carrera</label>
+					<label for="carrera_id" class="col-sm-2 col-form-label">Carrera</label>
 					<div class="col-sm-4 row-fluid" >
-						<select name="titulo_id" id="titulo_id" class="form-control" >
+						<select name="carrera_id" id="carrera_id" class="form-control" >
 							<option disabled selected > -- seleccione una Titulo -- </option>
-							@foreach ($titulos as $titulo)
-								<option value="{{$titulo->id}}" 
-								{{$docente->profesional->titulo->pluck('id')->contains($titulo->id) ? 'selected':''}}>{{$titulo->nombre}}</option>
+							@foreach ($carreras as $carrera)
+								<option value="{{$carrera->id}}" 
+								{{$docente->profesional->carrera_id == $carrera->id ? 'selected':''}}>{{$carrera->nombre_carrera}}</option>
 							@endforeach
 						</select>
 					</div>

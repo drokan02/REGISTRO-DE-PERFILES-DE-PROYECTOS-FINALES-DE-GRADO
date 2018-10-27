@@ -7,71 +7,139 @@ use App\Docente;
 use App\Modal;
 use App\Perfil;
 use App\Profesional;
+use App\Estudiante;
+use App\Http\Requests\PerfilFormRequest;
+use Validator;
 use Illuminate\Http\Request;
 
 class PerfilController extends Controller
 {
-    public function seleccion(){
-        $modalidades=Modal::all()->pluck('nombre_mod');
-        $areas=Area::all()->where('id_area',null);
-        return view('perfiles/seleccionFormulario',compact('modalidades','areas'));
+    public function nuevoFormulario(){
+        $modalidades = Modal::all();
+        return view('perfiles.formulario',compact('modalidades'));
     }
 
-    public function formulario(Request $request){
-        $this->validate(request(), [
-            'modalidad' => ['required','not_in:seleccione una opcion'],
-            'area' => ['required','not_in:seleccione una opcion'],
-        ]);
-        $docentes=Docente::all();
-        $subAreas=Area::query()->where('id_area',$request['area'])->get();
-        //$areaProf=Area::find($request['area']);
-        $area=Area::query()->where('id',$request['area'])->pluck('nombre')->implode('');
-        $profesionales=Profesional::all();//$areaProf->profesionales()->get();
-        $modalidad=$request['modalidad'];
-        $estudiante=auth()->user()->estudiante()->first();
-        //dd($area);
-        if($modalidad === "proyecto de grado" || $modalidad === "tesis"){
-            return view('perfiles/formTesisProyGrado',compact('modalidad','subAreas','area','profesionales', 'estudiante'));
-        }else{
-            return view('perfiles/formAdsTrabDir',compact('modalidad','subAreas','area','profesionales', 'estudiante'));
+    public function mostrarForm(Request $request){
+        $modalidad_id  = $request->modalidad_id;
+        $estudiante    = auth()->user()->estudiante()->first();
+        $carrera_id    = $estudiante->carrera_id;
+        $modalidad     = Modal::where('id',$modalidad_id)->value('nombre_mod');
+        $subareas      = Area::subareasCarrera($carrera_id)->get();
+        $areas         = Area::areasCarrera($carrera_id)->get();
+        $profesionales = Profesional::porCarrera($carrera_id)->get();
+        $docentes      = Docente::with('profesional')->porCarrera($carrera_id)->get();
+        $id            = Docente::directorCarrera($carrera_id)->value('id');
+        $director      = Docente::with('profesional')->findOrFail($id);
+        $gestion       = $this->periodo();
+        $fecha_ini     = $this->fechaIni();
+        $fecha_fin     = $this->fechaFin();
+        //$res = $this->verificar('si',7,[]);
+       // $aux = $modalidad->toArray()[0];
+      // dd($res);
+        if($request->ajax()){
+            if($modalidad == "adscripcion" || $modalidad == "trabajo dirigido"){
+                
+                return response()->json(
+                    view('perfiles.formTrabajoD',compact('director','docentes','profesionales','areas','subareas','estudiante','modalidad_id','modalidad','gestion','fecha_ini','fecha_fin'))->render()
+                );
+            }else{
+                return response()->json(
+                    view('perfiles.formTesis',compact('director','docentes','profesionales','areas','subareas','estudiante','modalidad_id','modalidad','gestion','fecha_ini','fecha_fin'))->render()
+                );
+            } 
         }
     }
-
-    public function index()
-    {
-        //
+    
+    public function almacenar(PerfilFormRequest $request){
+        $perfil = new Perfil;
+        $trabConjunto = $request['trabajo_conjunto'];
+        $estudiante_id = $request['estudiante_id'];
+        $est_perf = Estudiante::find($estudiante_id)->perfil;
+        $est_perf = $est_perf->toArray();
+        $perfil_id = Perfil::where('titulo',$request['titulo'])->value('id');
+        $validacion = $this->verificar($trabConjunto,$perfil_id,$est_perf);
+        if($request->ajax()){
+            return response()->json($validacion);
+        }
+        if($perfil_id && $trabConjunto == 'si'){
+            $perfil->estudiantes()->attach($estudiante_id,['perfil_id'=>$perfil_id]); 
+        }else{
+            $perfil->create($request->all());
+            $perfil_id = Perfil::where('titulo',$request['titulo'])->value('id');
+            $perfil->estudiantes()->attach($estudiante_id,['perfil_id'=>$perfil_id]); 
+        }
+        
+        
+        
+        
+       // Perfil::create($request->all());
+        
     }
 
+     public function verificar($trabConjunto,$id,$est_perf){
+        
+         if($est_perf == []){
+                if($trabConjunto == 'si'){
+                    return $this->maximoIntegrantes($id);
+                }else if($id){
+                        return [
+                            'registrado'=>false,
+                            'mensaje'=> 'Ya existe un formulario registrado con ese titulo'.$trabConjunto
+                        ];  
+                }else{
+                    return [
+                        'registrado'=>true,
+                        'mensaje'=> 'Formulario registrado correctamente'
+                    ];  
+                }
+        }else{
+            return [
+                'registrado'=>false,
+                'mensaje'=> 'Usted ya tiene registrado un Formulario de Perfil '
+            ]; 
+        }
 
-    public function create()
-    {
-        //
+     }
+
+    public function maximoIntegrantes($id){
+        $nro_integrantes = $this->nroIntegrantes($id);
+        if ($nro_integrantes < 2) {
+            return [
+                'registrado'=>true,
+                'mensaje'=> 'Formulario registrado correctamente'
+            ];  
+        }else{
+            return [
+                'registrado'=>false,
+                'mensaje'=> 'Titulo del Perfil ya se encuentra registrado y  cuenta con  el maximo de integrantes que es 2'
+            ];
+        }
     }
+     public function fechaFin(){
+        $dia = date('d');
+        $mes = date('m');
+        $anio= date('Y')+2;
+        $fecha_fin = "$anio-$mes-$dia";
+        return  $fecha_fin;
+     }
 
+     public function fechaIni(){
+        $dt = new \DateTime();
+        $fecha_ini = $dt->format('Y-m-d');
+        return $fecha_ini;
+     }
+     public function periodo(){
+         $mes = date('m');
+         $anio = date('Y');
+        return ($mes < 7 ? 1 : 2 ).'/'.$anio;
+     }
 
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show(Perfil $perfil)
-    {
-        //
-    }
-
-    public function edit(Perfil $perfil)
-    {
-        //
-    }
-
-    public function update(Request $request, Perfil $perfil)
-    {
-        //
-    }
-
-    public function destroy(Perfil $perfil)
-    {
-        //
-    }
-
+     public function nroIntegrantes($id){
+         if($id){
+             $res = Perfil::find($id)->estudiantes;
+             return $res->count();
+         }else{
+             return 0;
+         }
+     }
 }

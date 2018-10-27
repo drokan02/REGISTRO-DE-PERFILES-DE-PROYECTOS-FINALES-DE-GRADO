@@ -7,32 +7,31 @@
 <Form method="GET" action="{{route('Areas')}}" >
     <!--BUSCADOR -->
     @if ($areas->isNotEmpty() or $buscar)
-    <div class="centrar col-sm-10 ">
         
-            <div class="row">
-                <div class="col-sm-3"></div>
-                
-                <div class=" col-sm-4">       
-                                <input type="search" placeholder="&#xF002; Buscar" style="font-family:Time, FontAwesome" class="form-control buscar" 
-                                name="buscar" autofocus value="{{$buscar}}" autocomplete="off" onfocus="var temp_value=this.value; this.value=''; this.value=temp_value">   
-                </div>          
-                <div class="col-4">
-                                <button class=" btn btn-success pull-left"> Buscar</button>
+    <div class="container">
+                <div class="form-group row">
+                    <div class="col-sm-4"></div>
+                    <div class=" col-4">       
+                                    <input type="search" placeholder="&#xF002; Buscar" style="font-family:Time, FontAwesome" class="form-control buscar" 
+                                    name="buscar" autofocus value="{{$buscar}}" autocomplete="off" onfocus="var temp_value=this.value; this.value=''; this.value=temp_value">   
+                    </div>          
+                    <div class="col-sm-0">
+                                    <button class=" btn btn-success pull-left"> Buscar</button>
+                    </div>
+                   
                 </div>
-            </div>
-             
-    </div>  
+                     
+        </div> 
     @endif
    <!--FIN BUSCADOR -->
 
 
-   @include('complementos.error')
-  <div  class="centrar col-sm-10 listaDatos">
+  <div  class=" tabla centrar col-sm-10 listaDatos">
    @if($areas->isNotEmpty())
 
-      <table class="tabla" id="listaArea">
-        <thead class ="columnas">
-        <tr>
+      <table class=" table table-hover table-bordered-primary text-center" id="listaArea">
+        <thead class="thead">
+        <tr class="tr">
           <th style="width: 5%; text-align: center;">N°</th>
           <th style="width: 10%;">Codigo</th>
           <th style="width: 25%;">Nombre</th>
@@ -40,10 +39,10 @@
           <th style="width: 10%;">Opciones</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="tbody">
            
         @foreach ($areas as $area)
-            <tr>
+            <tr class="tr">
                 <td style="text-align: right;">{{$fila++}}</td>
                 <td>{{$area->codigo}}</td>
                 <td>{{$area->nombre}}</td>

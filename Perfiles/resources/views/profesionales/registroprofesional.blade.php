@@ -74,8 +74,8 @@
 						<div class="col-sm-4 row-fluid" >
 							<select name="carrera_id" id="carrera_id" class="form-control" >
 								<option disabled selected > -- seleccione una Carrera-- </option>
-								@foreach ($titulos as $titulo)
-									<option value="{{$titulo->id}}">{{$titulo->nombre}}</option>
+								@foreach ($carreras as $carrera)
+									<option value="{{$carrera->id}}">{{$carrera->nombre_carrera}}</option>
 								@endforeach
 							</select>
 						</div>

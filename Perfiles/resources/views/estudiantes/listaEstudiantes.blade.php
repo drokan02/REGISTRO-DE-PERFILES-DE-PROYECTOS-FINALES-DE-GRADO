@@ -3,19 +3,19 @@
 @section('contenido')
 
     @if($estudiantes->isNotEmpty())
-        <div class="container col-sm-9">
+        <div class="container col-sm-9 listaDatos">
             <table class="table table-hover table-bordered-primary text-center">
-                <thead class="thead-primary">
-                <tr>
+                <thead class=" thead thead-primary">
+                <tr class="tr">
                     <th scope="col">#</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">carrera</th>
                     <th scope="col">Acciones</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody class="tbody">
                 @foreach($estudiantes as $estudiante)
-                    <tr>
+                    <tr class="tr">
                         <th scope="row">{{$estudiante->id}}</th>
                         <td>{{$estudiante->nombres}}</td>
                         <td>{{$estudiante->carrera()->pluck('nombre_carrera')->implode(' - ')}}</td>

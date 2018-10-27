@@ -18,6 +18,10 @@ class Estudiante extends Model
     protected $hidden = [
         'password'
     ];
+
+    public function perfil(){
+        return $this->belongsToMany(Perfil::class,'estudiante_perfil');  
+    }
     public function carrera(){
         return $this->belongsTo(Carrera::class);
     }

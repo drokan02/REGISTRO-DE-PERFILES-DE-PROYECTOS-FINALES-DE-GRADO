@@ -20,7 +20,10 @@ class Modal extends Model
 
     protected $table='modalidad';
     public $timestamps=false;
-	
+    
+    public function perfiles(){
+        return $this->hasMany(Perfil::class);
+    }
 
     public function scopeBuscar($query, $buscar){
         return $query->whereNull('id')

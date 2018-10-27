@@ -23,6 +23,9 @@
                 <a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Guia par el llenado <br> de formulario </a>
             </li>
             <li>
+                <a href="{{route('gestiones')}}"><i class="fa fa-caret-right" aria-hidden="true"></i>Gestiones</a>
+            </li>
+            <li>
                 <a href="{{route('carreras')}}"><i class="fa fa-caret-right" aria-hidden="true"></i>Carreras</a>
             </li>
             <li>
@@ -98,7 +101,7 @@
         </a>
         <ul class="treeview-menu">
           <li><a href="{{route('registrarDocente')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Docente</a></li>
-          <li><a href="{{route('Docentes')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar docentes</a></li>
+          <li><a href="{{route('Docentes',['carrera_id'=>1])}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar docentes</a></li>
         </ul>
       </li>
 
@@ -141,10 +144,10 @@
             </a>
             <ul class="treeview-menu">
                 <li class="">
-                    <a href="{{route('seleccionarPerfil')}}"><i class="fa fa-caret-right" aria-hidden="true"></i>Registrar Perfil</a>
+                    <a href="{{route('nuevoPerfil')}}"><i class="fa fa-caret-right" aria-hidden="true"></i>Registrar Perfil</a>
                 </li>
                 <li class="">
-                    <a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Lista Perfiles</a>
+                    <a href="{{route('perfiles')}}"><i class="fa fa-caret-right" aria-hidden="true"></i>Lista Perfiles</a>
                 </li>
             </ul>
         </li>
