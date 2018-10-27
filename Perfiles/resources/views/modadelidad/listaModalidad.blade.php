@@ -1,5 +1,5 @@
 @extends('layouts.menu')
-@section('titulo','LISTAR MODADELIDAD')
+@section('titulo','LISTA MODADELIDADES')
 @section('contenido')
 
 <Form method="GET" action="{{route('modalidad')}}">
@@ -17,7 +17,7 @@
               <th style="width: 10%;">Codigo</th>
               <th style="width: 25%;">Nombre</th>
               <th style="width: 43%; ">Descripcion</th>
-              <th style="width: 17%;"></th>
+              <th style="width: 17%;">Acciones</th>
             </tr>
           </thead>
           <tbody class="tbody">

@@ -20,11 +20,13 @@
     <script src={{asset('js/popper.min.js')}}></script>
     
   </head>
+
   <body class="hold-transition skin-blue sidebar-mini">
+      @include('layouts.header')
     <div class="wrapper">
       
       <!--BARRA DEL ENCABEZADO-->
-      @include('layouts.header')
+      
       <!-- BARRA DE MENU -->
       @include('layouts.sidebar')
        <!--Contenido-->

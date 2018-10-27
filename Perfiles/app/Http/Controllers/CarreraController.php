@@ -19,8 +19,15 @@ class CarreraController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request){
-        $carreras=Carrera::name($request->get('name'))->get();
-        return view('carreras/listaCarreras',compact('carreras'));
+        $buscar = $request['buscar'];
+        $carreras=Carrera::name($buscar)->get();
+        if ($request->ajax())
+         {
+            return response()->json([
+                view('parcial.carreras',compact('carreras','buscar'))->render()
+            ]);
+        }
+        return view('carreras/listaCarreras',compact('carreras','buscar'));
     }
     /**Show the form for creating a new resource.
      * @return \Illuminate\Http\Response
