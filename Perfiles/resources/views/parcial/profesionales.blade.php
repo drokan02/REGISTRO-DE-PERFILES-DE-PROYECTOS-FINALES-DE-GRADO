@@ -11,7 +11,7 @@
                  <th style="width: 12%;">Correo</th>
                  <th style="width: 10%;">Area</th>
                  <th style="width: 10%;">Sub Area</th>
-                 <th style="width: 5%;">Opsiones</th>
+                 <th style="width: 5%;">Acciones</th>
                </tr>
              </thead>
              <tbody class="tbody">

@@ -7,7 +7,7 @@
     <th style="width: 10%;">Codigo</th>
     <th style="width: 25%;">Nombre</th>
     <th style="width: 45%; ">Descripcion</th>
-    <th style="width: 10%;">Opciones</th>
+    <th style="width: 10%;">Acciones</th>
   </tr>
 </thead>
 <tbody class="tbody">
