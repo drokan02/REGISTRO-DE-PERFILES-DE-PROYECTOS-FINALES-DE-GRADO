@@ -114,25 +114,31 @@ class modalidades extends Controller
     }
 
     public function importacion(Request $request){
-        $archivo = $request->file('importar_modalidad');
-        $nombre=$archivo->getClientOriginalName();
-        \Storage::disk('archivos')->put($nombre, \File::get($archivo) );
-        $ruta  =  storage_path('archivos') ."/". $nombre;
-        Excel::selectSheetsByIndex(0)->load($ruta, function ($hoja) {
-            $hoja->each(function ($fila) {
-                $codigo_mod=Modal::query()->where('codigo_mod',$fila->codigo_mod)->get();
-                if(count($codigo_mod)==0){
-                    $modalidad = new Modal();
-                    $modalidad->create([
-                        'codigo_mod' => $fila->codigo_mod,
-                        'nombre_mod' => $fila->nombre_mod,
-                        'descripsion_mod' => $fila->descripsion_mod
-                    ]);
-                }
-            });
+        try{
+            $archivo = $request->file('importar_modalidad');
+            $nombre=$archivo->getClientOriginalName();
+            \Storage::disk('archivos')->put($nombre, \File::get($archivo) );
+            $ruta  =  storage_path('archivos') ."/". $nombre;
+            Excel::selectSheetsByIndex(0)->load($ruta, function ($hoja) {
+                $hoja->each(function ($fila) {
+                    $codigo_mod=Modal::query()->where('codigo_mod',$fila->codigo_mod)->get();
+                    $nombre_mod=Modal::query()->where('nombre_mod',$fila->nombre_mod)->get();
+                    if(count($codigo_mod)==0 && count($nombre_mod)==0){
+                        $modalidad = new Modal();
+                        $modalidad->create([
+                            'codigo_mod' => $fila->codigo_mod,
+                            'nombre_mod' => $fila->nombre_mod,
+                            'descripsion_mod' => $fila->descripsion_mod
+                        ]);
+                    }
+                });
 
-        });
-        \Storage::disk('archivos')->delete($nombre);
-        return redirect()->route('modalidad');
+            });
+            \Storage::disk('archivos')->delete($nombre);
+            return redirect()->route('modalidad');
+        }catch (\Exception $exception){
+            return back()->withErrors('no se puede importar');
+        }
+
     }
 }
