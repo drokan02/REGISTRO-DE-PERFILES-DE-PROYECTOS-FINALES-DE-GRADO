@@ -1,16 +1,16 @@
 @if($roles->isNotEmpty())
-    <table class="table-hover table-bordered-primary text-center">
-    <thead class="thead-primary">
-    <tr>
+    <table class="table table-hover table-bordered-primary text-center">
+    <thead class="thead thead-primary">
+    <tr class="tr">
         <th scope="col">#</th>
         <th scope="col">Nombre Rol</th>
         <th scope="col">privilegios</th>
         <th scope="col">Acciones</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody class="tbody">
     @foreach($roles as $rol)
-        <tr>
+        <tr class="tr">
             <th scope="row">{{$rol->id}}</th>
             <td>{{$rol->nombre_rol}}</td>
             <td>{{$rol->privilegios}}</td>

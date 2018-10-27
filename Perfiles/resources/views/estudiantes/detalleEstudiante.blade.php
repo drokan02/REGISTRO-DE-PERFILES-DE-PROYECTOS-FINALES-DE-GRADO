@@ -13,45 +13,47 @@
     </ul>
 
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th class="h1 " scope="col">Informacion Basica</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>Nombre de estudiante: </td>
-            <td>{{$estudiante->nombres}}</td>
-
-        </tr>
-        <tr>
-            <td>Carrera del estudiante</td>
-            <td>{{$estudiante->carrera()->pluck('nombre_carrera')->implode(' - ')}}</td>
-        </tr>
-        </tbody>
-    </table>
-    <table class="table">
-        <thead>
-        <tr>
-            <th class="h1" scope="col">Informacion Personal</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>Nombre de Usuario: </td>
-            <td>{{$estudiante->user_name}}</td>
-        </tr>
-        <tr>
-            <td>Correo Electronico</td>
-            <td>{{$estudiante->email}}</td>
-        </tr>
-        <tr>
-            <td>Telefono: </td>
-            <td>{{$estudiante->telefono}}</td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="listaDatos">
+        <table class="table">
+            <thead class="thead">
+            <tr class="tr">
+                <th class="h1 " scope="col">Informacion Basica</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody class="tbody">
+            <tr class="tr">
+                <td>Nombre de estudiante: </td>
+                <td>{{$estudiante->nombres}}</td>
+        
+            </tr>
+            <tr class="tr">
+                <td>Carrera del estudiante</td>
+                <td>{{$estudiante->carrera()->pluck('nombre_carrera')->implode(' - ')}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <table class="table">
+            <thead class="thead">
+            <tr class="tr">
+                <th class="h1" scope="col">Informacion Personal</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody class="tbody">
+            <tr class="tr">
+                <td>Nombre de Usuario: </td>
+                <td>{{$estudiante->user_name}}</td>
+            </tr>
+            <tr class="tr">
+                <td>Correo Electronico</td>
+                <td>{{$estudiante->email}}</td>
+            </tr>
+            <tr class="tr">
+                <td>Telefono: </td>
+                <td>{{$estudiante->telefono}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 @endsection

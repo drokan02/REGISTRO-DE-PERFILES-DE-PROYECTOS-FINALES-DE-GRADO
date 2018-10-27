@@ -37,9 +37,9 @@
   
   <div class="centrar col-sm-10 table-responsive listaDatos">
     @if($subareas->isNotEmpty())   <!--BUSCADOR -->
-      <table class="tabla" id="listaArea">
-          <thead class ="columnas">
-        <tr>
+      <table class="table" id="listaArea">
+          <thead class ="thead">
+        <tr class="tr">
           <th style="width: 5%; text-align: center;">N°</th>
           <th style="width: 10%;">Codigo</th>
           <th style="width: 25%;">Nombre</th>
@@ -47,10 +47,10 @@
           <th style="width: 10%;">Opciones</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="tbody">
            
         @foreach ($subareas as $subarea)
-            <tr>            
+            <tr class="tr">            
                 <td style="text-align: right;">{{$fila++}}</td>
                 <td>{{$subarea->codigo}}</td>
                 <td>{{$subarea->nombre}}</td>

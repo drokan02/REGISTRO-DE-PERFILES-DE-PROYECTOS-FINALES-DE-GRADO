@@ -30,17 +30,21 @@ class PerfilController extends Controller
         $docentes      = Docente::with('profesional')->porCarrera($carrera_id)->get();
         $id            = Docente::directorCarrera($carrera_id)->value('id');
         $director      = Docente::with('profesional')->findOrFail($id);
+        $gestion       = $this->periodo();
+        $fecha_ini     = $this->fechaIni();
+        $fecha_fin     = $this->fechaFin();
+        //$res = $this->verificar('si',7,[]);
        // $aux = $modalidad->toArray()[0];
-       // dd($aux['id']);
+      // dd($res);
         if($request->ajax()){
             if($modalidad == "adscripcion" || $modalidad == "trabajo dirigido"){
                 
                 return response()->json(
-                    view('perfiles.formTrabajoD',compact('director','docentes','profesionales','areas','subareas','estudiante','modalidad_id','modalidad'))->render()
+                    view('perfiles.formTrabajoD',compact('director','docentes','profesionales','areas','subareas','estudiante','modalidad_id','modalidad','gestion','fecha_ini','fecha_fin'))->render()
                 );
             }else{
                 return response()->json(
-                    view('perfiles.formTesis',compact('director','docentes','profesionales','areas','subareas','estudiante','modalidad_id','modalidad'))->render()
+                    view('perfiles.formTesis',compact('director','docentes','profesionales','areas','subareas','estudiante','modalidad_id','modalidad','gestion','fecha_ini','fecha_fin'))->render()
                 );
             } 
         }
@@ -48,12 +52,14 @@ class PerfilController extends Controller
     
     public function almacenar(PerfilFormRequest $request){
         $perfil = new Perfil;
-        $trabConjunto = $request['trabajo'];
+        $trabConjunto = $request['trabajo_conjunto'];
         $estudiante_id = $request['estudiante_id'];
         $est_perf = Estudiante::find($estudiante_id)->perfil;
+        $est_perf = $est_perf->toArray();
         $perfil_id = Perfil::where('titulo',$request['titulo'])->value('id');
+        $validacion = $this->verificar($trabConjunto,$perfil_id,$est_perf);
         if($request->ajax()){
-            return response()->json($this->verificar($trabConjunto,$perfil_id,$est_perf));
+            return response()->json($validacion);
         }
         if($perfil_id && $trabConjunto == 'si'){
             $perfil->estudiantes()->attach($estudiante_id,['perfil_id'=>$perfil_id]); 
@@ -71,32 +77,69 @@ class PerfilController extends Controller
     }
 
      public function verificar($trabConjunto,$id,$est_perf){
-         if(!$est_perf){
-            if($trabConjunto == 'si'){
-                return [
-                    'registrado'=>true,
-                    'mensaje'=> 'Formulario registrado correctamente'
-                ];  
-            }else{
-                if($id){
-                    return [
-                        'registrado'=>false,
-                        'mensaje'=> 'Ya existe un formulario registrado con ese titulo'
-                    ];  
+        
+         if($est_perf == []){
+                if($trabConjunto == 'si'){
+                    return $this->maximoIntegrantes($id);
+                }else if($id){
+                        return [
+                            'registrado'=>false,
+                            'mensaje'=> 'Ya existe un formulario registrado con ese titulo'.$trabConjunto
+                        ];  
                 }else{
                     return [
                         'registrado'=>true,
                         'mensaje'=> 'Formulario registrado correctamente'
                     ];  
                 }
-            }
         }else{
             return [
                 'registrado'=>false,
-                'mensaje'=> 'El estudiante ya tiene registrado un formulario de perfil de grado'
+                'mensaje'=> 'Usted ya tiene registrado un Formulario de Perfil '
             ]; 
         }
 
      }
 
+    public function maximoIntegrantes($id){
+        $nro_integrantes = $this->nroIntegrantes($id);
+        if ($nro_integrantes < 2) {
+            return [
+                'registrado'=>true,
+                'mensaje'=> 'Formulario registrado correctamente'
+            ];  
+        }else{
+            return [
+                'registrado'=>false,
+                'mensaje'=> 'Titulo del Perfil ya se encuentra registrado y  cuenta con  el maximo de integrantes que es 2'
+            ];
+        }
+    }
+     public function fechaFin(){
+        $dia = date('d');
+        $mes = date('m');
+        $anio= date('Y')+2;
+        $fecha_fin = "$anio-$mes-$dia";
+        return  $fecha_fin;
+     }
+
+     public function fechaIni(){
+        $dt = new \DateTime();
+        $fecha_ini = $dt->format('Y-m-d');
+        return $fecha_ini;
+     }
+     public function periodo(){
+         $mes = date('m');
+         $anio = date('Y');
+        return ($mes < 7 ? 1 : 2 ).'/'.$anio;
+     }
+
+     public function nroIntegrantes($id){
+         if($id){
+             $res = Perfil::find($id)->estudiantes;
+             return $res->count();
+         }else{
+             return 0;
+         }
+     }
 }

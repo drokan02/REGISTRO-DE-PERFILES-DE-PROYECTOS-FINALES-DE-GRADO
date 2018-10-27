@@ -26,9 +26,9 @@
   <div  class="centrar col-sm-10 listaDatos">
    @if($gestiones->isNotEmpty())
 
-      <table class="table-hover table-bordered-primary text-center" id="listaArea">
-        <thead class ="columnas">
-        <tr>
+      <table class=" table table-hover table-bordered-primary text-center" id="listaArea">
+        <thead class ="thead">
+        <tr class="tr">
           <th style="width: 5%; text-align: center;">N°</th>
           <th style="width: 10%;">Fecha Inicio</th>
           <th style="width: 25%;">Fecha Fin</th>
@@ -36,10 +36,10 @@
           <th style="width: 10%;">Opciones</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="tbody">
            
         @foreach ($gestiones as $gestion)
-            <tr>
+            <tr class="tr">
                 <td style="text-align: right;">{{$fila++}}</td>
                 <td>{{$gestion->fecha_ini}}</td>
                 <td>{{$gestion->fecha_fin}}</td>

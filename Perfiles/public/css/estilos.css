@@ -11,13 +11,6 @@ label {
     
 }
 
-table{
-    table-layout: fixed;
-    background-color: white;
-    width: 100%;
-    border: solid 1px #6495ED;
-    
-}
 
 .centrar{
     margin: auto;
@@ -34,18 +27,31 @@ table{
     overflow:auto;
 }
 
-thead{
+.listaDatos > table{
+    table-layout: fixed;
+    background-color: white;
+    width: 100%;
+    border: solid 1px #6495ED;   
+}
+
+
+.table > thead{
     text-align: center;
     background-color: #6495ED;
     border-bottom: #0000FF;
 }
 
-tbody{
+.table > tbody{
     background-color: white;
 }
-td , th {
+.tr > th , .tr > td  {
     border: solid 1px #6495ED;
     padding: 5px;
+}
+
+.tbody > tr:hover td{
+    background-color: #ddd;
+
 }
 
 .iconMenu{
@@ -69,10 +75,7 @@ h1.truncated {
     text-overflow: ellipsis;
 }
 
-tr:hover td{
-    background-color: #ddd;
 
-}
 
 .alinearDer{
 
@@ -84,7 +87,7 @@ tr:hover td{
     background-color: rgb(200,200,200);
     background-blend-mode: soft-light;
     background-size: cover;
-    height: 1200px;
+    height: 1500px;
 }
 
 #formLogin{

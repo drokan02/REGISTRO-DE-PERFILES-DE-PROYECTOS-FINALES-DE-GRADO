@@ -23,8 +23,8 @@ class Perfil extends Model
         'descripcion',
         'trabajo_conjunto',
         'cambio_tema',
-        'gestion_ini',
-        'gestion_fin'
+        'fecha_ini',
+        'fecha_fin'
     ];
 
     public function gestion()

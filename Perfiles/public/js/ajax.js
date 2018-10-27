@@ -135,3 +135,12 @@ $('#carrera_id').change(function(e){
      id = $('#directorCarrera').val();
      //alert(id);
 })
+
+$('#fecha_ini').datepicker({
+    uiLibrary: 'bootstrap4',
+});
+
+$('.prueba').click(function(e){
+    e.preventDefault();
+    alert($('#fecha_ini').val())
+})

@@ -22,7 +22,8 @@ class GestionController extends Controller
     }
 
     public function registrar(){
-        return view('gestion.registrarGestion');
+        
+        return view('gestion.registrarGestion',compact('fecha'));
     }
 
     public function almacenar(GestionFormRequest $request){
@@ -47,5 +48,32 @@ class GestionController extends Controller
         }
         $gestion->update($request->all);
         return redirect()->route('gestiones');
+    }
+
+    public function calcularPeriodo(){
+       
+       $bisiesto = $this->bisiesto($anio);
+        switch ($mes) {
+            case '1': return 31;break;
+            case '2':  return ($bisiesto? 29 : 28);break;
+            case '3': return 31;break;
+            case '4': return 30;break;
+            case '5': return 31;break;
+            case '6': return 30;break;
+            case '7': return 31;break;
+            case '8': return 31;break;
+            case '9': return 30;break;
+            case '10': return 31;break;
+            case '11': return 30;break;
+            default:  return 31;break;
+        }
+    }
+
+    public function bisiesto($anio){
+        if($anio % 4 == 0  && ($anio % 100 != 0 || $anio % 400 == 0)){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

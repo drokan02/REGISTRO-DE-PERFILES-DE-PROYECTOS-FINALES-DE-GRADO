@@ -18,21 +18,21 @@
                 <li>{{$errors}}</li>
             </ul>
         @endforeach
-    </div>
+    </div class="listaDatos">
     @if($carreras->isNotEmpty())
         <table class="table table-hover table-bordered-primary text-center">
-            <thead class="thead-primary">
-            <tr>
+            <thead class="thead thead-primary">
+            <tr class="tr">
                 <th scope="col">#</th>
                 <th scope="col">Codigo Carrera</th>
                 <th scope="col">Carrera</th>
                 <th scope="col">Acciones</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody class="tbody">
             @foreach($carreras as $carrera)
-                <tr>
-                    <th scope="row">{{$carrera->id}}</th>
+                <tr class="tr">
+                    <td scope="row">{{$carrera->id}}</td>
                     <td>{{$carrera->codigo_carrera}}</td>
                     <td>{{$carrera->nombre_carrera}}</td>
                     <td>
