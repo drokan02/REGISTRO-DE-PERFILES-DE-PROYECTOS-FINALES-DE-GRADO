@@ -124,3 +124,6 @@ Route::post('register','Auth\RegisterController@register')->name('registerPost')
 //perfiles
 Route::get('/seleccion_modalidad','PerfilController@seleccion')->name('seleccionarPerfil');
 Route::post('/seleccionarFormulario','PerfilController@formulario')->name('formularioPerfil');
+//fechas
+Route::get('/fechas','FechasController@index')->name('fechas');
+Route::get('/fechas/guardar','FechasController@guardar')->name('guadarfecha');

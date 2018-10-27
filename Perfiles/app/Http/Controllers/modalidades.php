@@ -8,6 +8,8 @@ use Illuminate\Validation\Rule;
 //use Validator;
 use App\Modal;
 use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
+use App\fechas;
 
 //use DB;
 
@@ -48,12 +50,24 @@ class modalidades extends Controller
             'descripsion_mod'=> ['required']
 		]);
 		if($request->ajax()){
+             $date=Carbon::now();
+    $fechas=new fechas;
+    $fechas->titulo=$request->nombre_mod;
+
+    $fechas->fechainicio=$date;
+    $date=Carbon::now();
+    $endDate =$date->addMonth(6);
+    $fechas->fechafin=$date;
+    $fechas->save();
             return response()->json([
                 'mensaje'=>'Modalidad registrado correctamente'
+
             ]);
+    
         }
         $request['nombre_mod']=strtolower($request['nombre_mod']);
 		$modadelidad = new Modal;
+
 		$modadelidad->create($request->all());
 		return redirect()->route('modalidad');
 	}
