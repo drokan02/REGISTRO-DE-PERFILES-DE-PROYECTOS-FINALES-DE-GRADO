@@ -7,6 +7,7 @@ use DB;
 
 class Area extends Model
 {   
+    protected $table='area';
     protected $fillable = [
         'codigo',
         'nombre',

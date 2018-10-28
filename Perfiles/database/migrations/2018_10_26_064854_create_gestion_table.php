@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCarreraTable extends Migration
+class CreateGestionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateCarreraTable extends Migration
      */
     public function up()
     {
-        Schema::create('carrera', function (Blueprint $table) {
+        Schema::create('gestion', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('codigo_carrera',20)->unique();
-            $table->string('nombre_carrera',40)->unique();
-            $table->string('descripcion')->nullable();
+            $table->date('fecha_ini');
+            $table->date('fecha_fin');
+            $table->integer('periodo');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateCarreraTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('carrera');
+        Schema::dropIfExists('gestion');
     }
 }

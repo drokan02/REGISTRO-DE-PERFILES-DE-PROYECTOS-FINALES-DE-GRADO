@@ -66,7 +66,7 @@
                             <option disabled selected > -- select an option -- </option>
                             @foreach ($titulos as $titulo)
                                 @if ($profesional->titulo_id == $titulo->id)
-                                    <option value="{{$titulo->id}}" selected >{{$titulo->nombre}}</option>                                    
+                                    <option value="{{$titulo->id}}" selected >{{$titulo->abreviatura}}</option>                                    
                                 @else
                                     <option value="{{$titulo->id}}" >{{$titulo->nombre}}</option>
                                 @endif

@@ -83,7 +83,7 @@
 							<option disabled selected > -- seleccione una Titulo -- </option>
 							@foreach ($titulos as $titulo)
 								<option value="{{$titulo->id}}" 
-								{{$docente->profesional->titulo->pluck('id')->contains($titulo->id) ? 'selected':''}}>{{$titulo->nombre}}</option>
+								{{$docente->profesional->titulo->pluck('id')->contains($titulo->id) ? 'selected':''}}>{{$titulo->abreviatura}}</option>
 							@endforeach
 						</select>
 					</div>

@@ -50,7 +50,7 @@
                     <td style="text-align: right;">{{$fila++}}</td>
                     <td>{{$docente->profesional->nombre_prof}}</td>
                     <td>{{$docente->profesional->ap_pa_prof}}&nbsp;{{$docente->profesional->ap_ma_prof}}</td>
-                    <td>{{$docente->profesional->titulo->pluck('nombre')[0]}}</td>
+                    <td>{{$docente->profesional->titulo->pluck('abreviatura')[0]}}</td>
                     <td>{{$docente->profesional->telef_prof}}</td>
                     <td>{{$docente->profesional->correo_prof}}</td>
                     @if (!$docente->profesional->areas->pluck('id_area')[0])

@@ -25,7 +25,7 @@ class Profesional extends Model
          ];
 
 
-    public function Perfiles()
+    public function perfiles()
     {
         return $this->hasMany(Perfil::class);    
     }

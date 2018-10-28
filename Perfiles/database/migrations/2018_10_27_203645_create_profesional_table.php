@@ -21,7 +21,7 @@ class CreateProfesionalTable extends Migration
             $table->string('ap_ma_prof',50);
             $table->string('correo_prof',50)->nullable()->unique();
             $table->integer('telef_prof')->unsigned()->unique()->nullable();
-            $table->string('direc_pro',50)->nullable();
+            $table->string('direc_prof',50)->nullable();
             $table->integer('titulo_id')->unsigned();
             $table->foreign('titulo_id')->references('id')->on('titulo')->onDelete('cascade');
             $table->integer('carrera_id')->unsigned();
