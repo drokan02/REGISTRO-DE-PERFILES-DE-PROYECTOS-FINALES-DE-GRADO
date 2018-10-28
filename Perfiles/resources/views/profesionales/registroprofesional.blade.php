@@ -66,7 +66,7 @@
 							<select name="titulo_id" id="titulo_id" class="form-control" >
 								<option disabled selected > -- seleccione una Titulo -- </option>
 								@foreach ($titulos as $titulo)
-									<option value="{{$titulo->id}}">{{$titulo->nombre}}</option>
+									<option value="{{$titulo->id}}">{{$titulo->abreviatura}}</option>
 								@endforeach
 							</select>
 						</div>

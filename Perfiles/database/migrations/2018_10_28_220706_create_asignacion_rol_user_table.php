@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AsignacionRolUser extends Migration
+class CreateAsignacionRolUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,8 +15,10 @@ class AsignacionRolUser extends Migration
     {
         Schema::create('asignacion_rol_user', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id');
-            $table->unsignedInteger('role_id');
+            $table->integer('user_id')->unsigned();
+            $table->integer('role_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('role_id')->references('id')->on('rol')->onDelete('cascade');
             $table->timestamps();
         });
     }

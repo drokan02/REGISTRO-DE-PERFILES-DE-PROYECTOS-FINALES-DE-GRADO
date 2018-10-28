@@ -7,19 +7,11 @@ use DB;
 
 class Modal extends Model
 {
-    
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    protected $table='modalidad';
     protected $fillable = [
         'id','codigo_mod','nombre_mod', 'descripsion_mod'
     ];
 
-    protected $table='modalidad';
-    public $timestamps=false;
     
     public function perfiles(){
         return $this->hasMany(Perfil::class);
