@@ -16,6 +16,7 @@ class Area extends Model
         'carrera_id'
     ];
 
+
     public function profesionales(){    
          return $this->belongsToMany(Profesional::class,'profesional_area');
     }
@@ -31,6 +32,7 @@ class Area extends Model
         return $query->whereNull('id_area');
     }
 
+    
     public function scopeSubareas($query){
         return $query->whereNotNull('id_area');
     }

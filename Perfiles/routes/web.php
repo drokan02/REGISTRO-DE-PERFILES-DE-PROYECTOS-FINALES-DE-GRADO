@@ -46,6 +46,8 @@ Route::any('/areas/buscar', 'AreaController@index')->name('buscarArea');
 Route::any('/areas/ver/{id}','AreaController@ver')->name('verArea');
 Route::any('/areas/subir_Excel', 'AreaController@subirExcel')->name('subirAreas');
 Route::any('/areas/subir_Excel/importar', 'AreaController@importar')->name('importarAreas');
+Route::any('/areas/agregarCarrera/{area}', 'AreaController@carreras')->name('carrerasArea');
+Route::any('/areas/eliminarCarrera/{carrera}', 'AreaController@eliminarCarrera')->name('eliminarCarreraArea');
 
 
 //tutores
@@ -122,11 +124,14 @@ Route::get('register','Auth\RegisterController@showRegistrationForm')->name('reg
 Route::post('register','Auth\RegisterController@register')->name('registerPost');
 
 //perfiles
-Route::get('/perfil','perfilesController@index')->name('perfiles');
+Route::get('/perfil','PerfilController@index')->name('perfiles');
+Route::get('/perfil/ver','PerfilController@index')->name('verPerfil');
 Route::get('/perfil/registrarPerfil','PerfilController@nuevoFormulario')->name('nuevoPerfil');
 Route::any('/perfil/registrarPerfil/mostrarForm','PerfilController@mostrarForm')->name('mostrarFormulario');
 Route::post('/perfil/registrarPerfil/almacenar','PerfilController@almacenar')->name('almacenarPerfil');
-
+Route::get('/perfil/editar/{perfil}','PerfilController@index')->name('editarPerfil');
+Route::post('/perfil/editar/modificar/{perfil}','PerfilController@index')->name('modificarPerfil');
+Route::any('/perfil/eliminar/{perfil}','PerfilController@index')->name('eliminarPerfil');
 //Gestion
 Route::any('/menu/Gestion', 'GestionController@index')->name('gestiones');
 Route::get('menu/Gestion/registrar', 'GestionController@registrar')->name('registrarGestion');

@@ -28,6 +28,31 @@ $('.eliminar').click(function(e){
     });
 })
 
+$
+$('.eliminarCarreraArea').click(function(e){
+    e.preventDefault();
+    var divLista = $('.listaDatos');
+    var fila = $(this).parents('tr');
+    var url  = $(this).attr('href');
+    alertify.confirm("Esta seguro de eliminar",
+        function(){
+            $.post(url,function(res){
+                if(res.eliminado){
+                    alertify.alert(res.mensaje).set('basic', true);
+                     divLista.html(res.tabla);
+                }else{
+                    alertify.set('notifier','position', 'top-right');
+                    alertify.error(""+res.mensaje);
+                }  
+            }).fail(function(ress,status,error){
+                    alertify.set('notifier','position', 'top-center');
+                    alertify.error('UPS no se pudo eliminar');  
+            })
+        },
+        function(){ 
+    });
+})
+
 $('.registrar').click(function(e){
     e.preventDefault();
     form = $(this).parents('form');

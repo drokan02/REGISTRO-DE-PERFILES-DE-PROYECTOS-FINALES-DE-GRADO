@@ -144,3 +144,52 @@ $('.prueba').click(function(e){
     e.preventDefault();
     alert($('#fecha_ini').val())
 })
+
+$('.carreraArea').click(function(e){
+    e.preventDefault();
+    form = $(this).parents('form');
+    var divLista = $('.listaDatos');
+    url  = form.attr('action');
+    datos = form.serialize();
+    $.get(url,datos,function(res){
+        if (res.registrado) {
+            console.log(res.tabla)
+            divLista.html(res.tabla);  
+            alertify.alert(res.mensaje).set('basic', true);
+            
+        }else{
+            alertify.set('notifier','position', 'top-right');
+            alertify.error(""+res.mensaje,5);
+        }
+       
+
+    }).fail(function(ress,status,error){
+          
+        alertify.set('notifier','position', 'top-right');
+            alertify.error("Esa carrera ya se encuentra registrada",5);
+    });
+})
+
+$('.eliminarCarreraArea').click(function(e){
+    e.preventDefault();
+    var divLista = $('.listaDatos');
+    var fila = $(this).parents('tr');
+    var url  = $(this).attr('href');
+    alertify.confirm("Esta seguro de eliminar",
+        function(){
+            $.get(url,['carrera'],function(res){
+                if(res.eliminado){
+                    alertify.alert(res.mensaje).set('basic', true);
+                     divLista.html(res.tabla);
+                }else{
+                    alertify.set('notifier','position', 'top-right');
+                    alertify.error(""+res.mensaje);
+                }  
+            }).fail(function(ress,status,error){
+                    alertify.set('notifier','position', 'top-center');
+                    alertify.error(ress.responseText+"");  
+            })
+        },
+        function(){ 
+    });
+})

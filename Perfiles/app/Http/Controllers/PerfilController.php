@@ -14,6 +14,28 @@ use Illuminate\Http\Request;
 
 class PerfilController extends Controller
 {
+    public function index(Request $request){
+        $mod_id   = $request['modalidad'];
+        $periodo  = $request['periodo'];
+        $anio     = $request['anio'];
+        $buscar   = $request['buscar'];//"no hay titulo";
+        $fila     = 1;
+        $perfiles = Perfil::modalidadP($mod_id)
+                          ->anio($anio)
+                          ->periodo($periodo)
+                          ->buscar($buscar)
+                          ->with('tutor')
+                          ->orderBy('id','DESC')
+                          ->paginate(7);
+        //dd($perfiles->toArray());
+        if ($request->ajax()) {
+            return response()->json([
+                view('parcial.perfiles',compact('perfiles','buscar','fila'))->render()
+            ]);
+        }
+        return view('perfiles.listaPerfiles',compact('perfiles','buscar','fila'));
+    }
+
     public function nuevoFormulario(){
         $modalidades = Modal::all();
         return view('perfiles.formulario',compact('modalidades'));
