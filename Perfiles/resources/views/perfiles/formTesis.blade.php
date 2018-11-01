@@ -19,6 +19,7 @@
         </div>
     </div>
 
+   
     <div class="form-group row">
         <label for="director" class="col-sm-2 col-form-label">Director de Carrera</label>
         <div class="col-10">
@@ -89,10 +90,12 @@
                 <select name="docente_id" id="docente_id" class="form-control">
                         <option disabled selected>-- seleccione una opcion --</option>
                         @foreach ($docentes as $docente)
-                        <option value="{{$docente->id}}">{{$docente->profesional->ap_pa_prof}}&nbsp;
-                                                            {{$docente->profesional->ap_ma_prof}}&nbsp;
-                                                            {{$docente->profesional->nombre_prof }}
-                        </option>
+                            @if ($director->profesional_id != $docente->profesional_id)
+                                <option value="{{$docente->id}}">{{$docente->profesional->ap_pa_prof}}&nbsp;
+                                                                    {{$docente->profesional->ap_ma_prof}}&nbsp;
+                                                                    {{$docente->profesional->nombre_prof }}
+                                </option>
+                            @endif
                         @endforeach
                 </select>
             </div>
@@ -104,10 +107,12 @@
                 <select name="tutor_id" id="tutor_id" class="form-control">
                         <option disabled selected>-- seleccione una opcion --</option>
                         @foreach ($profesionales as $profesional)
-                        <option value="{{$profesional->id}}">{{$profesional->ap_pa_prof}}&nbsp;
-                                                                {{$profesional->ap_ma_prof}}&nbsp;
-                                                                {{$profesional->nombre_prof }}
-                        </option>
+                            @if ($director->profesional_id != $profesional->id)
+                                <option value="{{$profesional->id}}">{{$profesional->ap_pa_prof}}&nbsp;
+                                    {{$profesional->ap_ma_prof}}&nbsp;
+                                    {{$profesional->nombre_prof }}
+                                </option>  
+                            @endif
                         @endforeach
                 </select>
             </div>
