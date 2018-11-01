@@ -17,7 +17,7 @@ class CreateModalidadTable extends Migration
             $table->increments('id');
             $table->string('codigo_mod',20)->unique();
             $table->string('nombre_mod',20)->unique();
-            $table->string('descripcion_mod',500);
+            $table->string('descripcion_mod',1000);
             $table->timestamps();
         });
     }

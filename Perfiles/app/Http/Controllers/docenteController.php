@@ -59,8 +59,11 @@ class docenteController extends Controller
             return response()->json([
                 'mensaje'=>'Docente registrado correctamente'
             ]);
-        }  
-        $areas = [$request->area_id,$request->subarea_id];
+        } 
+        $areas = [$request->area_id];
+        if($request->subarea_id){
+            $areas = [$request->area_id,$request->subarea_id];
+        }
         $profesional = new Profesional;
         $docente = new Docente;
         $profesional->create($request->all());
@@ -97,7 +100,10 @@ class docenteController extends Controller
         }
         $datosDocente  = $docente->toArray();
         $prof_id = $datosDocente['profesional_id'];
-        $areas = [$request->area_id,$request->subarea_id];
+        $areas = [$request->area_id];
+        if($request->subarea_id){
+            $areas = [$request->area_id,$request->subarea_id];
+        }
         $profesional = Profesional::findOrFail($prof_id);
         $profesional->areas()->sync($areas,['profesional_id'=>$prof_id]);
         $profesional->update($request->all());

@@ -32,6 +32,7 @@ $('.registrar').click(function(e){
         alertify.alert(res.mensaje).set('basic', true); 
           form.submit();
     }).fail(function(ress,status,error){
+        alertify.alert(ress.responseText).set('basic', true); 
         var errores="";
         var cont = 18;
        // $('#mensajeError').show();//muestra los mensajes

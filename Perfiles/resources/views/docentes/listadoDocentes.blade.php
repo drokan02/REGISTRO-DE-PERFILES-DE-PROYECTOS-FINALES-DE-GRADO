@@ -53,13 +53,12 @@
                     <td>{{$docente->profesional->titulo->pluck('abreviatura')[0]}}</td>
                     <td>{{$docente->profesional->telef_prof}}</td>
                     <td>{{$docente->profesional->correo_prof}}</td>
-                    @if (!$docente->profesional->areas->pluck('area_id')[0])
-                        <td>{{$docente->profesional->areas->pluck('nombre')[0]}}</td>
-                        <td>{{$docente->profesional->areas->pluck('nombre')[1]}}</td>   
-                    @else
-                        <td>{{$docente->profesional->areas->pluck('nombre')[1]}}</td>
-                        <td>{{$docente->profesional->areas->pluck('nombre')[0]}}</td>
-                    @endif
+                    @foreach ($docente->profesional->areas as $area)
+                            <td style="width: 10%;">{{$area->nombre}}</td>
+                            @if ($docente->profesional->areas->count() < 2)
+                            <td></td>
+                            @endif
+                    @endforeach
                     <td>{{$docente->cargahoraria->pluck('carga_horaria')[0]}}</td>
 
                     <td>
