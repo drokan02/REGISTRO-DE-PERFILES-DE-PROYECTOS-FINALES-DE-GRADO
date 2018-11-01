@@ -61,7 +61,8 @@ class PerfilController extends Controller
         if($request->ajax()){
             $errores = $this->validarDatos($docentes,$profesionales,$areas,$subareas);
             if(!$errores){
-                if($modalidad == "Adscripcion" || $modalidad == "Trabajo Dirigido"){ 
+                $modalidad = strtolower($modalidad);
+                if($modalidad == "adscripcion" || $modalidad == "trabajo dirigido"){ 
                     return response()->json([
                        'valido'=> true, 
                        'datos' => view('perfiles.formTrabajoD',compact('director','docentes','profesionales','perfiles',
