@@ -123,9 +123,21 @@ $('#modalidad').change(function(e){
     //indice 1 es el codigo
     //indice 5 nombre modalidad
     $.get(url,form.serialize(),function(res){
-         $('#contenidoForm').html(res);
+        if(res.valido){
+            $('#contenidoForm').html(res.datos);
+        }else{
+            var cont = 10;
+            $.each(res.errores, function (ind, elem) {     
+                alertify.set('notifier','position', 'top-right');
+                alertify.error(""+elem,cont--);
+               
+        }); 
+        }
+         
 
-    })
+    }).fail(function(ress,status,error){  
+        alertify.alert(ress.responseText).set('basic', true);
+    });
 })
 
 $('#carrera_id').change(function(e){
@@ -145,45 +157,41 @@ $('.prueba').click(function(e){
     alert($('#fecha_ini').val())
 })
 
-$('.carreraArea').click(function(e){
+//agregar areas a las carreras
+$('#areaCarrera').click(function(e){
     e.preventDefault();
-    form = $(this).parents('form');
+    var form     = $(this).parents('form');
     var divLista = $('.listaDatos');
-    url  = form.attr('action');
-    datos = form.serialize();
-    $.get(url,datos,function(res){
-        if (res.registrado) {
-            console.log(res.tabla)
-            divLista.html(res.tabla);  
+    var url      = form.attr('action');
+    var datos    = form.serialize();
+    $.post(url,datos,function(res){
+        if(res.registrado){
             alertify.alert(res.mensaje).set('basic', true);
-            
+            divLista.html(res.datos);
         }else{
             alertify.set('notifier','position', 'top-right');
             alertify.error(""+res.mensaje,5);
         }
-       
-
-    }).fail(function(ress,status,error){
-          
-        alertify.set('notifier','position', 'top-right');
-            alertify.error("Esa carrera ya se encuentra registrada",5);
+    }).fail(function(ress,status,error){  
+        alertify.alert(ress.responseText).set('basic', true);
     });
 })
 
-$('.eliminarCarreraArea').click(function(e){
+$('#eliminarAreaCarrera').click(function(e){
     e.preventDefault();
+    var form     = $(this).parents('form');
     var divLista = $('.listaDatos');
-    var fila = $(this).parents('tr');
-    var url  = $(this).attr('href');
+    var url      = form.attr('action');
+    var datos    = form.serialize();
     alertify.confirm("Esta seguro de eliminar",
         function(){
-            $.get(url,['carrera'],function(res){
+            $.post(url,datos,function(res){
                 if(res.eliminado){
                     alertify.alert(res.mensaje).set('basic', true);
-                     divLista.html(res.tabla);
+                     divLista.html(res.datos);
                 }else{
                     alertify.set('notifier','position', 'top-right');
-                    alertify.error(""+res.mensaje);
+                    alertify.error("sfsdf"+res.mensaje);
                 }  
             }).fail(function(ress,status,error){
                     alertify.set('notifier','position', 'top-center');

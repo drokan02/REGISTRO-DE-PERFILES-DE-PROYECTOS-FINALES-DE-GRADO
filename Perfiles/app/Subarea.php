@@ -3,10 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use DB;
 
-class Area extends Model
-{   
+class Subarea extends Model
+{
     protected $table='area';
     protected $fillable = [
         'codigo',
@@ -16,8 +15,8 @@ class Area extends Model
         'carrera_id'
     ];
 
-    public function sub(){
-        return $this->hasMany(Subarea::class);
+    public function area(){
+        return $this->belongsTo(Area::class,'area_id');
     }
     public function profesionales(){    
          return $this->belongsToMany(Profesional::class,'profesional_area');
@@ -73,5 +72,4 @@ class Area extends Model
                                 $query->where('carrera_id',$carrera_id);
                             });
     }
-
 }

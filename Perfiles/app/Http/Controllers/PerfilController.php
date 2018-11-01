@@ -50,8 +50,8 @@ class PerfilController extends Controller
         $areas         = Area::areasCarrera($carrera_id)->get();
         $profesionales = Profesional::porCarrera($carrera_id)->get();
         $docentes      = Docente::with('profesional')->porCarrera($carrera_id)->get();
-        $id            = Docente::directorCarrera($carrera_id)->value('id');
-        $director      = Docente::with('profesional')->findOrFail($id);
+        $director      = $this->directorCarrera($carrera_id);
+        $perfiles      = Perfil::where('modalidad_id',$modalidad_id)->whereHas('estudiantes')->get();
         $gestion       = $this->periodo();
         $fecha_ini     = $this->fechaIni();
         $fecha_fin     = $this->fechaFin();
@@ -59,19 +59,39 @@ class PerfilController extends Controller
        // $aux = $modalidad->toArray()[0];
       // dd($res);
         if($request->ajax()){
-            if($modalidad == "adscripcion" || $modalidad == "trabajo dirigido"){
-                
-                return response()->json(
-                    view('perfiles.formTrabajoD',compact('director','docentes','profesionales','areas','subareas','estudiante','modalidad_id','modalidad','gestion','fecha_ini','fecha_fin'))->render()
-                );
+            $errores = $this->validarDatos($docentes,$profesionales,$areas,$subareas);
+            if(!$errores){
+                if($modalidad == "adscripcion" || $modalidad == "trabajo dirigido"){ 
+                    return response()->json([
+                       'valido'=> true, 
+                       'datos' => view('perfiles.formTrabajoD',compact('director','docentes','profesionales','perfiles',
+                        'areas','subareas','estudiante','modalidad_id','modalidad','gestion','fecha_ini','fecha_fin'))->render()
+                    ]);
+                }else{return response()->json([
+                        'valido'=> true, 
+                        'datos' =>  view('perfiles.formTesis',compact('director','docentes','profesionales','perfiles',
+                         'areas','subareas','estudiante','modalidad_id','modalidad','gestion','fecha_ini','fecha_fin'))->render()
+                    ]);
+                } 
             }else{
-                return response()->json(
-                    view('perfiles.formTesis',compact('director','docentes','profesionales','areas','subareas','estudiante','modalidad_id','modalidad','gestion','fecha_ini','fecha_fin'))->render()
-                );
-            } 
+                return response()->json([
+                    'valido'=> false, 
+                    'errores' => $errores
+                 ]);
+            }
+            
         }
     }
-    
+    public function directorCarrera($carrera_id)
+    {
+        $id = Docente::directorCarrera($carrera_id)->value('id');
+        if($id){
+           return Docente::with('profesional')->findOrFail($id);
+        }else{
+            return [];
+        }
+           
+    }
     public function almacenar(PerfilFormRequest $request){
         $perfil = new Perfil;
         $trabConjunto = $request['trabajo_conjunto'];
@@ -163,5 +183,28 @@ class PerfilController extends Controller
          }else{
              return 0;
          }
+     }
+
+     
+     public function validarDatos($docentes,$profesionales,$areas,$subareas){
+         $countD   = $docentes->count();
+         $countP   = $profesionales->count();
+         $countA   = $areas->count();
+         $countS = $subareas->count();
+         $errores = array();
+         if ($countD == 0 ) {
+             $errores['docentes'] ='no puede registrar su perfil  por q no existe registros de los Docentes en la Carrera';
+         }
+         if ($countP == 0 ) {
+            $errores['tutores'] = 'no puede registrar su perfil  por q no no existe registros de los Tutores en la Carrera';
+        }
+        if ($countA == 0 ) {
+            $errores['areas'] = 'no puede registrar su perfil  por q no existe registros de las Areas en la Carrera';
+        }
+        if ($countS == 0 ) {
+            $errores['subareas'] = 'no puede registrar su perfil  por q no existe registros de las Subaras en la Carrera';
+        }
+
+        return $errores;
      }
 }

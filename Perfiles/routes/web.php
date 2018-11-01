@@ -46,8 +46,6 @@ Route::any('/areas/buscar', 'AreaController@index')->name('buscarArea');
 Route::any('/areas/ver/{id}','AreaController@ver')->name('verArea');
 Route::any('/areas/subir_Excel', 'AreaController@subirExcel')->name('subirAreas');
 Route::any('/areas/subir_Excel/importar', 'AreaController@importar')->name('importarAreas');
-Route::any('/areas/agregarCarrera/{area}', 'AreaController@carreras')->name('carrerasArea');
-Route::any('/areas/eliminarCarrera/{carrera}', 'AreaController@eliminarCarrera')->name('eliminarCarreraArea');
 
 
 //tutores
@@ -67,6 +65,7 @@ Route::post('areas/subareas/almacenar/{area}','SubareaController@almacenar')->na
 Route::any('/areas/subareas/editar/{id}','SubareaController@editar')->name('editarSubarea');
 Route::post('areas/subareas/modificar/{id}','SubareaController@modificar')->name('modificarSubarea');
 Route::any('areas/subareas/eliminar/{id}','SubareaController@eliminar')->name('eliminarSubarea');
+
 
 
 //Modalidades
@@ -92,7 +91,9 @@ Route::put('/carreras/{carrera}','CarreraController@actualizar')->name('actualiz
 Route::delete('/carreras/{carrera}/eliminar','CarreraController@eliminar')->name('eliminarCarrera');
 Route::get('/carreras/importar','CarreraController@importar')->name('importarCarreras');
 Route::post('/carreras/importacion','CarreraController@importacion')->name('importacionCarrera');
-
+Route::any('/carreras/agregarArea/{carrera}', 'CarreraController@areas')->name('areasCarrera');
+Route::any('/carreras/agregarArea/almacenar/{carrera}', 'CarreraController@almacenarArea')->name('almacenarAreasCarrera');
+Route::any('/carreras/eliminarArea/{carrera}/{area}', 'CarreraController@EliminarArea')->name('eliminarCarreraArea');
 //docentes
 Route::get('/docentes','docenteController@index')->name('Docentes');
 Route::get('/docentes/registrar', 'docenteController@registrar')->name('registrarDocente');

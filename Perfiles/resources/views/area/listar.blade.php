@@ -65,10 +65,7 @@
                                     </a>
                                     <a href='{{ route('subareas',$area)}}' class="dropdown-item" >
                                             <h5><i class="col-sm-3 fa fa-plus iconMenu"  >&nbsp;&nbsp;&nbsp;Agregar subArea</i></h5>
-                                    </a> 
-                                    <a href='{{ route('carrerasArea',$area)}}' class="dropdown-item" >
-                                                <h5><i class="col-sm-3 fa fa-plus iconMenu"  >&nbsp;&nbsp;&nbsp;Agregar Carrera</i></h5>
-                                     </a>                                                      
+                                    </a>                                                  
                             </div>
                     </div> 
                 </td>

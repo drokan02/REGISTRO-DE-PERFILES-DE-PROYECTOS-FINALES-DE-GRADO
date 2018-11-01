@@ -44,12 +44,26 @@
                             <td>{{$carrera->codigo_carrera}}</td>
                             <td>{{$carrera->nombre_carrera}}</td>
                             <td>
-                                <form method="POST" action="{{route('eliminarCarrera',$carrera)}}">
-                                    {{method_field('DELETE')}}
-                                    {!! csrf_field() !!}
-                                    <a href="{{route('editarCarrera',$carrera)}}" class="btn btn-link" data-toggle="tooltip" data-placement="right" title="Editar"><i class="fa fa-edit fa-2x"></i></a>
-                                    <button class="btn btn-link" type="submit"><i class="fa fa-trash fa-2x"></i></button>
-                                </form>
+                                <div class=" dropleft text-center">
+                                    <a href="#" data-toggle="dropdown"  data-placement="right" title="opsiones">
+                                            <i class="fa fa-ellipsis-v fa-2x" aria-hidden="true"></i>
+                                    </a>
+                                    <div class="dropdown-menu profile-dropdown-menu" aria-labelledby="dropdownMenu1">
+                                            <a href="{{route('editarCarrera',$carrera)}}" class="dropdown-item" >
+                                                    <h5><i class="col-sm-3 fa fa-pencil-square-o iconMenu">&nbsp;&nbsp;&nbsp;Editar</i></h5>
+                                             </a> 
+                                            <a href='{{ route('areasCarrera',$carrera)}}' class="dropdown-item" >
+                                                        <h5><i class="col-sm-3 fa fa-plus iconMenu"  >&nbsp;&nbsp;&nbsp;Agregar Area</i></h5>
+                                            </a>  
+                                            <form method="POST" action="{{route('eliminarCarrera',$carrera)}}">
+                                                    {{method_field('DELETE')}}
+                                                    {!! csrf_field() !!}
+                                                    <button class="dropdown-item"  type="submit">
+                                                        <h5> <i class="col-sm-3 fa fa-minus-square iconMenu" >&nbsp;&nbsp;&nbsp;Eliminar</i></h5>
+                                                    </button>
+                                            </form>                                                    
+                                    </div>
+                                </div> 
                             </td>
                         </tr>
                     @endforeach

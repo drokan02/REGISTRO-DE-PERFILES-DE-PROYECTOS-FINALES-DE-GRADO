@@ -18,7 +18,7 @@ class CreateEstudianteTable extends Migration
             $table->string('nombres',30);
             $table->string('email',30)->unique();
             $table->string('user_name',30)->unique();
-            $table->string('password',200);
+            $table->string('password',500);
             $table->integer('telefono')->unisgned()->unique();
             $table->integer('carrera_id')->unsigned();
             $table->foreign('carrera_id')->references('id')->on('carrera')->onDelete('cascade');
