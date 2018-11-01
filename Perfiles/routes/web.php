@@ -67,6 +67,7 @@ Route::post('areas/subareas/modificar/{id}','SubareaController@modificar')->name
 Route::any('areas/subareas/eliminar/{id}','SubareaController@eliminar')->name('eliminarSubarea');
 
 
+
 //Modalidades
 Route::get('/modalidad','modalidades@index')->name('modalidad');
 Route::get('/modalidad/registrarmodalidad','modalidades@registrar')->name('registrarmodalidad');
@@ -90,7 +91,9 @@ Route::put('/carreras/{carrera}','CarreraController@actualizar')->name('actualiz
 Route::delete('/carreras/{carrera}/eliminar','CarreraController@eliminar')->name('eliminarCarrera');
 Route::get('/carreras/importar','CarreraController@importar')->name('importarCarreras');
 Route::post('/carreras/importacion','CarreraController@importacion')->name('importacionCarrera');
-
+Route::any('/carreras/agregarArea/{carrera}', 'CarreraController@areas')->name('areasCarrera');
+Route::any('/carreras/agregarArea/almacenar/{carrera}', 'CarreraController@almacenarArea')->name('almacenarAreasCarrera');
+Route::any('/carreras/eliminarArea/{carrera}/{area}', 'CarreraController@EliminarArea')->name('eliminarCarreraArea');
 //docentes
 Route::get('/docentes','docenteController@index')->name('Docentes');
 Route::get('/docentes/registrar', 'docenteController@registrar')->name('registrarDocente');
@@ -122,11 +125,14 @@ Route::get('register','Auth\RegisterController@showRegistrationForm')->name('reg
 Route::post('register','Auth\RegisterController@register')->name('registerPost');
 
 //perfiles
-Route::get('/perfil','perfilesController@index')->name('perfiles');
+Route::get('/perfil','PerfilController@index')->name('perfiles');
+Route::get('/perfil/ver','PerfilController@index')->name('verPerfil');
 Route::get('/perfil/registrarPerfil','PerfilController@nuevoFormulario')->name('nuevoPerfil');
 Route::any('/perfil/registrarPerfil/mostrarForm','PerfilController@mostrarForm')->name('mostrarFormulario');
 Route::post('/perfil/registrarPerfil/almacenar','PerfilController@almacenar')->name('almacenarPerfil');
-
+Route::get('/perfil/editar/{perfil}','PerfilController@index')->name('editarPerfil');
+Route::post('/perfil/editar/modificar/{perfil}','PerfilController@index')->name('modificarPerfil');
+Route::any('/perfil/eliminar/{perfil}','PerfilController@index')->name('eliminarPerfil');
 //Gestion
 Route::any('/menu/Gestion', 'GestionController@index')->name('gestiones');
 Route::get('menu/Gestion/registrar', 'GestionController@registrar')->name('registrarGestion');

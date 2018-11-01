@@ -17,7 +17,7 @@
             <td style="text-align: right;">{{$modalidad->id}}</td>
             <td>{{$modalidad->codigo_mod}}</td>
             <td>{{$modalidad->nombre_mod}}</td>
-            <td style="width: 43%;" >{{$modalidad->descripsion_mod}}</td>
+            <td style="width: 43%;" >{{$modalidad->descripcion_mod}}</td>
 
             <td>
                 <div class=" dropleft text-center">

@@ -106,14 +106,14 @@ class docenteController extends Controller
     }
 
     //todos los metos eliminar con el tiempo se tendra que validar con registros de BD
-    public function eliminar(Docente $docente){
+    public function eliminar(Request $request,Docente $docente){
         $datosDocente  = $docente->toArray();
         $prof_id = $datosDocente['profesional_id'];
         $docente->delete();
         $profesional = Profesional::findOrFail($prof_id);
 		$profesional->areas()->detach(); //eliminar datos en tabla intermedia
         $profesional->delete();
-        {
+        if($request->ajax()){
             return response()->json([
                 'eliminado'=>true,
                 'mensaje'=>'El Docente se elimino correctamente'

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Carrera;
+use App\Area;
 use File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -119,5 +120,84 @@ class CarreraController extends Controller
             return back()->withErrors('no se puede importar, los campos deben ser: 
             codigo_carrera, nombre_carrera, descripcion');
         }
+    }
+
+    public function areas(Request $request,Carrera $carrera){
+        $fila = 1;
+        $areas = Area::areas()->get();
+        return view('carreras.areasCarrera',compact('areas','carrera','areasCarrera','fila'));
+    }
+
+    public function almacenarArea(Request $request,Carrera $carrera){
+        $area_id  = $request['area_id'];
+        if($request->ajax()){
+            if($area_id){
+                $registrado = $this->agregarArea($carrera,$area_id);
+                if ($registrado) {
+                    return response()->json([
+                        'registrado'=> true,
+                        'mensaje'   => 'Area agregada Correctamente',
+                        'datos'     => $this->parcialAreas($carrera)
+                    ]);
+                }else{
+                    return response()->json([
+                        'registrado'=> false,
+                        'mensaje'   => 'La Carrera ya tiene agregada esa Area'
+                    ]);
+                }
+            }else{
+                return response()->json([
+                    'registrado'=> false,
+                    'mensaje'   => 'Debe seleccionar una Area'
+                ]);
+            }
+        }
+       
+       
+    }
+
+    public function agregarArea($carrera,$area_id){
+        $area = Area::find($area_id);
+        $areas = $area->sub->pluck('id');
+        $areas[] = $area_id+0;
+        $carrera_id = $carrera->toArray()['id'];
+        $valido = $this->valido($carrera,$area_id);
+		if($valido){
+            $carrera->areas()->attach($areas,['carrera_id'=>$carrera_id]);
+			return true;
+		}else{
+			return false;
+		}
+    }
+
+    public function valido($carrera,$area_id){
+		$aux = $carrera->areas->where('id',$area_id);
+		$aux = $aux->toArray();
+		if($aux){
+			return false;//retornamos false por que esta registrado ya esa carrera
+		}else{
+			return true;//retornamos verdad por q no esta registrado y asi poder registrarlo
+		}
+			
+    }
+    
+    public function parcialAreas($carrera){
+        $fila = 1;
+        $carrera_id = $carrera->toArray()['id'];
+        $carrera = Carrera::find($carrera_id);
+        return view('parcial.areasCarrera',compact('carrera','fila'))->render();
+    }
+
+    public function eliminarArea(Request $request,Carrera $carrera,Area $area){
+        $areas = $area->sub->pluck('id');
+        $areas[] = $area->toArray()['id'];
+        $carrera->areas()->detach($areas);
+        if($request->ajax()){
+			return response()->json([
+				"eliminado"=>true,
+				"mensaje" => "Se elimino el area de la carrera correctamente",
+				"datos"   => $this->parcialAreas($carrera)
+			]);
+		}
     }
 }

@@ -3,8 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule; 
-class AreaFormRequest extends FormRequest
+
+class CarreraFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,21 +24,10 @@ class AreaFormRequest extends FormRequest
     public function rules()
     {
         $ruta = $this->route()->getName();
-        if($ruta == 'modificarArea' || 'modificarSubarea'){
-       
-            return [
-                'codigo'=> ['required','alpha_num','min:2','max:8', Rule::unique('area', 'codigo')->ignore($this->{'id'})],
-                'nombre'=> ['required','regex:/^[\pL\s]+$/u','min:3',Rule::unique('area', 'nombre')->ignore($this->{'id'})],
-                'descripcion'=> 'nullable|min:20|max:500',
-            ];
-
-        }else{
-            return [
-                'codigo'=> 'required|alpha_num|min:2|max:5|unique:area,codigo',
-                'nombre'=> 'required|regex:/^[\pL\s]+$/u|min:3|unique:area,nombre',
-                'descripcion'=> 'nullable|min:20|max:500',
-            ];
-        }
+        return [
+            'area_id'=> 'required|unique:area_carrera,area',
+        ];
+        
         
     }
 
@@ -62,3 +51,5 @@ class AreaFormRequest extends FormRequest
         ];
     }
 }
+
+

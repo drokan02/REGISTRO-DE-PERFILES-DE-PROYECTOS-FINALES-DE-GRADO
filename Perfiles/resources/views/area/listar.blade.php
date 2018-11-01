@@ -8,7 +8,7 @@
     <!--BUSCADOR -->
     @if ($areas->isNotEmpty() or $buscar)
         
-    <div class="container">
+        <div class="container">
                 <div class="form-group row">
                     <div class="col-sm-4"></div>
                     <div class=" col-4">       
@@ -21,7 +21,7 @@
                    
                 </div>
                      
-         </div> 
+        </div> 
     @endif
    <!--FIN BUSCADOR -->
 
@@ -54,18 +54,18 @@
                                     <i class="fa fa-ellipsis-v fa-2x" aria-hidden="true"></i>
                             </a>
                             <div class="dropdown-menu profile-dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <a href='{{ route('verArea',$area->id)}}' class="dropdown-item" href="#">
+                                    <a href='{{ route('verArea',$area->id)}}' class="dropdown-item" >
                                             <h5><i class="col-sm-3 fa fa-eye iconMenu" >&nbsp;&nbsp;&nbsp;Ver </i></h5>
                                     </a>
-                                    <a href='{{ route('editarArea',$area->id)}}' class="dropdown-item" href="#">
+                                    <a href='{{ route('editarArea',$area->id)}}' class="dropdown-item" >
                                             <h5><i class="col-sm-3 fa fa-pencil-square-o iconMenu">&nbsp;&nbsp;&nbsp;Editar</i></h5>
                                     </a>
-                                    <a href='{{ route('eliminarArea',$area->id)}}' class="dropdown-item eliminar" href="#">
+                                    <a href='{{ route('eliminarArea',$area->id)}}' class="dropdown-item eliminar" >
                                             <h5> <i class="col-sm-3 fa fa-minus-square iconMenu" >&nbsp;&nbsp;&nbsp;Eliminar</i></h5>
                                     </a>
-                                    <a href='{{ route('subareas',$area)}}' class="dropdown-item" href="#">
+                                    <a href='{{ route('subareas',$area)}}' class="dropdown-item" >
                                             <h5><i class="col-sm-3 fa fa-plus iconMenu"  >&nbsp;&nbsp;&nbsp;Agregar subArea</i></h5>
-                                    </a>                                                      
+                                    </a>                                                  
                             </div>
                     </div> 
                 </td>

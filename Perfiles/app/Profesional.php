@@ -47,6 +47,7 @@ class Profesional extends Model
         return $this->belongsTo(Carrera::class);
     }
 
+
     public function scopeBuscarProfesional($query,$buscar){
         if($buscar){
             return $query->where(DB::raw("CONCAT(nombre_prof,' ',ap_pa_prof,' ',ap_ma_prof)"), "LIKE", "%$buscar%");

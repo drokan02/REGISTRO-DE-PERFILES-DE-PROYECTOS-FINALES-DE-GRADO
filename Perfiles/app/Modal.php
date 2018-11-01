@@ -9,7 +9,7 @@ class Modal extends Model
 {
     protected $table='modalidad';
     protected $fillable = [
-        'id','codigo_mod','nombre_mod', 'descripsion_mod'
+        'id','codigo_mod','nombre_mod', 'descripcion_mod'
     ];
 
     
