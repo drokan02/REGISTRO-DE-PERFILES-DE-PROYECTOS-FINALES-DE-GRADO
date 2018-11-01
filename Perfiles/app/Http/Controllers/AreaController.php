@@ -7,6 +7,7 @@ use App\Http\Requests\AreaFormRequest;
 use Maatwebsite\Excel\Facades\Excel;
 use Validator;
 use App\Area;
+use App\Carrera;
 use DB;
 class AreaController extends Controller
 {
@@ -123,7 +124,7 @@ class AreaController extends Controller
                             'codigo' => $fila->codigo,
                             'nombre' => $fila->nombre,
                             'descripcion' => $fila->descripcion,
-                            'id_area' => $fila->id_area,
+                            'area_id' => $fila->area_id,
                         ]);
                     }
                 });

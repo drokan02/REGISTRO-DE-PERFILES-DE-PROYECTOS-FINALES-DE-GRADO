@@ -1,4 +1,5 @@
-<form method="POST" action="{{route('almacenarPerfil',['director_id'=>$director->id,'modalidad_id'=>$modalidad_id,'estudiante_id'=>$estudiante->id,'fecha_ini'=>$fecha_ini,'fecha_fin'=>$fecha_fin]))}}">
+<form method="POST" action="{{route('almacenarPerfil',['director_id'=>$director->id,'modalidad_id'=>$modalidad_id,
+'estudiante_id'=>$estudiante->id,'fecha_ini'=>$fecha_ini,'fecha_fin'=>$fecha_fin])}}">
     {!! csrf_field() !!}
     <div class="form-group row">
         <label for="name" class="col-sm-2 col-form-label">Nombre Estudiante</label>
@@ -18,6 +19,14 @@
         </div>
     </div>
 
+    <div class="form-group row">
+        <label for="director" class="col-sm-2 col-form-label">Director de Carrera</label>
+        <div class="col-10">
+                <input type="text" class="form-control" name="director" id="director" 
+                value="{{$director->profesional->ap_pa_prof}} {{$director->profesional->ap_ma_prof}} {{$director->profesional->nombre_prof }}" disabled>
+        </div>
+    </div>
+    
     <div class="form-group row">   
         <div class="col-sm-4"></div>
         <label for="trabajo_conjunto" class="col-sm-2 col-form-label">Trabajo Conjunto  &nbsp;
@@ -25,9 +34,22 @@
         </label> 
 
         <div class="col-sm-1"></div>
-        <label for="trabajo_conjunto" class="col-sm-2 col-form-label">Cambio de Tema  &nbsp;
-                <input class="cambioTema" type="checkbox"   name="cambio_tema" value="no">
+        <label for="trabajo_conjunto" class="col-sm-2 col-form-label" >Cambio de Tema  &nbsp;
+                <input class="cambioTema" type="checkbox"   name="cambio_tema" value="no" disabled>
         </label> 
+    </div>
+
+    <div class="form-group row" id="contentPerfiles" style="display:none;">
+        <label for="tutor" class="col-sm-2 col-form-label">Perfiles en Conjunto</label>
+        <div class="col-10">
+            <select name="titulo_perfil" id="titulo_perfil" class="form-control" data-perfil="{{$perfiles}}">
+                    <option  disabled selected>-- seleccione una Perfil --</option>
+                    <option value="">Perfil aun no registrado</option>
+                    @foreach ($perfiles as $perfil)
+                        <option value="{{$perfil}}">{{$perfil->titulo}}</option>
+                    @endforeach
+            </select>
+        </div>
     </div>
     
     <div class="form-group row">
@@ -41,7 +63,7 @@
     <div class="form-group row" >
             <label for="name" class="col-sm-2 col-form-label">Seccion de trabajo</label>
             <div class="col-10">
-                <input type="text" class="form-control" name="sec_trabajo" id="institucion" value="{{old('institucion')}}" >
+                <input type="text" class="form-control" name="sec_trabajo" id="sec_trabajo" value="{{old('institucion')}}" >
              </div>
     </div>  
     @endif
@@ -79,18 +101,11 @@
             </div>
     </div>
 
-    <div class="form-group row">
-        <label for="director" class="col-sm-2 col-form-label">Director de Carrera</label>
-        <div class="col-10">
-                <input type="text" class="form-control" name="director" id="director" 
-                value="{{$director->profesional->ap_pa_prof}} {{$director->profesional->ap_ma_prof}} {{$director->profesional->nombre_prof }}" disabled>
-        </div>
-    </div>
 
     <div class="form-group row">
         <label for="tutor" class="col-sm-2 col-form-label">Docente de Materia</label>
         <div class="col-10">
-            <select name="docente_id" id="tutor" class="form-control">
+            <select name="docente_id" id="docente_id" class="form-control">
                     <option disabled selected>-- seleccione una opcion --</option>
                     @foreach ($docentes as $docente)
                     <option value="{{$docente->id}}">{{$docente->profesional->ap_pa_prof}}&nbsp;

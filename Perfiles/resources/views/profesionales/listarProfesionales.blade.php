@@ -54,7 +54,7 @@
                     <td style="width: 8%;">{{$profesional->titulo->pluck('abreviatura')[0]}}</td>
                     <td style="width: 8%;">{{$profesional->telef_prof}}</td>
                     <td style="width: 12%;">{{$profesional->correo_prof}}</td>
-                    @if (!$profesional->areas->pluck('id_area')[0])
+                    @if (!$profesional->areas->pluck('area_id')[0])
                         <td style="width: 10%;">{{$profesional->areas->pluck('nombre')[0]}}</td>
                         <td style="width: 10%;">{{$profesional->areas->pluck('nombre')[1]}}</td>    
                     @else

@@ -10,7 +10,7 @@ use App\Titulo;
 
 class Profesional extends Model
 {
-     protected $table = 'profesionales';
+     protected $table = 'profesional';
      protected $fillable = [
         'ci_prof',
         'nombre_prof', 
@@ -46,6 +46,7 @@ class Profesional extends Model
     public function carrera(){
         return $this->belongsTo(Carrera::class);
     }
+
 
     public function scopeBuscarProfesional($query,$buscar){
         if($buscar){

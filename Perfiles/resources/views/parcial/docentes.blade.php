@@ -25,7 +25,7 @@
                     <td>{{$docente->profesional->titulo->pluck('nombre')[0]}}</td>
                     <td>{{$docente->profesional->telef_prof}}</td>
                     <td>{{$docente->profesional->correo_prof}}</td>
-                    @if (!$docente->profesional->areas->pluck('id_area')[0])
+                    @if (!$docente->profesional->areas->pluck('area_id')[0])
                         <td>{{$docente->profesional->areas->pluck('nombre')[0]}}</td>
                         <td>{{$docente->profesional->areas->pluck('nombre')[1]}}</td>   
                     @else
