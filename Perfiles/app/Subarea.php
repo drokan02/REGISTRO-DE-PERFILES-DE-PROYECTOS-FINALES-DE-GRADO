@@ -3,10 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use DB;
 
-class Area extends Model
-{   
+class Subarea extends Model
+{
     protected $table='area';
     protected $fillable = [
         'codigo',
@@ -16,8 +15,8 @@ class Area extends Model
         'carrera_id'
     ];
 
-    public function sub(){
-        return $this->hasMany(Subarea::class);
+    public function area(){
+        return $this->belongsTo(Area::class,'area_id');
     }
     public function profesionales(){    
          return $this->belongsToMany(Profesional::class,'profesional_area');
@@ -48,30 +47,10 @@ class Area extends Model
         }
     }
 
-    public function scopeBuscarAreas($query, $buscar){
-        if($buscar){
-            return $query->whereNull('area_id')
-                        ->where(DB::raw("CONCAT(codigo,' ',nombre)"), "LIKE", "%$buscar%");
-        }else{
-            return $query->whereNull('area_id');
-        }
-    }
-    
-    public function scopeSubareasArea($query,$id){
-        return $query->where('area_id',$id);
-    }
-
-    public function scopeAreasCarrera($query,$carrera_id){
-        return $query->whereNull('area_id')->whereHas('carreras', function ($query) use ( $carrera_id){
-            $query->where('carrera_id',$carrera_id);
-        });
-    }
-
-    public function scopeSubareasCarrera($query,$carrera_id){
+    public function scopeDeCarrera($query,$carrera_id){
         return $query->whereNotNull('area_id')
                      ->whereHas('carreras', function ($query) use ( $carrera_id){
                                 $query->where('carrera_id',$carrera_id);
                             });
     }
-
 }

@@ -45,7 +45,7 @@ class modalidades extends Controller
 		$this->validate(request(), [
 			'nombre_mod'=>['required','regex:/^[\pL\s]+$/u','unique:modalidad,nombre_mod'],
 			'codigo_mod' => ['required','alpha_num','unique:modalidad,codigo_mod'],
-            'descripsion_mod'=> ['required']
+            'descripcion_mod'=> ['required']
 		]);
 		if($request->ajax()){
             return response()->json([
@@ -73,7 +73,7 @@ class modalidades extends Controller
         $this->validate(request(), [
             'codigo_mod' => ['required','alpha_num',Rule::unique('modalidad')->ignore($modalidad->id)],
             'nombre_mod'=>['required','regex:/^[\pL\s]+$/u',Rule::unique('modalidad')->ignore($modalidad->id)],
-            'descripsion_mod'=> ['required']
+            'descripcion_mod'=> ['required']
 		]);
 		if($request->ajax()){
             return response()->json([

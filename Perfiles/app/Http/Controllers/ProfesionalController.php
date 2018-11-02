@@ -48,7 +48,10 @@ class ProfesionalController extends Controller
                 'mensaje'=>'Profesional registrado correctamente'
             ]);
         }
-        $areas = [$request->area_id,$request->subarea_id];
+        $areas = [$request->area_id];
+        if($request->subarea_id){
+            $areas = [$request->area_id,$request->subarea_id];
+        }
         $profesional = new Profesional;
         $profesional->create($request->all());
         $prof_id = Profesional::where('ci_prof',$request['ci_prof'])->value('id');
@@ -73,7 +76,10 @@ class ProfesionalController extends Controller
             ]);
         }
         DB::transaction(function () use($request,$profesional) {
-            $areas = [$request->area_id,$request->subarea_id];
+            $areas = [$request->area_id];
+            if($request->subarea_id){
+                $areas = [$request->area_id,$request->subarea_id];
+            }
             $profesional->update($request->all());
             $prof_id = Profesional::query()->where('ci_prof',$request['ci_prof'])->value('id');
             $profesional->areas()->sync($areas,['profesional_id'=>$prof_id]);//elimina todos los registro de la tabla relaccion y ingresa uno nuevo

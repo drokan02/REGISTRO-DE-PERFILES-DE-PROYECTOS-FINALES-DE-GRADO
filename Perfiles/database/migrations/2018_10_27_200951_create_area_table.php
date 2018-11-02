@@ -16,10 +16,10 @@ class CreateAreaTable extends Migration
         Schema::create('area', function (Blueprint $table) {
             $table->increments('id');
             $table->string('codigo',30);
-            $table->string('nombre',30);
+            $table->string('nombre',255);
             $table->string('descripcion',500)->nullable();
-            $table->integer('id_area')->unsigned()->nullable();
-            $table->foreign('id_area')->references('id')->on('area')->onDelete('cascade');
+            $table->integer('area_id')->unsigned()->nullable();
+            $table->foreign('area_id')->references('id')->on('area')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

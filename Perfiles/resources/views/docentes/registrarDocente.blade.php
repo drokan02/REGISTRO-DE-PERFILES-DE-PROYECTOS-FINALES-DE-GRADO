@@ -76,9 +76,7 @@
 						<label for="codigo_sis" class="col-sm-2 col-form-label">CodigoSIS</label>
 						<div class="col-sm-4">
 						<input type="text" class="form-control" name="codigo_sis" id="codigo_sis" value="{{old('codigo_sis')}}">
-						</div>
-	
-						
+						</div>		
 				</div>
 				
 				<div class = "form-group row"> 
@@ -100,8 +98,7 @@
 									<option value="{{$carrera->id}}">{{$carrera->nombre_carrera}}</option>
 								@endforeach
 							</select>
-						</div>
-						
+						</div>	
 				</div>
 
 				<div class="form-group row">

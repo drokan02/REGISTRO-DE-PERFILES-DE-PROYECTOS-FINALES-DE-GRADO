@@ -23,7 +23,7 @@ class Carrera extends Model
     public function profesionales(){
         return $this->hasMany(Profesional::class);
     }
-
+    
     public function areas(){    
         return $this->belongsToMany(Area::class,'area_carrera');
    }

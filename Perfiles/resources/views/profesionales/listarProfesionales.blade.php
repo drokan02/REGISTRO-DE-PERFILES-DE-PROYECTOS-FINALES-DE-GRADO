@@ -54,14 +54,13 @@
                     <td style="width: 8%;">{{$profesional->titulo->pluck('abreviatura')[0]}}</td>
                     <td style="width: 8%;">{{$profesional->telef_prof}}</td>
                     <td style="width: 12%;">{{$profesional->correo_prof}}</td>
-                    @if (!$profesional->areas->pluck('id_area')[0])
-                        <td style="width: 10%;">{{$profesional->areas->pluck('nombre')[0]}}</td>
-                        <td style="width: 10%;">{{$profesional->areas->pluck('nombre')[1]}}</td>    
-                    @else
-                        <td style="width: 10%;">{{$profesional->areas->pluck('nombre')[1]}}</td>
-                        <td style="width: 10%;">{{$profesional->areas->pluck('nombre')[0]}}</td>
-                    @endif
                     
+                        @foreach ($profesional->areas as $area)
+                            <td style="width: 10%;">{{$area->nombre}}</td>
+                            @if ($profesional->areas->count() < 2)
+                            <td></td>
+                            @endif
+                        @endforeach
                     <td>
                         <div class=" dropleft text-center">
                                 <a href="#" data-toggle="dropdown"  data-placement="right" title="opsiones">

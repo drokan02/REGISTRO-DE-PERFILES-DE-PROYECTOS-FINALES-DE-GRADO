@@ -19,6 +19,15 @@
         </div>
     </div>
 
+   
+    <div class="form-group row">
+        <label for="director" class="col-sm-2 col-form-label">Director de Carrera</label>
+        <div class="col-10">
+                <input type="text" class="form-control" name="director" id="director" 
+                value="{{$director->profesional->ap_pa_prof}} {{$director->profesional->ap_ma_prof}} {{$director->profesional->nombre_prof }}" disabled>
+        </div>
+    </div>
+
     <div class="form-group row">   
         <div class="col-sm-4"></div>
         <label for="trabajo_conjunto" class="col-sm-2 col-form-label">Trabajo Conjunto  &nbsp;
@@ -27,11 +36,23 @@
 
         <div class="col-sm-1"></div>
         <label for="trabajo_conjunto" class="col-sm-2 col-form-label">Cambio de Tema  &nbsp;
-                <input class="cambioTema" type="checkbox"  name="cambio_tema" value="no">
+                <input class="cambioTema" type="checkbox"  name="cambio_tema" value="no" disabled>
         </label> 
     </div>
     
-    
+    <div class="form-group row" id="contentPerfiles" style="display:none;">
+        <label for="tutor" class="col-sm-2 col-form-label">Perfiles en Conjunto</label>
+        <div class="col-10">
+            <select name="titulo_perfil" id="titulo_perfil" class="form-control" data-perfil="{{$perfiles}}">
+                    <option disabled selected>-- seleccione una Perfil --</option>
+                    <option value="">Perfil aun no registrado</option>
+                    @foreach ($perfiles as $perfil)
+                        <option value="{{$perfil}}">{{$perfil->titulo}}</option>
+                    @endforeach
+            </select>
+        </div>
+    </div>
+
     <div class="form-group row">
         <label for="name" class="col-sm-2 col-form-label">Titulo</label>
         <div class="col-10">
@@ -63,24 +84,18 @@
             </div>
     </div>
     
-    <div class="form-group row">
-            <label for="director" class="col-sm-2 col-form-label">Director de Carrera</label>
-            <div class="col-10">
-                    <input type="text" class="form-control" name="director" id="director" 
-                    value="{{$director->profesional->ap_pa_prof}} {{$director->profesional->ap_ma_prof}} {{$director->profesional->nombre_prof }}" disabled>
-            </div>
-        </div>
-    
         <div class="form-group row">
             <label for="tutor" class="col-sm-2 col-form-label">Docente de Materia</label>
             <div class="col-10">
-                <select name="docente_id" id="tutor" class="form-control">
+                <select name="docente_id" id="docente_id" class="form-control">
                         <option disabled selected>-- seleccione una opcion --</option>
                         @foreach ($docentes as $docente)
-                        <option value="{{$docente->id}}">{{$docente->profesional->ap_pa_prof}}&nbsp;
-                                                            {{$docente->profesional->ap_ma_prof}}&nbsp;
-                                                            {{$docente->profesional->nombre_prof }}
-                        </option>
+                            @if ($director->profesional_id != $docente->profesional_id)
+                                <option value="{{$docente->id}}">{{$docente->profesional->ap_pa_prof}}&nbsp;
+                                                                    {{$docente->profesional->ap_ma_prof}}&nbsp;
+                                                                    {{$docente->profesional->nombre_prof }}
+                                </option>
+                            @endif
                         @endforeach
                 </select>
             </div>
@@ -92,10 +107,12 @@
                 <select name="tutor_id" id="tutor_id" class="form-control">
                         <option disabled selected>-- seleccione una opcion --</option>
                         @foreach ($profesionales as $profesional)
-                        <option value="{{$profesional->id}}">{{$profesional->ap_pa_prof}}&nbsp;
-                                                                {{$profesional->ap_ma_prof}}&nbsp;
-                                                                {{$profesional->nombre_prof }}
-                        </option>
+                            @if ($director->profesional_id != $profesional->id)
+                                <option value="{{$profesional->id}}">{{$profesional->ap_pa_prof}}&nbsp;
+                                    {{$profesional->ap_ma_prof}}&nbsp;
+                                    {{$profesional->nombre_prof }}
+                                </option>  
+                            @endif
                         @endforeach
                 </select>
             </div>

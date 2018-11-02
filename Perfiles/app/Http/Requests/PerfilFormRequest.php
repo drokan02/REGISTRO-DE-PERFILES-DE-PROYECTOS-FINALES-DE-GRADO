@@ -24,16 +24,24 @@ class PerfilFormRequest extends FormRequest
     public function rules()
     {
         $ruta = $this->route()->getName();
-        $aux = $this->toArray();
+        if($ruta == "modificarPerfil"){
+            //dd($ruta);
+            return [
+                'tutor_id'     => 'required',
+                'objetivo_gen' => 'required',
+                'objetivo_esp' => 'required',
+                'descripcion'  => 'required'
+            ]; 
+        }else{
+            $aux = $this->toArray();
         $id  = $aux['modalidad_id'];
         $modalidad = Modal::where('id',$id)->get();
-        $aux = $modalidad->toArray()[0]['nombre_mod']; 
+        $aux = $modalidad->toArray()[0]['nombre_mod'];
         if( $aux == "trabajo dirigido"){
             return [
                 'docente_id'   => 'required',
                 'tutor_id'     => 'required',
                 'area_id'      => 'required',
-                'subarea_id'   => 'required',
                 'titulo'       => 'required',
                 'institucion'  => 'required',
                 'objetivo_gen' => 'required',
@@ -45,7 +53,6 @@ class PerfilFormRequest extends FormRequest
                 'docente_id'   => 'required',
                 'tutor_id'     => 'required',
                 'area_id'      => 'required',
-                'subarea_id'   => 'required',
                 'titulo'       => 'required',
                 'sec_trabajo'  => 'required',
                 'objetivo_gen' => 'required',
@@ -57,13 +64,16 @@ class PerfilFormRequest extends FormRequest
                 'docente_id'   => 'required',
                 'tutor_id'     => 'required',
                 'area_id'      => 'required',
-                'subarea_id'   => 'required',
                 'titulo'       => 'required',
                 'objetivo_gen' => 'required',
                 'objetivo_esp' => 'required',
                 'descripcion'  => 'required'
             ];   
         }
+    
+    
+        }
+        
     }
 
     public function messages()
