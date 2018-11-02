@@ -18,21 +18,23 @@ class CreatePerfilTable extends Migration
             $table->integer('modalidad_id')->unsigned();
             $table->integer('docente_id')->unsigned();
             $table->integer('director_id')->unsigned();
-            $table->integer('tutor_id')->unsigned();
             $table->integer('area_id')->unsigned();
             $table->integer('subarea_id')->unsigned();
-            $table->string('titulo',20)->unique();
-            $table->string('institucion',20);
-            $table->string('sec_trabajo',20);
+            $table->string('titulo',200);
+            $table->string('institucion',200)->nullable();;
+            $table->string('sec_trabajo',200)->nullable();;
             $table->string('objetivo_gen',1024);
             $table->string('objetivo_esp',1024);
             $table->string('descripcion',1024);
             $table->string('trabajo_conjunto',10)->nullable();
             $table->string('cambio_tema',10)->nullable();
+            $table->date('fecha_ini');
+            $table->date('fecha_fin');
+            $table->string('eliminado',10)->nullable();
+            $table->string('cambio_tema',10)->nullable();
             $table->foreign('modalidad_id')->references('id')->on('modalidad')->onDelete('cascade');
             $table->foreign('docente_id')->references('id')->on('docente')->onDelete('cascade');
             $table->foreign('director_id')->references('id')->on('docente')->onDelete('cascade');
-            $table->foreign('tutor_id')->references('id')->on('profesional')->onDelete('cascade');
             $table->foreign('area_id')->references('id')->on('area')->onDelete('cascade');
             $table->foreign('subarea_id')->references('id')->on('area')->onDelete('cascade');
 

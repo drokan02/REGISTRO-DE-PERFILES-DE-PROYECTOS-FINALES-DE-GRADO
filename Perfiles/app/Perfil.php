@@ -12,7 +12,6 @@ class Perfil extends Model
         'modalidad_id',
         'docente_id',
         'director_id',
-        'tutor_id',
         'area_id',
         'subarea_id',
         'titulo',
@@ -24,7 +23,8 @@ class Perfil extends Model
         'trabajo_conjunto',
         'cambio_tema',
         'fecha_ini',
-        'fecha_fin'
+        'fecha_fin',
+        'eliminado'
     ];
 
     public function gestion()
@@ -46,12 +46,12 @@ class Perfil extends Model
         return $this->belongsTo(Docente::class,'docente_id');
     }
 
-    public function directo(){
+    public function director(){
         return $this->belongsTo(Docente::class,'director_id');
     }
 
     public function tutor(){
-        return $this->belongsTo(Profesional::class);
+        return $this->belongsToMany(Profesional::class,'perfil_tutor');
     }
     public function area(){    
         return $this->belongsTo(Area::class,'area_id');
@@ -90,6 +90,14 @@ class Perfil extends Model
             return $query->whereHas('modalidad', function($query) use ($modalidad_id){
                                 return $query->where('id',$modalidad_id);
                            });
+        }
+    }
+
+    public function scopeEliminado($query,$eliminados){
+        if ($eliminados) {
+            return $query->where('eliminado','si');
+        }else{
+            return $query->whereNull('eliminado');
         }
     }
 }

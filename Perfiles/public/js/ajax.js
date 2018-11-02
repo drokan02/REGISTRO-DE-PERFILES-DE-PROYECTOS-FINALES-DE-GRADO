@@ -23,6 +23,7 @@ $('.registrarForm').click(function(e){
     });
 })
 
+
 $('.registrar').click(function(e){
     e.preventDefault();
     form = $(this).parents('form');
@@ -32,7 +33,7 @@ $('.registrar').click(function(e){
         alertify.alert(res.mensaje).set('basic', true); 
           form.submit();
     }).fail(function(ress,status,error){
-        alertify.alert(ress.responseText).set('basic', true); 
+        //alertify.alert(ress.responseText).set('basic', true); 
         var errores="";
         var cont = 18;
        // $('#mensajeError').show();//muestra los mensajes
@@ -48,6 +49,7 @@ $('.registrar').click(function(e){
         
     });
 })
+
 
 $('.eliminar').click(function(e){
     e.preventDefault();
@@ -71,32 +73,33 @@ $('.eliminar').click(function(e){
                     alertify.error(""+res.mensaje);
                 }  
             }).fail(function(ress,status,error){
-                    alertify.set('notifier','position', 'top-center');
-                    alertify.error('UPS no se pudo eliminar');  
+                alertify.alert(ress.responseText).set('basic', true);
             })
         },
         function(){ 
     });
 })
 
-$('#btnMensaje').click(function(){
-    //oculta los mensajes
-    $("#mensajeError").hide();
+$('.btnBuscar').click(function(e){
+    e.preventDefault(); 
+    buscar(this);
 });
 
 
 $('.buscar').keyup(function(e){
     e.preventDefault();
+    buscar(this);
+});
+
+function buscar(componente){
     var divLista = $('.listaDatos');
-    form = $(this).parents('form');
+    form = $(componente).parents('form');
     url = form.attr('action');
     $.get(url,form.serialize(),function(res){ 
         divLista.empty();
         divLista.html(res);
     });
-});
-
-
+}
 $(document).on('click','.pagination a',function(e){
     e.preventDefault();
     var divLista = $('.listaDatos');

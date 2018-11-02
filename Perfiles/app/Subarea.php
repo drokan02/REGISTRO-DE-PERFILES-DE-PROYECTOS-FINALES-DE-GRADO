@@ -47,26 +47,7 @@ class Subarea extends Model
         }
     }
 
-    public function scopeBuscarAreas($query, $buscar){
-        if($buscar){
-            return $query->whereNull('area_id')
-                        ->where(DB::raw("CONCAT(codigo,' ',nombre)"), "LIKE", "%$buscar%");
-        }else{
-            return $query->whereNull('area_id');
-        }
-    }
-    
-    public function scopeSubareasArea($query,$id){
-        return $query->where('area_id',$id);
-    }
-
-    public function scopeAreasCarrera($query,$carrera_id){
-        return $query->whereNull('area_id')->whereHas('carreras', function ($query) use ( $carrera_id){
-            $query->where('carrera_id',$carrera_id);
-        });
-    }
-
-    public function scopeSubareasCarrera($query,$carrera_id){
+    public function scopeDeCarrera($query,$carrera_id){
         return $query->whereNotNull('area_id')
                      ->whereHas('carreras', function ($query) use ( $carrera_id){
                                 $query->where('carrera_id',$carrera_id);

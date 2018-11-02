@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Area;
+use App\Subarea;
 use App\Docente;
 use App\Modal;
 use App\Perfil;
 use App\Profesional;
 use App\Estudiante;
+use App\Carrera;
 use App\Http\Requests\PerfilFormRequest;
 use Validator;
 use Illuminate\Http\Request;
@@ -15,12 +17,14 @@ use Illuminate\Http\Request;
 class PerfilController extends Controller
 {
     public function index(Request $request){
-        $mod_id   = $request['modalidad'];
+        $modalidades = Modal::all();
+        $mod_id   = $request['modalidad_id'];
         $periodo  = $request['periodo'];
         $anio     = $request['anio'];
         $buscar   = $request['buscar'];//"no hay titulo";
         $fila     = 1;
-        $perfiles = Perfil::modalidadP($mod_id)
+        $perfiles = Perfil::eliminado(false)
+                         ->modalidadP($mod_id)
                           ->anio($anio)
                           ->periodo($periodo)
                           ->buscar($buscar)
@@ -33,7 +37,7 @@ class PerfilController extends Controller
                 view('parcial.perfiles',compact('perfiles','buscar','fila'))->render()
             ]);
         }
-        return view('perfiles.listaPerfiles',compact('perfiles','buscar','fila'));
+        return view('perfiles.listaPerfiles',compact('perfiles','buscar','fila','modalidades'));
     }
 
     public function nuevoFormulario(){
@@ -48,10 +52,11 @@ class PerfilController extends Controller
         $modalidad     = Modal::where('id',$modalidad_id)->value('nombre_mod');
         $subareas      = Area::subareasCarrera($carrera_id)->get();
         $areas         = Area::areasCarrera($carrera_id)->get();
-        $profesionales = Profesional::porCarrera($carrera_id)->get();
-        $docentes      = Docente::with('profesional')->porCarrera($carrera_id)->get();
         $director      = $this->directorCarrera($carrera_id);
-        $perfiles      = Perfil::where('modalidad_id',$modalidad_id)->whereHas('estudiantes')->get();
+        $director_id   = $director->toArray()['id'];
+        $profesionales = Profesional::where('id','!=',$director_id)->DeCarrera($carrera_id)->get();
+        $docentes      = Docente::where('id','!=',$director_id)->with('profesional')->porCarrera($carrera_id)->get();
+        $perfiles      = Perfil::where('modalidad_id',$modalidad_id)->with('tutor')->whereHas('estudiantes')->get();
         $gestion       = $this->periodo();
         $fecha_ini     = $this->fechaIni();
         $fecha_fin     = $this->fechaFin();
@@ -83,6 +88,74 @@ class PerfilController extends Controller
             
         }
     }
+    
+    public function almacenar(PerfilFormRequest $request){
+        $perfil        = new Perfil;
+        $trabConjunto  = $request['trabajo_conjunto'];
+        $estudiante_id = $request['estudiante_id'];
+        $tutor_id      = $request['tutor_id'];        
+        $est_perf      = Estudiante::find($estudiante_id)->perfil;
+        $est_perf      = $est_perf->toArray();
+        $perfil_id     = Perfil::where('titulo',$request['titulo'])->value('id');
+        $validacion    = $this->verificar($trabConjunto,$perfil_id,$est_perf);
+        if($request->ajax()){
+            return response()->json($validacion);
+        }
+        if($perfil_id && $trabConjunto == 'si'){
+            $perfil->estudiantes()->attach($estudiante_id,['perfil_id'=>$perfil_id]); 
+        }else{
+            $perfil->create($request->all());
+            $perfil_id = Perfil::where('titulo',$request['titulo'])->value('id');
+            $perfil->estudiantes()->attach($estudiante_id,['perfil_id'=>$perfil_id]); 
+            $perfil->tutor()->attach($tutor_id,['perfil_id'=>$perfil_id]); 
+        }
+        
+        return redirect()->route('perfiles');
+        
+    }
+
+    public function editar($id){
+       // $profesionales = Profesional::
+        $perfil        = Perfil::where('id',$id)->with('tutor','estudiantes','docente','director','area','subarea','modalidad')->get();;
+        $carrera_id    = $perfil->toArray()[0]['estudiantes'][0]['carrera_id'];
+        $fecha_ini     = $perfil->toArray()[0]['fecha_ini'];
+        $director_id   = $perfil->toArray()[0]['director_id'];
+        $docente_id     = $perfil->toArray()[0]['docente_id'];
+        //dd($perfil->toArray());
+        $docente       = Profesional::find($docente_id);
+        $director      = Profesional::find($director_id);
+        $carrera       = Carrera::find($carrera_id);
+        $subareas      = Area::subareasCarrera($carrera_id)->get();
+        $profesionales = Profesional::DeCarrera($carrera_id)
+                                    ->where('id','!=',$director_id)
+                                    ->where('id','!=',$docente_id)
+                                    ->get();
+        $gestion       = $this->gestion($fecha_ini);    
+        return view('perfiles.editarPerfil',compact('perfil','subareas','profesionales','gestion','carrera','director','docente'));
+            
+    }
+
+
+    public function modificar(PerfilFormRequest $request,Perfil $perfil){
+        if($request->ajax()){
+            return response()->json([
+                'mensaje'=>'Perfil modificado correctamente'
+            ]);
+        }
+        $perfil->update($request->all());
+        return redirect()->route('perfiles');
+    }
+
+    public function eliminar(Request $request, Perfil $perfil){
+        $perfil->update([
+            'eliminado'=>'si'
+        ]);
+        return response()->json([
+            'eliminado'=>true,
+            'mensaje'=>'Se a eliminado el Perfil'
+        ]);
+    }
+
     public function directorCarrera($carrera_id)
     {
         $id = Docente::directorCarrera($carrera_id)->value('id');
@@ -93,32 +166,6 @@ class PerfilController extends Controller
         }
            
     }
-    public function almacenar(PerfilFormRequest $request){
-        $perfil = new Perfil;
-        $trabConjunto = $request['trabajo_conjunto'];
-        $estudiante_id = $request['estudiante_id'];
-        $est_perf = Estudiante::find($estudiante_id)->perfil;
-        $est_perf = $est_perf->toArray();
-        $perfil_id = Perfil::where('titulo',$request['titulo'])->value('id');
-        $validacion = $this->verificar($trabConjunto,$perfil_id,$est_perf);
-        if($request->ajax()){
-            return response()->json($validacion);
-        }
-        if($perfil_id && $trabConjunto == 'si'){
-            $perfil->estudiantes()->attach($estudiante_id,['perfil_id'=>$perfil_id]); 
-        }else{
-            $perfil->create($request->all());
-            $perfil_id = Perfil::where('titulo',$request['titulo'])->value('id');
-            $perfil->estudiantes()->attach($estudiante_id,['perfil_id'=>$perfil_id]); 
-        }
-        
-        
-        
-        
-       // Perfil::create($request->all());
-        
-    }
-
      public function verificar($trabConjunto,$id,$est_perf){
         
          if($est_perf == []){
@@ -177,6 +224,12 @@ class PerfilController extends Controller
         return ($mes < 7 ? 1 : 2 ).'/'.$anio;
      }
 
+     public function gestion($fecha){
+        $fecha = explode("-", $fecha);
+         $mes  = $fecha[1];
+         $anio = $fecha[0];
+         return ($mes < 7 ? 1 : 2 ).'/'.$anio;
+     }
      public function nroIntegrantes($id){
          if($id){
              $res = Perfil::find($id)->estudiantes;

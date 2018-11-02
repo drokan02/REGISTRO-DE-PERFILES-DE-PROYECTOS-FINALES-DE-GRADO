@@ -28,6 +28,7 @@ $('.eliminar').click(function(e){
     });
 })
 
+
 $('#eliminarAreaCarrera').click(function(e){
     e.preventDefault();
     var form     = $(this).parents('form');
@@ -137,7 +138,7 @@ function llenarCampos(perfil){
     $("#objetivo_gen").val(perfil.objetivo_gen);
     $("#descripcion").val(perfil.descripcion);
     $("#docente_id").val(perfil.docente_id);
-    $("#tutor_id").val(perfil.tutor_id);
+    $("#tutor_id").val(perfil.tutor[0].id);
     $("#area_id").val(perfil.area_id);
     $("#subarea_id").val(perfil.subarea_id);
 }
