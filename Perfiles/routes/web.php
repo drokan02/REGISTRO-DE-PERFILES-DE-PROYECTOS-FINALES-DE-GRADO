@@ -130,9 +130,10 @@ Route::get('/perfil/ver','PerfilController@index')->name('verPerfil');
 Route::get('/perfil/registrarPerfil','PerfilController@nuevoFormulario')->name('nuevoPerfil');
 Route::any('/perfil/registrarPerfil/mostrarForm','PerfilController@mostrarForm')->name('mostrarFormulario');
 Route::post('/perfil/registrarPerfil/almacenar','PerfilController@almacenar')->name('almacenarPerfil');
-Route::get('/perfil/editar/{perfil}','PerfilController@index')->name('editarPerfil');
-Route::post('/perfil/editar/modificar/{perfil}','PerfilController@index')->name('modificarPerfil');
-Route::any('/perfil/eliminar/{perfil}','PerfilController@index')->name('eliminarPerfil');
+Route::get('/perfil/editar/{perfil}','PerfilController@editar')->name('editarPerfil');
+Route::post('/perfil/editar/modificar/{perfil}','PerfilController@modificar')->name('modificarPerfil');
+//Route::post('/perfil/editar/{perfil}/modificar','PerfilController@modificar')->name('mPerfil');
+Route::any('/perfil/eliminar/{perfil}','PerfilController@eliminar')->name('eliminarPerfil');
 //Gestion
 Route::any('/menu/Gestion', 'GestionController@index')->name('gestiones');
 Route::get('menu/Gestion/registrar', 'GestionController@registrar')->name('registrarGestion');

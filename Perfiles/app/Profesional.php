@@ -27,7 +27,7 @@ class Profesional extends Model
 
     public function perfiles()
     {
-        return $this->hasMany(Perfil::class);    
+        return $this->belongsToMany(Perfil::class,'perfil_tutor');    
     }
 
     public function docente()
@@ -56,7 +56,7 @@ class Profesional extends Model
         }
     }
 
-    public function scopePorCarrera($query,$carrera_id){
+    public function scopeDeCarrera($query,$carrera_id){
         return $query->where('carrera_id',$carrera_id);
     }
 }

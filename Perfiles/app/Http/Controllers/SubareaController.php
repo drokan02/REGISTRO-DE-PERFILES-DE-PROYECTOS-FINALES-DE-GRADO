@@ -43,6 +43,7 @@ class SubareaController extends Controller
 		$subarea->descripcion = $request->descripcion;
 		$subarea->area_id = $area->id;
 		$subarea->save();
+		$this->agregarCarrera($request['codigo'],$area);
 		return redirect()->route('subareas',['area'=>$area]);
 	}
 
@@ -80,80 +81,12 @@ class SubareaController extends Controller
 		return redirect()->route('subareas',compact('area'));
 	}
 
-	public function carreras(Request $request,Area $subarea){
-		$fila = 1;
-		$nombreArea = $subarea->toArray()['nombre'];
-		$subarea_id = $subarea->toArray()['id'];
-		$carrera = $request['carrera_id'];
-		$carreras = Carrera::all();
-		if(!$carrera){
-			if ($request->ajax()) {		
-				return response()->json([
-					"registrado"=> false,
-					'mensaje' => 'Seleccione una carrera',
-				]);	
-			}
-		}else{
-			$registrado = $this->agregarCarrera($carrera,$subarea);
-			if ($request->ajax()) {
-				if($registrado){
-					$subarea = Area::find($subarea_id);
-					return response()->json([
-						"registrado"=> true,
-						'mensaje' => "Registrado correctamente la carrera en la Subarea $nombreArea",
-						'tabla'   => view('parcial.carrerasSubarea',compact('subarea','carreras','fila'))->render()
-					]);
-				}else{
-					return response()->json([
-						"registrado"=> false,
-						'mensaje' => 'Esa carrera ya se encuentra registrada',
-					]);
-				}
-				
-			}
-		}
-		
-		//dd($this->valido($carrera_id,$area));
-		return view('area.carrerasArea',compact('area','carreras','fila'));
-	}
-
-	public function agregarCarrera($carrera,Area $subarea){
-		$subarea_id = $subarea->toArray()['id'];
-		$valido = $this->valido($carrera,$subarea);
-		if($valido){
-			$subarea->carreras()->attach($carrera,['area_id'=>$subarea_id]);
-			return true;
-		}else{
-			return false;
-		}
-
-	}
-
-	public function valido($carrera,$subarea){
-		$aux = $subarea->carreras->where('id',$carrera);
-		$aux = $aux->toArray();
-		if($aux){
-			return false;//retornamos false por que esta registrado ya esa carrera
-		}else{
-			return true;//retornamos verdad por q no esta registrado y asi poder registrarlo
-		}
-			
-	}
-
-	public function eliminarCarrera(Request $request,Carrera $carrera){
-		$fila = 1;
-		//$carrera_id = $datos['carrera_id'];
-		$subarea_id = $request['subarea'];
-		//dd($area_id);
-		
-		$carrera->areas()->detach($subarea_id);
-		$subarea = Area::find($subarea_id);
-		if($request->ajax()){
-			return response()->json([
-				"eliminado"=>true,
-				"mensaje" => "Se elimino el area de la carrera correctamente",
-				"tabla"   => view('parcial.carrerasArea',compact('subarea','fila'))->render()
-			]);
+	public function agregarCarrera($codigo,$area){
+		$subarea_id = Area::where('codigo',$codigo)->value('id');
+		$carreras   = $area->carreras->pluck('id')->toArray();
+		if($carreras){
+			$area->carreras()->attach($carreras,['area_id'=>$subarea_id]);
 		}
 	}
+
 }

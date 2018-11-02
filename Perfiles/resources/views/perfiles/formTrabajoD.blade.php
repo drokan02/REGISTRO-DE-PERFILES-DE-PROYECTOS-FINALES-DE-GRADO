@@ -1,5 +1,5 @@
 <form method="POST" action="{{route('almacenarPerfil',['director_id'=>$director->id,'modalidad_id'=>$modalidad_id,
-'estudiante_id'=>$estudiante->id,'fecha_ini'=>$fecha_ini,'fecha_fin'=>$fecha_fin])}}">
+    'estudiante_id'=>$estudiante->id,'fecha_ini'=>$fecha_ini,'fecha_fin'=>$fecha_fin])}}">
     {!! csrf_field() !!}
     <div class="form-group row">
         <label for="name" class="col-sm-2 col-form-label">Nombre Estudiante</label>
