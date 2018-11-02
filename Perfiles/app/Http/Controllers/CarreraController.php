@@ -42,7 +42,7 @@ class CarreraController extends Controller
      */
     public function guardar(Request $request){
         $this->validate(request(), [
-            'codigo_carrera' => ['required','unique:carreras,codigo_carrera'],
+            'codigo_carrera' => ['required','unique:carrera,codigo_carrera'],
             'nombre_carrera'=> ['required'],
             'descripcion'=>'required'
         ]);
@@ -72,7 +72,7 @@ class CarreraController extends Controller
     public function actualizar(Request $request, Carrera $carrera)
     {
         $this->validate(request(), [
-            'codigo_carrera' => ['required',Rule::unique('carreras')->ignore($carrera->id)],
+            'codigo_carrera' => ['required',Rule::unique('carrera')->ignore($carrera->id)],
             'nombre_carrera'=> ['required'],
             'descripcion'=>'required'
         ]);

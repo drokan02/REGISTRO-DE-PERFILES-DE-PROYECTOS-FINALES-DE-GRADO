@@ -128,7 +128,7 @@ class modalidades extends Controller
                         $modalidad->create([
                             'codigo_mod' => $fila->codigo_mod,
                             'nombre_mod' => $fila->nombre_mod,
-                            'descripsion_mod' => $fila->descripsion_mod
+                            'descripcion_mod' => $fila->descripcion_mod
                         ]);
                     }
                 });
