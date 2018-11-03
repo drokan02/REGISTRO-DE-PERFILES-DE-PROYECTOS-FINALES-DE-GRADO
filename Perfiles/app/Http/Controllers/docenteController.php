@@ -18,6 +18,7 @@ class docenteController extends Controller
 {
     function __construct(){
        // $this->middleware('auth');
+        //$this->middleware(['verificarCuenta']);
     }
     public function index(Request $request){
        $carrera_id=0;//falta pasar como atributo

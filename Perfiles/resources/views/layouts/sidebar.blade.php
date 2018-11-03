@@ -5,9 +5,6 @@
               
     <!-- Menu -->
     <ul class="sidebar-menu">
-      <!-- revisar   -->
-      <li class="header"></li>
-
       <!-- indice inicio -->
       <li class="treeview">
         <a href="#">
