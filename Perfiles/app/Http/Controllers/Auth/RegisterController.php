@@ -8,6 +8,7 @@ use App\Role;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -70,12 +71,14 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         DB::transaction(function () use($data) {
+            $data['confirmation_code'] = str_random(10);
             $user =new User();
             $user->create([
                 'name' => $data['nombres'],
                 'user_name' => $data['user_name'],
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
+                'confirmation_code' => $data['confirmation_code']
             ]);
             $data['password']=bcrypt($data['password']);
             $idcarrera=Carrera::query()->where('nombre_carrera',$data['carrera'])->value('id');
@@ -94,7 +97,21 @@ class RegisterController extends Controller
             $idEstudiante=Estudiante::query()->where('email',$data['email'])->value('id');
             $user->roles()->attach($role_id,['user_id'=>$iduser]);
             $user->estudiante()->attach($idEstudiante,['user_id'=>$iduser]);
+            $data1=$data;
+            Mail::send('emails.bienvenido', $data1, function($message) use ($data) {
+                $message->to($data['email'], $data['nombres'])->subject('Por favor confirma tu correo');
+            });
             return $user;
         });
+    }
+    public function verify($code){
+        $user = User::where('confirmation_code', $code)->first();
+        if (! $user){
+            return redirect('/');
+        }
+        $user->confirmado = true;
+        $user->confirmation_code = null;
+        $user->save();
+        return redirect('/');//->with('notification', 'Has confirmado correctamente tu correo!');
     }
 }

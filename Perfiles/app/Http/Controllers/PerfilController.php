@@ -16,6 +16,12 @@ use Illuminate\Http\Request;
 
 class PerfilController extends Controller
 {
+
+    function __construct(){
+        // $this->middleware('auth');
+        //$this->middleware(['verificarCuenta']);
+    }
+
     public function index(Request $request){
         $modalidades = Modal::all();
         $mod_id   = $request['modalidad_id'];
