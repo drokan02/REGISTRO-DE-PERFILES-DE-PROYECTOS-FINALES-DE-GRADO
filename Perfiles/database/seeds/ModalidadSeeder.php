@@ -29,7 +29,7 @@ class ModalidadSeeder extends Seeder
 
         Modal::create([
             'codigo_mod' => 'ad-12',
-            'nombre_mod' => 'Adscripción',
+            'nombre_mod' => 'Adscripcion',
             'descripcion_mod' => 'Se establece la Adscripción como la incorporación de estudiantes de la UMSS a la realización de actividades
              en los ámbitos académico, de investigación, interacción, y/o de gestión universitaria. La Adscripción consiste en la realización
               de un Trabajo Dirigido y/o una práctica profesional supervisada (internado) dentro de la Universidad Mayor de San Simón, 
