@@ -1,12 +1,12 @@
-<aside class="main-sidebar" >
+<aside class="main-sidebar"  style="position: fixed;" >
   <!-- sidebar: style can be found in sidebar.less -->
-  <section class="sidebar">
+  <section class="sidebar ">
     <!-- Sidebar user panel -->
               
     <!-- Menu -->
     <ul class="sidebar-menu">
       <!-- revisar   -->
-      <li class="header"></li>
+      <li class="header" style="background-color: #367fa9"></li>
 
       <!-- indice inicio -->
       <li class="treeview">

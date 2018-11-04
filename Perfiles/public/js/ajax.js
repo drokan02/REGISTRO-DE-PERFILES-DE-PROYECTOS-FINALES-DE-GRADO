@@ -1,4 +1,12 @@
+var cont = 0;
+$('.sidebar-toggle').click(function(){
+    if(cont==0){
+        
+    }
+})
+
 //funciona tanto para registrar como eliminar 
+
 $('.registrarForm').click(function(e){
     e.preventDefault();
     form = $(this).parents('form');

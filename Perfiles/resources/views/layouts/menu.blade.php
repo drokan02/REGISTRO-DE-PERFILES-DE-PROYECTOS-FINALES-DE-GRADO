@@ -30,7 +30,7 @@
        <!--Contenido-->
    
       <div class="content-wrapper">
-        <section class="content">
+        <section class="content" style="padding-top: 80px">
           <div class="row">
             <div class="col-md-12">
               

@@ -27,8 +27,8 @@
    @include('complementos.error')
    <div  class="centrar table-responsive col-sm-12 listaDatos">
     @if($docentes->isNotEmpty())
-      <table class="table table-hover text-center" id="listaProfesionales">
-          <thead class ="thead">
+      <table class="table table-hover " id="listaProfesionales">
+          <thead class ="thead text-center">
         <tr class="tr">
           <th style="width: 3%; text-align: center;">N°</th>
           <th style="width: 10%;">Nombres</th>

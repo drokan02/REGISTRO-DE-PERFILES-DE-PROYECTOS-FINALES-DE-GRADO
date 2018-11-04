@@ -26,10 +26,10 @@
    <!--FIN BUSCADOR -->
 
 
-  <div  class=" tabla centrar col-sm-10 listaDatos">
+  <div  class=" tabla centrar  col-sm-10 listaDatos">
    @if($areas->isNotEmpty())
 
-      <table class=" table table-hover table-bordered-primary text-center" id="listaArea">
+      <table class=" table  table-hover text-center " id="listaArea">
         <thead class="thead">
         <tr class="tr">
           <th style="width: 5%; text-align: center;">N°</th>
@@ -73,13 +73,13 @@
         @endforeach
       </tbody>
     </table>
-    
+
      {!! $areas->render() !!}
      @else
         <li>No hay Areas registradas</li>
     @endif
-
 </div>
+
 
 </Form>
 @endsection
