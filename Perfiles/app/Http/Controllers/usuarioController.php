@@ -12,6 +12,7 @@ class usuarioController extends Controller
 {
     function __construct(){
        // $this->middleware('auth');
+        //$this->middleware(['verificarCuenta']);
     }
     /**
      * Display a listing of the resource.

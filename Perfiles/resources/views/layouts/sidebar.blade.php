@@ -5,9 +5,6 @@
               
     <!-- Menu -->
     <ul class="sidebar-menu">
-      <!-- revisar   -->
-      <li class="header" style="background-color: #367fa9"></li>
-
       <!-- indice inicio -->
       <li class="treeview">
         <a href="#">

@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'id','name','user_name', 'email', 'password'
+        'id','name','user_name', 'email', 'password','confirmation_code'
     ];
 
     /**
@@ -44,5 +44,8 @@ class User extends Authenticatable
     }
     public function estudiante(){
         return $this->belongsToMany(Estudiante::class);
+    }
+    public function isConfirmed(){
+        return $this->confirmado;
     }
 }

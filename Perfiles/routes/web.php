@@ -14,6 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 })->name('inicio');
+Route::get('/verifiqueCuenta',function () {
+    return view('emails/confirmarCuenta');
+})->name('confirmarCuenta');
 
 Route::get('/prueba', function () {
     return view('complementos.prueba');
@@ -145,3 +148,5 @@ Route::get('menu/Gestion/registrar/almacenar', 'GestionController@almacenar')->n
 Route::get('menu/Gestion/editar/{gestion}', 'GestionController@editar')->name('editarGestion');
 Route::post('menu/Gestion/editar/modificar/{gestion}', 'GestionController@modificar')->name('modificarGestion');
 
+// E-mail verification
+Route::get('/register/verify/{code}', 'Auth\RegisterController@verify');
