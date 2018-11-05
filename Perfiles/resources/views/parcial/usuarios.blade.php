@@ -1,6 +1,6 @@
 @if($users->isNotEmpty())
-<table class="table table-hover table-bordered-primary text-center">
-    <thead class="thead thead-primary">
+<table class="table  table-hover text-center">
+    <thead class="thead">
     <tr class="tr">
         <th scope="col">#</th>
         <th scope="col">Nombre</th>

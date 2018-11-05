@@ -60,7 +60,7 @@
 				<div class = "form-group row"> 
 					<label for="cargahoraria_id" class="col-sm-2 col-form-label">Carga Horaria</label>
 					<div class="col-sm-4 row-fluid" >
-							<select name="cargahoraria_id" id="cargahoraria_id" class="form-control" >
+							<select name="cargahoraria_id" id="cargahoraria_id" class="form-control form-control-chosen" >
 								<option disabled selected > -- seleccione la Carga Horaria -- </option>
 								@foreach ($horarios as $horario)
 									<option value="{{$horario->id}}" 
@@ -79,7 +79,7 @@
 				<div class = "form-group row"> 
 					<label for="titulo_id" class="col-sm-2 col-form-label">Titulo</label>
 					<div class="col-sm-4 row-fluid" >
-						<select name="titulo_id" id="titulo_id" class="form-control" >
+						<select name="titulo_id" id="titulo_id" class="form-control form-control-chosen" >
 							<option disabled selected > -- seleccione una Titulo -- </option>
 							@foreach ($titulos as $titulo)
 								<option value="{{$titulo->id}}" 
@@ -90,7 +90,7 @@
 
 					<label for="carrera_id" class="col-sm-2 col-form-label">Carrera</label>
 					<div class="col-sm-4 row-fluid" >
-						<select name="carrera_id" id="carrera_id" class="form-control" >
+						<select name="carrera_id" id="carrera_id" class="form-control form-control-chosen" >
 							<option disabled selected > -- seleccione una Titulo -- </option>
 							@foreach ($carreras as $carrera)
 								<option value="{{$carrera->id}}" 
@@ -104,8 +104,8 @@
 				<div class = "form-group row"> 
 					<label for="area_id" class="col-sm-2 col-form-label">Area</label>
 					<div class="col-sm-10">
-						<select name="area_id" id="area_id" class="form-control" >
-							<option disabled selected > -- seleccione una Area -- </option>
+						<select name="area_id" id="area_id" class="form-control form-control-chosen" >
+							<option disabled selected >Seleccionar </option>
 							@foreach ($areas as $area)
 								<option value="{{$area->id}}"
 								{{$docente->profesional->areas->pluck('id')->contains($area->id) ? 'selected':''}}>{{$area->nombre}}</option>
@@ -116,8 +116,8 @@
 				<div class="form-group row">
 					<label for="subarea_id" class="col-sm-2 col-form-label">Sub Area</label>
 					<div class="col-sm-10">
-						<select name="subarea_id" id="subarea_id" class="form-control" >
-							<option disabled selected > -- seleccione una Sub Area -- </option>
+						<select name="subarea_id" id="subarea_id" class="form-control form-control-chosen" >
+							<option disabled selected > Seleccionar </option>
 							@foreach ($subareas as $subarea)
 								<option value="{{$subarea->id}}"
 								{{$docente->profesional->areas->pluck('id')->contains($subarea->id) ? 'selected':''}}>{{$subarea->nombre}}</option>
@@ -139,6 +139,9 @@
 		</div>
 	
 	</div>
+	<script>
+			$('.form-control-chosen').chosen({});
+	</script>
 @endsection
 
 

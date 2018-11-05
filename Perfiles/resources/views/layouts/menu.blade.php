@@ -15,7 +15,11 @@
     <link rel="stylesheet" href={{asset('css/_all-skins.min.css')}}>
     <link rel="apple-touch-icon" href={{asset('img/apple-touch-icon.png')}}>
     <link rel="shortcut icon" href={{asset('img/favicon.ico')}}>
+    <link href={{asset("sel/component-chosen.css")}} rel="stylesheet">
+    <script src={{asset("js/jquery-3.3.1.slim.min.js")}} ></script>
     <script src={{asset('js/popper.min.js')}}></script>
+    <script src={{asset("js/chosen.jquery.min.js")}}></script>
+    
     
   </head>
 
@@ -64,16 +68,30 @@
     </div>
       <!--Fin-Contenido-->
 
-      <!--PIE DE PAGINA-->
-      <footer class="main-footer">
-        
- 
+      <!--PIE DE PAGINA
+      <footer class="main-footer" style="background-color: #3c8dbc;color: white">
+          <div class="row">
+              <div class="col-auto ml-2 mt-1">
+                  <img  src="{{asset('img/vensoft.jpg')}}" width="50" height="50">
+              </div>
+              <div class="col-4 mt-2">
+                      <span class="font-italic">El sistema es Diseño y Desarrollo de la Empresa de software
+                          "VENSOFT" Copyright © 2018 . Todos los derechos reservados.
+                      </span>
+              </div>
+              <div class="col-3 offset-4 text-center mt-2">
+                  <span>Facultad de Ciencias y Tecnología (UMSS).<br></span>
+                  <span> Cochabamba - Bolivia</span>
+              </div>
+          </div>
+      </footer>-->
+      <script src={{asset('js/ajax.js')}}></script>
     <script src={{asset('js/jQuery-3.3.1.min.js')}}></script>
     <script src={{asset('js/gijgo.min.js')}} ></script>
     <script src={{asset('js/bootstrap.min.js')}}></script>
     <script src={{asset('js/alertify.min.js')}}></script>
     <script src={{asset('js/parsley.min.js')}}></script>
     <script src={{asset('js/app.min.js')}}></script>
-    <script src={{asset('js/ajax.js')}}></script>
+    
   </body>
 </html>

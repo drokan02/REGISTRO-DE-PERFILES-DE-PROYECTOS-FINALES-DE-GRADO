@@ -1,6 +1,6 @@
 @if($carrera->areas->isNotEmpty())
 
-      <table class=" table table-hover table-bordered-primary text-center" id="listaArea">
+      <table class=" table  table-hover text-center" id="listaArea">
         <thead class="thead">
         <tr class="tr">
           <th style="width: 5%; text-align: center;">N°</th>

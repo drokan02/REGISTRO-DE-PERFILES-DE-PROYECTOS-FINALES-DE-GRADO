@@ -24,7 +24,7 @@ class Perfil extends Model
         'cambio_tema',
         'fecha_ini',
         'fecha_fin',
-        'eliminado'
+        'estado'
     ];
 
     public function gestion()
@@ -95,9 +95,9 @@ class Perfil extends Model
 
     public function scopeEliminado($query,$eliminados){
         if ($eliminados) {
-            return $query->where('eliminado','si');
+            return $query->where('estado','eliminado');
         }else{
-            return $query->whereNull('eliminado');
+            return $query->where('estado','!=','eliminado')->orWhereNull('estado');
         }
     }
 }

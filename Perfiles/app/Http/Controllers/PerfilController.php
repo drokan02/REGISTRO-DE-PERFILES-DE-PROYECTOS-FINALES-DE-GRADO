@@ -54,9 +54,14 @@ class PerfilController extends Controller
         $areas         = Area::areasCarrera($carrera_id)->get();
         $director      = $this->directorCarrera($carrera_id);
         $director_id   = $director->toArray()['id'];
-        $profesionales = Profesional::where('id','!=',$director_id)->DeCarrera($carrera_id)->get();
-        $docentes      = Docente::where('id','!=',$director_id)->with('profesional')->porCarrera($carrera_id)->get();
-        $perfiles      = Perfil::where('modalidad_id',$modalidad_id)->with('tutor')->whereHas('estudiantes')->get();
+        $profesionales = Profesional::where('id','!=',$director_id)
+                                    ->DeCarrera($carrera_id)->get();
+        $docentes      = Docente::where('id','!=',$director_id)->with('profesional')
+                                ->porCarrera($carrera_id)->get();
+        $perfiles      = Perfil::where('modalidad_id',$modalidad_id)
+                                ->where('trabajo_conjunto','si')
+                                ->with('docente.profesional')->with('tutor','area','subarea')
+                                ->whereHas('estudiantes')->get();
         $gestion       = $this->periodo();
         $fecha_ini     = $this->fechaIni();
         $fecha_fin     = $this->fechaFin();
@@ -75,7 +80,7 @@ class PerfilController extends Controller
                     ]);
                 }else{return response()->json([
                         'valido'=> true, 
-                        'datos' =>  view('perfiles.formTesis',compact('director','docentes','profesionales','perfiles',
+                        'datos' =>  view('perfiles.formTrabajoD',compact('director','docentes','profesionales','perfiles',
                          'areas','subareas','estudiante','modalidad_id','modalidad','gestion','fecha_ini','fecha_fin'))->render()
                     ]);
                 } 
@@ -101,7 +106,7 @@ class PerfilController extends Controller
         if($request->ajax()){
             return response()->json($validacion);
         }
-        if($perfil_id && $trabConjunto == 'si'){
+        if($perfil_id  && $trabConjunto == 'si'){
             $perfil->estudiantes()->attach($estudiante_id,['perfil_id'=>$perfil_id]); 
         }else{
             $perfil->create($request->all());
@@ -148,12 +153,16 @@ class PerfilController extends Controller
 
     public function eliminar(Request $request, Perfil $perfil){
         $perfil->update([
-            'eliminado'=>'si'
+            'eliminado'=>'eliminado'
         ]);
         return response()->json([
             'eliminado'=>true,
             'mensaje'=>'Se a eliminado el Perfil'
         ]);
+    }
+
+    public function cambiar(){
+        
     }
 
     public function directorCarrera($carrera_id)

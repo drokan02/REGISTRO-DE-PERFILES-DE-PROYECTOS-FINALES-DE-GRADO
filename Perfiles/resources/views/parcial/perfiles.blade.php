@@ -1,6 +1,6 @@
 @if ($perfiles->isNotEmpty())
-<table class=" table table-hover table-bordered-primary" id="listaArea">
-    <thead class="thead">
+<table class=" table  table-hover " id="listaArea">
+    <thead class="thead text-center">
     <tr class="tr">
         <th style="width: 3%; text-align: center;">N°</th>
         <th style="width: 20%;">Titulo</th>

@@ -9,11 +9,12 @@
                  <div class="form-group row">
                      <label for="cargahoraria_id" class="col-sm-2 col-form-label">Carreras</label>
                      <div class="col-sm-8 " >
-                             <select name="area_id" id="area_id" class="form-control" >
+                             <select name="area_id" class="form-control form-control-chosen " data-placeholder="Seleccione." >
                                  <option disabled selected > seleccionar </option>
                                  @foreach ($areas as $area)
                                  <option value="{{$area->id}}"> {{$area->nombre}} </option>   
                                  @endforeach
+                                 
                              </select>
                      </div>
                      <div class="col-sm-0">
@@ -61,5 +62,7 @@
     @endif
 
 </div>
-
+<script>
+        $('.form-control-chosen').chosen({});
+ </script>
 @endsection

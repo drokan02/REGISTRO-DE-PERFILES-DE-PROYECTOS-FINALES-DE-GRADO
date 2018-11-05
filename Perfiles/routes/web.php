@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 })->name('inicio');
 
+Route::get('/prueba', function () {
+    return view('complementos.prueba');
+})->name('inicio');
+
 //Roles
 Route::get('/menu','menuController@index')->name('menu');
 Route::get('/roles','RoleController@index')->name('roles');
@@ -140,3 +144,4 @@ Route::get('menu/Gestion/registrar', 'GestionController@registrar')->name('regis
 Route::get('menu/Gestion/registrar/almacenar', 'GestionController@almacenar')->name('almacenarGestion');
 Route::get('menu/Gestion/editar/{gestion}', 'GestionController@editar')->name('editarGestion');
 Route::post('menu/Gestion/editar/modificar/{gestion}', 'GestionController@modificar')->name('modificarGestion');
+

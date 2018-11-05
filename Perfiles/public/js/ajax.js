@@ -1,11 +1,3 @@
-var cont = 0;
-$('.sidebar-toggle').click(function(){
-    if(cont==0){
-        
-    }
-})
-
-//funciona tanto para registrar como eliminar 
 
 $('.registrarForm').click(function(e){
     e.preventDefault();
@@ -152,6 +144,7 @@ $('#modalidad').change(function(e){
     });
 })
 
+
 $('#carrera_id').change(function(e){
     e.preventDefault();
      carrera_id = $(this).val();
@@ -160,9 +153,9 @@ $('#carrera_id').change(function(e){
      //alert(id);
 })
 
-$('#fecha_ini').datepicker({
-    uiLibrary: 'bootstrap4',
-});
+//$('#fecha_ini').datepicker({
+   // uiLibrary: 'bootstrap4',
+//});
 
 $('.prueba').click(function(e){
     e.preventDefault();
