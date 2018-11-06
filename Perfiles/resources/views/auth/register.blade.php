@@ -16,7 +16,7 @@
         <div class="form-group row">
             <div class="col">
                 <label for="nombre">Nombre Completo   (*)</label>
-                <input type="text" class="form-control" name="nombres" id="nombre" value="{{old('nombre')}}"  placeholder="ApellidoPaterno  ApellidoMaterno   Nombres">
+                <input type="text" class="form-control" name="nombres" id="nombre" value="{{old('nombres')}}"  placeholder="ApellidoPaterno  ApellidoMaterno   Nombres">
             </div>
         </div>
 
@@ -34,11 +34,11 @@
         <div class="form-group row">
             <div class="col">
                 <label for="password">Password  (*)</label>
-                <input type="password" class="form-control" name="password" id="password">
+                <input type="password" class="form-control" name="password" id="password" value="{{old('password')}}">
             </div>
             <div class="col">
                 <label for="password_confirmation">Confirmar Password  (*)</label>
-                <input type="password" class="form-control" name="password_confirmation" id="password_confirmation">
+                <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" value="{{old('password_confirmation')}}">
             </div>
         </div>
         <div class="form-group row">
