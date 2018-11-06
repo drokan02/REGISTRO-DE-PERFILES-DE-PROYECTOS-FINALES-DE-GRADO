@@ -31,7 +31,6 @@ class CreatePerfilTable extends Migration
             $table->date('fecha_ini');
             $table->date('fecha_fin');
             $table->string('eliminado',10)->nullable();
-
             $table->foreign('modalidad_id')->references('id')->on('modalidad')->onDelete('cascade');
             $table->foreign('docente_id')->references('id')->on('docente')->onDelete('cascade');
             $table->foreign('director_id')->references('id')->on('docente')->onDelete('cascade');
