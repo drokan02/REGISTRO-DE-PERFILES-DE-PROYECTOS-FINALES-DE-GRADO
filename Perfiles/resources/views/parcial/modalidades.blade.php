@@ -1,5 +1,5 @@
 @if($modalidades->isNotEmpty())
-    <table class="table" id="listaModall">
+    <table class="table  table-hover text-center" id="listaModall">
         <thead class ="thead">
     <tr class="tr">
         <th style="width: 5%; text-align: center;">N°</th>
@@ -17,7 +17,7 @@
             <td style="text-align: right;">{{$modalidad->id}}</td>
             <td>{{$modalidad->codigo_mod}}</td>
             <td>{{$modalidad->nombre_mod}}</td>
-            <td style="width: 43%;" >{{$modalidad->descripcion_mod}}</td>
+            <td class="descripcion" style="width: 43%;" >{{$modalidad->descripcion_mod}}</td>
 
             <td>
                 <div class=" dropleft text-center">

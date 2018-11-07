@@ -1,4 +1,10 @@
-//funciona tanto para registrar como eliminar 
+$("#prueba").click(function(){
+    
+    res = $('#area_id').val(1).trigger('area_id:updated');
+    console.log(res)
+});
+
+
 $('.registrarForm').click(function(e){
     e.preventDefault();
     form = $(this).parents('form');
@@ -144,6 +150,7 @@ $('#modalidad').change(function(e){
     });
 })
 
+
 $('#carrera_id').change(function(e){
     e.preventDefault();
      carrera_id = $(this).val();
@@ -152,9 +159,9 @@ $('#carrera_id').change(function(e){
      //alert(id);
 })
 
-$('#fecha_ini').datepicker({
-    uiLibrary: 'bootstrap4',
-});
+//$('#fecha_ini').datepicker({
+   // uiLibrary: 'bootstrap4',
+//});
 
 $('.prueba').click(function(e){
     e.preventDefault();

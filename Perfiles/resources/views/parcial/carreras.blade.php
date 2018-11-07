@@ -1,6 +1,6 @@
 @if($carreras->isNotEmpty())
-    <table class="table text-center">
-        <thead class="thead thead-primary">
+    <table class="table  table-hover text-center">
+        <thead class="thead">
         <tr class="tr">
             <th >#</th>
             <th >Codigo Carrera</th>

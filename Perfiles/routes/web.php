@@ -18,6 +18,10 @@ Route::get('/verifiqueCuenta',function () {
     return view('emails/confirmarCuenta');
 })->name('confirmarCuenta');
 
+Route::get('/prueba', function () {
+    return view('complementos.prueba');
+})->name('inicio');
+
 //Roles
 Route::get('/menu','menuController@index')->name('menu');
 Route::get('/roles','RoleController@index')->name('roles');

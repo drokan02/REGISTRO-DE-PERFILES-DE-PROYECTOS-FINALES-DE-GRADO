@@ -10,8 +10,7 @@
         
         <div class="container">
                 <div class="form-group row">
-                    <div class="col-sm-4"></div>
-                    <div class=" col-4">       
+                    <div class=" col-sm-4 offset-md-4">       
                                     <input type="search" placeholder="&#xF002; Buscar" style="font-family:Time, FontAwesome" class="form-control buscar" 
                                     name="buscar" autofocus value="{{$buscar}}" autocomplete="off" onfocus="var temp_value=this.value; this.value=''; this.value=temp_value">   
                     </div>          
@@ -26,10 +25,10 @@
    <!--FIN BUSCADOR -->
 
 
-  <div  class=" tabla centrar col-sm-10 listaDatos">
+  <div  class=" tabla centrar  col-sm-10 listaDatos">
    @if($areas->isNotEmpty())
 
-      <table class=" table table-hover table-bordered-primary text-center" id="listaArea">
+      <table class=" table  table-hover text-center " id="listaArea">
         <thead class="thead">
         <tr class="tr">
           <th style="width: 5%; text-align: center;">N°</th>
@@ -73,13 +72,13 @@
         @endforeach
       </tbody>
     </table>
-    
+
      {!! $areas->render() !!}
      @else
         <li>No hay Areas registradas</li>
     @endif
-
 </div>
+
 
 </Form>
 @endsection

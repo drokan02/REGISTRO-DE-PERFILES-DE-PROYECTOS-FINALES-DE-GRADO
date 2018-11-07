@@ -21,8 +21,7 @@
             </div>
        </div>
         <div class="form-group row">
-            <div class="col-sm-4"></div>
-            <div class=" col-4">       
+            <div class=" col-sm-4 offset-md-4">       
                             <input type="search" placeholder="&#xF002; Buscar" style="font-family:Time, FontAwesome" class="form-control " 
                             name="buscar" autofocus value="{{$buscar}}" autocomplete="off" onfocus="var temp_value=this.value; this.value=''; this.value=temp_value">   
             </div>          
@@ -33,10 +32,10 @@
         </div>        
     </div> 
 </Form>
-    <div class="listaDatos">
+    <div class="listaDatos ">
         @if ($perfiles->isNotEmpty())
-        <table class=" table table-hover table-bordered-primary" id="listaArea">
-            <thead class="thead">
+        <table class=" table  table-hover  " id="listaArea">
+            <thead class="thead text-center">
             <tr class="tr">
                 <th style="width: 3%; text-align: center;">N°</th>
                 <th style="width: 20%;">Titulo</th>

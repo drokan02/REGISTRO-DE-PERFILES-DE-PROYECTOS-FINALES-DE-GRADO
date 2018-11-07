@@ -43,8 +43,8 @@
     <div class="form-group row" id="contentPerfiles" style="display:none;">
         <label for="tutor" class="col-sm-2 col-form-label">Perfiles en Conjunto</label>
         <div class="col-10">
-            <select name="titulo_perfil" id="titulo_perfil" class="form-control" data-perfil="{{$perfiles}}">
-                    <option disabled selected>-- seleccione una Perfil --</option>
+            <select name="titulo_perfil" id="titulo_perfil" class="form-control form-control-chosen" data-perfil="{{$perfiles}}">
+                    <option disabled selected>Seleccionar</option>
                     <option value="">Perfil aun no registrado</option>
                     @foreach ($perfiles as $perfil)
                         <option value="{{$perfil}}">{{$perfil->titulo}}</option>
@@ -59,7 +59,63 @@
             <input type="text" class="form-control" name="titulo" id="titulo" value="{{old('trabajo_conjunto')}}" >
         </div>
     </div>
-
+    <div class="form-group row">
+            <label for="tutor" class="col-sm-2 col-form-label">Docente de Materia</label>
+            <div class="col-10">
+                <select name="docente_id" id="docente_id" class="form-control form-control-chosen">
+                        <option disabled selected>Seleccionar</option>
+                        @foreach ($docentes as $docente)
+                            @if ($director->profesional_id != $docente->profesional_id)
+                                <option value="{{$docente->id}}">{{$docente->profesional->ap_pa_prof}}&nbsp;
+                                                                    {{$docente->profesional->ap_ma_prof}}&nbsp;
+                                                                    {{$docente->profesional->nombre_prof }}
+                                </option>
+                            @endif
+                        @endforeach
+                </select>
+            </div>
+        </div>
+    
+        <div class="form-group row">
+            <label for="tutor" class="col-sm-2 col-form-label">Tutor</label>
+            <div class="col-10">
+                <select name="tutor_id" id="tutor_id" class="form-control form-control-chosen">
+                        <option disabled selected>Seleccionar</option>
+                        @foreach ($profesionales as $profesional)
+                            @if ($director->profesional_id != $profesional->id)
+                                <option value="{{$profesional->id}}">{{$profesional->ap_pa_prof}}&nbsp;
+                                    {{$profesional->ap_ma_prof}}&nbsp;
+                                    {{$profesional->nombre_prof }}
+                                </option>  
+                            @endif
+                        @endforeach
+                </select>
+            </div>
+        </div>
+        
+        <div class="form-group row">
+                <label for="tutor" class="col-sm-2 col-form-label">Area</label>
+                <div class="col-10">
+                    <select name="area_id" id="area_id" class="form-control form-control-chosen">
+                            <option disabled selected>Seleccionar</option>
+                            @foreach ($areas as $area)
+                            <option value="{{$area->id}}">{{$area->nombre}}</option>
+                            @endforeach
+                    </select>
+                </div>
+        </div>
+            
+        <div class="form-group row">
+            <label for="tutor" class="col-sm-2 col-form-label">Subarea</label>
+            <div class="col-10">
+                <select name="subarea_id" id="subarea_id" class="form-control form-control-chosen">
+                        <option disabled selected>Seleccionar</option>
+                        @foreach ($subareas as $subarea)
+                        <option value="{{$subarea->id}}">{{$subarea->nombre}}</option>
+                        @endforeach
+                </select>
+            </div>
+        </div>
     <div class = "form-group row">
         <label for="objetivo_gen" class="col-sm-2 col-form-label">Objetivo general</label>
         <div class="col-sm-10">
@@ -84,65 +140,8 @@
             </div>
     </div>
     
-        <div class="form-group row">
-            <label for="tutor" class="col-sm-2 col-form-label">Docente de Materia</label>
-            <div class="col-10">
-                <select name="docente_id" id="docente_id" class="form-control">
-                        <option disabled selected>-- seleccione una opcion --</option>
-                        @foreach ($docentes as $docente)
-                            @if ($director->profesional_id != $docente->profesional_id)
-                                <option value="{{$docente->id}}">{{$docente->profesional->ap_pa_prof}}&nbsp;
-                                                                    {{$docente->profesional->ap_ma_prof}}&nbsp;
-                                                                    {{$docente->profesional->nombre_prof }}
-                                </option>
-                            @endif
-                        @endforeach
-                </select>
-            </div>
-        </div>
-    
-        <div class="form-group row">
-            <label for="tutor" class="col-sm-2 col-form-label">Tutor</label>
-            <div class="col-10">
-                <select name="tutor_id" id="tutor_id" class="form-control">
-                        <option disabled selected>-- seleccione una opcion --</option>
-                        @foreach ($profesionales as $profesional)
-                            @if ($director->profesional_id != $profesional->id)
-                                <option value="{{$profesional->id}}">{{$profesional->ap_pa_prof}}&nbsp;
-                                    {{$profesional->ap_ma_prof}}&nbsp;
-                                    {{$profesional->nombre_prof }}
-                                </option>  
-                            @endif
-                        @endforeach
-                </select>
-            </div>
-        </div>
-        
-        <div class="form-group row">
-                <label for="tutor" class="col-sm-2 col-form-label">Area</label>
-                <div class="col-10">
-                    <select name="area_id" id="area_id" class="form-control">
-                            <option disabled selected>-- seleccione una opcion --</option>
-                            @foreach ($areas as $area)
-                            <option value="{{$area->id}}">{{$area->nombre}}</option>
-                            @endforeach
-                    </select>
-                </div>
-            </div>
-            
-            <div class="form-group row">
-                <label for="tutor" class="col-sm-2 col-form-label">Subarea</label>
-                <div class="col-10">
-                    <select name="subarea_id" id="subarea_id" class="form-control">
-                            <option disabled selected>-- seleccione una opcion --</option>
-                            @foreach ($subareas as $subarea)
-                            <option value="{{$subarea->id}}">{{$subarea->nombre}}</option>
-                            @endforeach
-                    </select>
-                </div>
-            </div>
-    
-    <div class = "form-group row"> 
+ 
+            <div class = "form-group row"> 
         <div class="col-sm-2"></div>
         <div class="col-8">
                 <a href="{{ route('Docentes') }}" class="btn btn-danger">Cancel</a>
@@ -154,4 +153,8 @@
         
 
 </form>
+<script src={{asset("sel/chosen.jquery.min.js")}}></script>
+    <script>
+			$('.form-control-chosen').chosen({});
+	 </script>
 <script src={{asset('js/eliminar.js')}}></script>

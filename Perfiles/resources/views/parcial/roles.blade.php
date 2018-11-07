@@ -1,5 +1,5 @@
 @if($roles->isNotEmpty())
-    <table class="table table-hover table-bordered-primary text-center">
+    <table class="table  table-hover text-center">
     <thead class="thead thead-primary">
     <tr class="tr">
         <th scope="col">#</th>

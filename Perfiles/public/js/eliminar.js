@@ -65,6 +65,41 @@ $('.registrar').click(function(e){
             alertify.alert(res.mensaje).set('basic', true); 
             form.submit();
         }else{
+            if(perfilSeleccionado()){
+                 bloquearCampos(true);
+            }
+            alertify.set('notifier','position', 'top-right');
+            alertify.error(res.mensaje);
+            
+        }
+        
+    }).fail(function(ress,status,error){
+        if(perfilSeleccionado()){
+            bloquearCampos(true);
+       }
+        var errores="";
+        var cont = 18;
+       // $('#mensajeError').show();//muestra los mensajes
+        $.each($.parseJSON(ress.responseText), function (ind, elem) {     
+                errores += "<li>"+elem+"</li>"
+                alertify.set('notifier','position', 'top-right');
+                alertify.error(""+elem,cont--);
+        }); 
+        
+    });
+})
+
+$('.modificarP').click(function(e){
+    e.preventDefault();
+    bloquearCampos(false);
+    form = $(this).parents('form');
+    url  = form.attr('action');
+    datos = form.serialize();
+    $.post(url,datos,function(res){
+        if(res.registrado){
+            alertify.alert(res.mensaje).set('basic', true); 
+            form.submit();
+        }else{
             bloquearCampos(true);
             alertify.set('notifier','position', 'top-right');
             alertify.error(res.mensaje);
@@ -84,7 +119,6 @@ $('.registrar').click(function(e){
         
     });
 })
-
 $('.cambioTema').click(function(){
     if(this.checked) $(this).prop('value','si');
     else $(this).prop('value','no');
@@ -94,6 +128,7 @@ $('.trabajoCon').click(function(){
     if(this.checked){
         $(this).prop('value','si');
         mostrarPerfiles(true);
+        
     } 
     else {
         $(this).prop('value','no');
@@ -122,10 +157,15 @@ $('#titulo_perfil').change(function(){
     if(perfil == ""){
         limpiarCampos();
         bloquearCampos(false);
+        $("#inputs").hide();
+        $("#selects").show();
     }else{
         perfil = JSON.parse(perfil);
+        $("#inputs").show();
+        //console.log(perfil);
         bloquearCampos(true);
         llenarCampos(perfil);
+        $("#selects").hide();
     }
     
 })
@@ -137,14 +177,30 @@ function llenarCampos(perfil){
     $("#objetivo_esp").val(perfil.objetivo_esp);
     $("#objetivo_gen").val(perfil.objetivo_gen);
     $("#descripcion").val(perfil.descripcion);
-    $("#docente_id").val(perfil.docente_id);
-    $("#tutor_id").val(perfil.tutor[0].id);
-    $("#area_id").val(perfil.area_id);
-    $("#subarea_id").val(perfil.subarea_id);
+    $("#docente_id").val(nombreDocente(perfil));
+    $("#tutor_id").val(nombreTutor(perfil));
+    $("#area_id").val(perfil.area.nombre);
+    $("#subarea_id").val(perfil.subarea.nombre);
 }
 
+function nombreDocente(perfil){
+    var profesional = perfil.docente.profesional;
+    var nombre = profesional.ap_pa_prof+" ";
+    nombre += profesional.ap_ma_prof+" ";
+    nombre += profesional.nombre_prof;
+    return nombre;
+}
+
+function nombreTutor(perfil){
+    var profesional = perfil.tutor;
+    var nombre = profesional.ap_pa_prof+" ";
+    nombre += profesional.ap_ma_prof+" ";
+    nombre += profesional.nombre_prof;
+    return nombre;
+}
 function limpiarCampos(){
-    $('#titulo_perfil').val("");
+    $('#titulo_perfil').val(null);
+    $('#titulo_perfil').trigger("chose:updated");
     $('#titulo').prop('value',null);
     $('#sec_trabajo').prop('value',null);
     $('#institucion').prop('value',null);
@@ -171,4 +227,13 @@ function bloquearCampos(validar){
     $('#tutor_id').prop('disabled',validar);
     $('#area_id').prop('disabled',validar);
     $('#subarea_id').prop('disabled',validar);
+}
+
+function perfilSeleccionado(){
+    var perfil = $('#titulo_perfil').val();
+    if(perfil != ""){
+        return true;
+    }else{
+        return false;
+    }
 }

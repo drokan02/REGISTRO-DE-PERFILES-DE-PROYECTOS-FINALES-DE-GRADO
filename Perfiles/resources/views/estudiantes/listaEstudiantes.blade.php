@@ -3,11 +3,11 @@
 @section('contenido')
 
     @if($estudiantes->isNotEmpty())
-        <div class="container col-sm-9 listaDatos">
-            <table class="table table-hover table-bordered-primary text-center">
-                <thead class=" thead thead-primary">
+        <div class="container col-sm-9 table-responsive listaDatos">
+            <table class="table table-hover text-center">
+                <thead class=" thead">
                 <tr class="tr">
-                    <th scope="col">#</th>
+                    <th >#</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">carrera</th>
                     <th scope="col">Acciones</th>

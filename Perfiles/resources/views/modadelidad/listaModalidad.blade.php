@@ -8,10 +8,10 @@
    
    <!--FIN BUSCADOR 
    @include('complementos.error')-->
-  <div class="container col-sm-8 listaDatos">
+  <div class="container col-sm-8  listaDatos">
         @if($modalidades->isNotEmpty())
-          <table class="table tabla" id="listaModall">
-              <thead class ="thead">
+          <table class=" table  table-hover" id="listaModall">
+              <thead class ="thead text-center">
             <tr class="tr">
               <th style="width: 5%; text-align: center;">N°</th>
               <th style="width: 10%;">Codigo</th>
@@ -28,7 +28,7 @@
                     <td style="text-align: right;">{{$modalidad->id}}</td>
                     <td>{{$modalidad->codigo_mod}}</td>
                     <td>{{$modalidad->nombre_mod}}</td>
-                    <td style="width: 43%;" >{{$modalidad->descripcion_mod}}</td>
+                    <td  class="descripcion" style="width: 43%;">{{$modalidad->descripcion_mod}}</td>
 
                     <td>
                         <div class=" dropleft text-center">
