@@ -19,7 +19,6 @@ class CreateAsignacionRolUserTable extends Migration
             $table->integer('role_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('role_id')->references('id')->on('rol')->onDelete('cascade');
-            $table->timestamps();
         });
     }
 

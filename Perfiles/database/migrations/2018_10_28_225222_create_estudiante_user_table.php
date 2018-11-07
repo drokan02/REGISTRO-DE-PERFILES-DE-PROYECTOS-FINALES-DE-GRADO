@@ -19,7 +19,6 @@ class CreateEstudianteUserTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->foreign('estudiante_id')->references('id')->on('estudiante')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->timestamps();
         });
     }
 
