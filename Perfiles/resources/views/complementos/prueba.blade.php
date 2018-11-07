@@ -20,13 +20,10 @@
         <script >
                 //$('#area_id').trigger("chosen:updated")
                 $('.form-control-chosen').chosen();
-                
+                res = $('#area_id').val(2).trigger('chosen:updated');
         </script>
 
-        <script id="script">
-                 $("#area_id").val(1).trigger("chosen:updated");
-                 alert( $("#area_id").val())
-        </script>
+      
         <button id="prueba">prueba</button>
 
 @endsection

@@ -28,7 +28,7 @@
       <table class="table table-hover " id="listaProfesionales">
           <thead class ="thead text-center">
         <tr class="tr">
-          <th style="width: 3%; text-align: center;">N°</th>
+          <th style="width: 3%; text-aligne: center;">N°</th>
           <th style="width: 10%;">Nombres</th>
           <th style="width: 10%;">Apellidos</th>
           <th style="width: 8%; ">Titulo</th>

@@ -1,3 +1,9 @@
+$("#prueba").click(function(){
+    
+    res = $('#area_id').val(1).trigger('area_id:updated');
+    console.log(res)
+});
+
 
 $('.registrarForm').click(function(e){
     e.preventDefault();

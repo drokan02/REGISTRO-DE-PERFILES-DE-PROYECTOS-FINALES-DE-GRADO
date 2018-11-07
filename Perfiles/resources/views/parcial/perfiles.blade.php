@@ -49,3 +49,4 @@
 @else
     <li>No se encontro Perfiles registrados</li>
 @endif
+<script src={{asset('js/eliminar.js')}}></script>

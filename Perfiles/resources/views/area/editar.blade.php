@@ -2,6 +2,7 @@
 @section('titulo','EDITAR AREA')
 @section('contenido')
 
+
 <!--ERRORES-->
 	@include('complementos.error')				
 <!--FIN ERRORES-->

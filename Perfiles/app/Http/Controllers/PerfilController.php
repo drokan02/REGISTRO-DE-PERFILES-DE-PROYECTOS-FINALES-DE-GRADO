@@ -59,7 +59,11 @@ class PerfilController extends Controller
         $subareas      = Area::subareasCarrera($carrera_id)->get();
         $areas         = Area::areasCarrera($carrera_id)->get();
         $director      = $this->directorCarrera($carrera_id);
-        $director_id   = $director->toArray()['id'];
+        if($director){
+            $director_id   = $director->toArray()['id'];
+        }else
+            $director_id = 0;
+        
         $profesionales = Profesional::where('id','!=',$director_id)
                                     ->DeCarrera($carrera_id)->get();
         $docentes      = Docente::where('id','!=',$director_id)->with('profesional')
@@ -75,8 +79,8 @@ class PerfilController extends Controller
        // $aux = $modalidad->toArray()[0];
       // dd($res);
         if($request->ajax()){
-            $errores = $this->validarDatos($docentes,$profesionales,$areas,$subareas);
-            if(!$errores){
+            $errores = $this->validarDatos($docentes,$profesionales,$areas,$subareas,$director);
+            if($errores == []){
                 $modalidad = strtolower($modalidad);
                 if($modalidad == "adscripcion" || $modalidad == "trabajo dirigido"){ 
                     return response()->json([
@@ -99,6 +103,7 @@ class PerfilController extends Controller
             
         }
     }
+    
     
     public function almacenar(PerfilFormRequest $request){
         $perfil        = new Perfil;
@@ -159,8 +164,8 @@ class PerfilController extends Controller
 
     public function eliminar(Request $request, Perfil $perfil){
         $perfil->update([
-            'eliminado'=>'eliminado'
-        ]);
+            'estado'=>'eliminado'
+        ]); 
         return response()->json([
             'eliminado'=>true,
             'mensaje'=>'Se a eliminado el Perfil'
@@ -255,7 +260,7 @@ class PerfilController extends Controller
      }
 
      
-     public function validarDatos($docentes,$profesionales,$areas,$subareas){
+     public function validarDatos($docentes,$profesionales,$areas,$subareas,$director){
          $countD   = $docentes->count();
          $countP   = $profesionales->count();
          $countA   = $areas->count();
@@ -272,6 +277,8 @@ class PerfilController extends Controller
         }
         if ($countS == 0 ) {
             $errores['subareas'] = 'no puede registrar su perfil  por q no existe registros de las Subaras en la Carrera';
+        }if($director == []){
+            $errores['subareas'] = 'no puede registrar su perfil por que su carrera no tiene Registrado un direcor de carrerae';
         }
 
         return $errores;

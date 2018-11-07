@@ -5,7 +5,6 @@
 <!--ERRORES-->
 	@include('complementos.error')				
 <!--FIN ERRORES-->
-	
 	<div class="row justify-content-center mt-4">
 		<div class= "col-sm-9 offset-md-1">
 			<form method="POST" action="{{route('almacenarArea')}}">

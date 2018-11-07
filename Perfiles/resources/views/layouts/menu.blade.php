@@ -16,9 +16,9 @@
     <link rel="apple-touch-icon" href={{asset('img/apple-touch-icon.png')}}>
     <link rel="shortcut icon" href={{asset('img/favicon.ico')}}>
     <link href={{asset("sel/component-chosen.css")}} rel="stylesheet">
-    <script src={{asset("js/jquery-3.3.1.slim.min.js")}} ></script>
-    <script src={{asset('js/popper.min.js')}}></script>
-    <script src={{asset("js/chosen.jquery.min.js")}}></script>
+    <script src={{asset("sel/jquery-3.3.1.slim.min.js")}} ></script>
+    <script src={{asset('sel/popper.min.js')}}></script>
+    <!--<script src={{asset("sel/chosen.jquery.min.js")}}></script>-->
     
     
   </head>
@@ -86,7 +86,7 @@
           </div>
       </footer>-->
       <script src={{asset('js/ajax.js')}}></script>
-    <script src={{asset('js/jQuery-3.3.1.min.js')}}></script>
+    <script src={{asset('js/jquery-3.3.1.min.js')}}></script>
     <script src={{asset('js/gijgo.min.js')}} ></script>
     <script src={{asset('js/bootstrap.min.js')}}></script>
     <script src={{asset('js/alertify.min.js')}}></script>
