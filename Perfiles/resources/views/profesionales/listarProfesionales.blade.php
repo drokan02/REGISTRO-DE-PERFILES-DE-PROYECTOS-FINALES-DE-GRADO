@@ -8,10 +8,8 @@
          @if($profesionales->isNotEmpty() or $buscar)
         <div class="container">
              <div class="col-sm-12 ">
-                <div class="form-group row">
-                    <div class="col-sm-3"></div>
-                    
-                    <div class=" col-sm-4">       
+                <div class="form-group row">                   
+                    <div class=" col-sm-4 offset-md-4">       
                                     <input id="buscarProf" type="search" placeholder="&#xF002; Buscar" style="font-family:Time, FontAwesome" class="form-control buscar" 
                                     name="buscar" autofocus value="{{$buscar}}" autocomplete="off" onfocus="var temp_value=this.value; this.value=''; this.value=temp_value">   
                     </div>          
@@ -30,8 +28,8 @@
        @include('complementos.error')
        <div  class="centrar table-responsive col-sm-11 listaDatos">
           @if($profesionales->isNotEmpty())
-          <table class="table table-hover text-center" id="listaProfesionales">
-              <thead class ="thead">
+          <table class="table table-hover " id="listaProfesionales">
+              <thead class ="thead text-center">
             <tr class="tr">
               <th style="width: 5%; text-align: center;">N°</th>
               <th style="width: 10%;">Nombres</th>

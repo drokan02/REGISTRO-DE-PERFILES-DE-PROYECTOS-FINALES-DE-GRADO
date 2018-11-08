@@ -1,7 +1,7 @@
 
              @if($profesionales->isNotEmpty())
-             <table class="table table-hover text-center" id="listaProfesionales">
-                 <thead class ="thead">
+             <table class="table table-hover " id="listaProfesionales">
+                 <thead class ="thead text-center">
                <tr class="tr">
                  <th style="width: 5%; text-align: center;">N°</th>
                  <th style="width: 10%;">Nombres</th>

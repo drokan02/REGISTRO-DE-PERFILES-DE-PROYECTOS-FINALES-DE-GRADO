@@ -1,5 +1,5 @@
 @extends('layouts.menu')
-@section('titulo','SELECCIONE LA MODALIDAD DE SU PERFIL')
+@section('titulo','FORMULARIO DE PERFIL DE PROYECTO')
 @section('contenido')
     <div class="container">
         <form method="POST" action="{{route('mostrarFormulario')}}">
@@ -21,4 +21,5 @@
                 
         </div>
     </div>
+    
 @endsection

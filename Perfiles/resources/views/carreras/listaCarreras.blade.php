@@ -26,9 +26,9 @@
         </div>
                 
     </div> 
-  <div class="container col-sm-8 listaDatos">       
+  <div class="container table-responsive col-sm-8 listaDatos">       
             @if($carreras->isNotEmpty())
-                <table class="table text-center">
+                <table class="table  table-hover text-center">
                     <thead class="thead thead-primary">
                     <tr class="tr">
                         <th >#</th>
