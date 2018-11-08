@@ -253,7 +253,7 @@ class PerfilController extends Controller
          $countS = $subareas->count();
          $errores = array();
          if ($countD == 0 ) {
-             $errores['docentes'] ='no puede registrar su perfil  por q no existe registros de los Docentes en la Carrera';
+             $errores['docentes'] ='no puede registrar su perfil  por q no existe registros de los Docentes en la Carreras';
          }
          if ($countP == 0 ) {
             $errores['tutores'] = 'no puede registrar su perfil  por q no no existe registros de los Tutores en la Carrera';

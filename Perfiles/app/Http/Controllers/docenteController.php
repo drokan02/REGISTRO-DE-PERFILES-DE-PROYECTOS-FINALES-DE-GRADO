@@ -88,7 +88,7 @@ class docenteController extends Controller
         return view('docentes.editarDocente',compact('docente','subareas','areas','titulos','horarios','carreras','horarios'));
     }
     public function ver($id){
-		$docente=docentes::findOrFail($id);
+		$docente=Docente::findOrFail($id);
 		
 		return view('docentes.ver',['docente'=>$docente]);
     }
