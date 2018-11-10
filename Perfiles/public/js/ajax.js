@@ -14,12 +14,15 @@ $('.registrarForm').click(function(e){
         alertify.alert(res.mensaje).set('basic', true); 
     }).fail(function(ress,status,error){
         var errores="";
-        var cont = 18;
+        var cont = 15;
        // $('#mensajeError').show();//muestra los mensajes
         $.each($.parseJSON(ress.responseText), function (ind, elem) {     
-                errores += "<li>"+elem+"</li>"
-                alertify.set('notifier','position', 'top-right');
+            alertify.set('notifier','position', 'top-right');
+            if(cont == 15){
+                alertify.error(""+elem,cont--).dismissOthers();
+            }else{
                 alertify.error(""+elem,cont--);
+            }
                
         }); 
        /* $('#errores').html(
@@ -44,9 +47,13 @@ $('.registrar').click(function(e){
         var cont = 18;
        // $('#mensajeError').show();//muestra los mensajes
         $.each($.parseJSON(ress.responseText), function (ind, elem) {     
-                errores += "<li>"+elem+"</li>"
                 alertify.set('notifier','position', 'top-right');
-                alertify.error(""+elem,cont--);
+                if(cont == 18){
+                    alertify.error(""+elem,cont--).dismissOthers();
+                }else{
+                    alertify.error(""+elem,cont--);
+                }
+               
                
         }); 
        /* $('#errores').html(
@@ -139,7 +146,11 @@ $('#modalidad').change(function(e){
             var cont = 10;
             $.each(res.errores, function (ind, elem) {     
                 alertify.set('notifier','position', 'top-right');
-                alertify.error(""+elem,cont--);
+                if(cont == 10){
+                    alertify.error(""+elem,cont--).dismissOthers();
+                }else{
+                    alertify.error(""+elem,cont--);
+                }
                
         }); 
         }
@@ -181,7 +192,7 @@ $('#areaCarrera').click(function(e){
             divLista.html(res.datos);
         }else{
             alertify.set('notifier','position', 'top-right');
-            alertify.error(""+res.mensaje,5);
+            alertify.error(""+res.mensaje,5).dismissOthers();
         }
     }).fail(function(ress,status,error){  
         alertify.alert(ress.responseText).set('basic', true);
@@ -202,7 +213,7 @@ $('#eliminarAreaCarrera').click(function(e){
                      divLista.html(res.datos);
                 }else{
                     alertify.set('notifier','position', 'top-right');
-                    alertify.error("sfsdf"+res.mensaje);
+                    alertify.error("sfsdf"+res.mensaje).dismissOthers();
                 }  
             }).fail(function(ress,status,error){
                     alertify.set('notifier','position', 'top-center');

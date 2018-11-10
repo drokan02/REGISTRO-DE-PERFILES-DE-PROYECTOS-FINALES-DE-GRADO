@@ -17,11 +17,11 @@ $('.eliminar').click(function(e){
                     });
                 }else{
                     alertify.set('notifier','position', 'top-right');
-                    alertify.error(""+res.mensaje);
+                    alertify.error(""+res.mensaje).dismissOthers();
                 }  
             }).fail(function(ress,status,error){
                     alertify.set('notifier','position', 'top-center');
-                    alertify.error('UPS no se pudo eliminar');  
+                    alertify.error('UPS no se pudo eliminar').dismissOthers();  
             })
         },
         function(){ 
@@ -43,7 +43,7 @@ $('#eliminarAreaCarrera').click(function(e){
                      divLista.html(res.datos);
                 }else{
                     alertify.set('notifier','position', 'top-right');
-                    alertify.error("sfsdf"+res.mensaje);
+                    alertify.error("sfsdf"+res.mensaje).dismissOthers();
                 }  
             }).fail(function(ress,status,error){
                     alertify.set('notifier','position', 'top-center');
@@ -69,10 +69,10 @@ $('.registrar').click(function(e){
                  bloquearCampos(true);
             }
             alertify.set('notifier','position', 'top-right');
-            alertify.error(res.mensaje);
+            alertify.error(res.mensaje,6).dismissOthers();
             
         }
-        
+     //error   
     }).fail(function(ress,status,error){
         if(perfilSeleccionado()){
             bloquearCampos(true);
@@ -81,9 +81,12 @@ $('.registrar').click(function(e){
         var cont = 18;
        // $('#mensajeError').show();//muestra los mensajes
         $.each($.parseJSON(ress.responseText), function (ind, elem) {     
-                errores += "<li>"+elem+"</li>"
                 alertify.set('notifier','position', 'top-right');
-                alertify.error(""+elem,cont--);
+                if(cont == 18){
+                    alertify.error(""+elem,cont--).dismissOthers();
+                }else{
+                    alertify.error(""+elem,cont--);
+                }
         }); 
         
     });
@@ -114,7 +117,11 @@ $('.modificarP').click(function(e){
         $.each($.parseJSON(ress.responseText), function (ind, elem) {     
                 errores += "<li>"+elem+"</li>"
                 alertify.set('notifier','position', 'top-right');
-                alertify.error(""+elem,cont--);
+                if(cont == 18){
+                    alertify.error(""+elem,cont--).dismissOthers();
+                }else{
+                    alertify.error(""+elem,cont--);
+                }
         }); 
         
     });
@@ -135,6 +142,8 @@ $('.trabajoCon').click(function(){
         mostrarPerfiles(false);
         bloquearCampos(false);
         limpiarCampos();
+        $("#inputs").hide();
+        $("#selects").show();
     }
 })
 
@@ -231,9 +240,11 @@ function bloquearCampos(validar){
 
 function perfilSeleccionado(){
     var perfil = $('#titulo_perfil').val();
-    if(perfil != ""){
-        return true;
-    }else{
+    if(perfil == ""){
         return false;
+    }else if(perfil == null){
+        return false;
+    }else{
+        return true;
     }
 }
