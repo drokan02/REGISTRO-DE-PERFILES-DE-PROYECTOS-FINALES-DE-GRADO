@@ -14,7 +14,7 @@ class RoleSeeder extends Seeder
     {
         Role::create([
             'nombre_rol'=>'administrador',
-            'privilegios'=>'alto'
+            'privilegios'=>'SuperUsuario'
         ]);
     }
 }

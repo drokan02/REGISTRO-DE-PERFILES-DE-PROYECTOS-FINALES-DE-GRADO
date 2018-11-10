@@ -15,6 +15,7 @@ class CarreraController extends Controller
     function __construct(){
         //$this->middleware('auth');
         //$this->middleware(['verificarCuenta']);
+        $this->middleware('permisos:carreras');
     }
     /**Display a listing of the resource.
      * @param Request $request

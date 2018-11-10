@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Carrera;
 use App\Estudiante;
+use App\Permiso;
 use App\Role;
 use App\User;
 use App\Http\Controllers\Controller;
@@ -92,11 +93,22 @@ class RegisterController extends Controller
                 'telefono' => $data['telefono'],
                 'carrera_id'=> $data['carrera']
             ]);
+            $permisos=[];
+            $i=0;
             $role_id=Role::query()->where('nombre_rol','estudiante')->value('id');
             $iduser=User::query()->where('email',$data['email'])->value('id');
             $idEstudiante=Estudiante::query()->where('email',$data['email'])->value('id');
+            $roles=Role::findOrFail($role_id);
+            $aux=$roles->permisos()->pluck('name');
+            foreach ($aux as $a) {
+                $per=Permiso::query()->where('name',$a)->get()->first();
+                $per=$per->id;
+                $permisos=array_add($permisos,$i,$per);
+                $i=$i+1;
+            }
             $user->roles()->attach($role_id,['user_id'=>$iduser]);
             $user->estudiante()->attach($idEstudiante,['user_id'=>$iduser]);
+            $user->permisosUser()->attach($permisos,['user_id'=>$iduser]);
             $data1=$data;
             Mail::send('emails.bienvenido', $data1, function($message) use ($data) {
                 $message->to($data['email'], $data['nombres'])->subject('Por favor confirma tu correo');
