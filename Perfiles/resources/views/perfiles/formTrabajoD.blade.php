@@ -35,7 +35,7 @@
 
         <div class="col-sm-1"></div>
         <label for="trabajo_conjunto" class="col-sm-2 col-form-label" >Cambio de Tema  &nbsp;
-                <input class="cambioTema" type="checkbox"   name="cambio_tema" value="no" disabled>
+                <input class="cambioTema" type="checkbox"   name="cambio_tema" value="no" >
         </label> 
     </div>
 
@@ -204,7 +204,7 @@
     </div>
     
 </form>
-<script src={{asset("sel/chosen.jquery.min.js")}}></script>
+<!--<script src={{asset("sel/chosen.jquery.min.js")}}></script>-->
     <script>
 			$('.form-control-chosen').chosen({});
 	 </script>
