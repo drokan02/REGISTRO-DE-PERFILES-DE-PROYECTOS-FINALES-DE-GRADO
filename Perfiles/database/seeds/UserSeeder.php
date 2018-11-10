@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
             'email'=>'admin@gmail.com',
             'password'=>bcrypt('admin123'),  
         ]);
-        $user->roles()->attach(1,['user_id'=>1]);
+        $user->roles()->attach([1,2],['user_id'=>1]);
         $estudiante=Estudiante::create([
             'id'=>1,
             'nombres'=>'admin',
