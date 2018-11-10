@@ -16,6 +16,7 @@ class modalidades extends Controller
     function __construct(){
        // $this->middleware('auth');
         //$this->middleware(['verificarCuenta']);
+        $this->middleware('permisos:modalidades');
     }
 	
 	

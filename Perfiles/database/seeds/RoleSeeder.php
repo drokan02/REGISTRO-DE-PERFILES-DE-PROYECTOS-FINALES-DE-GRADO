@@ -12,9 +12,17 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        Role::create([
+        $r1=Role::create([
+            'id'=> 1,
             'nombre_rol'=>'administrador',
-            'privilegios'=>'alto'
+            'privilegios'=>'SuperUsuario'
         ]);
+        $r1->permisos()->attach(1,['role_id'=>1]);
+        $r2=Role::create([
+            'id'=> 2,
+            'nombre_rol'=>'estudiante',
+            'privilegios'=>'Usuario Normal'
+        ]);
+        $r2->permisos()->attach(9,['role_id'=>2]);
     }
 }

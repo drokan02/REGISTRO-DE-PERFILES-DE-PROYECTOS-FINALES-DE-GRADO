@@ -26,12 +26,24 @@
                     <div class="col-sm-7">
                         <select class="form-control" id="privilegios" name="privilegios">
                             <option>{{$role->privilegios}}</option>
-                            <option>alto</option>
-                            <option>medio</option>
-                            <option>bajo</option>
+                            <option>SuperUsuario</option>
+                            <option>Usuario Normal</option>
                         </select>
                     </div>
                 </div>
+
+                <div class="form-group row" >
+                    <label for="password" class="col-sm-2 col-form-label">Permisos</label>
+                    @foreach($permisos as $id=>$name)
+                        <label for="permisos" class="btn btn-outline-dark">
+                            <input type="checkbox" value="{{$id}}" name="permisos[]"
+                                    {{$role->permisos->pluck('id')->contains($id) ? 'checked': ''}}
+                            >
+                            {{$name}}
+                        </label>
+                    @endforeach
+                </div>
+
                <div class="form-group row">
                     <div class="col-sm-2"></div>
                    <div>

@@ -10,6 +10,7 @@ class SubareaController extends Controller
     function __construct(){
         //$this->middleware('auth');
         //$this->middleware(['verificarCuenta']);
+        $this->middleware('permisos:areas');
     }
 
     public function index(Request $request,Area $area){
