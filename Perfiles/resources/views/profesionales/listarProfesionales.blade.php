@@ -65,7 +65,7 @@
                                         <i class="fa fa-ellipsis-v fa-2x" aria-hidden="true"></i>
                                 </a>
                                 <div class="dropdown-menu profile-dropdown-menu" aria-labelledby="dropdownMenu1">
-                                        <a href='#' class="dropdown-item" href="#">
+                                        <a href='{{route('verProfesional',$profesional->id)}}' class="dropdown-item" href="#">
                                                 <h5><i class="col-sm-3 fa fa-eye iconMenu" >&nbsp;&nbsp;&nbsp;Ver </i></h5>
                                         </a>
                                         <a href='{{ route('editarProfesional',$profesional->id)}}' class="dropdown-item" href="#">

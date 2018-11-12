@@ -54,7 +54,7 @@
                     @foreach ($docente->profesional->areas as $area)
                             <td style="width: 10%;">{{$area->nombre}}</td>
                             @if ($docente->profesional->areas->count() < 2)
-                            <td></td>
+                            <td>ho</td>
                             @endif
                     @endforeach
                     <td>{{$docente->cargahoraria->pluck('carga_horaria')[0]}}</td>
