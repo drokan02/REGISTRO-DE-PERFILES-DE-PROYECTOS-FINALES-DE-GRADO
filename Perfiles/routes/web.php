@@ -18,9 +18,7 @@ Route::get('/verifiqueCuenta',function () {
     return view('emails/confirmarCuenta');
 })->name('confirmarCuenta');
 
-Route::get('/prueba', function () {
-    return view('complementos.prueba');
-})->name('inicio');
+
 
 //Roles
 Route::get('/menu','menuController@index')->name('menu');
@@ -32,13 +30,13 @@ Route::any('/roles/{role}','RoleController@actualizar')->name('actualizarRol');
 Route::any('/roles/{role}/eliminar','RoleController@eliminar')->name('eliminarRol');
 
 //usuarios
-Route::get('/usuarios','usuarioController@index')->name('usuarios')->middleware('permisos:users');
-Route::get('/usuarios/crear','usuarioController@crear')->name('crearUsuario')->middleware('permisos:users');
-Route::post('/usuarios/guardar','usuarioController@guardar')->name('guardarUsuario')->middleware('permisos:users');
+Route::get('/usuarios','usuarioController@index')->name('usuarios');
+Route::get('/usuarios/crear','usuarioController@crear')->name('crearUsuario');
+Route::post('/usuarios/guardar','usuarioController@guardar')->name('guardarUsuario');
 Route::get('/usuarios/{user}','usuarioController@detalle')->name('detalleUsuario');
 Route::get('/usuarios/{user}/editar','usuarioController@editar')->name('editarUsuario');
 Route::put('/usuarios/{user}','usuarioController@actualizar')->name('actualizarUsuario');//put metodo para actualizar
-Route::any('/usuarios/{user}/eliminar','usuarioController@eliminar')->name('eliminarUsuario')->middleware('permisos:users');
+Route::any('/usuarios/{user}/eliminar','usuarioController@eliminar')->name('eliminarUsuario');
 Route::get('/cambiar_contraseña/{user}','usuarioController@cambiarContraseña')->name('cambiarContraseña');
 Route::post('/guardar_contraseña/{user}','usuarioController@guardarContraseña')->name('guardarContraseña');
 
@@ -56,12 +54,12 @@ Route::any('/areas/subir_Excel/importar', 'AreaController@importar')->name('impo
 
 
 //tutores
-Route::get('/profesionales','ProfesionalController@index')->name('listarProfesionales')->middleware('permisos:profesionales');
-Route::get('/profesionales/registrar','ProfesionalController@registrar')->name('registroProfesional')->middleware('permisos:profesionales');;
-Route::post('/profesionales/almacenar','ProfesionalController@almacenar')->name('almacenarProfesional')->middleware('permisos:profesionales');;
+Route::get('/profesionales','ProfesionalController@index')->name('listarProfesionales');
+Route::get('/profesionales/registrar','ProfesionalController@registrar')->name('registroProfesional');
+Route::post('/profesionales/almacenar','ProfesionalController@almacenar')->name('almacenarProfesional');
 Route::any('/profesionales/editar/{id}','ProfesionalController@editar')->name('editarProfesional');
 Route::post('/profesionales/editar/modificar/{profesional}','ProfesionalController@modificar')->name('modificarProfesional');
-Route::any('/profesionales/eliminar/{profesional}','ProfesionalController@eliminar')->name('eliminarProfesional')->middleware('permisos:profesionales');;
+Route::any('/profesionales/eliminar/{profesional}','ProfesionalController@eliminar')->name('eliminarProfesional');
 Route::any('/profesionales/ver/{profesional}','ProfesionalController@ver')->name('verProfesional');
 
 
@@ -72,6 +70,7 @@ Route::post('areas/subareas/almacenar/{area}','SubareaController@almacenar')->na
 Route::any('/areas/subareas/editar/{id}','SubareaController@editar')->name('editarSubarea');
 Route::post('areas/subareas/modificar/{id}','SubareaController@modificar')->name('modificarSubarea');
 Route::any('areas/subareas/eliminar/{id}','SubareaController@eliminar')->name('eliminarSubarea');
+
 
 
 //Modalidades
@@ -100,19 +99,18 @@ Route::post('/carreras/importacion','CarreraController@importacion')->name('impo
 Route::any('/carreras/agregarArea/{carrera}', 'CarreraController@areas')->name('areasCarrera');
 Route::any('/carreras/agregarArea/almacenar/{carrera}', 'CarreraController@almacenarArea')->name('almacenarAreasCarrera');
 Route::any('/carreras/eliminarArea/{carrera}/{area}', 'CarreraController@EliminarArea')->name('eliminarCarreraArea');
-
 //docentes
-Route::get('/docentes','docenteController@index')->name('Docentes')->middleware('permisos:docentes');
-Route::get('/docentes/registrar', 'docenteController@registrar')->name('registrarDocente')->middleware('permisos:docentes');
-Route::any('/docentes/registrar/almacenar','docenteController@almacenar')->name('almacenarDocente')->middleware('permisos:docentes');
+Route::get('/docentes','docenteController@index')->name('Docentes');
+Route::get('/docentes/registrar', 'docenteController@registrar')->name('registrarDocente');
+Route::any('/docentes/registrar/almacenar','docenteController@almacenar')->name('almacenarDocente');
 Route::any('/docentes/editar/{docente}','docenteController@editar')->name('editarDocente');
 Route::any('/docentes/editar/modificar/{docente}','docenteController@modificar')->name('modificarDocente');
-Route::any('/docentes/eliminar/{docente}','docenteController@eliminar')->name('eliminarDocente')->middleware('permisos:docentes');
+Route::any('/docentes/eliminar/{docente}','docenteController@eliminar')->name('eliminarDocente');
 Route::any('/docentes/ver/{docente}','docenteController@ver')->name('verDocente');
 
 
 //estudiantes
-Route::get('/estudiantes','EstudianteController@index')->name('estudiantes')->middleware('permisos:estudiantes');
+Route::get('/estudiantes','EstudianteController@index')->name('estudiantes');
 Route::get('/estudiantes/crear','EstudianteController@crear')->name('CrearEstudiantes');
 Route::post('/estudiantes/guardar','EstudianteController@guardar')->name('guardarEstudiante');
 Route::get('/estudiantes/{estudiante}','EstudianteController@detalle')->name('detalleEstudiante');
@@ -120,7 +118,7 @@ Route::get('/estudiantes/{estudiante}/editar','EstudianteController@editar')->na
 Route::put('/estudiantes/{estudiante}','EstudianteController@actualizar')->name('actualizarEstudiante');
 Route::get('/cambiar_contraseña_estudiante/{estudiante}','EstudianteController@cambiarContraseña')->name('cambiarContraseñaEstudiante');
 Route::post('/guardar_contraseña_estudiante/{estudiante}','EstudianteController@guardarContraseña')->name('guardarContraseñaEstudiante');
-Route::delete('/estudiantes/{estudiante}/eliminar','EstudianteController@eliminar')->name('eliminarEstudiante')->middleware('permisos:estudiantes');
+Route::delete('/estudiantes/{estudiante}/eliminar','EstudianteController@eliminar')->name('eliminarEstudiante');
 
 //login
 Route::get('login','Auth\LoginController@showLoginForm')->name('login');

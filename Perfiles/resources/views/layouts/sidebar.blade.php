@@ -22,17 +22,17 @@
             <li>
                 <a href="{{route('gestiones')}}"><i class="fa fa-caret-right" aria-hidden="true"></i>Gestiones</a>
             </li>
-            @if(auth()->user()->hasPermisos(['carreras']))
+           
                 <li>
                     <a href="{{route('carreras')}}"><i class="fa fa-caret-right" aria-hidden="true"></i>Carreras</a>
                 </li>
                 <li>
                     <a href="{{route('importarCarreras')}}"><i class="fa fa-upload" aria-hidden="true"></i>Importar Carreras</a>
                 </li>
-            @endif
+         
         </ul>
       </li>
-      @if(auth()->user()->hasPermisos(['areas']))
+     
           <!-- menu AREAS -->
           <li class="treeview {{ request()->segment(1) == 'areas'? 'active open':'' }}">
               <a href="#">
@@ -52,8 +52,8 @@
                   </li>
               </ul>
           </li>
-      @endif
-        @if(auth()->user()->hasPermisos(['roles']))
+     
+       
             <!-- menu Roles-->
             <li class="treeview">
                 <a href="#">
@@ -65,8 +65,8 @@
                     <li><a href="{{route('roles')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Lista de Roles del Sistema</a></li>
                 </ul>
             </li>
-        @endif
-        @if(auth()->user()->hasPermisos(['modalidades']))
+       
+       
             <!-- menu MODALIDADES -->
             <li class="treeview {{ request()->segment(1) == 'modalidad'? 'active open':'' }}">
                 <a href="#">
@@ -86,9 +86,9 @@
                     </li>
                 </ul>
             </li>
-        @endif
+        
       <!-- Menu Usuarios-->
-        @if(auth()->user()->hasPermisos(['users']))
+      
             <li class="treeview {{ request()->segment(1) == 'usuarios'? 'active open':'' }}">
                 <a href="#">
                     <i class="fa fa-users" aria-hidden="true"></i> <span>Usuarios</span>
@@ -103,8 +103,7 @@
                     </li>
                 </ul>
             </li>
-        @endif
-        @if(auth()->user()->hasPermisos(['docentes']))
+      
             <!-- Menu DOCENTES-->
             <li class="treeview">
                 <a href="#">
@@ -116,8 +115,7 @@
                     <li><a href="{{route('Docentes',['carrera_id'=>1])}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar docentes</a></li>
                 </ul>
             </li>
-        @endif
-        @if(auth()->user()->hasPermisos(['profesionales']))
+        
             <!-- Menu PROFESIONALES-->
             <li class="treeview {{ request()->segment(1) == 'profesionales'? 'active open':'' }}">
                 <a href="#">
@@ -133,8 +131,7 @@
                     </li>
                 </ul>
             </li>
-        @endif
-        @if(auth()->user()->hasPermisos(['estudiantes']))
+      
       <!-- Menu ESTUDIANTES-->
        <li class="treeview">
         <a href="#">
@@ -146,7 +143,7 @@
           <li><a href="{{route('estudiantes')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Lista Estudiantes</a></li>
         </ul>
       </li>
-        @endif
+       
         <!-- Menu Perfiles-->
         <li class="treeview {{ request()->segment(1) == 'perfil'? 'active open':'' }}">
             <a href="#">
