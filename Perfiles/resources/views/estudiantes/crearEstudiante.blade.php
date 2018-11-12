@@ -58,7 +58,7 @@
         </div>
     </div>
     <div class="form-group">
-        <button type="submit" class="btn btn-primary btn-lg">Registrarse</button>
+        <button type="submit" class="btn btn-primary btn-lg registrar">Registrarse</button>
     </div>
 </form>
 <div class="row">

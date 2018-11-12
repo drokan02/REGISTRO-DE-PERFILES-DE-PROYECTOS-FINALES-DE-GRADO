@@ -5,54 +5,35 @@
 
     <ul class="nav justify-content-end ">
         <li class="nav-item">
-            <a class="nav-link" href="{{route('editarUsuario',$user)}}">Modifica tus datos</a>
+            <a class="nav-link" href="{{route('editarUsuario',$user)}}"><strong class="text-red" >Modifica tus datos </strong></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{route('cambiarContraseña',$user)}}">Cambiar Contraseña</a>
+            <a class="nav-link" href="{{route('cambiarContraseña',$user)}}"><strong class="text-red" > Contraseña</strong> </a>
         </li>
     </ul>
 
 
 
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th class="h1 " scope="col">Informacion Basica</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Nombre de Usuario: </td>
-                <td>{{$user->user_name}}</td>
-            </tr>
-            <tr>
-                <td>Rol del usuario</td>
-                <td>{{$user->roles->pluck('nombre_rol')->implode(' - ')}}</td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table">
-        <thead>
-        <tr>
-            <th class="h1" scope="col">Informacion Personal</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>Nombre del Usuarios: </td>
-            <td>{{$user->name}}</td>
-        </tr>
-        <tr>
-            <td>Correo Electronico</td>
-            <td>{{$user->email}}</td>
-        </tr>
-        <tr>
-            <td>Nombre de Usuario: </td>
-            <td>{{$user->user_name}}</td>
-        </tr>
-        </tbody>
-    </table>
+        <div class="row justify-content-center">
+                <div class="list-group  col-10  " >
+                     <h2  class="list-group-item active "><strong class="row justify-content-center">Informacion Personal</strong></h2>  
+                     
+                              <div class="list-group-item">
+                                <h4><b>{{$user->name}}</b></h4>
+                                 <p>Nombre de Usuario </p>  
+                                </div>
+                                <div class="list-group-item">
+                                <strong>{{$user->email}}</strong>
+                              <p>Correo Electronico</p>
+                        </div>
+                        <div class="list-group-item">
+                                <strong><b>{{$user->user_name}}</b></strong>
+                                 <p>Nombre de Usuario </p>  
+                                </div>
+                                <!--div class="list-group-item">
+                                        <strong>{{$user->roles->pluck('nombre_rol')->implode(' - ')}}</strong>
+                                      <p>Rol del usuario</p>
+                                </div-->
+                        </div>  
+                </div>
 @endsection

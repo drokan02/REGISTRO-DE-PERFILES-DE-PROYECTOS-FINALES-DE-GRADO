@@ -17,6 +17,8 @@ class modalidades extends Controller
 {
     function __construct(){
        // $this->middleware('auth');
+        //$this->middleware(['verificarCuenta']);
+        $this->middleware('permisos:modalidades');
     }
 	
 	
@@ -47,7 +49,7 @@ class modalidades extends Controller
 		$this->validate(request(), [
 			'nombre_mod'=>['required','regex:/^[\pL\s]+$/u','unique:modalidad,nombre_mod'],
 			'codigo_mod' => ['required','alpha_num','unique:modalidad,codigo_mod'],
-            'descripsion_mod'=> ['required']
+            'descripcion_mod'=> ['required']
 		]);
 		if($request->ajax()){
              $date=Carbon::now();
@@ -87,7 +89,7 @@ class modalidades extends Controller
         $this->validate(request(), [
             'codigo_mod' => ['required','alpha_num',Rule::unique('modalidad')->ignore($modalidad->id)],
             'nombre_mod'=>['required','regex:/^[\pL\s]+$/u',Rule::unique('modalidad')->ignore($modalidad->id)],
-            'descripsion_mod'=> ['required']
+            'descripcion_mod'=> ['required']
 		]);
 		if($request->ajax()){
             return response()->json([
@@ -142,7 +144,7 @@ class modalidades extends Controller
                         $modalidad->create([
                             'codigo_mod' => $fila->codigo_mod,
                             'nombre_mod' => $fila->nombre_mod,
-                            'descripsion_mod' => $fila->descripsion_mod
+                            'descripcion_mod' => $fila->descripcion_mod
                         ]);
                     }
                 });

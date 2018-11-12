@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Estudiante extends Model
 {
+    protected $table='estudiante';
     protected $fillable = [
         'nombres', 'email', 'user_name', 'password', 'telefono', 'carrera_id'
     ];
@@ -18,6 +19,10 @@ class Estudiante extends Model
     protected $hidden = [
         'password'
     ];
+
+    public function perfil(){
+        return $this->belongsToMany(Perfil::class,'estudiante_perfil');  
+    }
     public function carrera(){
         return $this->belongsTo(Carrera::class);
     }

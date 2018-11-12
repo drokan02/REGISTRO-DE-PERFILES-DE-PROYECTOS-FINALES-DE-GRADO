@@ -39,10 +39,10 @@
 				</div>
 	
 				<div class = "form-group row">
-					<label for="descripsion_mod" class="col-sm-2 col-form-label">Descripsion</label>
+					<label for="descripcion_mod" class="col-sm-2 col-form-label">Descripsion</label>
 					<div class="col-sm-7">
 						<textarea class="form-control" placeholder="descripcion" autocomplete="off"
-						name="descripsion_mod" rows="5">{{old('descripsion_mod')}}</textarea>
+						name="descripcion_mod" rows="5">{{old('descripcion_mod')}}</textarea>
 					</div>
 					
 				</div>

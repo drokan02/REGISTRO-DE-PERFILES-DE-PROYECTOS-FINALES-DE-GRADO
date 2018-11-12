@@ -1,16 +1,16 @@
 @if($users->isNotEmpty())
-<table class="table table-hover table-bordered-primary text-center">
-    <thead class="thead-primary">
-    <tr>
+<table class="table  table-hover text-center">
+    <thead class="thead">
+    <tr class="tr">
         <th scope="col">#</th>
         <th scope="col">Nombre</th>
         <th scope="col">Rol Usuario</th>
         <th scope="col">Acciones</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody class="tbody">
     @foreach($users as $us)
-        <tr>
+        <tr class="tr">
             <th scope="row">{{$us->id}}</th>
             <td>{{$us->name}}</td>
             <td>{{$us->roles->pluck('nombre_rol')->implode(' - ')}}</td>

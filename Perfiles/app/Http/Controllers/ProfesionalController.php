@@ -9,10 +9,12 @@ use Validator;
 use App\Profesional;
 use App\Area;
 use App\Titulo;
+use App\Carrera;
 class ProfesionalController extends Controller
 {
     function __construct(){
        // $this->middleware('auth');
+        //$this->middleware(['verificarCuenta']);
     }
     /**
      * Display a listing of the resource.
@@ -35,8 +37,9 @@ class ProfesionalController extends Controller
     public function registrar(){
         $areas = Area::areas()->get();
         $subareas = Area::subareas()->get();
+        $carreras = Carrera::all();
         $titulos = Titulo::all();
-        return view('profesionales.registroprofesional',['areas'=>$areas, 'subareas'=>$subareas, 'titulos'=>$titulos ]);
+        return view('profesionales.registroprofesional',compact('areas','subareas','carreras','titulos'));
     }
 
     
@@ -46,7 +49,10 @@ class ProfesionalController extends Controller
                 'mensaje'=>'Profesional registrado correctamente'
             ]);
         }
-        $areas = [$request->area_id,$request->subarea_id];
+        $areas = [$request->area_id];
+        if($request->subarea_id){
+            $areas = [$request->area_id,$request->subarea_id];
+        }
         $profesional = new Profesional;
         $profesional->create($request->all());
         $prof_id = Profesional::where('ci_prof',$request['ci_prof'])->value('id');
@@ -59,8 +65,9 @@ class ProfesionalController extends Controller
         $areas = Area::areas()->get();
         $subareas = Area::subareas()->get();
         $titulos = Titulo::all();
+        $carreras = Carrera::all();
         //dd($profesional->toArray());
-        return view('profesionales.editarProfesional',compact('profesional','areas','subareas','titulos'));
+        return view('profesionales.editarProfesional',compact('profesional','areas','subareas','titulos','carreras'));
     }
 
     public function modificar(ProfesionalRequest $request,Profesional $profesional){
@@ -70,7 +77,10 @@ class ProfesionalController extends Controller
             ]);
         }
         DB::transaction(function () use($request,$profesional) {
-            $areas = [$request->area_id,$request->subarea_id];
+            $areas = [$request->area_id];
+            if($request->subarea_id){
+                $areas = [$request->area_id,$request->subarea_id];
+            }
             $profesional->update($request->all());
             $prof_id = Profesional::query()->where('ci_prof',$request['ci_prof'])->value('id');
             $profesional->areas()->sync($areas,['profesional_id'=>$prof_id]);//elimina todos los registro de la tabla relaccion y ingresa uno nuevo
@@ -91,8 +101,11 @@ class ProfesionalController extends Controller
         return redirect()->route('listarProfesionales');
     }
 
-    public function ver(Profesional $profesional){
-
+   
+    public function ver($id){
+		$profesional=Profesional::findOrFail($id);
+		
+		return view('profesionales.ver',['profesional'=>$profesional]);
     }
     
     public function tabularDatos($datos){}

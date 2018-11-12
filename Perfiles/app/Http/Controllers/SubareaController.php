@@ -9,6 +9,8 @@ class SubareaController extends Controller
 {
     function __construct(){
         //$this->middleware('auth');
+        //$this->middleware(['verificarCuenta']);
+        $this->middleware('permisos:areas');
     }
 
     public function index(Request $request,Area $area){
@@ -41,15 +43,16 @@ class SubareaController extends Controller
 		$subarea->codigo = $request->codigo;
 		$subarea->nombre = $request->nombre;
 		$subarea->descripcion = $request->descripcion;
-		$subarea->id_area = $area->id;
+		$subarea->area_id = $area->id;
 		$subarea->save();
+		$this->agregarCarrera($request['codigo'],$area);
 		return redirect()->route('subareas',['area'=>$area]);
 	}
 
 
 	public function editar($id){
 		$subarea = Area::findOrFail($id);
-		$area = Area::findOrFail($subarea->id_area);
+		$area = Area::findOrFail($subarea->area_id);
 		return view('subarea.editar',['area'=>$area,'subarea'=>$subarea]);
 	}
 
@@ -60,7 +63,7 @@ class SubareaController extends Controller
             ]);
         }
 		$subarea = Area::findOrFail($id);
-		$area = Area::findOrFail($subarea->id_area);
+		$area = Area::findOrFail($subarea->area_id);
 		$subarea->update($request->all());
         return redirect()->route('subareas',['area'=>$area]);
 	}
@@ -68,7 +71,7 @@ class SubareaController extends Controller
 	public function eliminar(Request $request,$id){
 		//falta condicionar la eliminacion
 		$subarea = Area::findOrFail($id);
-		$area = Area::findOrFail($subarea->id_area);
+		$area = Area::findOrFail($subarea->area_id);
 		$subarea->delete();
 		if($request->ajax())
 			{
@@ -79,4 +82,13 @@ class SubareaController extends Controller
 			 }
 		return redirect()->route('subareas',compact('area'));
 	}
+
+	public function agregarCarrera($codigo,$area){
+		$subarea_id = Area::where('codigo',$codigo)->value('id');
+		$carreras   = $area->carreras->pluck('id')->toArray();
+		if($carreras){
+			$area->carreras()->attach($carreras,['area_id'=>$subarea_id]);
+		}
+	}
+
 }

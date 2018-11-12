@@ -4,18 +4,19 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTituloTable extends Migration
+class CreatePermisosTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-   public function up()
+    public function up()
     {
-        Schema::create('titulo', function (Blueprint $table) {
+        Schema::create('permisos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string("nombre");
+            $table->string('name');
+            $table->text('descripcion')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateTituloTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('titulo');
+        Schema::dropIfExists('permisos');
     }
 }

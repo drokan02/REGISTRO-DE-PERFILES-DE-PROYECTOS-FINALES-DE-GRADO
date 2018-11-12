@@ -34,7 +34,7 @@
                         </form>
                     </div>
                 </div>
-                <p>Eres estudiante y no tienes cuenta? <a class="btn btn-link" href="{{route('register')}}">Registrate</a></p>
+                <p class="text-primary"> Eres estudiante y no tienes cuenta? <a class="btn btn-link" href="{{route('register')}}">Registrate</a></p>
             </div>
         </div>
     </div>

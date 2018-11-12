@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'id','name','user_name', 'email', 'password'
+        'id','name','user_name', 'email', 'password','confirmation_code'
     ];
 
     /**
@@ -34,6 +34,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class,'asignacion_rol_user');
 
     }
+    public function permisosUser(){
+        return $this->belongsToMany(Permiso::class);
+
+    }
     public function scopeName($query,$name){
         if (trim($name) != ""){
             $query->where('name','like',"%$name%");
@@ -42,7 +46,19 @@ class User extends Authenticatable
     public function hasRoles(array $roles){
         return $this->roles()->pluck('nombre_rol')->intersect($roles)->count();
     }
+    public function hasPermisos(array $permisos){
+        if($this->isAdmin()){
+            return true;
+        }
+        return $this->permisosUser()->pluck('name')->intersect($permisos)->count();
+    }
     public function estudiante(){
         return $this->belongsToMany(Estudiante::class);
+    }
+    public function isConfirmed(){
+        return $this->confirmado;
+    }
+    public function isAdmin(){
+        return $this->roles()->pluck('privilegios')->intersect('SuperUsuario')->count();
     }
 }
