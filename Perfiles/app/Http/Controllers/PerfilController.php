@@ -107,13 +107,13 @@ class PerfilController extends Controller
     
     public function almacenar(PerfilFormRequest $request){
         $perfil        = new Perfil;
+        $cambioTema    = $request['cambio_tema'];
         $trabConjunto  = $request['trabajo_conjunto'];
         $estudiante_id = $request['estudiante_id'];
         $tutor_id      = $request['tutor_id'];        
-        $est_perf      = Estudiante::find($estudiante_id)->perfil;
-        $est_perf      = $est_perf->toArray();
+        $estudiante      = Estudiante::find($estudiante_id);
         $perfil_id     = Perfil::where('titulo',$request['titulo'])->value('id');
-        $validacion    = $this->verificar($trabConjunto,$perfil_id,$est_perf);
+        $validacion    = $this->verificar($trabConjunto,$perfil_id,$estudiante,$cambioTema);
         if($request->ajax()){
             return response()->json($validacion);
         }
@@ -172,9 +172,6 @@ class PerfilController extends Controller
         ]);
     }
 
-    public function cambiar(){
-        
-    }
 
     public function directorCarrera($carrera_id)
     {
@@ -186,10 +183,16 @@ class PerfilController extends Controller
         }
            
     }
-     public function verificar($trabConjunto,$id,$est_perf){
-        
+     public function verificar($trabConjunto,$id,$estudiante,$cambioTema){
+        $est_perf = $estudiante->perfil;
+        $est_perf = $est_perf->toArray();
          if($est_perf == []){
-                if($trabConjunto == 'si'){
+                if($cambioTema){
+                    return [
+                        'registrado'=>false,
+                        'mensaje'=> 'No debe seleccionar el cambio de Tema'.$trabConjunto
+                    ]; 
+                }else if($trabConjunto == 'si'){
                     return $this->maximoIntegrantes($id);
                 }else if($id){
                         return [
@@ -202,6 +205,8 @@ class PerfilController extends Controller
                         'mensaje'=> 'Formulario registrado correctamente'
                     ];  
                 }
+        }else if($cambioTema){
+            return $this->cambiarTema($estudiante);
         }else{
             return [
                 'registrado'=>false,
@@ -219,12 +224,45 @@ class PerfilController extends Controller
                 'mensaje'=> 'Formulario registrado correctamente'
             ];  
         }else{
-            return [
-                'registrado'=>false,
-                'mensaje'=> 'Titulo del Perfil ya se encuentra registrado y  cuenta con  el maximo de integrantes que es 2'
-            ];
+            
         }
     }
+
+    public function cambiarTema($estudiante){
+        $perfil = $estudiante->perfil;
+        $fecha_fin = $perfil->toArray()[0]['fecha_fin'];
+        $valido = $this->fechaValido($fecha_fin);
+        if($valido){
+            //$estudiante->perfil()->detach();
+            return [
+                'registrado'=>true,
+                'mensaje'=> 'Formulario para el Cambio De Tema registrado correctamente '
+            ];
+        }else{
+            return [
+                'registrado'=>false,
+                'mensaje'=> 'No puede realizar cambio de tema por que aun no a culminado el plazo de su Perfil de grado'
+            ];
+        }
+        
+    }
+
+    public function fechaValido($fecha_fin){
+        $fechaF = explode("-",$fecha_fin);
+        $fecha     = explode("-",date('Y-m-d'));
+        if($fechaF[0]< $fecha[0]){
+            return true;
+        }else if($fechaF[0] == $fecha[0]){
+                if($fechaF[1] < $fecha[1]){
+                    return true;
+                }else if ($fechaF[1] == $fecha[1]){
+                        if($fechaF[2] <= $fecha[2]){
+                             return true;
+                        }
+                }
+        }
+    }
+
      public function fechaFin(){
         $dia = date('d');
         $mes = date('m');

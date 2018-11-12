@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Permiso;
 use App\Role;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
+use function Sodium\add;
 
 class usuarioController extends Controller
 {
@@ -57,17 +59,33 @@ class usuarioController extends Controller
             'password' => ['required','min:6'],
             'roles'=>'required'
         ]);
+
+        $roles1=$request['roles'];
+        $permisos=[];
+        $i=0;
+        foreach ($roles1 as $role){
+            $roles=Role::findOrFail($role);
+            $aux=$roles->permisos()->pluck('name');
+            foreach ($aux as $a) {
+                $per=Permiso::query()->where('name',$a)->get()->first();
+                $per=$per->id;
+                $permisos=array_add($permisos,$i,$per);
+                $i=$i+1;
+            }
+        }
         if($request->ajax()){
             return response()->json([
                 'mensaje'=>'Usuario registrado correctamente'
             ]);
         }
+
         $request['password']=bcrypt($request['password']);
-        DB::transaction(function () use($request) {
+        DB::transaction(function () use($request,$permisos) {
             $user=new User();
             $user->create($request->all());
             $iduser=User::query()->where('email',$request['email'])->value('id');
             $user->roles()->attach($request['roles'],['user_id'=>$iduser]);
+            $user->permisosUser()->attach($permisos,['user_id'=>$iduser]);
         });
         return redirect()->route('usuarios');
     }
@@ -106,10 +124,24 @@ class usuarioController extends Controller
                 'mensaje'=>'Usuario modificado correctamente'
             ]);
         }
-        DB::transaction(function () use($request,$user) {
+        $roles1=$request['roles'];
+        $permisos=[];
+        $i=0;
+        foreach ($roles1 as $role){
+            $roles=Role::findOrFail($role);
+            $aux=$roles->permisos()->pluck('name');
+            foreach ($aux as $a) {
+                $per=Permiso::query()->where('name',$a)->get()->first();
+                $per=$per->id;
+                $permisos=array_add($permisos,$i,$per);
+                $i=$i+1;
+            }
+        }
+        DB::transaction(function () use($request,$user,$permisos) {
             $user->update($request->all());
             $iduser=User::query()->where('email',$request['email'])->value('id');
             $user->roles()->sync($request['roles'],['user_id'=>$iduser]);
+            $user->permisosUser()->sync($permisos,['user_id'=>$iduser]);
         });
         return redirect()->route('usuarios');
     }
@@ -119,6 +151,7 @@ class usuarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function eliminar(Request $request,User $user){
+        $user->permisosUser()->detach();
         $user->roles()->detach(); //eliminar datos en tabla intermedia
         $user->delete();
         if($request->ajax()){
