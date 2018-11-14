@@ -57,7 +57,7 @@ Route::any('/areas/subir_Excel/importar', 'AreaController@importar')->name('impo
 
 
 //tutores
-Route::get('/profesionales','ProfesionalController@index')->name('listarProfesionales')->middleware('permisos:profesionales');
+Route::get('/profesionales','ProfesionalController@index')->name('listarProfesionales');
 Route::get('/profesionales/registrar','ProfesionalController@registrar')->name('registroProfesional')->middleware('permisos:profesionales');;
 Route::post('/profesionales/almacenar','ProfesionalController@almacenar')->name('almacenarProfesional')->middleware('permisos:profesionales');;
 Route::any('/profesionales/editar/{id}','ProfesionalController@editar')->name('editarProfesional');
@@ -103,7 +103,7 @@ Route::any('/carreras/agregarArea/almacenar/{carrera}', 'CarreraController@almac
 Route::any('/carreras/eliminarArea/{carrera}/{area}', 'CarreraController@EliminarArea')->name('eliminarCarreraArea');
 
 //docentes
-Route::get('/docentes','docenteController@index')->name('Docentes')->middleware('permisos:docentes');
+Route::get('/docentes','docenteController@index')->name('Docentes');
 Route::get('/docentes/registrar', 'docenteController@registrar')->name('registrarDocente')->middleware('permisos:docentes');
 Route::any('/docentes/registrar/almacenar','docenteController@almacenar')->name('almacenarDocente')->middleware('permisos:docentes');
 Route::any('/docentes/editar/{docente}','docenteController@editar')->name('editarDocente');

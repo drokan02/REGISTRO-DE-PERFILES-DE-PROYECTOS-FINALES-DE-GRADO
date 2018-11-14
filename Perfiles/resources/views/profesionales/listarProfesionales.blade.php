@@ -68,12 +68,14 @@
                                         <a href='#' class="dropdown-item" href="#">
                                                 <h5><i class="col-sm-3 fa fa-eye iconMenu" >&nbsp;&nbsp;&nbsp;Ver </i></h5>
                                         </a>
+                                    @if(auth()->user()->hasPermisos(['profesionales']))
                                         <a href='{{ route('editarProfesional',$profesional->id)}}' class="dropdown-item" href="#">
                                                 <h5><i class="col-sm-3 fa fa-pencil-square-o iconMenu">&nbsp;&nbsp;&nbsp;Editar</i></h5>
                                         </a>
                                         <a href='{{ route('eliminarProfesional',$profesional)}}' class="dropdown-item eliminar" href="#">
                                                 <h5> <i class="col-sm-3 fa fa-minus-square iconMenu" >&nbsp;&nbsp;&nbsp;Eliminar</i></h5>
-                                        </a>                                                      
+                                        </a>
+                                    @endif
                                 </div>
                         </div> 
                     </td>
