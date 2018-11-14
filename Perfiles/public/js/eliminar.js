@@ -265,7 +265,7 @@ $('.cambiarEstado').click(function(){
     celda = $(this).data('celda');
     $.get(url,{'estado':estado},function(res){
         alertify.alert(res.mensaje).set('basic', true);
-        console.log(celda.text(estado));
+        celda.text(estado);
     })
    
 })
