@@ -223,3 +223,23 @@ $('#eliminarAreaCarrera').click(function(e){
         function(){ 
     });
 })
+
+$('.estado').click(function(){
+    url = $(this).data('ruta'); 
+    celda =  $(this).parents("tr").find("td").eq(5);
+    cambiarEstado = $('.cambiarEstado');
+    cambiarEstado.data('ruta',url);
+    cambiarEstado.data('celda',celda);
+    
+})
+
+$('.cambiarEstado').click(function(){
+    estado = $('#nuevoEstado').val();
+    url = $(this).data('ruta');
+    celda = $(this).data('celda');
+    $.get(url,{'estado':estado},function(res){
+        alertify.alert(res.mensaje).set('basic', true);
+        console.log(celda.text());
+    })
+   
+})
