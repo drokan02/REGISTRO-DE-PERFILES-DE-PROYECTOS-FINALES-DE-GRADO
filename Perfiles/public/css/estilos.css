@@ -101,7 +101,7 @@ h1.truncated {
 
 .contenido{
     background-image: url("../img/contenido-bg.png");
-    background-color:#abcbec;
+    background-color:#ebeff3;
     background-blend-mode: soft-light;
     background-size: contain;
     min-height: 770px;

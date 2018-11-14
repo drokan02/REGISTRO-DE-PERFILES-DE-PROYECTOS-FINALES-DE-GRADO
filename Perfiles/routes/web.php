@@ -19,7 +19,8 @@ Route::get('/verifiqueCuenta',function () {
 })->name('confirmarCuenta');
 
 Route::get('/prueba', function () {
-    return view('complementos.prueba');
+    $valor = 12;
+    return view('complementos.prueba',compact('valor'));
 })->name('inicio');
 
 //Roles
@@ -141,6 +142,8 @@ Route::get('/perfil/editar/{perfil}','PerfilController@editar')->name('editarPer
 Route::post('/perfil/editar/modificar/{perfil}','PerfilController@modificar')->name('modificarPerfil');
 //Route::post('/perfil/editar/{perfil}/modificar','PerfilController@modificar')->name('mPerfil');
 Route::any('/perfil/eliminar/{perfil}','PerfilController@eliminar')->name('eliminarPerfil');
+Route::any('/perfil/cambiarEstado/{perfil}','PerfilController@cambiarEstado')->name('cambiarEstadoPerfil');
+
 //Gestion
 Route::any('/menu/Gestion', 'GestionController@index')->name('gestiones');
 Route::get('menu/Gestion/registrar', 'GestionController@registrar')->name('registrarGestion');

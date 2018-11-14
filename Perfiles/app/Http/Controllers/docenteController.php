@@ -26,17 +26,16 @@ class docenteController extends Controller
        $docentes = new Docente;
        $fila = 1;
        if($buscar){
-            $docentes=Docente::with('profesional')
+            $docentes=Docente::with('profesional.titulo')//arreglar
                                 ->porCarrera($carrera_id)
                                 ->buscardocentes($buscar)
                                 ->orderBy('id','ASC')
                                 ->paginate(10);	
        } else{
-        $docentes=Docente::with('profesional')->porCarrera($carrera_id)
+        $docentes=Docente::with('profesional.titulo')->porCarrera($carrera_id)
                                               ->orderBy('id','ASC')
                                               ->paginate(10);
        }
-    
       if($request->ajax()){
         return response()->json(
             view('parcial.docentes',compact('docentes','buscar','fila'))->render()
