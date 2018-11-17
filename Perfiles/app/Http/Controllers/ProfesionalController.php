@@ -106,5 +106,7 @@ class ProfesionalController extends Controller
 
     }
     
-    public function tabularDatos($datos){}
+    public function tutoria(Profesional $profesional){
+        dd($profesional->perfiles->toArray());
+    }
 }

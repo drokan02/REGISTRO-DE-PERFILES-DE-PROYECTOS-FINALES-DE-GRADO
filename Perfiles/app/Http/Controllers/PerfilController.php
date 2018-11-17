@@ -55,6 +55,8 @@ class PerfilController extends Controller
         $modalidad_id  = $request->modalidad_id;
         $estudiante    = auth()->user()->estudiante()->first();
         $carrera_id    = $estudiante->carrera_id;
+        $estudiante    = Estudiante::Where('id',$estudiante->id)->with('carrera')->get();
+        $estudiante    = $estudiante[0];  
         $modalidad     = Modal::where('id',$modalidad_id)->value('nombre_mod');
         $subareas      = Area::subareasCarrera($carrera_id)->get();
         $areas         = Area::areasCarrera($carrera_id)->get();
@@ -132,22 +134,20 @@ class PerfilController extends Controller
 
     public function editar($id){
        // $profesionales = Profesional::
-        $perfil        = Perfil::where('id',$id)->with('tutor','estudiantes','docente','director','area','subarea','modalidad')->get();;
-        $carrera_id    = $perfil->toArray()[0]['estudiantes'][0]['carrera_id'];
-        $fecha_ini     = $perfil->toArray()[0]['fecha_ini'];
-        $director_id   = $perfil->toArray()[0]['director_id'];
-        $docente_id     = $perfil->toArray()[0]['docente_id'];
+        $perfil        = Perfil::where('id',$id)->with('tutor','estudiantes.carrera','docente.profesional','director.profesional','area','subarea','modalidad')->get();;
+        $perfil        = $perfil[0];
+        $carrera_id    = $perfil->estudiantes[0]->carrera_id;
+        $fecha_ini     = $perfil->fecha_ini;
+        $director_id   = $perfil->director->profesional->id;
+        $docente_id    = $perfil->docente->profesional->id;
         //dd($perfil->toArray());
-        $docente       = Profesional::find($docente_id);
-        $director      = Profesional::find($director_id);
-        $carrera       = Carrera::find($carrera_id);
         $subareas      = Area::subareasCarrera($carrera_id)->get();
         $profesionales = Profesional::DeCarrera($carrera_id)
                                     ->where('id','!=',$director_id)
                                     ->where('id','!=',$docente_id)
                                     ->get();
-        $gestion       = $this->gestion($fecha_ini);    
-        return view('perfiles.editarPerfil',compact('perfil','subareas','profesionales','gestion','carrera','director','docente'));
+        $gestion       = $this->gestion($fecha_ini);
+        return view('perfiles.editarPerfil',compact('perfil','subareas','profesionales','gestion'));
             
     }
 
