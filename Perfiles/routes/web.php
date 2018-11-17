@@ -153,3 +153,6 @@ Route::post('menu/Gestion/editar/modificar/{gestion}', 'GestionController@modifi
 
 // E-mail verification
 Route::get('/register/verify/{code}', 'Auth\RegisterController@verify');
+
+//notificacion
+Route::get('/notificar','menuController@notificar')->name('notificar');
