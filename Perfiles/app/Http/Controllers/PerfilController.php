@@ -247,6 +247,17 @@ class PerfilController extends Controller
         
     }
 
+    //metodo para cambiar estado de un perfil
+    public function cambiarEstado(Request $request,Perfil $perfil){
+        $perfil->update([
+            'estado' => $request['estado']
+        ]);
+        if($request->ajax()){
+            return response()->json([
+                'mensaje'=>'El estado del perfil fue actualizado Correctamente'
+            ]);
+        }
+    }
     public function fechaValido($fecha_fin){
         $fechaF = explode("-",$fecha_fin);
         $fecha     = explode("-",date('Y-m-d'));
@@ -322,3 +333,4 @@ class PerfilController extends Controller
         return $errores;
      }
 }
+

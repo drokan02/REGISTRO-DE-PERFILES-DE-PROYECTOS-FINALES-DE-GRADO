@@ -1,7 +1,7 @@
+
 @extends('layouts.menu')
 @section('titulo','LISTAR AREAS')
 @section('contenido')
-
 
   
 <Form method="GET" action="{{route('Areas')}}" >
@@ -56,6 +56,7 @@
                                     <a href='{{ route('verArea',$area->id)}}' class="dropdown-item" >
                                             <h5><i class="col-sm-3 fa fa-eye iconMenu" >&nbsp;&nbsp;&nbsp;Ver </i></h5>
                                     </a>
+                                @if(auth()->user()->hasPermisos(['areas']))
                                     <a href='{{ route('editarArea',$area->id)}}' class="dropdown-item" >
                                             <h5><i class="col-sm-3 fa fa-pencil-square-o iconMenu">&nbsp;&nbsp;&nbsp;Editar</i></h5>
                                     </a>
@@ -64,7 +65,8 @@
                                     </a>
                                     <a href='{{ route('subareas',$area)}}' class="dropdown-item" >
                                             <h5><i class="col-sm-3 fa fa-plus iconMenu"  >&nbsp;&nbsp;&nbsp;Agregar subArea</i></h5>
-                                    </a>                                                  
+                                    </a>
+                                @endif
                             </div>
                     </div> 
                 </td>

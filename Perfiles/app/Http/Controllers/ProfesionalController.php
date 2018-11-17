@@ -24,6 +24,7 @@ class ProfesionalController extends Controller
     public function index(Request $request){
        $buscar = $request->get('buscar');
        $profesionales = Profesional::buscarprofesional($buscar)
+                                 ->with('titulo')
                                  ->orderBy('id','ASC')
                                  ->paginate(15);
         if($request->ajax()){

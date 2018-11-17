@@ -48,7 +48,7 @@
                     <td style="text-align: right;">{{$fila++}}</td>
                     <td>{{$docente->profesional->nombre_prof}}</td>
                     <td>{{$docente->profesional->ap_pa_prof}}&nbsp;{{$docente->profesional->ap_ma_prof}}</td>
-                    <td>{{$docente->profesional->titulo->pluck('abreviatura')[0]}}</td>
+                    <td>{{$docente->profesional->titulo->abreviatura}}</td>
                     <td>{{$docente->profesional->telef_prof}}</td>
                     <td>{{$docente->profesional->correo_prof}}</td>
                     @foreach ($docente->profesional->areas as $area)
@@ -68,12 +68,14 @@
                                         <a href='{{route('verDocente',$docente)}}' class="dropdown-item" href="#">
                                                 <h5><i class="col-sm-3 fa fa-eye iconMenu" >&nbsp;&nbsp;&nbsp;Ver </i></h5>
                                         </a>
+                                    @if(auth()->user()->hasPermisos(['docentes']))
                                         <a href='{{ route('editarDocente',$docente)}}' class="dropdown-item" href="#">
                                                 <h5><i class="col-sm-3 fa fa-pencil-square-o iconMenu">&nbsp;&nbsp;&nbsp;Editar</i></h5>
                                         </a>
                                         <a href='{{ route('eliminarDocente',$docente)}}' class="dropdown-item eliminar" href="#">
                                                 <h5> <i class="col-sm-3 fa fa-minus-square iconMenu" >&nbsp;&nbsp;&nbsp;Eliminar</i></h5>
-                                        </a>                                                      
+                                        </a>
+                                    @endif
                                 </div>
                         </div> 
                     </td>
