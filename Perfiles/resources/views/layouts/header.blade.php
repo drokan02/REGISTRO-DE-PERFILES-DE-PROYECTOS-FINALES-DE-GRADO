@@ -18,7 +18,7 @@
       <ul class="nav navbar">
           @if(auth()->user()->isAdmin())
               <li class="dropdown">
-                  <a class="nav-link btn-outline-success" onclick="alert('desea lanzar una alarma, el proceso puede tardar unos segundos')" href="{{route('notificar')}}"><span class="hidden-xs">Notificar Estudiantes</span></a>
+                  <a class="nav-link btn-outline-success" onclick="alert('desea lanzar una alarma, esta accion puede tardar unos minutos')" href="{{route('notificar')}}"><span class="hidden-xs">Notificar Estudiantes</span></a>
               </li>
           @endif
         <!-- Messages: style can be found in dropdown.less-->
