@@ -11,7 +11,7 @@
     <div class="form-group row">
         <label for="carrera_id" class="col-sm-2 col-form-label">Carrera</label>
         <div class="col-4">
-            <input type="text" class="form-control" name="carrera_id" id="carrera_id" value="{{$estudiante->carrera->pluck('nombre_carrera')[0]}}" disabled>
+            <input type="text" class="form-control" name="carrera_id" id="carrera_id" value="{{$estudiante->carrera->nombre_carrera}}" disabled>
         </div>
         <label for="gestion_aprobacion" class="col-sm-2 col-form-label">Gestion de Aprobacion</label>
         <div class="col-4">
