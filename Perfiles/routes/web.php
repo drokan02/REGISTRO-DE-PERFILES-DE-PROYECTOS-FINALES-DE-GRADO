@@ -18,14 +18,10 @@ Route::get('/verifiqueCuenta',function () {
     return view('emails/confirmarCuenta');
 })->name('confirmarCuenta');
 
-<<<<<<< HEAD
-
-=======
 Route::get('/prueba', function () {
     $valor = 12;
     return view('complementos.prueba',compact('valor'));
 })->name('inicio');
->>>>>>> 76b5ecd54646cae76a97e7238c5bd2a2cf2b30d5
 
 //Roles
 Route::get('/menu','menuController@index')->name('menu');
@@ -62,13 +58,8 @@ Route::any('/areas/subir_Excel/importar', 'AreaController@importar')->name('impo
 
 //tutores
 Route::get('/profesionales','ProfesionalController@index')->name('listarProfesionales');
-<<<<<<< HEAD
-Route::get('/profesionales/registrar','ProfesionalController@registrar')->name('registroProfesional');
-Route::post('/profesionales/almacenar','ProfesionalController@almacenar')->name('almacenarProfesional');
-=======
 Route::get('/profesionales/registrar','ProfesionalController@registrar')->name('registroProfesional')->middleware('permisos:profesionales');;
 Route::post('/profesionales/almacenar','ProfesionalController@almacenar')->name('almacenarProfesional')->middleware('permisos:profesionales');;
->>>>>>> 76b5ecd54646cae76a97e7238c5bd2a2cf2b30d5
 Route::any('/profesionales/editar/{id}','ProfesionalController@editar')->name('editarProfesional');
 Route::post('/profesionales/editar/modificar/{profesional}','ProfesionalController@modificar')->name('modificarProfesional');
 Route::any('/profesionales/eliminar/{profesional}','ProfesionalController@eliminar')->name('eliminarProfesional');
@@ -113,13 +104,8 @@ Route::any('/carreras/agregarArea/almacenar/{carrera}', 'CarreraController@almac
 Route::any('/carreras/eliminarArea/{carrera}/{area}', 'CarreraController@EliminarArea')->name('eliminarCarreraArea');
 //docentes
 Route::get('/docentes','docenteController@index')->name('Docentes');
-<<<<<<< HEAD
-Route::get('/docentes/registrar', 'docenteController@registrar')->name('registrarDocente');
-Route::any('/docentes/registrar/almacenar','docenteController@almacenar')->name('almacenarDocente');
-=======
 Route::get('/docentes/registrar', 'docenteController@registrar')->name('registrarDocente')->middleware('permisos:docentes');
 Route::any('/docentes/registrar/almacenar','docenteController@almacenar')->name('almacenarDocente')->middleware('permisos:docentes');
->>>>>>> 76b5ecd54646cae76a97e7238c5bd2a2cf2b30d5
 Route::any('/docentes/editar/{docente}','docenteController@editar')->name('editarDocente');
 Route::any('/docentes/editar/modificar/{docente}','docenteController@modificar')->name('modificarDocente');
 Route::any('/docentes/eliminar/{docente}','docenteController@eliminar')->name('eliminarDocente');
