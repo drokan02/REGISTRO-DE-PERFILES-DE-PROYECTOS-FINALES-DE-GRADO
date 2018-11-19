@@ -332,5 +332,10 @@ class PerfilController extends Controller
 
         return $errores;
      }
+     public function ver($id){
+		$perfil=Perfil::findOrFail($id);
+		
+		return view('perfiles.ver',['perfil'=>$perfil]);
+    }
 }
 

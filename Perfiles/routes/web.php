@@ -134,7 +134,6 @@ Route::post('register','Auth\RegisterController@register')->name('registerPost')
 
 //perfiles
 Route::get('/perfil','PerfilController@index')->name('perfiles');
-Route::get('/perfil/ver','PerfilController@index')->name('verPerfil');
 Route::get('/perfil/registrarPerfil','PerfilController@nuevoFormulario')->name('nuevoPerfil');
 Route::any('/perfil/registrarPerfil/mostrarForm','PerfilController@mostrarForm')->name('mostrarFormulario');
 Route::post('/perfil/registrarPerfil/almacenar','PerfilController@almacenar')->name('almacenarPerfil');
@@ -143,7 +142,7 @@ Route::post('/perfil/editar/modificar/{perfil}','PerfilController@modificar')->n
 //Route::post('/perfil/editar/{perfil}/modificar','PerfilController@modificar')->name('mPerfil');
 Route::any('/perfil/eliminar/{perfil}','PerfilController@eliminar')->name('eliminarPerfil');
 Route::any('/perfil/cambiarEstado/{perfil}','PerfilController@cambiarEstado')->name('cambiarEstadoPerfil');
-
+Route::any('/perfil/ver/{perfil}','PerfilController@ver')->name('verPerfil');
 //Gestion
 Route::any('/menu/Gestion', 'GestionController@index')->name('gestiones');
 Route::get('menu/Gestion/registrar', 'GestionController@registrar')->name('registrarGestion');
