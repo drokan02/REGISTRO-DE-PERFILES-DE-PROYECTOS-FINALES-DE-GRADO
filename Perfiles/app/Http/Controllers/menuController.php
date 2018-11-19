@@ -38,10 +38,10 @@ class menuController extends Controller
             $fechaFin=$perfil->fecha_fin;
             $fechaActual=Carbon::now();
             $diferencia=$fechaActual->diffInDays($fechaFin);
-            if($diferencia>0){
+            $estado=$perfil->estado;
+            if($diferencia>0 && $estado == "En Progreso"){
                 $estudiantes=$perfil->estudiantes()->get();
                 foreach ($estudiantes as $estudiante){
-                    //dd($estudiante);
                     $data=['estudiante'=> $estudiante,'fechaFin'=>$fechaFin,'fechaInicio'=>$fechaInicio,'diferencia'=>$diferencia];
                     Mail::send('emails.notificacion',$data, function($message) use ($estudiante) {
                         $message->to($estudiante->email, $estudiante->nombres)->subject('Tiempo de tu perfil');
