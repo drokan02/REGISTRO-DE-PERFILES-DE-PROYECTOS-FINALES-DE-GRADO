@@ -109,5 +109,7 @@ class ProfesionalController extends Controller
 		return view('profesionales.ver',['profesional'=>$profesional]);
     }
     
-    public function tabularDatos($datos){}
+    public function tutoria(Profesional $profesional){
+        dd($profesional->perfiles->toArray());
+    }
 }

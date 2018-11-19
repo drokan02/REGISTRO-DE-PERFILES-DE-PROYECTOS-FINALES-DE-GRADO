@@ -75,6 +75,10 @@
                                         <a href='{{ route('eliminarProfesional',$profesional)}}' class="dropdown-item eliminar" href="#">
                                                 <h5> <i class="col-sm-3 fa fa-minus-square iconMenu" >&nbsp;&nbsp;&nbsp;Eliminar</i></h5>
                                         </a>
+
+                                        <a href='{{ route('tutoriaProfesional',$profesional)}}' class="dropdown-item" href="#">
+                                            <h5> <i class="col-sm-3 fa fa-file-text-o iconMenu" >&nbsp;&nbsp;&nbsp;Tutoria</i></h5>
+                                        </a>
                                     @endif
                                 </div>
                         </div> 

@@ -64,7 +64,7 @@ Route::any('/profesionales/editar/{id}','ProfesionalController@editar')->name('e
 Route::post('/profesionales/editar/modificar/{profesional}','ProfesionalController@modificar')->name('modificarProfesional');
 Route::any('/profesionales/eliminar/{profesional}','ProfesionalController@eliminar')->name('eliminarProfesional');
 Route::any('/profesionales/ver/{profesional}','ProfesionalController@ver')->name('verProfesional');
-
+Route::any('/profesionales/tutoria/{profesional}','ProfesionalController@tutoria')->name('tutoriaProfesional');
 
 //Subareas
 Route::get('areas/subareas/{area}','SubareaController@index')->name('subareas');
@@ -152,3 +152,6 @@ Route::post('menu/Gestion/editar/modificar/{gestion}', 'GestionController@modifi
 
 // E-mail verification
 Route::get('/register/verify/{code}', 'Auth\RegisterController@verify');
+
+//notificacion
+Route::get('/notificar','menuController@notificar')->name('notificar');
