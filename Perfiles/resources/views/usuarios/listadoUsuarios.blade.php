@@ -28,7 +28,7 @@
 
 <div class="container col-sm-8 listaDatos">
         @if($users->isNotEmpty())
-    <table class="table table-hover table-bordered-primary text-center">
+    <table class="table table-hover table-bordered-primary text-center table-responsive-md">
         <thead class="thead thead-primary">
         <tr class="tr">
             <th scope="col">#</th>
