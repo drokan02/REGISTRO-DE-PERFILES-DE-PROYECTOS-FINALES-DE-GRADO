@@ -10,6 +10,7 @@ use App\Profesional;
 use App\Area;
 use App\Titulo;
 use App\Carrera;
+use App\Perfil;
 class ProfesionalController extends Controller
 {
     function __construct(){
@@ -24,6 +25,7 @@ class ProfesionalController extends Controller
     public function index(Request $request){
        $buscar = $request->get('buscar');
        $profesionales = Profesional::buscarprofesional($buscar)
+                                 ->doesntHave('docente')
                                  ->with('titulo')
                                  ->orderBy('id','ASC')
                                  ->paginate(15);
@@ -106,7 +108,32 @@ class ProfesionalController extends Controller
 
     }
     
-    public function tutoria(Profesional $profesional){
-        dd($profesional->perfiles->toArray());
+    public function tutoria(Request $request,Profesional $profesional){
+        $fila = 1;
+        $buscar = $request['buscar'];
+        $perfiles = Perfil::with(['estudiantes'])
+                            ->perfilesTutor($profesional->id)
+                            ->buscar($buscar)
+                            ->orderBy('id','DESC')
+                            ->paginate(7);
+        if($request->ajax()){
+            return view('parcial.perfilesTutor',compact('profesional','perfiles','fila',"buscar"))->render();      
+        }
+        return view('profesionales.perfilesTutor',compact('profesional','perfiles','fila',"buscar"));
+    }
+
+    public function renunciar(Request $request,Profesional $profesional,Perfil $perfil){
+        $profesional->perfiles()->detach($perfil->id);
+        $this->notificarEstudiante($perfil);
+        if($request->ajax()){
+            return response()->json([
+                "datos" =>$this->tutoria($request,$profesional),
+                "mensaje" => "El profesional ya no es el tutor del Perfil"
+            ]);
+        }
+    }
+
+    public function notificarEstudiante($perfil){
+        //mandar correo para notificar al estudiante
     }
 }

@@ -63,7 +63,9 @@ class Perfil extends Model
 
     public function scopeBuscar($query,$buscar){
         if($buscar){
-            return $query->where(DB::raw("CONCAT(titulo,' ',descripcion)"), "LIKE", "%$buscar%");
+            return $query->whereHas('estudiantes', function($query) use ($buscar){
+                return $query->where(DB::raw("CONCAT(titulo,' ',descripcion,' ',nombres)"), "LIKE", "%$buscar%");
+            });
         }
         
     }
@@ -100,4 +102,13 @@ class Perfil extends Model
             return $query->where('estado','!=','eliminado')->orWhereNull('estado');
         }
     }
+
+    public function scopePerfilesTutor($query,$tutor_id){
+        return $query->where('estado','Progreso')
+                     ->whereHas('tutor', function($query) use ($tutor_id){
+                        return $query->where('profesional_id',$tutor_id);
+                     });
+    }
+
+   
 }

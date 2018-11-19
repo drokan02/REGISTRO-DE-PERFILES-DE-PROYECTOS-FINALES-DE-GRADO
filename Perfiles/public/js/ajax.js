@@ -4,6 +4,15 @@ $("#prueba").click(function(){
     console.log(res)
 });
 
+$(window).resize(function() {
+    var ventana_ancho = $(window).width();
+	var ventana_alto = $(window).height();
+	if (ventana_ancho < 700) {
+        $(".contenidoP").css("padding-top", "130px");  
+    }else if (ventana_ancho > 700) {
+        $(".contenidoP").css("padding-top", "80px");  
+    }
+  });
 
 $('.registrarForm').click(function(e){
     e.preventDefault();
@@ -242,4 +251,17 @@ $('.cambiarEstado').click(function(){
         celda.text(estado);
     })
    
+})
+
+$('.renunciarTutoria').click(function(e){
+    e.preventDefault();
+    url  = $(this).attr('href');
+    fila = $(this).parents("tr");
+    tabla = $(this).parents("tbody");
+    var divLista = $('.listaDatos');
+    console.log(tabla.find("tr").length);
+    $.get(url,[],function(res){
+        alertify.alert(res.mensaje).set('basic', true);
+        divLista.html(res.datos);
+    })
 })

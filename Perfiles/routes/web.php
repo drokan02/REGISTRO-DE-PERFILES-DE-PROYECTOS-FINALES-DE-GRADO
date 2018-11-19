@@ -65,6 +65,7 @@ Route::post('/profesionales/editar/modificar/{profesional}','ProfesionalControll
 Route::any('/profesionales/eliminar/{profesional}','ProfesionalController@eliminar')->name('eliminarProfesional')->middleware('permisos:profesionales');;
 Route::any('/profesionales/ver/{profesional}','ProfesionalController@ver')->name('verProfesional');
 Route::any('/profesionales/tutoria/{profesional}','ProfesionalController@tutoria')->name('tutoriaProfesional');
+Route::any('/profesionales/tutoria/renunciar/{profesional}/{perfil}','ProfesionalController@renunciar')->name('renunciarTutoria');
 
 //Subareas
 Route::get('areas/subareas/{area}','SubareaController@index')->name('subareas');

@@ -43,7 +43,8 @@ class Docente extends Model
         if($buscar){
             return $query->whereHas('profesional', function ($query) use ( $buscar){
                                 $query->where(DB::raw("CONCAT(nombre_prof,' ',ap_pa_prof,' ',ap_ma_prof)"), "LIKE", "%$buscar%");
-                    });
+              
+                            });
         }else{
             return null;
         }

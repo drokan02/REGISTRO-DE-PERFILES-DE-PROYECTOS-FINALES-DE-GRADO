@@ -233,7 +233,10 @@ class PerfilController extends Controller
         $fecha_fin = $perfil->toArray()[0]['fecha_fin'];
         $valido = $this->fechaValido($fecha_fin);
         if($valido){
-            //$estudiante->perfil()->detach();
+            $estudiante->perfil()->detach();
+            $perfil->update([
+                'estado'=>'eliminado'
+            ]);
             return [
                 'registrado'=>true,
                 'mensaje'=> 'Formulario para el Cambio De Tema registrado correctamente '

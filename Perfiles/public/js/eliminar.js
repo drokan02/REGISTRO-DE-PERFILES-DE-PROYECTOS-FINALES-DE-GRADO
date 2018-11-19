@@ -269,3 +269,16 @@ $('.cambiarEstado').click(function(){
     })
    
 })
+
+$('.renunciarTutoria').click(function(e){
+    e.preventDefault();
+    url  = $(this).attr('href');
+    fila = $(this).parents("tr");
+    tabla = $(this).parents("tbody");
+    var divLista = $('.listaDatos');
+    console.log(tabla.find("tr").length);
+    $.get(url,[],function(res){
+        alertify.alert(res.mensaje).set('basic', true);
+        divLista.html(res.datos);
+    })
+})
