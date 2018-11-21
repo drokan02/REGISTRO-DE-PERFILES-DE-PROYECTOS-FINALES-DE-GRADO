@@ -16,19 +16,16 @@
 
         <div class="row justify-content-center">
                 <div class="list-group  col-10  " >
-                     <h2  class="list-group-item active "><strong class="row justify-content-center">Informacion Personal</strong></h2>  
+                     <h2  class="list-group-item active "><strong class="row justify-content-center">{{$user->name}}</strong></h2>  
                      
-                              <div class="list-group-item">
-                                <h4><b>{{$user->name}}</b></h4>
-                                 <p>Nombre de Usuario </p>  
-                                </div>
+                
                                 <div class="list-group-item">
-                                <strong>{{$user->email}}</strong>
-                              <p>Correo Electronico</p>
+                                <strong>{{$user->email}}</strong><br>
+                              <small>Correo Electronico</small>
                         </div>
                         <div class="list-group-item">
-                                <strong><b>{{$user->user_name}}</b></strong>
-                                 <p>Nombre de Usuario </p>  
+                                <strong> {{$user->user_name}}</strong><br>
+                                 <small>Nombre de Usuario </small>  
                                 </div>
                                 <!--div class="list-group-item">
                                         <strong>{{$user->roles->pluck('nombre_rol')->implode(' - ')}}</strong>
