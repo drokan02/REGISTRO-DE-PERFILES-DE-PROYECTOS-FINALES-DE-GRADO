@@ -39,12 +39,14 @@
                                         <a href='{{ route('ver',$modalidad->id)}}' class="dropdown-item" >
                                                 <h5><i class="col-sm-3 fa fa-eye iconMenu" >&nbsp;&nbsp;&nbsp;Ver </i></h5>
                                         </a>
+                                    @if(auth()->user()->hasPermisos(['modalidades']))
                                         <a href='{{ route('editarModalidad',$modalidad)}}' class="dropdown-item" >
                                                 <h5><i class="col-sm-3 fa fa-pencil-square-o iconMenu">&nbsp;&nbsp;&nbsp;Editar</i></h5>
                                         </a>
                                         <a href="{{route('eliminarModalidad',$modalidad)}}" class="dropdown-item eliminar" >
                                                 <h5> <i class="col-sm-3 fa fa-minus-square iconMenu" >&nbsp;&nbsp;&nbsp;Eliminar</i></h5>
-                                        </a>                                                      
+                                        </a>
+                                    @endif
                                 </div>
                         </div> 
                         </td>

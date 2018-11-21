@@ -49,7 +49,7 @@
                     <td style="text-align: right;">{{$fila++}}</td>
                     <td>{{$profesional->nombre_prof}}</td>
                     <td style="width: 15%;">{{$profesional->ap_pa_prof}}&nbsp;&nbsp;{{$profesional->ap_ma_prof}}</td>
-                    <td style="width: 8%;">{{$profesional->titulo->pluck('abreviatura')[0]}}</td>
+                    <td style="width: 8%;">{{$profesional->titulo->abreviatura}}</td>
                     <td style="width: 8%;">{{$profesional->telef_prof}}</td>
                     <td style="width: 12%;">{{$profesional->correo_prof}}</td>
                     
@@ -68,12 +68,18 @@
                                         <a href='{{route('verProfesional',$profesional->id)}}' class="dropdown-item" href="#">
                                                 <h5><i class="col-sm-3 fa fa-eye iconMenu" >&nbsp;&nbsp;&nbsp;Ver </i></h5>
                                         </a>
+                                    @if(auth()->user()->hasPermisos(['profesionales']))
                                         <a href='{{ route('editarProfesional',$profesional->id)}}' class="dropdown-item" href="#">
                                                 <h5><i class="col-sm-3 fa fa-pencil-square-o iconMenu">&nbsp;&nbsp;&nbsp;Editar</i></h5>
                                         </a>
                                         <a href='{{ route('eliminarProfesional',$profesional)}}' class="dropdown-item eliminar" href="#">
                                                 <h5> <i class="col-sm-3 fa fa-minus-square iconMenu" >&nbsp;&nbsp;&nbsp;Eliminar</i></h5>
-                                        </a>                                                      
+                                        </a>
+
+                                        <a href='{{ route('tutoriaProfesional',$profesional)}}' class="dropdown-item" href="#">
+                                            <h5> <i class="col-sm-3 fa fa-file-text-o iconMenu" >&nbsp;&nbsp;&nbsp;Tutoria</i></h5>
+                                        </a>
+                                    @endif
                                 </div>
                         </div> 
                     </td>

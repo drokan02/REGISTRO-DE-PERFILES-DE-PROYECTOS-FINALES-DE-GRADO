@@ -24,6 +24,7 @@ class ProfesionalController extends Controller
     public function index(Request $request){
        $buscar = $request->get('buscar');
        $profesionales = Profesional::buscarprofesional($buscar)
+                                 ->with('titulo')
                                  ->orderBy('id','ASC')
                                  ->paginate(15);
         if($request->ajax()){
@@ -108,5 +109,7 @@ class ProfesionalController extends Controller
 		return view('profesionales.ver',['profesional'=>$profesional]);
     }
     
-    public function tabularDatos($datos){}
+    public function tutoria(Profesional $profesional){
+        dd($profesional->perfiles->toArray());
+    }
 }

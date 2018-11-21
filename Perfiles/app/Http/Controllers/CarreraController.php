@@ -97,9 +97,17 @@ class CarreraController extends Controller
 
 
     public function importacion(Request $request){
+        $this->validate(request(), [
+            'importar_carreras' => ['required'],
+        ]);
         try{
             $archivo = $request->file('importar_carreras');
             $nombre=$archivo->getClientOriginalName();
+            $extension=$archivo->getClientOriginalExtension();
+            if(!in_array($extension,['xls','xlsx','xlsm','xlsb'])){
+                return back()->withErrors('el archivo que intenta 
+                subir no es un archivo excel: xls, xlsx, xlsm, xlsb');
+            }
             \Storage::disk('archivos')->put($nombre, \File::get($archivo) );
             $ruta  =  storage_path('archivos') ."/". $nombre;
             Excel::selectSheetsByIndex(0)->load($ruta, function ($hoja) {

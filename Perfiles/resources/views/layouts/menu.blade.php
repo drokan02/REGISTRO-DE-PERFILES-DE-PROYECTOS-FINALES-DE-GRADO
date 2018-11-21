@@ -66,25 +66,7 @@
         </section><!-- /.content -->
       </div>
     </div>
-      <!--Fin-Contenido-->
-
-      <!--PIE DE PAGINA
-      <footer class="main-footer" style="background-color: #3c8dbc;color: white">
-          <div class="row">
-              <div class="col-auto ml-2 mt-1">
-                  <img  src="{{asset('img/vensoft.jpg')}}" width="50" height="50">
-              </div>
-              <div class="col-4 mt-2">
-                      <span class="font-italic">El sistema es Diseño y Desarrollo de la Empresa de software
-                          "VENSOFT" Copyright © 2018 . Todos los derechos reservados.
-                      </span>
-              </div>
-              <div class="col-3 offset-4 text-center mt-2">
-                  <span>Facultad de Ciencias y Tecnología (UMSS).<br></span>
-                  <span> Cochabamba - Bolivia</span>
-              </div>
-          </div>
-      </footer>-->
+     
       <script src={{asset('js/ajax.js')}}></script>
     <script src={{asset('js/jquery-3.3.1.min.js')}}></script>
     <script src={{asset('js/gijgo.min.js')}} ></script>

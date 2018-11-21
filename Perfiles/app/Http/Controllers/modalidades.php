@@ -18,7 +18,7 @@ class modalidades extends Controller
     function __construct(){
        // $this->middleware('auth');
         //$this->middleware(['verificarCuenta']);
-        $this->middleware('permisos:modalidades');
+        $this->middleware('permisos:modalidades',['except'=>['index','ver']]);
     }
 	
 	
@@ -130,9 +130,17 @@ class modalidades extends Controller
     }
 
     public function importacion(Request $request){
+        $this->validate(request(), [
+            'importar_modalidad' => ['required'],
+        ]);
         try{
             $archivo = $request->file('importar_modalidad');
             $nombre=$archivo->getClientOriginalName();
+            $extension=$archivo->getClientOriginalExtension();
+            if(!in_array($extension,['xls','xlsx','xlsm','xlsb'])){
+                return back()->withErrors('el archivo que intenta 
+                subir no es un archivo excel: xls, xlsx, xlsm, xlsb');
+            }
             \Storage::disk('archivos')->put($nombre, \File::get($archivo) );
             $ruta  =  storage_path('archivos') ."/". $nombre;
             Excel::selectSheetsByIndex(0)->load($ruta, function ($hoja) {

@@ -29,30 +29,31 @@
                 <li>
                     <a href="{{route('importarCarreras')}}"><i class="fa fa-upload" aria-hidden="true"></i>Importar Carreras</a>
                 </li>
-            @endif
+             @endif
         </ul>
       </li>
-      @if(auth()->user()->hasPermisos(['areas']))
-          <!-- menu AREAS -->
-          <li class="treeview {{ request()->segment(1) == 'areas'? 'active open':'' }}">
-              <a href="#">
-                  <i class="fa fa-file-text-o" aria-hidden="true"></i>
-                  <span> Areas </span>
-                  <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
+      <!-- menu AREAS -->
+      <li class="treeview {{ request()->segment(1) == 'areas'? 'active open':'' }}">
+          <a href="#">
+              <i class="fa fa-file-text-o" aria-hidden="true"></i>
+              <span> Areas </span>
+              <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+              @if(auth()->user()->hasPermisos(['areas']))
                   <li class="{{ request()->routeIs('subirAreas')? 'active':'' }}">
                       <a href="{{route('subirAreas')}}"><i class="fa fa-upload" aria-hidden="true"></i>Importar datos de Excel</a>
                   </li>
                   <li class="{{ request()->routeIs('registrarArea')? 'active':'' }}">
                       <a href="{{route('registrarArea')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Area</a>
                   </li>
-                  <li class="{{ request()->routeIs('Areas')? 'active':'' }}">
-                      <a href="{{route('Areas')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Area</a>
-                  </li>
-              </ul>
-          </li>
-      @endif
+              @endif
+              <li class="{{ request()->routeIs('Areas')? 'active':'' }}">
+                  <a href="{{route('Areas')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Area</a>
+              </li>
+          </ul>
+      </li>
+
         @if(auth()->user()->hasPermisos(['roles']))
             <!-- menu Roles-->
             <li class="treeview">
@@ -66,7 +67,6 @@
                 </ul>
             </li>
         @endif
-        @if(auth()->user()->hasPermisos(['modalidades']))
             <!-- menu MODALIDADES -->
             <li class="treeview {{ request()->segment(1) == 'modalidad'? 'active open':'' }}">
                 <a href="#">
@@ -75,20 +75,21 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ request()->routeIs('registrarmodalidad')? 'active':'' }}">
-                        <a href="{{route('registrarmodalidad')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Modalidad</a>
-                    </li>
+                    @if(auth()->user()->hasPermisos(['modalidades']))
+                        <li>
+                            <a href="{{route('importarModalidad')}}"><i class="fa fa-upload" aria-hidden="true"></i>Importar Modalidades</a>
+                        </li>
+                        <li class="{{ request()->routeIs('registrarmodalidad')? 'active':'' }}">
+                            <a href="{{route('registrarmodalidad')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Modalidad</a>
+                        </li>
+                    @endif
                     <li class="{{ request()->routeIs('modalidad')? 'active':'' }}">
                         <a href="{{route('modalidad')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Modalidad</a>
                     </li>
-                    <li>
-                        <a href="{{route('importarModalidad')}}"><i class="fa fa-upload" aria-hidden="true"></i>Importar Modalidades</a>
-                    </li>
                 </ul>
             </li>
-        @endif
       <!-- Menu Usuarios-->
-        @if(auth()->user()->hasPermisos(['users']))
+      @if(auth()->user()->hasPermisos(['users']))
             <li class="treeview {{ request()->segment(1) == 'usuarios'? 'active open':'' }}">
                 <a href="#">
                     <i class="fa fa-users" aria-hidden="true"></i> <span>Usuarios</span>
@@ -104,7 +105,7 @@
                 </ul>
             </li>
         @endif
-        @if(auth()->user()->hasPermisos(['docentes']))
+
             <!-- Menu DOCENTES-->
             <li class="treeview">
                 <a href="#">
@@ -112,12 +113,14 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('registrarDocente')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Docente</a></li>
+                    @if(auth()->user()->hasPermisos(['docentes']))
+                        <li><a href="{{route('registrarDocente')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Docente</a></li>
+                    @endif
                     <li><a href="{{route('Docentes',['carrera_id'=>1])}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar docentes</a></li>
                 </ul>
             </li>
-        @endif
-        @if(auth()->user()->hasPermisos(['profesionales']))
+
+
             <!-- Menu PROFESIONALES-->
             <li class="treeview {{ request()->segment(1) == 'profesionales'? 'active open':'' }}">
                 <a href="#">
@@ -125,15 +128,17 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ request()->routeIs('registroProfesional')? 'active':'' }}">
-                        <a href="{{route('registroProfesional')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Profesional</a>
-                    </li>
+                    @if(auth()->user()->hasPermisos(['profesionales']))
+                        <li class="{{ request()->routeIs('registroProfesional')? 'active':'' }}">
+                            <a href="{{route('registroProfesional')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar Profesional</a>
+                        </li>
+                    @endif
                     <li class="{{ request()->routeIs('listarProfesionales')? 'active':'' }}">
                         <a href="{{route('listarProfesionales')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Listar Profesional</a>
                     </li>
                 </ul>
             </li>
-        @endif
+
         @if(auth()->user()->hasPermisos(['estudiantes']))
       <!-- Menu ESTUDIANTES-->
        <li class="treeview">
@@ -146,7 +151,7 @@
           <li><a href="{{route('estudiantes')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Lista Estudiantes</a></li>
         </ul>
       </li>
-        @endif
+      @endif
         <!-- Menu Perfiles-->
         <li class="treeview {{ request()->segment(1) == 'perfil'? 'active open':'' }}">
             <a href="#">

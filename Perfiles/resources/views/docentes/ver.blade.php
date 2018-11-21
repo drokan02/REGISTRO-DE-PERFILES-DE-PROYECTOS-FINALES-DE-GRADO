@@ -10,16 +10,17 @@
                                   
                               <div class="list-group-item">
                                  <h4><b>{{$docente->profesional->nombre_prof}} {{$docente->profesional->ap_pa_prof}}  {{$docente->profesional->ap_ma_prof}} </b></h4> 
-                                 <p>Nombre Completo</p>  
+                                 <small>Nombre Completo</small>  
                               </div>
                               <div class="list-group-item">
-                                 <strong>{{$docente->profesional->ci_prof}}</strong>
-                                 <p>Cedula de Indentidad</p>
+                                    
+                                 <strong>{{$docente->profesional->ci_prof}}</strong><br>
+                                 <small>Cedula de Indentidad</small>
                               </div>
                               <div class="list-group-item">
                                 
-                                       <strong class="leas text-left" >{{$docente->profesional->direc_prof}}</strong>
-                                     <p>Direccion</p>
+                                       <strong class="leas text-left" >{{$docente->profesional->direc_prof}}</strong><br>
+                                     <small>Direccion</small>
                                 
                               </div>
                       </div>  
@@ -30,27 +31,27 @@
                     <h2  class="list-group-item active "><strong class="row justify-content-center">Informacion Academica</strong></h2>  
                           
                       <div class="list-group-item">
-                         <strong>{{$docente->codigo_sis}}</strong> 
-                         <p>Codigo Sis</p>  
+                         <strong>{{$docente->codigo_sis}}</strong><br>
+                         <small>Codigo Sis</small>  
                       </div>
                       <div class="list-group-item">
-                         <strong>{{$docente->cargahoraria->carga_horaria}}</strong>
-                         <p>Carga Horaria</p>
+                         <strong>{{$docente->cargahoraria->carga_horaria}}</strong><br>
+                         <small>Carga Horaria</small>
                       </div>
                       <div class="list-group-item">
                         
-                               <strong class="leas text-left" >{{$docente->profesional->carrera->nombre_carrera}}</strong>
-                             <p>Carrera</p>
+                               <strong class="leas text-left" >{{$docente->profesional->carrera->nombre_carrera}}</strong><br>
+                             <small>Carrera</small>
                         
                       </div>
                       @foreach ($docente->profesional->areas as $area)
                       <div class="list-group-item">
-                        <strong>{{$area->nombre}}</strong>
-                        <p>Area</p>
+                        <strong>{{$area->nombre}}</strong><br>
+                        <small>Area</small>
                       </div>
                       @if ($docente->profesional->areas->count() < 2)
                       <div class="list-group-item">
-                              <p>SubArea</p>
+                              <small>SubArea</small>
                       </div>
                       @endif
                      
@@ -63,12 +64,12 @@
             <h2  class="list-group-item active "><strong class="row justify-content-center">Informacion de Contacto</strong></h2>  
                   
               <div class="list-group-item">
-                 <strong>{{$docente->profesional->telef_prof}}</strong> 
-                 <p>Telefono</p>  
+                 <strong>{{$docente->profesional->telef_prof}}</strong><br> 
+                 <small>Telefono</small>  
               </div>
               <div class="list-group-item">
-                 <strong>{{$docente->profesional->correo_prof}}</strong>
-                 <p>Correo</p>
+                 <strong>{{$docente->profesional->correo_prof}}</strong><br>
+                 <small>Correo</small>
               </div>
              
  </div>  

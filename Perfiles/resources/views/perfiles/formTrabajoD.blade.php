@@ -1,5 +1,5 @@
 <form method="POST" action="{{route('almacenarPerfil',['director_id'=>$director->id,'modalidad_id'=>$modalidad_id,
-    'estudiante_id'=>$estudiante->id,'fecha_ini'=>$fecha_ini,'fecha_fin'=>$fecha_fin])}}">
+    'estudiante_id'=>$estudiante->id,'fecha_ini'=>$fecha_ini,'fecha_fin'=>$fecha_fin,'estado'=>'En Progreso'])}}">
     {!! csrf_field() !!}
     <div class="form-group row">
         <label for="name" class="col-sm-2 col-form-label">Nombre Estudiante</label>
@@ -11,7 +11,7 @@
     <div class="form-group row">
         <label for="carrera_id" class="col-sm-2 col-form-label">Carrera</label>
         <div class="col-4">
-            <input type="text" class="form-control" name="carrera_id" id="carrera_id" value="{{$estudiante->carrera->pluck('nombre_carrera')[0]}}" disabled>
+            <input type="text" class="form-control" name="carrera_id" id="carrera_id" value="{{$estudiante->carrera->nombre_carrera}}" disabled>
         </div>
         <label for="gestion_aprobacion" class="col-sm-2 col-form-label">Gestion de Aprobacion</label>
         <div class="col-4">
