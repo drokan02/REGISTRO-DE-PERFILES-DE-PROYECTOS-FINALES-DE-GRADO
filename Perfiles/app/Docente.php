@@ -63,5 +63,8 @@ class Docente extends Model
 
             return $query->where('director_carrera',$carrera_id);
     }
+    public function usuario(){
+        return $this->belongsToMany(User::class);
+    }
 
 }

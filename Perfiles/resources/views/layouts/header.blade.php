@@ -41,6 +41,14 @@
                           <div class="dropdown-divider"></div>
                           <a class="dropdown-item" href="{{route('logout')}}">
                               <i class="fa fa-power-off icon"></i> Cerrar sesion </a>
+                      @elseif(auth()->user()->hasRoles(['docente']))
+                          <a class="dropdown-item" href="{{route('verDocente',auth()->user()->docente()->first())}}">
+                              <i class="fa fa-user icon"></i> Perfil </a>
+                          <a class="dropdown-item" href="{{route('editarDocente',auth()->user()->docente()->first())}}">
+                              <i class="fa fa-gear icon"></i> Editar cuenta </a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="{{route('logout')}}">
+                              <i class="fa fa-power-off icon"></i> Cerrar sesion </a>
                       @else
                           <a class="dropdown-item" href="{{route('detalleUsuario',auth()->user())}}">
                               <i class="fa fa-user icon"></i> Perfil </a>
