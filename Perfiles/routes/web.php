@@ -166,3 +166,6 @@ Route::get('/register/verify/{code}', 'Auth\RegisterController@verify');
 //notificacion
 Route::get('/notificar','menuController@notificar')->name('notificar');
 
+//guia llenado formulario
+Route::get('/guiaFormulario/perfil','guiaController@index')->name('guiaFormulario');
+
