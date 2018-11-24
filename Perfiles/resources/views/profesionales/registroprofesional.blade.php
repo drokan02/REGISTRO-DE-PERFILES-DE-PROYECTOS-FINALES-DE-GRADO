@@ -63,19 +63,19 @@
 				<div class="form-group row">
 						<label for="titulo_id" class="col-sm-2 col-form-label">Titulo</label>
 						<div class="col-sm-4 row-fluid" >
-							<select name="titulo_id" id="titulo_id" class="form-control" >
-								<option disabled selected > -- seleccione una Titulo -- </option>
+							<select name="titulo_id" id="titulo_id" class="form-control form-control-chosen" >
+								<option disabled selected > Seleccionar </option>
 								@foreach ($titulos as $titulo)
-									<option value="{{$titulo->id}}">{{$titulo->nombre}}</option>
+									<option value="{{$titulo->id}}">{{$titulo->abreviatura}}</option>
 								@endforeach
 							</select>
 						</div>
 						<label for="carrera_id" class="col-sm-2 col-form-label">Carrera</label>
 						<div class="col-sm-4 row-fluid" >
-							<select name="carrera_id" id="carrera_id" class="form-control" >
-								<option disabled selected > -- seleccione una Carrera-- </option>
-								@foreach ($titulos as $titulo)
-									<option value="{{$titulo->id}}">{{$titulo->nombre}}</option>
+							<select name="carrera_id" id="carrera_id" class="form-control form-control-chosen" >
+								<option disabled selected > Seleccionar </option>
+								@foreach ($carreras as $carrera)
+									<option value="{{$carrera->id}}">{{$carrera->nombre_carrera}}</option>
 								@endforeach
 							</select>
 						</div>
@@ -84,8 +84,8 @@
 				<div class = "form-group row"> 
 					<label for="area_id" class="col-sm-2 col-form-label">Area</label>
 					<div class="col-sm-10">
-						<select name="area_id" id="area_id" class="form-control" >
-							<option disabled selected > -- seleccione una Area -- </option>
+						<select name="area_id" id="area_id" class="form-control form-control-chosen" >
+							<option disabled selected > Seleccionar </option>
 							@foreach ($areas as $area)
 								<option value="{{$area->id}}">{{$area->nombre}}</option>
 							@endforeach
@@ -96,8 +96,8 @@
 				<div class="form-group row">
 						<label for="subarea_id" class="col-sm-2 col-form-label">Sub Area</label>
 						<div class="col-sm-10">
-							<select name="subarea_id" id="subarea_id" class="form-control" >
-								<option disabled selected > -- seleccione una Sub Area -- </option>
+							<select name="subarea_id" id="subarea_id" class="form-control form-control-chosen" >
+								<option disabled selected > Seleccionar </option>
 								@foreach ($subareas as $subarea)
 									<option value="{{$subarea->id}}">{{$subarea->nombre}}</option>
 								@endforeach
@@ -119,6 +119,9 @@
 		</div>
 	
 	</div>
+	<script>
+			$('.form-control-chosen').chosen({});
+	 </script>
 @endsection
 
 

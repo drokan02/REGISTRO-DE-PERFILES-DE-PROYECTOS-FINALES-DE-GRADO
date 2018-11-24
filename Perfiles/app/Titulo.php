@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Titulo extends Model
 {
 	//use Notifiable;
-	public $timestamps=false;
+	public $timestamps=true;
 
 
 
@@ -16,4 +16,9 @@ class Titulo extends Model
     protected $fillable = [
         'id', 'nombre'
     ];
+
+    public function profecionales()
+    {
+        return $this->hasMany(Profesional::class);    
+    }
 }

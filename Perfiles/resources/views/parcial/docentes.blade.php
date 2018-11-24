@@ -1,7 +1,7 @@
 @if($docentes->isNotEmpty())
-      <table class="table table-hover text-center" id="listaProfesionales">
-          <thead class ="columnas">
-        <tr>
+      <table class="table table-hover " id="listaProfesionales">
+          <thead class ="thead text-center">
+        <tr class="tr">
           <th style="width: 3%; text-align: center;">N°</th>
           <th style="width: 10%;">Nombres</th>
           <th style="width: 10%;">Apellidos</th>
@@ -11,29 +11,27 @@
           <th style="width: 10%;">Area</th>
           <th style="width: 10%;">Sub Area</th>
           <th style="width: 10%;">Carga horaria</th>
-          <th style="width: 5%;">Opsiones</th>
+          <th style="width: 5%;">Acciones</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="tbody">
            
         @foreach ($docentes as $docente)
-            <tr>  
+            <tr class="tr">  
                 
                     <td style="text-align: right;">{{$fila++}}</td>
                     <td>{{$docente->profesional->nombre_prof}}</td>
                     <td>{{$docente->profesional->ap_pa_prof}}&nbsp;{{$docente->profesional->ap_ma_prof}}</td>
-                    <td>{{$docente->profesional->titulo->pluck('nombre')[0]}}</td>
+                    <td>{{$docente->profesional->titulo->pluck('abreviatura')[0]}}</td>
                     <td>{{$docente->profesional->telef_prof}}</td>
                     <td>{{$docente->profesional->correo_prof}}</td>
-                    @if (!$docente->profesional->areas->pluck('id_area')[0])
-                        <td>{{$docente->profesional->areas->pluck('nombre')[0]}}</td>
-                        <td>{{$docente->profesional->areas->pluck('nombre')[1]}}</td>   
-                    @else
-                        <td>{{$docente->profesional->areas->pluck('nombre')[1]}}</td>
-                        <td>{{$docente->profesional->areas->pluck('nombre')[0]}}</td>
-                    @endif
-                    <td>{{$docente->carga_horaria}}</td>
-                
+                    @foreach ($docente->profesional->areas as $area)
+                            <td style="width: 10%;">{{$area->nombre}}</td>
+                            @if ($docente->profesional->areas->count() < 2)
+                            <td></td>
+                            @endif
+                    @endforeach
+                    <td>{{$docente->cargahoraria->pluck('carga_horaria')[0]}}</td>      
                     <td>
                         <div class=" dropleft text-center">
                                 <a href="#" data-toggle="dropdown"  data-placement="right" title="opsiones">

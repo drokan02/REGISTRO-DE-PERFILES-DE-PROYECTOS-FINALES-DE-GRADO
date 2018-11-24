@@ -27,16 +27,16 @@ class AreaFormRequest extends FormRequest
         if($ruta == 'modificarArea' || 'modificarSubarea'){
        
             return [
-                'codigo'=> ['required','alpha_num','min:2','max:5', Rule::unique('areas', 'codigo')->ignore($this->{'id'})],
-                'nombre'=> ['required','regex:/^[\pL\s]+$/u','min:3',Rule::unique('areas', 'nombre')->ignore($this->{'id'})],
-                'descripcion'=> 'nullable|min:20|max:255',
+                'codigo'=> ['required','alpha_num','min:2','max:8', Rule::unique('area', 'codigo')->ignore($this->{'id'})],
+                'nombre'=> ['required','regex:/^[\pL\s]+$/u','min:3',Rule::unique('area', 'nombre')->ignore($this->{'id'})],
+                'descripcion'=> 'nullable|min:20|max:500',
             ];
 
         }else{
             return [
-                'codigo'=> 'required|alpha_num|min:2|max:5|unique:areas,codigo',
-                'nombre'=> 'required|regex:/^[\pL\s]+$/u|min:3|unique:areas,nombre',
-                'descripcion'=> 'nullable|min:20|max:255',
+                'codigo'=> 'required|alpha_num|min:2|max:5|unique:area,codigo',
+                'nombre'=> 'required|regex:/^[\pL\s]+$/u|min:3|unique:area,nombre',
+                'descripcion'=> 'nullable|min:20|max:500',
             ];
         }
         
@@ -58,6 +58,7 @@ class AreaFormRequest extends FormRequest
             'nombre.regex' => 'solo se permiten espacios y letras en el nombre',
             'nombre.unique'   => 'esa '.$tipo.' ya se encuentra registrada',
             'descripcion.min' => 'minimo numero de caracteres de la descripcion es de 20 o nada',
+            'descripcion.max' => 'maximo numero de caracteres de la descripcion es de 500 caracteres',
         ];
     }
 }

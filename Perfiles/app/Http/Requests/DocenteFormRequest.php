@@ -29,14 +29,16 @@ class DocenteFormRequest extends FormRequest
                 'nombre_prof'   => 'required|regex:/^[\pL\s]+$/u|min:3',
                 'ap_pa_prof'    => 'required|alpha|min:3',
                 'ap_ma_prof'    => 'required|alpha|min:3',
-                'ci_prof'       => 'required|numeric|digits_between:6,8|unique:profesionales,ci_prof',
-                'telef_prof'    => 'required|numeric|digits_between:7,8|unique:profesionales,telef_prof',
-                'correo_prof'   => 'email|min:8|unique:profesionales,correo_prof',
+                'ci_prof'       => 'required|numeric|digits_between:6,8|unique:profesional,ci_prof',
+                'telef_prof'    => 'required|numeric|digits_between:7,8|unique:profesional,telef_prof',
+                'correo_prof'   => 'email|min:8|unique:profesional,correo_prof',
                 'direc_prof'    => 'min:7',
-                'codigo_sis'    => 'required|numeric|digits_between:6,10|unique:profesionales,ci_prof',
-                'carga_horaria' => 'required',
+                'codigo_sis'    => 'required|numeric|digits_between:6,10|unique:docente,codigo_sis',
+                'director_carrera' => 'unique:docente,director_carrera',
+                'cargahoraria_id' => 'required',
                 'titulo_id'     => 'required',
                 'area_id'       => 'required',
+                'carrera_id'    => 'required',
 
             ];
         }else{
@@ -46,14 +48,15 @@ class DocenteFormRequest extends FormRequest
                 'nombre_prof'   => ['required','regex:/^[\pL\s]+$/u','min:3'],
                 'ap_pa_prof'    => ['required','alpha','min:3'],
                 'ap_ma_prof'    => ['required','alpha','min:3'],
-                'ci_prof'       => ['required','numeric','digits_between:6,8',Rule::unique('profesionales', 'ci_prof')->ignore($docente['profesional_id'])],
-                'telef_prof'    => ['required','numeric','digits_between:7,8',Rule::unique('profesionales', 'telef_prof')->ignore($docente['profesional_id'])],
-                'correo_prof'   => ['email',Rule::unique('profesionales', 'correo_prof')->ignore($docente['profesional_id'])],
+                'ci_prof'       => ['required','numeric','digits_between:6,8',Rule::unique('profesional', 'ci_prof')->ignore($docente['profesional_id'])],
+                'telef_prof'    => ['required','numeric','digits_between:7,8',Rule::unique('profesional', 'telef_prof')->ignore($docente['profesional_id'])],
+                'correo_prof'   => ['email',Rule::unique('profesional', 'correo_prof')->ignore($docente['profesional_id'])],
                 'direc_prof'    => 'min:7',
-                'codigo_sis'    => 'required|numeric|digits_between:6,10|unique:profesionales,ci_prof',
-                'carga_horaria' => 'required',
+                'codigo_sis'    => 'required|numeric|digits_between:6,10|unique:docente,codigo_sis',
+                'cargahoraria_id' => 'required',
                 'titulo_id'     => 'required',
                 'area_id'       => 'required',
+                'carrera_id'    => 'required',
             ];
         }
         
@@ -87,8 +90,12 @@ class DocenteFormRequest extends FormRequest
             'codigo_sis.required'       => 'No ingreso el Codigo SIS',
             'codigo_sis.numeric'        => 'El Codigo SIS solo puede tener numeros',
             'codigo_sis.digits_between' => 'El Codigo SIS debe tener min:6 y max:10 digitos',
-            'codigo_sis.unique'         => 'Ya existe un Docente registrado con esa C.I',
-            'carga_horaria.required'    => 'No selecciono la Carga horaria',
+            'codigo_sis.unique'         => 'Ya existe un Docente registrado con ese Codigo SIS',
+            'cargahoraria_id.required'  => 'No selecciono una Carga horaria',
+            'titulo_id.required'        => 'No selecciono un Titulo',
+            'carrera_id.required'       => 'No selecciono una Carrera',
+            'area_id.required'          => 'debe seleccionar una Area',
+            'director_carrera.unique'   => 'la carrera Seleccionada ya tiene un Director',
            
         ];
     }

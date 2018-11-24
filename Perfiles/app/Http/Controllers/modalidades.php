@@ -15,6 +15,8 @@ class modalidades extends Controller
 {
     function __construct(){
        // $this->middleware('auth');
+        //$this->middleware(['verificarCuenta']);
+        $this->middleware('permisos:modalidades',['except'=>['index','ver']]);
     }
 	
 	
@@ -45,7 +47,7 @@ class modalidades extends Controller
 		$this->validate(request(), [
 			'nombre_mod'=>['required','regex:/^[\pL\s]+$/u','unique:modalidad,nombre_mod'],
 			'codigo_mod' => ['required','alpha_num','unique:modalidad,codigo_mod'],
-            'descripsion_mod'=> ['required']
+            'descripcion_mod'=> ['required']
 		]);
 		if($request->ajax()){
             return response()->json([
@@ -73,7 +75,7 @@ class modalidades extends Controller
         $this->validate(request(), [
             'codigo_mod' => ['required','alpha_num',Rule::unique('modalidad')->ignore($modalidad->id)],
             'nombre_mod'=>['required','regex:/^[\pL\s]+$/u',Rule::unique('modalidad')->ignore($modalidad->id)],
-            'descripsion_mod'=> ['required']
+            'descripcion_mod'=> ['required']
 		]);
 		if($request->ajax()){
             return response()->json([
@@ -114,9 +116,17 @@ class modalidades extends Controller
     }
 
     public function importacion(Request $request){
+        $this->validate(request(), [
+            'importar_modalidad' => ['required'],
+        ]);
         try{
             $archivo = $request->file('importar_modalidad');
             $nombre=$archivo->getClientOriginalName();
+            $extension=$archivo->getClientOriginalExtension();
+            if(!in_array($extension,['xls','xlsx','xlsm','xlsb'])){
+                return back()->withErrors('el archivo que intenta 
+                subir no es un archivo excel: xls, xlsx, xlsm, xlsb');
+            }
             \Storage::disk('archivos')->put($nombre, \File::get($archivo) );
             $ruta  =  storage_path('archivos') ."/". $nombre;
             Excel::selectSheetsByIndex(0)->load($ruta, function ($hoja) {
@@ -128,7 +138,7 @@ class modalidades extends Controller
                         $modalidad->create([
                             'codigo_mod' => $fila->codigo_mod,
                             'nombre_mod' => $fila->nombre_mod,
-                            'descripsion_mod' => $fila->descripsion_mod
+                            'descripcion_mod' => $fila->descripcion_mod
                         ]);
                     }
                 });

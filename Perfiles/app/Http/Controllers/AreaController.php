@@ -7,11 +7,14 @@ use App\Http\Requests\AreaFormRequest;
 use Maatwebsite\Excel\Facades\Excel;
 use Validator;
 use App\Area;
+use App\Carrera;
 use DB;
 class AreaController extends Controller
 {
     function __construct(){
         //$this->middleware('auth');
+        //$this->middleware(['verificarCuenta']);
+        $this->middleware('permisos:areas',['except'=>['index','ver']]);
     }
 	
 
@@ -100,16 +103,17 @@ class AreaController extends Controller
 
 	//metodo para importar los datos de excel a la base de datos
 	public function importar(Request $request){
-		//$archivo = $request->file('archivo');
-		//$nombre=$archivo;
-		//if($request->ajax()){
-		//	 return response()->json([
-		//		 "mensaje" => $nombre
-		//	 ]);
-		//}
+        $this->validate(request(), [
+            'importar_area' => ['required'],
+        ]);
         try{
             $archivo = $request->file('importar_area');
             $nombre=$archivo->getClientOriginalName();
+            $extension=$archivo->getClientOriginalExtension();
+            if(!in_array($extension,['xls','xlsx','xlsm','xlsb'])){
+                return back()->withErrors('el archivo que intenta 
+                subir no es un archivo excel: xls, xlsx, xlsm, xlsb');
+            }
             \Storage::disk('archivos')->put($nombre, \File::get($archivo) );
             $ruta  =  storage_path('archivos') ."/". $nombre;
             Excel::selectSheetsByIndex(0)->load($ruta, function ($hoja) {
@@ -117,13 +121,13 @@ class AreaController extends Controller
                     $codigo=Area::query()->where('codigo',$fila->codigo)->get();
                     $nombre=Area::query()->where('nombre',$fila->nombre)->get();
                     if(count($codigo)==0 && count($nombre)==0){
-                        $modalidad = new Area();
-                        $modalidad->create([
+                        $area = new Area();
+                        $area->create([
                             'id' => $fila->id,
                             'codigo' => $fila->codigo,
                             'nombre' => $fila->nombre,
                             'descripcion' => $fila->descripcion,
-                            'id_area' => $fila->id_area,
+                            'area_id' => $fila->area_id,
                         ]);
                     }
                 });

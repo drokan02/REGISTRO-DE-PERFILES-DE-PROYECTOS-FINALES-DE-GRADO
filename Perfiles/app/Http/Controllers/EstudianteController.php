@@ -14,6 +14,7 @@ class EstudianteController extends Controller
 {
     function __construct(){
         //$this->middleware('auth');
+        //$this->middleware(['verificarCuenta']);
     }
     /**
      * Display a listing of the resource.
@@ -31,13 +32,18 @@ class EstudianteController extends Controller
     }
     public function guardar(Request $request){
         $this->validate(request(), [
-            'nombres' => 'required|max:255',
-            'user_name' => ['required','unique:users,user_name','unique:estudiantes,user_name','alpha_num'],
-            'email' => ['required','unique:users,email','unique:estudiantes,email','email'],
+            'nombres' => ['required','max:255','regex:/^[\pL\s]+$/u'],
+            'user_name' => ['required','unique:users,user_name','unique:estudiante,user_name','alpha_num'],
+            'email' => ['required','unique:users,email','unique:estudiante,email','email'],
             'password' => 'required|string|min:6|confirmed',
-            'telefono' => '',
+            'telefono' => 'required|digits_between:7,8',
             'carrera'=> ['required','not_in:seleccione una opcion']
         ]);
+        if($request->ajax()){
+            return response()->json([
+                'mensaje'=>'Te has registrado Correctamente'
+            ]);
+        }
         DB::transaction(function () use($request) {
             $user =new User();
             $user->create([
@@ -95,13 +101,18 @@ class EstudianteController extends Controller
      */
     public function actualizar(Request $request, Estudiante $estudiante)
     {
+        if($request->ajax()){
+           return response()->json([
+               'mensaje'=>'Datos personales Modificados correctamente'
+            ]);
+        }
         $this->validate(request(), [
-            'nombres' => 'required|max:255',
+            'nombres' => ['required','max:100','regex:/^[\pL\s]+$/u'],
             'user_name' => ['required',Rule::unique('users')->ignore(auth()->user()->id),
-                            Rule::unique('estudiantes')->ignore($estudiante->id),'alpha_num'],
+                            Rule::unique('estudiante')->ignore($estudiante->id),'alpha_num'],
             'email' => ['required','string','email','max:255',Rule::unique('users')->ignore(auth()->user()->id),
-                        Rule::unique('estudiantes')->ignore($estudiante->id)],
-            'telefono' => '',
+                        Rule::unique('estudiante')->ignore($estudiante->id)],
+            'telefono' => 'required|numeric|digits_between:7,8',
         ]);
         //dd($request->all());
         DB::transaction(function () use($request,$estudiante) {

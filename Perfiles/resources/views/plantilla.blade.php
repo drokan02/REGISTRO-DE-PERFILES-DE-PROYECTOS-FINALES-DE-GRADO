@@ -38,9 +38,6 @@
                                       <a class="nav-link btn-primary h5" href="{{route('login')}}">Iniciar sesion</a>
                                   @endif
                               </li>
-                              <li class="nav-item ">
-                                  <a class="nav-link btn-primary h5" href="{{route('menu')}}">Menu</a>
-                              </li>
                           </ul>
                       </div>
                   </nav>

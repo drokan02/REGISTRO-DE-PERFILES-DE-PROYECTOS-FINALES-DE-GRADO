@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAreasTable extends Migration
+class CreateModalidadTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateAreasTable extends Migration
      */
     public function up()
     {
-        Schema::create('areas', function (Blueprint $table) {
+        Schema::create('modalidad', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('codigo');
-            $table->string('nombre');
-            $table->string('descripcion')->nullable();
-            $table->integer('id_area')->nullable();
-            $table->integer('carrera_id');
-           // $table->foreign('id_subarea')->references('id')->on('areas');
+            $table->string('codigo_mod',20)->unique();
+            $table->string('nombre_mod',20)->unique();
+            $table->string('descripcion_mod',1000);
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ class CreateAreasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('areas');
+        Schema::dropIfExists('modalidad');
     }
 }

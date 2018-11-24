@@ -31,15 +31,22 @@
                     <div class="col-sm-7">
                         <select class="form-control" id="privilegios" name="privilegios" value="{{old('privilegios')}}">
                             <option>seleccione una opcion</option>
-                            <option>alto</option>
-                            <option>medio</option>
-                            <option>bajo</option>
+                            <option>SuperUsuario</option>
+                            <option>Usuario Normal</option>
                         </select>
                     </div>
                 </div>
-                
-                
 
+                <div class="form-group row" >
+                    <label for="password" class="col-sm-2 col-form-label">Permisos</label>
+                    @foreach($permisos as $id=>$name)
+                        <label for="permisos" class="btn btn-outline-dark">
+                            <input type="checkbox" value="{{$id}}" name="permisos[]">
+                            {{$name}}
+                        </label>
+                    @endforeach
+                </div>
+                <p class="font-weight-bold">el privilegio de superUsuario le permite acceder a todo el sistema</p>
                 <div class="form-group row">
                     <div class="col-sm-2"></div>
                     <div class="col-sm-7">

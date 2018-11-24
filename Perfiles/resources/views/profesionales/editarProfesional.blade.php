@@ -62,11 +62,11 @@
 				<div class = "form-group row"> 
 					<label for="titulo_id" class="col-sm-2 col-form-label">Titulo</label>
 					<div class="col-sm-4 row-fluid" >
-						<select name="titulo_id" id="titulo_id" class="form-control" >
+						<select name="titulo_id" id="titulo_id" class="form-control form-control-chosen" >
                             <option disabled selected > -- select an option -- </option>
                             @foreach ($titulos as $titulo)
                                 @if ($profesional->titulo_id == $titulo->id)
-                                    <option value="{{$titulo->id}}" selected >{{$titulo->nombre}}</option>                                    
+                                    <option value="{{$titulo->id}}" selected >{{$titulo->abreviatura}}</option>                                    
                                 @else
                                     <option value="{{$titulo->id}}" >{{$titulo->nombre}}</option>
                                 @endif
@@ -77,10 +77,15 @@
 
 					<label for="carrera_id" class="col-sm-2 col-form-label">Carrera</label>
 					<div class="col-sm-4 row-fluid" >
-						<select name="carrera_id" id="carrera_id" class="form-control" >
+						<select name="carrera_id" id="carrera_id" class="form-control form-control-chosen" >
 							<option disabled selected > -- seleccione una Carrera-- </option>
-							@foreach ($titulos as $titulo)
-								<option value="{{$titulo->id}}">{{$titulo->nombre}}</option>
+							@foreach ($carreras as $carrera)
+                                @if ($profesional->carrera_id == $carrera->id)
+                                    <option value="{{$carrera->id}}" selected >{{$carrera->nombre_carrera}}</option>                                    
+                                @else
+                                    <option value="{{$carrera->id}}" >{{$carrera->nombre_carrera}}</option>
+                                @endif
+								
 							@endforeach
 						</select>
 					</div>
@@ -90,35 +95,32 @@
 				<div class = "form-group row"> 
 					<label for="area_id" class="col-sm-2 col-form-label">Area</label>
 					<div class="col-sm-10">
-						<select name="area_id" id="area_id" class="form-control" >
-                            @foreach ($areas as $area)
-                                @if ($area->id == $profesional->areas->pluck('id')[0])
-                                    <option value="{{$area->id}}" selected>{{$area->nombre}}</option> 
-                                @elseif($area->id == $profesional->areas->pluck('id')[1])
-                                    <option value="{{$area->id}}" selected>{{$area->nombre}}</option>
-                                @else
-                                <option value="{{$area->id}}">{{$area->nombre}}</option>
-                                @endif
-							@endforeach
+						<select name="area_id" id="area_id" class="form-control form-control-chosen" >
+								@foreach ($areas as $area)
+									<option value="{{$area->id}}"
+									{{$profesional->areas->pluck('id')[0] == $area->id ? 'selected':''}}>{{$area->nombre}}</option>
+								@endforeach
+                           
 						</select>
 					</div>
 					</div>
 					<div class="form-group row">
 					<label for="subarea_id" class="col-sm-2 col-form-label">Sub Area</label>
 					<div class="col-sm-10">
-						<select name="subarea_id" id="subarea_id" class="form-control" >
+						<select name="subarea_id" id="subarea_id" class="form-control form-control-chosen" >
+								<option disabled selected > Seleccionar </option>
 							@foreach ($subareas as $subarea)
-                                @if ($subarea->id == $profesional->areas->pluck('id')[0])
-                                    <option value="{{$subarea->id}}" selected>{{$subarea->nombre}}</option> 
-                                @elseif($subarea->id == $profesional->areas->pluck('id')[1])
-                                    <option value="{{$subarea->id}}" selected>{{$subarea->nombre}}</option>
-                                @else
-                                    <option value="{{$subarea->id}}">{{$subarea->nombre}}</option>
-                                @endif
+                                @if ($profesional->areas->count()>1)
+									<option value="{{$area->id}}"
+									{{$profesional->areas->pluck('id')[1] == $area->id ? 'selected':''}}>{{$area->nombre}}</option>	
+								@else
+									<option value="{{$area->id}}">{{$area->nombre}}</option>	
+								@endif
 							@endforeach
 						</select>
 					</div>
-				</div>   
+				</div> 
+				  
 				<div class = "form-group row"> 
 					<div class="col-sm-2"></div>
 					<div class="col-8">
@@ -133,5 +135,8 @@
 		</div>
 	
 	</div>
+	<script>
+			$('.form-control-chosen').chosen({});
+	 </script>
 @endsection
 

@@ -10,7 +10,7 @@ use App\Titulo;
 
 class Profesional extends Model
 {
-     protected $table = 'profesionales';
+     protected $table = 'profesional';
      protected $fillable = [
         'ci_prof',
         'nombre_prof', 
@@ -21,13 +21,20 @@ class Profesional extends Model
         'direc_prof',
         'perfil_prof',
         'titulo_id',
+        'carrera_id'
          ];
 
+
+    public function perfiles()
+    {
+        return $this->belongsToMany(Perfil::class,'perfil_tutor');    
+    }
 
     public function docente()
     {
         return $this->hasOne(Docente::class,'profesional_id');    
     }
+
     public function areas(){
         return $this->belongsToMany(Area::class,'profesional_area');  
     }
@@ -36,11 +43,20 @@ class Profesional extends Model
         return $this->belongsTo(Titulo::class);
     }
 
+    public function carrera(){
+        return $this->belongsTo(Carrera::class);
+    }
+
+
     public function scopeBuscarProfesional($query,$buscar){
         if($buscar){
             return $query->where(DB::raw("CONCAT(nombre_prof,' ',ap_pa_prof,' ',ap_ma_prof)"), "LIKE", "%$buscar%");
         }else {
             return $query;
         }
+    }
+
+    public function scopeDeCarrera($query,$carrera_id){
+        return $query->where('carrera_id',$carrera_id);
     }
 }
