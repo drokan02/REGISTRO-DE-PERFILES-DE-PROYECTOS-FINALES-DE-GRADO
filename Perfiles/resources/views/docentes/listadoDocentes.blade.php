@@ -54,7 +54,7 @@
                     @foreach ($docente->profesional->areas as $area)
                             <td style="width: 10%;">{{$area->nombre}}</td>
                             @if ($docente->profesional->areas->count() < 2)
-                            <td></td>
+                            <td>ho</td>
                             @endif
                     @endforeach
                     <td>{{$docente->cargahoraria->pluck('carga_horaria')[0]}}</td>
@@ -65,7 +65,7 @@
                                         <i class="fa fa-ellipsis-v fa-2x" aria-hidden="true"></i>
                                 </a>
                                 <div class="dropdown-menu profile-dropdown-menu" aria-labelledby="dropdownMenu1">
-                                        <a href='#' class="dropdown-item" href="#">
+                                        <a href='{{route('verDocente',$docente)}}' class="dropdown-item" href="#">
                                                 <h5><i class="col-sm-3 fa fa-eye iconMenu" >&nbsp;&nbsp;&nbsp;Ver </i></h5>
                                         </a>
                                     @if(auth()->user()->hasPermisos(['docentes']))

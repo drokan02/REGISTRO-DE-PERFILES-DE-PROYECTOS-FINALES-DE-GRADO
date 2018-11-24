@@ -17,7 +17,11 @@
                 <a href=" {{route('menu')}} "><i class="fa fa-caret-right" aria-hidden="true"></i> Menu Principal</a>
             </li>
             <li>
+<<<<<<< HEAD
                 <a href="{{route('guiaregistro')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Guia par el llenado <br> de formulario </a>
+=======
+                <a href="{{route('guiaFormulario')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Guia par el llenado <br> de formulario </a>
+>>>>>>> 6fb15f0e4a926933bdf999a3a26ecfbe13f2a49a
             </li>
             <li>
                 <a href="{{route('gestiones')}}"><i class="fa fa-caret-right" aria-hidden="true"></i>Gestiones</a>
@@ -29,7 +33,7 @@
                 <li>
                     <a href="{{route('importarCarreras')}}"><i class="fa fa-upload" aria-hidden="true"></i>Importar Carreras</a>
                 </li>
-            @endif
+             @endif
         </ul>
       </li>
       <!-- menu AREAS -->
@@ -89,7 +93,7 @@
                 </ul>
             </li>
       <!-- Menu Usuarios-->
-        @if(auth()->user()->hasPermisos(['users']))
+      @if(auth()->user()->hasPermisos(['users']))
             <li class="treeview {{ request()->segment(1) == 'usuarios'? 'active open':'' }}">
                 <a href="#">
                     <i class="fa fa-users" aria-hidden="true"></i> <span>Usuarios</span>
@@ -151,7 +155,7 @@
           <li><a href="{{route('estudiantes')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Lista Estudiantes</a></li>
         </ul>
       </li>
-        @endif
+      @endif
         <!-- Menu Perfiles-->
         <li class="treeview {{ request()->segment(1) == 'perfil'? 'active open':'' }}">
             <a href="#">
