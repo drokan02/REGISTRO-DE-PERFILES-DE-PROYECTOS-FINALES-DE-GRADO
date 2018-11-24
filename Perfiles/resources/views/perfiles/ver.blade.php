@@ -6,7 +6,23 @@
  
             <div class="row justify-content-center">
                      <div class="list-group  col-10  " >
-                            <h2  class="list-group-item active display-4"><strong class="row justify-content-center">{{$perfil->titulo}}</strong></h2>  
+                           <div class="list-group-item active ">
+                                    <table class=" table  table-hover >
+                                                <thead class="thead text-center">
+                                                <tr >
+                                                    <th style="width: 40%; text-align: center;">
+                                                            <h2 display-4 ><strong class="row justify-content-center">{{$perfil->titulo}}</strong></h2>
+                                                </th>
+                                                    <th style="width: 10%;" ><a href="{{route('descargaPdf',$perfil)}}" title="Realizá un click para empezar la descarga del Formulario de esta tesis." class="text-dark">
+                                                            Descargar Pdf
+                                                            <img align="middle" src="/img/icon_bajar.gif">
+                                                      </a></th>
+                                                     
+                                                </td>
+                                          </tr> 
+                                    </table>
+                           </div>
+                             
                               <div class="list-group-item">
                                     <strong>{{$perfil->estudiantes->pluck('nombres')->implode(' - ')}}</strong><br>
                                     <small>Auto(res)</small><hr>

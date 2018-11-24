@@ -13,6 +13,7 @@ use App\Carrera;
 use App\Http\Requests\PerfilFormRequest;
 use Validator;
 use Illuminate\Http\Request;
+use PDF;
 
 class PerfilController extends Controller
 {
@@ -336,6 +337,13 @@ class PerfilController extends Controller
 		$perfil=Perfil::findOrFail($id);
 		
 		return view('perfiles.ver',['perfil'=>$perfil]);
+    }
+    public function vistaPdf($id){
+        $perfil=Perfil::findOrFail($id); 
+       // $pdf = App::make('dompdf.wrapper');
+       $pdf=PDF::loadView('perfiles.formPdf',['perfil'=>$perfil]); 
+     return $pdf->stream(); 
+		//return view('perfiles.ver',['perfil'=>$perfil]);
     }
 }
 

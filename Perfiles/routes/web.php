@@ -133,13 +133,13 @@ Route::get('register','Auth\RegisterController@showRegistrationForm')->name('reg
 Route::post('register','Auth\RegisterController@register')->name('registerPost');
 
 //perfiles
-<<<<<<< HEAD
+
 Route::get('/seleccion_modalidad','PerfilController@seleccion')->name('seleccionarPerfil');
 Route::post('/seleccionarFormulario','PerfilController@formulario')->name('formularioPerfil');
 //fechas
 Route::get('/fechas','FechasController@index')->name('fechas');
 Route::get('/fechas/guardar','FechasController@guardar')->name('guadarfecha');
-=======
+
 Route::get('/perfil','PerfilController@index')->name('perfiles');
 Route::get('/perfil/registrarPerfil','PerfilController@nuevoFormulario')->name('nuevoPerfil');
 Route::any('/perfil/registrarPerfil/mostrarForm','PerfilController@mostrarForm')->name('mostrarFormulario');
@@ -150,6 +150,8 @@ Route::post('/perfil/editar/modificar/{perfil}','PerfilController@modificar')->n
 Route::any('/perfil/eliminar/{perfil}','PerfilController@eliminar')->name('eliminarPerfil');
 Route::any('/perfil/cambiarEstado/{perfil}','PerfilController@cambiarEstado')->name('cambiarEstadoPerfil');
 Route::any('/perfil/ver/{perfil}','PerfilController@ver')->name('verPerfil');
+Route::get('/perfil/verPdf{perfil}','PerfilController@vistaPdf')->name('descargaPdf');
+
 //Gestion
 Route::any('/menu/Gestion', 'GestionController@index')->name('gestiones');
 Route::get('menu/Gestion/registrar', 'GestionController@registrar')->name('registrarGestion');
@@ -159,10 +161,8 @@ Route::post('menu/Gestion/editar/modificar/{gestion}', 'GestionController@modifi
 
 // E-mail verification
 Route::get('/register/verify/{code}', 'Auth\RegisterController@verify');
-<<<<<<< HEAD
->>>>>>> master
-=======
+
 
 //notificacion
 Route::get('/notificar','menuController@notificar')->name('notificar');
->>>>>>> master
+
