@@ -133,13 +133,13 @@ Route::get('register','Auth\RegisterController@showRegistrationForm')->name('reg
 Route::post('register','Auth\RegisterController@register')->name('registerPost');
 
 //perfiles
-<<<<<<< HEAD
+
 Route::get('/seleccion_modalidad','PerfilController@seleccion')->name('seleccionarPerfil');
 Route::post('/seleccionarFormulario','PerfilController@formulario')->name('formularioPerfil');
 
 
 
-=======
+
 Route::get('/perfil','PerfilController@index')->name('perfiles');
 Route::get('/perfil/ver','PerfilController@index')->name('verPerfil');
 Route::get('/perfil/registrarPerfil','PerfilController@nuevoFormulario')->name('nuevoPerfil');
@@ -163,4 +163,4 @@ Route::get('/register/verify/{code}', 'Auth\RegisterController@verify');
 
 //notificacion
 Route::get('/notificar','menuController@notificar')->name('notificar');
->>>>>>> 0dd642cd123624d579562a3a72c57d9ce23aeeb1
+
