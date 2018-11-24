@@ -17,11 +17,11 @@
                 <a href=" {{route('menu')}} "><i class="fa fa-caret-right" aria-hidden="true"></i> Menu Principal</a>
             </li>
             <li>
-<<<<<<< HEAD
+
                 <a href="{{route('guiaregistro')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Guia par el llenado <br> de formulario </a>
-=======
+
                 <a href="{{route('guiaFormulario')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Guia par el llenado <br> de formulario </a>
->>>>>>> 6fb15f0e4a926933bdf999a3a26ecfbe13f2a49a
+
             </li>
             <li>
                 <a href="{{route('gestiones')}}"><i class="fa fa-caret-right" aria-hidden="true"></i>Gestiones</a>
