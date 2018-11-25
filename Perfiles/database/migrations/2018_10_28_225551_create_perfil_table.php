@@ -30,7 +30,7 @@ class CreatePerfilTable extends Migration
             $table->string('cambio_tema',10)->nullable();
             $table->date('fecha_ini');
             $table->date('fecha_fin');
-            $table->string('estado',10)->nullable();
+            $table->string('estado',100)->nullable();
             $table->foreign('modalidad_id')->references('id')->on('modalidad')->onDelete('cascade');
             $table->foreign('docente_id')->references('id')->on('docente')->onDelete('cascade');
             $table->foreign('director_id')->references('id')->on('docente')->onDelete('cascade');
