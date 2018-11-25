@@ -112,7 +112,8 @@ Route::any('/docentes/eliminar/{docente}','docenteController@eliminar')->name('e
 Route::any('/docentes/ver/{docente}','docenteController@ver')->name('verDocente');
 Route::get('/cambiar_contraseña_docente/{docente}','docenteController@cambiarContraseña')->name('cambiarContraseñaDocente');
 Route::post('/guardar_contraseña_docente/{docente}','docenteController@guardarContraseña')->name('guardarContraseñaDocente');
-
+Route::get('/tutoria/{docente}','docenteController@tutoria')->name('tutoriaDocente');
+Route::get('/exportar_pdf_tutoria/{docente}','docenteController@descargarPdf')->name('tutoriaDocentePdf');
 
 //estudiantes
 Route::get('/estudiantes','EstudianteController@index')->name('estudiantes')->middleware('permisos:estudiantes');

@@ -6,6 +6,7 @@ use App\Http\Requests\DocenteFormRequest;
 use App\Permiso;
 use App\Role;
 use App\User;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use App\Docente;
 use App\Profesional;
@@ -178,5 +179,15 @@ class docenteController extends Controller
         });
         $profesional=$docente->profesional()->first();
         return view('docentes/ver',compact('docente','profesional'));
+    }
+    public function tutoria(Docente $docente){
+        $perfiles=$docente->perfiles()->get();
+        return view('docentes/tutoria',compact('docente','perfiles'));
+    }
+
+    public function descargarPdf(Docente $docente){
+        $perfiles=$docente->perfiles()->get();
+        $pdf=PDF::loadView('pdf/tutoriaDocente',compact('perfiles','docente'));
+        return  $pdf->download();
     }
 }

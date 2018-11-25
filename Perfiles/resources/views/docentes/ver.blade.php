@@ -3,6 +3,11 @@
 @section('contenido')
 
     <ul class="nav justify-content-end ">
+     {{--   @if($docente->perfiles->toArray() != [])--}}
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('tutoriaDocente',$docente)}}">Tutoria</a>
+        </li>
+     {{--   @endif   --}}
         <li class="nav-item">
             <a class="nav-link" href="{{route('editarDocente',$docente)}}">Modifica tus datos</a>
         </li>
