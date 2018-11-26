@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\AreaFormRequest;
+use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use Validator;
 use App\Area;
@@ -114,7 +115,7 @@ class AreaController extends Controller
                 return back()->withErrors('el archivo que intenta 
                 subir no es un archivo excel: xls, xlsx, xlsm, xlsb');
             }
-            \Storage::disk('archivos')->put($nombre, \File::get($archivo) );
+            Storage::disk('archivos')->put($nombre, \File::get($archivo) );
             $ruta  =  storage_path('archivos') ."/". $nombre;
             Excel::selectSheetsByIndex(0)->load($ruta, function ($hoja) {
                 $hoja->each(function ($fila) {
@@ -133,7 +134,7 @@ class AreaController extends Controller
                 });
 
             });
-            \Storage::disk('archivos')->delete($nombre);
+            Storage::disk('archivos')->delete($nombre);
             return redirect()->route('Areas');
         }catch (\Exception $exception){
             return back()->withErrors('no se puede importar');

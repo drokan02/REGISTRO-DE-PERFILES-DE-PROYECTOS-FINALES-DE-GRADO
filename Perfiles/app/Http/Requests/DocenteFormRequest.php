@@ -39,6 +39,7 @@ class DocenteFormRequest extends FormRequest
                 'titulo_id'     => 'required',
                 'area_id'       => 'required',
                 'carrera_id'    => 'required',
+                'password'      => 'required'
 
             ];
         }else{
@@ -52,7 +53,7 @@ class DocenteFormRequest extends FormRequest
                 'telef_prof'    => ['required','numeric','digits_between:7,8',Rule::unique('profesional', 'telef_prof')->ignore($docente['profesional_id'])],
                 'correo_prof'   => ['email',Rule::unique('profesional', 'correo_prof')->ignore($docente['profesional_id'])],
                 'direc_prof'    => 'min:7',
-                'codigo_sis'    => 'required|numeric|digits_between:6,10|unique:docente,codigo_sis',
+                'codigo_sis'    => ['required','numeric','digits_between:6,10',Rule::unique('docente','codigo_sis')->ignore($docente['id'])],
                 'cargahoraria_id' => 'required',
                 'titulo_id'     => 'required',
                 'area_id'       => 'required',
