@@ -37,7 +37,7 @@
       </div>
 
       <div class="item">
-        <img src="/img/umss.png" alt="" style="">
+        <img src="/img/umss.png" alt="" style="width:100%;">
         <div class="carousel-caption">
           <h3></h3>
           <p></p>
