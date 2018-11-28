@@ -174,5 +174,5 @@ Route::get('/notificar','menuController@notificar')->name('notificar');
 
 
 //guia llenado formulario
-Route::get('/guiaFormulario/perfil','guiaController@index')->name('guiaFormulario');
+Route::get('/guiaFormulario','guiaController@index')->name('guiaFormulario');
 

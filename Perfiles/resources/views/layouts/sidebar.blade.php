@@ -18,8 +18,6 @@
             </li>
             <li>
 
-                <a href="{{route('guiaregistro')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Guia par el llenado <br> de formulario </a>
-
                 <a href="{{route('guiaFormulario')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Guia par el llenado <br> de formulario </a>
 
             </li>
