@@ -1,22 +1,22 @@
 @extends('layouts.menu')
-@section('titulo','DOCENTE')
+@section('titulo','DATOS DOCENTE')
 @section('contenido')
 
-    <ul class="nav justify-content-end ">
-     {{--   @if($docente->perfiles->toArray() != [])--}}
-        <li class="nav-item">
-            <a class="nav-link" href="{{route('tutoriaDocente',$docente)}}">Tutoria</a>
-        </li>
-     {{--   @endif   --}}
-        <li class="nav-item">
-            <a class="nav-link" href="{{route('editarDocente',$docente)}}">Modifica tus datos</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{route('cambiarContraseñaDocente',$docente)}}">Cambiar Contraseña</a>
-        </li>
-    </ul>
-
-
+    @if(auth()->user()->hasRoles(['docente','administrador']))
+        <ul class="nav justify-content-end ">
+         {{--   @if($docente->perfiles->toArray() != [])--}}
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('tutoriaDocente',$docente)}}">Tutoria</a>
+            </li>
+         {{--   @endif   --}}
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('editarDocente',$docente)}}">Modifica tus datos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('cambiarContraseñaDocente',$docente)}}">Cambiar Contraseña</a>
+            </li>
+        </ul>
+    @endif
 
     <div class="listaDatos">
         <table class="table">
