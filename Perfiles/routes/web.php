@@ -21,7 +21,7 @@ Route::get('/verifiqueCuenta',function () {
 Route::get('/prueba', function () {
     $valor = 12;
     return view('complementos.prueba',compact('valor'));
-})->name('inicio');
+});
 
 //Roles
 Route::get('/menu','menuController@index')->name('menu');
