@@ -13,7 +13,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 class ReportesController extends Controller
 {
     public function generar(){
-        $areas=Area::all();
+        $areas=Area::query()->where('area_id',null)->get();
         $modalidades=Modal::all();
         $estados=['En progreso','Defendido','eliminado','Tribunal'];
         $perfiles=Perfil::all();
@@ -22,9 +22,11 @@ class ReportesController extends Controller
         $t=null;
         foreach ($perfiles as $perfil){
             $t=$perfil->tutor()->get()->first();
+            $i=$t->id;
             $tutores=array_add($tutores,$i,$t);
-            $i=$i+1;
+            //$i=$i+1;
         }
+        //dd($tutores);
         return view('reportes/generadorReportes',compact('areas','modalidades','estados','tutores'));
     }
     public function generador(Request $request){
@@ -36,6 +38,7 @@ class ReportesController extends Controller
             'cambio_tema'=> ['required','not_in:seleccione una opcion'],
             'trabajo_conjunto'=> ['required','not_in:seleccione una opcion'],
         ]);
+        //dd($request['tutor']);
         $perfiles=null;
         if($request['area'] !== 'Todos'){
             $perfiles1=Perfil::query()->where('area_id',$request['area'])->get();
@@ -62,7 +65,9 @@ class ReportesController extends Controller
             $perfiles4=[];
             foreach ($perfiless4 as $perfil4){
                 $t=$perfil4->tutor()->where('profesional_id',$request['tutor'])->get()->first();
-                $perfiles4=array_add($perfiles4,$i,$t);
+                if(!empty($t)){
+                    $perfiles4=array_add($perfiles4,$i,$perfil4);
+                }
                 $i=$i+1;
             }
         }
