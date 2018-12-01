@@ -21,7 +21,7 @@ Route::get('/verifiqueCuenta',function () {
 Route::get('/prueba', function () {
     $valor = 12;
     return view('complementos.prueba',compact('valor'));
-})->name('inicio');
+});
 
 //Roles
 Route::get('/menu','menuController@index')->name('menu');
@@ -159,3 +159,9 @@ Route::get('/register/verify/{code}', 'Auth\RegisterController@verify');
 
 //notificacion
 Route::get('/notificar','menuController@notificar')->name('notificar');
+
+//reportes
+Route::get('/generar_reportes','ReportesController@generar')->name('generar');
+Route::post('/generador/reportes','ReportesController@generador')->name('generador');
+Route::get('/reportes/pdf','ReportesController@reporte')->name('reportePdf');
+
