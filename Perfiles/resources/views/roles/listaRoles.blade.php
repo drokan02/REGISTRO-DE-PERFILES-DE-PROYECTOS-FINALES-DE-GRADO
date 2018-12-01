@@ -3,30 +3,26 @@
 @section('contenido')
    
 <form method="GET" action="{{route('roles')}}" >
-        @if ($roles->isNotEmpty() or $buscar)
-
         <div class="container">
-            
             <div class="form-group row">
+                @if ($roles->isNotEmpty() or $buscar)
                     <div class="col-sm-4"></div>
-                <div class=" col-sm-4">       
-                                <input type="search" placeholder="&#xF002; Buscar" style="font-family:Time, FontAwesome" class="form-control buscar" 
-                                name="buscar" autofocus value="{{$buscar}}" autocomplete="off" onfocus="var temp_value=this.value; this.value=''; this.value=temp_value">   
-                </div>          
-                <div class="col-sm-0">
-                                <button class=" btn btn-success pull-left"> Buscar</button>
-                </div>
+                    <div class=" col-sm-4">
+                        <input type="search" placeholder="&#xF002; Buscar" style="font-family:Time, FontAwesome" class="form-control buscar"
+                               name="buscar" autofocus value="{{$buscar}}" autocomplete="off" onfocus="var temp_value=this.value; this.value=''; this.value=temp_value">
+                    </div>
+                    <div class="col-sm-0">
+                        <button class=" btn btn-success pull-left"> Buscar</button>
+                    </div>
+                @endif
                 <div class="col-sm-3">
-                        <a href="{{route('crearRol')}}" class="btn btn-link pull-right" data-toggle="tooltip" data-placement="right" title="añadir"><i class="fa fa-plus fa-2x"></i></a>
-                <a href="{{route('usuarios')}}" class="btn btn-link pull-right" data-toggle="tooltip" data-placement="right" title="Usuarios"><i class="fa fa-users fa-2x"></i></a>
+                    <a href="{{route('crearRol')}}" class="btn btn-link pull-right" data-toggle="tooltip" data-placement="right" title="añadir"><i class="fa fa-plus fa-2x"></i></a>
+                    <a href="{{route('usuarios')}}" class="btn btn-link pull-right" data-toggle="tooltip" data-placement="right" title="Usuarios"><i class="fa fa-users fa-2x"></i></a>
                 </div>
             </div>
-                 
-        </div> 
+        </div>
 
-    @endif
-           
-       <div class="container col-sm-8 listaDatos">
+       <div class="container col-sm-8 listaDatos table-responsive-md">
             @if($roles->isNotEmpty())
             <table class="table table-hover table-bordered-primary text-center">
                 <thead class=" thead thead-primary">

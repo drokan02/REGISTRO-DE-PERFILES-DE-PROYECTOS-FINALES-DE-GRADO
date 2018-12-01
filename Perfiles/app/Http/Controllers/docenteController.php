@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\DocenteFormRequest;
 //use App\Http\Requests;
+use App\Permiso;
+use App\Role;
+use App\User;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use App\Docente;
 use App\Profesional;
@@ -10,8 +14,9 @@ use App\Area;
 use App\Titulo;
 use App\Carrera;
 use App\CargaHoraria;
+use Illuminate\Support\Facades\DB;
 use Validator;
-use DB;
+//use DB;
 
 
 class docenteController extends Controller
@@ -59,21 +64,50 @@ class docenteController extends Controller
             return response()->json([
                 'mensaje'=>'Docente registrado correctamente'
             ]);
-        } 
-        $areas = [$request->area_id];
-        if($request->subarea_id){
-            $areas = [$request->area_id,$request->subarea_id];
         }
-        $profesional = new Profesional;
-        $docente = new Docente;
-        $profesional->create($request->all());
-        $prof_id = Profesional::where('ci_prof',$request['ci_prof'])->value('id');
-        $profesional->areas()->attach($areas,['profesional_id'=>$prof_id]);
-        $docente->profesional_id = $prof_id;
-        $docente->cargahoraria_id = $request->cargahoraria_id;
-        $docente->codigo_sis = $request->codigo_sis;
-        $docente->director_carrera = $request->director_carrera;
-        $docente->save();
+       // dd($request['correo_prof']);
+        DB::transaction(function () use($request) {
+            $areas = [$request->area_id];
+            if($request->subarea_id){
+                $areas = [$request->area_id,$request->subarea_id];
+            }
+            $profesional = new Profesional;
+            $docente = new Docente;
+            $profesional->create($request->all());
+            $prof_id = Profesional::where('ci_prof',$request['ci_prof'])->value('id');
+            $profesional->areas()->attach($areas,['profesional_id'=>$prof_id]);
+            $docente->profesional_id = $prof_id;
+            $docente->cargahoraria_id = $request->cargahoraria_id;
+            $docente->codigo_sis = $request->codigo_sis;
+            $docente->director_carrera = $request->director_carrera;
+            $docente->save();
+            $name=$request['nombre_prof'].' '.$request['ap_pa_prof'].' '.$request['ap_ma_prof'];
+            $user =new User();
+            $user->create([
+                'name' => $name,
+                'user_name' => $name,
+                'email' => $request->correo_prof,
+                'password' => bcrypt($request->password),
+               // 'confirmation_code' => $data['confirmation_code']
+            ]);
+            $permisos=[];
+            $i=0;
+            $role_id=Role::query()->where('nombre_rol','docente')->value('id');
+            $iduser=User::query()->where('email',$request->correo_prof)->value('id');
+            $idDocente=$docente->id;
+            $roles=Role::findOrFail($role_id);
+            $aux=$roles->permisos()->pluck('name');
+            foreach ($aux as $a) {
+                $per=Permiso::query()->where('name',$a)->get()->first();
+                $per=$per->id;
+                $permisos=array_add($permisos,$i,$per);
+                $i=$i+1;
+            }
+            $user->roles()->attach($role_id,['user_id'=>$iduser]);
+            $user->docente()->attach($idDocente,['user_id'=>$iduser]);
+            $user->permisosUser()->attach($permisos,['user_id'=>$iduser]);
+        });
+
 		return redirect()->route('Docentes');
     }
 
@@ -86,10 +120,9 @@ class docenteController extends Controller
         $horarios = CargaHoraria::all();
         return view('docentes.editarDocente',compact('docente','subareas','areas','titulos','horarios','carreras','horarios'));
     }
-    public function ver($id){
-		$docente=docentes::findOrFail($id);
-		
-		return view('docentes.ver',['docente'=>$docente]);
+    public function ver(Docente $docente){
+		$profesional=$docente->profesional()->first();
+		return view('docentes/ver',compact('docente','profesional'));
     }
    
     public function modificar(DocenteFormRequest $request,Docente $docente){
@@ -115,6 +148,8 @@ class docenteController extends Controller
     public function eliminar(Request $request,Docente $docente){
         $datosDocente  = $docente->toArray();
         $prof_id = $datosDocente['profesional_id'];
+        $docente->usuario()->delete();
+        $docente->usuario()->detach();//eliminar datos en tabla intermedia
         $docente->delete();
         $profesional = Profesional::findOrFail($prof_id);
 		$profesional->areas()->detach(); //eliminar datos en tabla intermedia
@@ -128,4 +163,31 @@ class docenteController extends Controller
         return redirect()->route('Docentes');
     }
 
+    public function cambiarContraseña(Docente $docente){
+        return view('docentes/cambiarPassword',compact('docente'));
+    }
+
+    public function guardarContraseña(Request $request, Docente $docente){
+        $this->validate(request(), [
+            'password' => ['required','confirmed','min:6'],
+        ]);
+        $request['password']=bcrypt($request['password']);
+        DB::transaction(function () use($request,$docente) {
+            $docente->usuario()->update([
+                'password'=>$request['password']
+            ]);
+        });
+        $profesional=$docente->profesional()->first();
+        return view('docentes/ver',compact('docente','profesional'));
+    }
+    public function tutoria(Docente $docente){
+        $perfiles=$docente->perfiles()->get();
+        return view('docentes/tutoria',compact('docente','perfiles'));
+    }
+
+    public function descargarPdf(Docente $docente){
+        $perfiles=$docente->perfiles()->get();
+        $pdf=PDF::loadView('pdf/tutoriaDocente',compact('perfiles','docente'));
+        return  $pdf->download();
+    }
 }

@@ -111,7 +111,10 @@ Route::any('/docentes/editar/{docente}','docenteController@editar')->name('edita
 Route::any('/docentes/editar/modificar/{docente}','docenteController@modificar')->name('modificarDocente');
 Route::any('/docentes/eliminar/{docente}','docenteController@eliminar')->name('eliminarDocente')->middleware('permisos:docentes');
 Route::any('/docentes/ver/{docente}','docenteController@ver')->name('verDocente');
-
+Route::get('/cambiar_contraseña_docente/{docente}','docenteController@cambiarContraseña')->name('cambiarContraseñaDocente');
+Route::post('/guardar_contraseña_docente/{docente}','docenteController@guardarContraseña')->name('guardarContraseñaDocente');
+Route::get('/tutoria/{docente}','docenteController@tutoria')->name('tutoriaDocente');
+Route::get('/exportar_pdf_tutoria/{docente}','docenteController@descargarPdf')->name('tutoriaDocentePdf');
 
 //estudiantes
 Route::get('/estudiantes','EstudianteController@index')->name('estudiantes')->middleware('permisos:estudiantes');
@@ -154,3 +157,6 @@ Route::post('menu/Gestion/editar/modificar/{gestion}', 'GestionController@modifi
 
 // E-mail verification
 Route::get('/register/verify/{code}', 'Auth\RegisterController@verify');
+
+//notificacion
+Route::get('/notificar','menuController@notificar')->name('notificar');

@@ -18,15 +18,15 @@
                             @endif
             </div>
             <div class="col-sm-3">
-                        <a href='{{route('crearCarrera')}}' >
-                                        <!--class=pull-right  para poner el boton al extremo derecho-->
-                                        <i class=" fa fa-plus fa-2x fa-3x pull-right" data-toggle="tooltip" data-placement="right" title="Agregar nueva Carrera" ></i>                 
-                            </a> 
+                <a href='{{route('crearCarrera')}}' >
+                    <!--class=pull-right  para poner el boton al extremo derecho-->
+                    <i class=" fa fa-plus fa-2x fa-3x pull-right" data-toggle="tooltip" data-placement="right" title="Agregar nueva Carrera" ></i>
+                </a>
             </div>
         </div>
                 
     </div> 
-  <div class="container table-responsive col-sm-8 listaDatos">       
+  <div class="container table-responsive col-sm-8 listaDatos">
             @if($carreras->isNotEmpty())
                 <table class="table  table-hover text-center">
                     <thead class="thead thead-primary">
