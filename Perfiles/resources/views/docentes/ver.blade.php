@@ -32,10 +32,12 @@
                 <td>{{$profesional->nombre_prof.' '.$profesional->ap_pa_prof.' '.$profesional->ap_ma_prof}}</td>
 
             </tr>
-            <tr class="tr">
-                <td>Codigo SIS</td>
-                <td>{{$docente->codigo_sis}}</td>
-            </tr>
+            @if(auth()->user()->hasRoles(['docente','administrador']))
+                <tr class="tr">
+                    <td>Codigo SIS</td>
+                    <td>{{$docente->codigo_sis}}</td>
+                </tr>
+            @endif
             <tr class="tr">
                 <td>Titulo Profesional</td>
                 <td>{{$profesional->titulo()->pluck('nombre')->implode(' - ')}}</td>
@@ -62,10 +64,12 @@
                 <td>Correo Electronico</td>
                 <td>{{$profesional->correo_prof}}</td>
             </tr>
-            <tr class="tr">
-                <td>Carnet Identidad: </td>
-                <td>{{$profesional->ci_prof}}</td>
-            </tr>
+            @if(auth()->user()->hasRoles(['docente','administrador']))
+                <tr class="tr">
+                    <td>Carnet Identidad: </td>
+                    <td>{{$profesional->ci_prof}}</td>
+                </tr>
+            @endif
             <tr class="tr">
                 <td>Area: </td>
                 <td>{{$profesional->areas()->pluck('nombre')->implode(' - ')}}</td>
