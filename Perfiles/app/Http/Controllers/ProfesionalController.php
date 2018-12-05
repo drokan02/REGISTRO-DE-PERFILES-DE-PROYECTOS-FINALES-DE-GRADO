@@ -110,6 +110,7 @@ class ProfesionalController extends Controller
     
     public function tutoria(Request $request,Profesional $profesional){
         $fila = 1;
+
         $buscar = $request['buscar'];
         $perfiles = Perfil::with(['estudiantes'])
                             ->perfilesTutor($profesional->id)
@@ -117,14 +118,13 @@ class ProfesionalController extends Controller
                             ->orderBy('id','DESC')
                             ->paginate(7);
         if($request->ajax()){
-            return view('parcial.perfilesTutor',compact('profesional','perfiles','fila',"buscar"))->render();      
+            return view('parcial.perfilesTutor',compact('profesional','profesionales','perfiles','fila',"buscar"))->render();      
         }
-        return view('profesionales.perfilesTutor',compact('profesional','perfiles','fila',"buscar"));
+        return view('profesionales.perfilesTutor',compact('profesional','profesionales','perfiles','fila',"buscar"));
     }
 
     public function renunciar(Request $request,Profesional $profesional,Perfil $perfil){
-        $profesional->perfiles()->detach($perfil->id);
-        $this->notificarEstudiante($perfil);
+       $perfil->tutor()->sync($request['tutor_id'],['perfil'=>$perfil->id]);
         if($request->ajax()){
             return response()->json([
                 "datos" =>$this->tutoria($request,$profesional),
@@ -133,7 +133,19 @@ class ProfesionalController extends Controller
         }
     }
 
-    public function notificarEstudiante($perfil){
-        //mandar correo para notificar al estudiante
+    public function tutores(Request $request,Perfil $perfil,Profesional $profesional){
+        $carrera_id = $perfil->director->profesional->carrera_id;
+        $profesionales = Profesional::deCarrera($carrera_id)->where('id','!=',$profesional->id)->doesntHave('docente')->get();
+        $docentes = Profesional::where('carrera_id',$carrera_id)->WhereHas('docente', function ($query){
+            $query->whereNull('docente_materia')->whereNull('director_carrera');
+        })->get();
+
+        if ($request->ajax()) {
+            return response()->json([
+                'profesionales'=>$profesionales->toArray(),
+                'docentes'=> $docentes->toArray(),
+            ]);
+        }
     }
+
 }

@@ -179,6 +179,7 @@ $('#carrera_id').change(function(e){
      //alert(id);
 })
 
+
 //$('#fecha_ini').datepicker({
    // uiLibrary: 'bootstrap4',
 //});
@@ -255,13 +256,37 @@ $('.cambiarEstado').click(function(){
 
 $('.renunciarTutoria').click(function(e){
     e.preventDefault();
+    ops = "";
+    
     url  = $(this).attr('href');
+    ruta = $(this).data('url');
     fila = $(this).parents("tr");
     tabla = $(this).parents("tbody");
+    select = $('#nuevosTutores');
     var divLista = $('.listaDatos');
-    console.log(tabla.find("tr").length);
-    $.get(url,[],function(res){
-        alertify.alert(res.mensaje).set('basic', true);
-        divLista.html(res.datos);
+    $.get(url,{},function(res){
+       $("#nuevoTutor").prop('action',ruta);
+        $.each(res.profesionales, function(i, item) {
+             ops +=  "<option value='"+item.id+"'>"+item.ap_pa_prof+" "+item.ap_ma_prof+" "+item.nombre_prof+"</option>"
+        });
+        $.each(res.docentes, function(i, item) {
+             ops +=   "<option value='"+item.id+"'>"+item.ap_pa_prof+" "+item.ap_ma_prof+" "+item.nombre_prof+"</option>"
+        });
+        select.html(ops);
     })
 })
+
+$('#cambiarTutor').click(function(){
+    url = $('#nuevoTutor').attr('action');
+    tutor = $('#nuevosTutores').val();
+    var divLista = $('.listaDatos');
+    var token = $("input[name=_token]").val();
+    $.get(url,{'tutor_id':tutor},function(res){
+        alertify.alert(res.mensaje).set('basic', true);
+        divLista.html(res.datos);
+    }).fail(function(ress,status,error){
+        alertify.set('notifier','position', 'top-center');
+        alertify.error(ress.responseText+"");  
+    })
+   
+}) 

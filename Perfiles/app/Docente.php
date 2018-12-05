@@ -15,7 +15,8 @@ class Docente extends Model
         'codigo_sis',
         'cargahoraria_id',
         'profesional_id',
-        'director_carrera'
+        'director_carrera',
+        'docente_materia'
         
     ];
    

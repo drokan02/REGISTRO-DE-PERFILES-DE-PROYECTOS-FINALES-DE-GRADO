@@ -46,8 +46,9 @@
                         <td>{{$perfil->estudiantes->pluck('nombres')->implode(' - ')}}</td>
                         <td style="text-align: center">{{$perfil->estado}}</td>
                         <td style="text-align: center" >
-                            <a href='{{ route('renunciarTutoria',['perfil'=>$perfil,'profesional'=>$profesional])}}' 
-                                class="renunciarTutoria"  data-placement="right" title="renunciar Tutoria">
+                            <a href='{{ route('tutores',['perfil'=>$perfil,'profesional'=>$profesional])}}' class="renunciarTutoria" 
+                                data-url="{{ route('renunciarTutoria',['perfil'=>$perfil,'profesional'=>$profesional])}}" data-toggle="modal" data-target="#exampleModalCenter"
+                                 data-placement="right" title="renunciar Tutoria">
                                 <i class="fa fa-times iconMenu fa-2x" ></i>
                             </a> 
                         </td>
@@ -55,12 +56,10 @@
                 @endforeach
                 </tbody>
             </table>
-            @include('complementos.estadosPerfil') 
+            @include('complementos.nuevoTutor') 
             {!! $perfiles->render() !!}
         @else
             <li>No se encontro Perfiles registrados</li>
         @endif
     </div>
-    
-</Form>
 @endsection

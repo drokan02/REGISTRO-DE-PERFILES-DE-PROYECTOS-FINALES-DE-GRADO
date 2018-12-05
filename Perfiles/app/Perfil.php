@@ -97,18 +97,24 @@ class Perfil extends Model
 
     public function scopeEliminado($query,$eliminados){
         if ($eliminados) {
-            return $query->where('estado','eliminado');
+            return $query->where('estado','eliminado')->where('estado','Guardado');
         }else{
-            return $query->where('estado','!=','eliminado')->orWhereNull('estado');
+            return $query->where('estado','!=','eliminado')->where('estado','!=','Guardado')->orWhereNull('estado');
         }
     }
 
     public function scopePerfilesTutor($query,$tutor_id){
-        return $query->where('estado','Progreso')
+        return $query->where('estado','En Progreso')
                      ->whereHas('tutor', function($query) use ($tutor_id){
                         return $query->where('profesional_id',$tutor_id);
                      });
     }
 
    
+    public function scopePerfilEstudiante($query,$estudiante_id){
+        return $query->where('estado','Guardado')
+                     ->whereHas('estudiantes', function($query) use ($estudiante_id){
+                        return $query->where('estudiante_id',$estudiante_id);
+                     });
+    }
 }

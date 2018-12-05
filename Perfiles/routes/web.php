@@ -65,6 +65,7 @@ Route::post('/profesionales/editar/modificar/{profesional}','ProfesionalControll
 Route::any('/profesionales/eliminar/{profesional}','ProfesionalController@eliminar')->name('eliminarProfesional')->middleware('permisos:profesionales');;
 Route::any('/profesionales/ver/{profesional}','ProfesionalController@ver')->name('verProfesional');
 Route::any('/profesionales/tutoria/{profesional}','ProfesionalController@tutoria')->name('tutoriaProfesional');
+Route::any('/profesionales/tutores/{perfil}/{profesional}','ProfesionalController@tutores')->name('tutores');
 Route::any('/profesionales/tutoria/renunciar/{profesional}/{perfil}','ProfesionalController@renunciar')->name('renunciarTutoria');
 
 //Subareas
@@ -147,6 +148,7 @@ Route::post('/perfil/editar/modificar/{perfil}','PerfilController@modificar')->n
 //Route::post('/perfil/editar/{perfil}/modificar','PerfilController@modificar')->name('mPerfil');
 Route::any('/perfil/eliminar/{perfil}','PerfilController@eliminar')->name('eliminarPerfil');
 Route::any('/perfil/cambiarEstado/{perfil}','PerfilController@cambiarEstado')->name('cambiarEstadoPerfil');
+Route::any('/perfil/publicar/{perfil}','PerfilController@publicar')->name('publicarPerfil');
 
 //Gestion
 Route::any('/menu/Gestion', 'GestionController@index')->name('gestiones');

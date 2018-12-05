@@ -80,6 +80,7 @@ class docenteController extends Controller
             $docente->cargahoraria_id = $request->cargahoraria_id;
             $docente->codigo_sis = $request->codigo_sis;
             $docente->director_carrera = $request->director_carrera;
+            $docente->docente_materia = $request->docente_materia;
             $docente->save();
             $name=$request['nombre_prof'].' '.$request['ap_pa_prof'].' '.$request['ap_ma_prof'];
             $user =new User();
@@ -141,6 +142,19 @@ class docenteController extends Controller
         $profesional->areas()->sync($areas,['profesional_id'=>$prof_id]);
         $profesional->update($request->all());
         $docente->update($request->all());
+        if(!$request['director_carrera']){
+           
+            $docente->update([
+                'director_carrera'=>null
+            ]
+            );
+        }
+        if(!$request['docente_materia']){
+            $docente->update([
+                'docente_materia'=>null
+            ]
+            );
+        }
         return redirect()->route('Docentes');
     }
 
