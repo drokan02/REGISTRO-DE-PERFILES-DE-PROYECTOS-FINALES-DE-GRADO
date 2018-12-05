@@ -29,7 +29,7 @@
     <div class="carousel-inner">
 
       <div class="item active">
-        <img src="/img/planta.jpg" alt="" style="width:100%;">
+        <img src="/img/registrar.png" alt="" style="width:100%;">
         <div class="carousel-caption">
           <h3></h3>
           <p></p>
@@ -37,7 +37,7 @@
       </div>
 
       <div class="item">
-        <img src="/img/umss.png" alt="" style="width:100%;">
+        <img src="/img/captura2.png" alt="" style="width:100%;">
         <div class="carousel-caption">
           <h3></h3>
           <p></p>
@@ -45,7 +45,25 @@
       </div>
     
       <div class="item">
-        <img src="/img/vensoft.jpg" alt="" style="width:100%;">
+        <img src="/img/captura3.png" alt="" style="width:100%;">
+        <div class="carousel-caption">
+          <h3></h3>
+          <p></p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/img/captura4.png" alt="" style="width:100%;">
+        <div class="carousel-caption">
+          <h3></h3>
+          <p></p>
+        </div>
+      </div>
+
+      
+
+      <div class="item">
+        <img src="/img/captura6.png" alt="" style="width:100%;">
         <div class="carousel-caption">
           <h3></h3>
           <p></p>
