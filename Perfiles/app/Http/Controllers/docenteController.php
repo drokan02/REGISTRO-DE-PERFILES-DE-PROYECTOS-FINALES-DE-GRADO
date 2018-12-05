@@ -155,6 +155,13 @@ class docenteController extends Controller
             ]
             );
         }
+        $user=$docente->usuario()->first();
+        $name=$request['nombre_prof'].' '.$request['ap_pa_prof'].' '.$request['ap_ma_prof'];
+        $user->update([
+            'name' => $name,
+            'user_name' => $name,
+            'email' => $request->correo_prof,
+        ]);
         return redirect()->route('Docentes');
     }
 

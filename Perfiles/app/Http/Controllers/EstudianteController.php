@@ -108,9 +108,9 @@ class EstudianteController extends Controller
         }
         $this->validate(request(), [
             'nombres' => ['required','max:100','regex:/^[\pL\s]+$/u'],
-            'user_name' => ['required',Rule::unique('users')->ignore(auth()->user()->id),
+            'user_name' => ['required',Rule::unique('users')->ignore($estudiante->usuario()->first()->id),
                             Rule::unique('estudiante')->ignore($estudiante->id),'alpha_num'],
-            'email' => ['required','string','email','max:255',Rule::unique('users')->ignore(auth()->user()->id),
+            'email' => ['required','string','email','max:255',Rule::unique('users')->ignore($estudiante->usuario()->first()->id),
                         Rule::unique('estudiante')->ignore($estudiante->id)],
             'telefono' => 'required|numeric|digits_between:7,8',
         ]);

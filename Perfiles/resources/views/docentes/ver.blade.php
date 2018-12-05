@@ -1,22 +1,22 @@
 @extends('layouts.menu')
-@section('titulo','DOCENTE')
+@section('titulo','DATOS DOCENTE')
 @section('contenido')
 
-    <ul class="nav justify-content-end ">
-     {{--   @if($docente->perfiles->toArray() != [])--}}
-        <li class="nav-item">
-            <a class="nav-link" href="{{route('tutoriaDocente',$docente)}}">Tutoria</a>
-        </li>
-     {{--   @endif   --}}
-        <li class="nav-item">
-            <a class="nav-link" href="{{route('editarDocente',$docente)}}">Modifica tus datos</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{route('cambiarContraseñaDocente',$docente)}}">Cambiar Contraseña</a>
-        </li>
-    </ul>
-
-
+    @if(auth()->user()->hasRoles(['docente','administrador']))
+        <ul class="nav justify-content-end ">
+         {{--   @if($docente->perfiles->toArray() != [])--}}
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('tutoriaDocente',$docente)}}">Tutoria</a>
+            </li>
+         {{--   @endif   --}}
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('editarDocente',$docente)}}">Modifica tus datos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('cambiarContraseñaDocente',$docente)}}">Cambiar Contraseña</a>
+            </li>
+        </ul>
+    @endif
 
     <div class="listaDatos">
         <table class="table">
@@ -32,10 +32,12 @@
                 <td>{{$profesional->nombre_prof.' '.$profesional->ap_pa_prof.' '.$profesional->ap_ma_prof}}</td>
 
             </tr>
-            <tr class="tr">
-                <td>Codigo SIS</td>
-                <td>{{$docente->codigo_sis}}</td>
-            </tr>
+            @if(auth()->user()->hasRoles(['docente','administrador']))
+                <tr class="tr">
+                    <td>Codigo SIS</td>
+                    <td>{{$docente->codigo_sis}}</td>
+                </tr>
+            @endif
             <tr class="tr">
                 <td>Titulo Profesional</td>
                 <td>{{$profesional->titulo()->pluck('nombre')->implode(' - ')}}</td>
@@ -62,10 +64,12 @@
                 <td>Correo Electronico</td>
                 <td>{{$profesional->correo_prof}}</td>
             </tr>
-            <tr class="tr">
-                <td>Carnet Identidad: </td>
-                <td>{{$profesional->ci_prof}}</td>
-            </tr>
+            @if(auth()->user()->hasRoles(['docente','administrador']))
+                <tr class="tr">
+                    <td>Carnet Identidad: </td>
+                    <td>{{$profesional->ci_prof}}</td>
+                </tr>
+            @endif
             <tr class="tr">
                 <td>Area: </td>
                 <td>{{$profesional->areas()->pluck('nombre')->implode(' - ')}}</td>
