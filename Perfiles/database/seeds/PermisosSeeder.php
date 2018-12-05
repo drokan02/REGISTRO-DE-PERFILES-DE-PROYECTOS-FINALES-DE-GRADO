@@ -56,5 +56,13 @@ class PermisosSeeder extends Seeder
             'id'=>11,
             'name'=>'eliminar_perfil',
         ]);
+        Permiso::create([
+            'id'=>12,
+            'name'=>'cambiar_estado_perfil',
+        ]);
+        Permiso::create([
+            'id'=>13,
+            'name'=>'reportes',
+        ]);
     }
 }

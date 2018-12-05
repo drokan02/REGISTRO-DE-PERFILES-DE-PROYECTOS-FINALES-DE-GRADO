@@ -138,14 +138,14 @@ Route::post('register','Auth\RegisterController@register')->name('registerPost')
 //perfiles
 Route::get('/perfil','PerfilController@index')->name('perfiles');
 Route::get('/perfil/ver','PerfilController@index')->name('verPerfil');
-Route::get('/perfil/registrarPerfil','PerfilController@nuevoFormulario')->name('nuevoPerfil');
-Route::any('/perfil/registrarPerfil/mostrarForm','PerfilController@mostrarForm')->name('mostrarFormulario');
-Route::post('/perfil/registrarPerfil/almacenar','PerfilController@almacenar')->name('almacenarPerfil');
-Route::get('/perfil/editar/{perfil}','PerfilController@editar')->name('editarPerfil');
-Route::post('/perfil/editar/modificar/{perfil}','PerfilController@modificar')->name('modificarPerfil');
+Route::get('/perfil/registrarPerfil','PerfilController@nuevoFormulario')->name('nuevoPerfil')->middleware('permisos:registrar_perfil');
+Route::any('/perfil/registrarPerfil/mostrarForm','PerfilController@mostrarForm')->name('mostrarFormulario')->middleware('permisos:registrar_perfil');
+Route::post('/perfil/registrarPerfil/almacenar','PerfilController@almacenar')->name('almacenarPerfil')->middleware('permisos:registrar_perfil');
+Route::get('/perfil/editar/{perfil}','PerfilController@editar')->name('editarPerfil')->middleware('permisos:editar_perfil');
+Route::post('/perfil/editar/modificar/{perfil}','PerfilController@modificar')->name('modificarPerfil')->middleware('permisos:editar_perfil');
 //Route::post('/perfil/editar/{perfil}/modificar','PerfilController@modificar')->name('mPerfil');
-Route::any('/perfil/eliminar/{perfil}','PerfilController@eliminar')->name('eliminarPerfil');
-Route::any('/perfil/cambiarEstado/{perfil}','PerfilController@cambiarEstado')->name('cambiarEstadoPerfil');
+Route::any('/perfil/eliminar/{perfil}','PerfilController@eliminar')->name('eliminarPerfil')->middleware('permisos:eliminar_perfil');
+Route::any('/perfil/cambiarEstado/{perfil}','PerfilController@cambiarEstado')->name('cambiarEstadoPerfil')->middleware('permisos:cambiar_estado_perfil');
 
 //Gestion
 Route::any('/menu/Gestion', 'GestionController@index')->name('gestiones');
@@ -161,7 +161,7 @@ Route::get('/register/verify/{code}', 'Auth\RegisterController@verify');
 Route::get('/notificar','menuController@notificar')->name('notificar');
 
 //reportes
-Route::get('/generar_reportes','ReportesController@generar')->name('generar');
-Route::post('/generador/reportes','ReportesController@generador')->name('generador');
-Route::get('/reportes/pdf','ReportesController@reporte')->name('reportePdf');
+Route::get('/generar_reportes','ReportesController@generar')->name('generar')->middleware('permisos:reportes');
+Route::post('/generador/reportes','ReportesController@generador')->name('generador')->middleware('permisos:reportes');
+Route::get('/reportes/pdf','ReportesController@reporte')->name('reportePdf')->middleware('permisos:reportes');
 
