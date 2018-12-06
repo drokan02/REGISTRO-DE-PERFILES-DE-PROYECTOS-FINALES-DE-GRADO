@@ -34,10 +34,11 @@ class PerfilController extends Controller
                           ->anio($anio)
                           ->periodo($periodo)
                           ->buscar($buscar)
-                          ->with('tutor')
+                          ->with(['tutor','estudiantes'])
                           ->orderBy('id','DESC')
                           ->paginate(7);
-        //dd($perfiles->toArray());
+        dd($perfiles->toArray());
+    
         if ($request->ajax()) {
             return response()->json([
                 view('parcial.perfiles',compact('perfiles','buscar','fila'))->render()

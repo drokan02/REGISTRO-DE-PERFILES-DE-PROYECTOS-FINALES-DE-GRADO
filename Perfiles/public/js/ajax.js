@@ -1,3 +1,6 @@
+$( "#fecha_ini" ).ready(function() {
+  });
+
 $("#prueba").click(function(){
     
     res = $('#area_id').val(1).trigger('area_id:updated');
@@ -180,13 +183,35 @@ $('#carrera_id').change(function(e){
 })
 
 
-//$('#fecha_ini').datepicker({
-   // uiLibrary: 'bootstrap4',
-//});
-
 $('.prueba').click(function(e){
     e.preventDefault();
-    alert($('#fecha_ini').val())
+    var hoy             = new Date();
+    var fecha_ini = new Date($('#fecha_ini').val());
+    var fecha_fin = new Date($('#fecha_fin').val());
+    form = $(this).parents('form');
+    url = form.attr('action');
+    
+    if (fecha_ini > fecha_fin) {
+        alertify.set('notifier','position', 'top-right');
+        alertify.error('La fecha de inicio no puede ser mayor a la fecha de fin de periodo',5).dismissOthers(); 
+    }else if (fecha_ini.getFullYear() > hoy.getFullYear()) {
+        alertify.set('notifier','position', 'top-right');
+        alertify.error('El año de la fecha de inicio no puede ser mayor al año actual',5).dismissOthers(); 
+    }else if (fecha_fin.getFullYear() > hoy.getFullYear()) {
+        alertify.set('notifier','position', 'top-right');
+        alertify.error('El año de la fecha de fin no puede ser mayor al año actual',5).dismissOthers();
+    }else{
+        $.post(url,form.serialize(),function(res) {
+            if(res.registrado){
+                alertify.alert(res.mensaje).set('basic', true);
+                form.submit();
+            }else{
+                alertify.set('notifier','position', 'top-right');
+                 alertify.error(""+res.mensaje,5).dismissOthers();
+            }
+        })
+    }
+
 })
 
 //agregar areas a las carreras
