@@ -33,11 +33,11 @@ class PerfilFormRequest extends FormRequest
                 'descripcion'  => 'required'
             ]; 
         }else{
-            $aux = $this->toArray();
+        $aux = $this->toArray();
         $id  = $aux['modalidad_id'];
         $modalidad = Modal::where('id',$id)->get();
         $aux = $modalidad->toArray()[0]['nombre_mod'];
-        if( $aux == "trabajo dirigido"){
+        if( $aux == "Trabajo Dirigido"){
             return [
                 'docente_id'   => 'required',
                 'tutor_id'     => 'required',
@@ -48,7 +48,7 @@ class PerfilFormRequest extends FormRequest
                 'objetivo_esp' => 'required',
                 'descripcion'  => 'required'
             ];       
-        }else if($aux == "adscripcion"){
+        }else if($aux == "Adscripcion"){
             return [
                 'docente_id'   => 'required',
                 'tutor_id'     => 'required',

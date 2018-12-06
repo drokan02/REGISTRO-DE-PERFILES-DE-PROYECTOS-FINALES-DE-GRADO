@@ -61,7 +61,8 @@ $('.registrarPerfil').click(function(e){
     form = $(this).parents('form');
     url  = form.attr('action');
     datos = form.serialize();
-    
+    modalidad_id =  $('#modalidadG').val();
+    url = url +"&modalidad_id="+modalidad_id;
    alertify.confirm('Perfil de Grado',
     function () {
         url = url+"&estado=Guardado";
@@ -74,36 +75,7 @@ $('.registrarPerfil').click(function(e){
          registrarPerfil(url,datos);
     }
     ).set('labels', {ok:'Guardar', cancel:'Publicar'});
-  /* $.post(url,datos,function(res){
-        if(res.registrado){
-            alertify.alert(res.mensaje).set('basic', true); 
-            form.submit();
-        }else{
-            if(perfilSeleccionado()){
-                 bloquearCampos(true);
-            }
-            alertify.set('notifier','position', 'top-right');
-            alertify.error(res.mensaje,6).dismissOthers();
-            
-        }
-     //error   
-    }).fail(function(ress,status,error){
-        if(perfilSeleccionado()){
-            bloquearCampos(true);
-       }
-        var errores="";
-        var cont = 18;
-       // $('#mensajeError').show();//muestra los mensajes
-        $.each($.parseJSON(ress.responseText), function (ind, elem) {     
-                alertify.set('notifier','position', 'top-right');
-                if(cont == 18){
-                    alertify.error(""+elem,cont--).dismissOthers();
-                }else{
-                    alertify.error(""+elem,cont--);
-                }
-        }); 
-        
-    });*/
+
 })
 
 function registrarPerfil(url,datos){
