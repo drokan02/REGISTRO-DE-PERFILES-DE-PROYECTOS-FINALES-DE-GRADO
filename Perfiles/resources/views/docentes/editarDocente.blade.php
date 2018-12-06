@@ -125,6 +125,20 @@
 						</select>
 					</div>
 				</div>   
+
+				<div class="form-group row">   
+					<div class="col-sm-3"></div>
+					<label for="directorCarrera" class="col-sm-3 col-form-label">Director de Carrera  &nbsp;
+							<input type="checkbox"  id="directorCarrera" name="director_carrera" value="{{$docente->profesional->carrera_id}}"
+							{{$docente->director_carrera ? 'checked' :''}}  >		
+					</label>
+					<label for="docenteMateria" class="col-sm-3 col-form-label">Docente de Materia  &nbsp;
+							<input type="checkbox"  id="docenteMateria" name="docente_materia" value="si" 
+							{{$docente->docente_materia ? 'checked':''}}>
+							
+					</label> 
+				</div>
+				
 				<div class = "form-group row"> 
 					<div class="col-sm-2"></div>
 					<div class="col-8">

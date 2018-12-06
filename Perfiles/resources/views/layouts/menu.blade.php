@@ -34,7 +34,7 @@
        <!--Contenido-->
    
       <div class="content-wrapper">
-        <section class="content" style="padding-top: 80px">
+        <section class="content contenidoP" style="padding-top: 80px">
           <div class="row">
             <div class="col-md-12">
               
@@ -49,7 +49,7 @@
                   <div class="box-body ">
                     
                     <div class="row">
-                      <div class="col-md-12">
+                      <div class="col-sm-12">
                           <!--Contenido-->
                           @yield("contenido")
                           <!--Fin Contenido-->

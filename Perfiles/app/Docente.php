@@ -15,7 +15,8 @@ class Docente extends Model
         'codigo_sis',
         'cargahoraria_id',
         'profesional_id',
-        'director_carrera'
+        'director_carrera',
+        'docente_materia'
         
     ];
    
@@ -43,7 +44,8 @@ class Docente extends Model
         if($buscar){
             return $query->whereHas('profesional', function ($query) use ( $buscar){
                                 $query->where(DB::raw("CONCAT(nombre_prof,' ',ap_pa_prof,' ',ap_ma_prof)"), "LIKE", "%$buscar%");
-                    });
+              
+                            });
         }else{
             return null;
         }

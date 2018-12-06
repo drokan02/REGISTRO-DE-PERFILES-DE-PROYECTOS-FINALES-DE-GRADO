@@ -27,17 +27,41 @@ class GestionController extends Controller
     }
 
     public function registrar(){
-        
-        return view('gestion.registrarGestion',compact('fecha'));
+        $año = date('Y');
+        $mes = date('m');
+        $periodo = 0;
+        $gestiones = Gestion::whereYear('fecha_ini',$año)->get();
+        $periodo = $gestiones[0]->periodo;
+        if(!$gestiones->toArray()){
+            if($mes < 7){
+                $periodo = 1;
+            }else{
+                $periodo = 2;
+            }
+        }else if ($gestiones[0]->periodo > 1) {
+            $periodo = 2;
+        }else{
+            $periodo = 2;
+        }
+        return view('gestion.registrarGestion',compact('periodo'));
     }
 
-    public function almacenar(GestionFormRequest $request){
+    public function almacenar(Request $request){
+        $año = date('Y');
+        $gestiones = Gestion::whereYear('fecha_ini',$año)->where('periodo',2)->get();
         if ($request->ajax()) {
-            return response()->json([
-                'mensaje'=> 'Gestion registrado correctamente'
-            ]);
+            if(!$gestiones->toArray()){
+                return response()->json([
+                    'registrado' => true, 
+                    'mensaje'=> 'Gestion registrado correctamente'
+                ]);
+            }else {
+                return response()->json([
+                    'mensaje'=> 'ya se tiene registrado las gestiones correspondientes a este Año'
+                ]);
+            }
         }
-        Gestion::create($request->all());
+        //Gestion::create($request->all());
         return redirect()->route('gestiones');
     }
 

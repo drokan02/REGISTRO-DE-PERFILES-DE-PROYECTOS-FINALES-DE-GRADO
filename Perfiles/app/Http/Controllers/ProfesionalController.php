@@ -10,6 +10,7 @@ use App\Profesional;
 use App\Area;
 use App\Titulo;
 use App\Carrera;
+use App\Perfil;
 class ProfesionalController extends Controller
 {
     function __construct(){
@@ -24,6 +25,7 @@ class ProfesionalController extends Controller
     public function index(Request $request){
        $buscar = $request->get('buscar');
        $profesionales = Profesional::buscarprofesional($buscar)
+                                 ->doesntHave('docente')
                                  ->with('titulo')
                                  ->orderBy('id','ASC')
                                  ->paginate(15);
@@ -106,7 +108,44 @@ class ProfesionalController extends Controller
 
     }
     
-    public function tutoria(Profesional $profesional){
-        dd($profesional->perfiles->toArray());
+    public function tutoria(Request $request,Profesional $profesional){
+        $fila = 1;
+
+        $buscar = $request['buscar'];
+        $perfiles = Perfil::with(['estudiantes'])
+                            ->perfilesTutor($profesional->id)
+                            ->buscar($buscar)
+                            ->orderBy('id','DESC')
+                            ->paginate(7);
+        if($request->ajax()){
+            return view('parcial.perfilesTutor',compact('profesional','profesionales','perfiles','fila',"buscar"))->render();      
+        }
+        return view('profesionales.perfilesTutor',compact('profesional','profesionales','perfiles','fila',"buscar"));
     }
+
+    public function renunciar(Request $request,Profesional $profesional,Perfil $perfil){
+       $perfil->tutor()->sync($request['tutor_id'],['perfil'=>$perfil->id]);
+        if($request->ajax()){
+            return response()->json([
+                "datos" =>$this->tutoria($request,$profesional),
+                "mensaje" => "El profesional ya no es el tutor del Perfil"
+            ]);
+        }
+    }
+
+    public function tutores(Request $request,Perfil $perfil,Profesional $profesional){
+        $carrera_id = $perfil->director->profesional->carrera_id;
+        $profesionales = Profesional::deCarrera($carrera_id)->where('id','!=',$profesional->id)->doesntHave('docente')->get();
+        $docentes = Profesional::where('carrera_id',$carrera_id)->WhereHas('docente', function ($query){
+            $query->whereNull('docente_materia')->whereNull('director_carrera');
+        })->get();
+
+        if ($request->ajax()) {
+            return response()->json([
+                'profesionales'=>$profesionales->toArray(),
+                'docentes'=> $docentes->toArray(),
+            ]);
+        }
+    }
+
 }

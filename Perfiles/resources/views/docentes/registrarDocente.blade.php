@@ -132,9 +132,13 @@
 					</div>
 				</div>   
 				<div class="form-group row">   
-					<div class="col-sm-5"></div>
-					<label for="trabajo_conjunto" class="col-sm-3 col-form-label">Director de Carrera  &nbsp;
+					<div class="col-sm-3"></div>
+					<label for="directorCarrera" class="col-sm-3 col-form-label">Director de Carrera  &nbsp;
 							<input type="checkbox"  id="directorCarrera" name="director_carrera">
+							
+					</label>
+					<label for="docenteMateria" class="col-sm-3 col-form-label">Docente de Materia  &nbsp;
+							<input type="checkbox"  id="docenteMateria" name="docente_materia" value="si">
 							
 					</label> 
 				</div>

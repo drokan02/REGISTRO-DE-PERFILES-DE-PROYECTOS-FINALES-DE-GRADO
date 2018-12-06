@@ -65,6 +65,8 @@ Route::post('/profesionales/editar/modificar/{profesional}','ProfesionalControll
 Route::any('/profesionales/eliminar/{profesional}','ProfesionalController@eliminar')->name('eliminarProfesional')->middleware('permisos:profesionales');;
 Route::any('/profesionales/ver/{profesional}','ProfesionalController@ver')->name('verProfesional');
 Route::any('/profesionales/tutoria/{profesional}','ProfesionalController@tutoria')->name('tutoriaProfesional');
+Route::any('/profesionales/tutores/{perfil}/{profesional}','ProfesionalController@tutores')->name('tutores');
+Route::any('/profesionales/tutoria/renunciar/{profesional}/{perfil}','ProfesionalController@renunciar')->name('renunciarTutoria');
 
 //Subareas
 Route::get('areas/subareas/{area}','SubareaController@index')->name('subareas');
@@ -144,13 +146,14 @@ Route::post('/perfil/registrarPerfil/almacenar','PerfilController@almacenar')->n
 Route::get('/perfil/editar/{perfil}','PerfilController@editar')->name('editarPerfil')->middleware('permisos:editar_perfil');
 Route::post('/perfil/editar/modificar/{perfil}','PerfilController@modificar')->name('modificarPerfil')->middleware('permisos:editar_perfil');
 //Route::post('/perfil/editar/{perfil}/modificar','PerfilController@modificar')->name('mPerfil');
+Route::any('/perfil/publicar/{perfil}','PerfilController@publicar')->name('publicarPerfil');
 Route::any('/perfil/eliminar/{perfil}','PerfilController@eliminar')->name('eliminarPerfil')->middleware('permisos:eliminar_perfil');
 Route::any('/perfil/cambiarEstado/{perfil}','PerfilController@cambiarEstado')->name('cambiarEstadoPerfil')->middleware('permisos:cambiar_estado_perfil');
 
 //Gestion
 Route::any('/menu/Gestion', 'GestionController@index')->name('gestiones');
 Route::get('menu/Gestion/registrar', 'GestionController@registrar')->name('registrarGestion');
-Route::get('menu/Gestion/registrar/almacenar', 'GestionController@almacenar')->name('almacenarGestion');
+Route::any('menu/Gestion/registrar/almacenar', 'GestionController@almacenar')->name('almacenarGestion');
 Route::get('menu/Gestion/editar/{gestion}', 'GestionController@editar')->name('editarGestion');
 Route::post('menu/Gestion/editar/modificar/{gestion}', 'GestionController@modificar')->name('modificarGestion');
 
