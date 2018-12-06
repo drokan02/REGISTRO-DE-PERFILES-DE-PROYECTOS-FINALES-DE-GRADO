@@ -173,9 +173,11 @@
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li class="">
-                    <a href="{{route('nuevoPerfil')}}"><i class="fa fa-caret-right" aria-hidden="true"></i>Registrar Perfil</a>
-                </li>
+                @if(auth()->user()->hasPermisos(['registrar_perfil']))
+                    <li class="">
+                        <a href="{{route('nuevoPerfil')}}"><i class="fa fa-caret-right" aria-hidden="true"></i>Registrar Perfil</a>
+                    </li>
+                @endif
                 <li class="">
                     <a href="{{route('perfiles')}}"><i class="fa fa-caret-right" aria-hidden="true"></i>Lista Perfiles</a>
                 </li>
