@@ -55,6 +55,9 @@ class User extends Authenticatable
     public function estudiante(){
         return $this->belongsToMany(Estudiante::class);
     }
+    public function docente(){
+        return $this->belongsToMany(Docente::class);
+    }
     public function isConfirmed(){
         return $this->confirmado;
     }

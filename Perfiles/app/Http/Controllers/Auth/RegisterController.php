@@ -58,7 +58,7 @@ class RegisterController extends Controller
             'user_name' => ['required','unique:users,user_name','unique:estudiante,user_name','alpha_num'],
             'email' => ['required','unique:users,email','unique:estudiante,email','email'],
             'password' => 'required|string|min:6|confirmed',
-            'telefono' => 'required|numeric|digits_between:7,8',
+            'telefono' => 'required|numeric|digits_between:7,8|unique:estudiante,telefono',
             'carrera'=> ['required','not_in:seleccione una opcion']
         ]);
     }

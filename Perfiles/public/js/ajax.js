@@ -1,9 +1,21 @@
+$( "#fecha_ini" ).ready(function() {
+  });
+
 $("#prueba").click(function(){
     
     res = $('#area_id').val(1).trigger('area_id:updated');
     console.log(res)
 });
 
+$(window).resize(function() {
+    var ventana_ancho = $(window).width();
+	var ventana_alto = $(window).height();
+	if (ventana_ancho < 700) {
+        $(".contenidoP").css("padding-top", "130px");  
+    }else if (ventana_ancho > 700) {
+        $(".contenidoP").css("padding-top", "80px");  
+    }
+  });
 
 $('.registrarForm').click(function(e){
     e.preventDefault();
@@ -170,13 +182,36 @@ $('#carrera_id').change(function(e){
      //alert(id);
 })
 
-//$('#fecha_ini').datepicker({
-   // uiLibrary: 'bootstrap4',
-//});
 
 $('.prueba').click(function(e){
     e.preventDefault();
-    alert($('#fecha_ini').val())
+    var hoy             = new Date();
+    var fecha_ini = new Date($('#fecha_ini').val());
+    var fecha_fin = new Date($('#fecha_fin').val());
+    form = $(this).parents('form');
+    url = form.attr('action');
+    
+    if (fecha_ini > fecha_fin) {
+        alertify.set('notifier','position', 'top-right');
+        alertify.error('La fecha de inicio no puede ser mayor a la fecha de fin de periodo',5).dismissOthers(); 
+    }else if (fecha_ini.getFullYear() > hoy.getFullYear()) {
+        alertify.set('notifier','position', 'top-right');
+        alertify.error('El año de la fecha de inicio no puede ser mayor al año actual',5).dismissOthers(); 
+    }else if (fecha_fin.getFullYear() > hoy.getFullYear()) {
+        alertify.set('notifier','position', 'top-right');
+        alertify.error('El año de la fecha de fin no puede ser mayor al año actual',5).dismissOthers();
+    }else{
+        $.post(url,form.serialize(),function(res) {
+            if(res.registrado){
+                alertify.alert(res.mensaje).set('basic', true);
+                form.submit();
+            }else{
+                alertify.set('notifier','position', 'top-right');
+                 alertify.error(""+res.mensaje,5).dismissOthers();
+            }
+        })
+    }
+
 })
 
 //agregar areas a las carreras
@@ -243,3 +278,40 @@ $('.cambiarEstado').click(function(){
     })
    
 })
+
+$('.renunciarTutoria').click(function(e){
+    e.preventDefault();
+    ops = "";
+    
+    url  = $(this).attr('href');
+    ruta = $(this).data('url');
+    fila = $(this).parents("tr");
+    tabla = $(this).parents("tbody");
+    select = $('#nuevosTutores');
+    var divLista = $('.listaDatos');
+    $.get(url,{},function(res){
+       $("#nuevoTutor").prop('action',ruta);
+        $.each(res.profesionales, function(i, item) {
+             ops +=  "<option value='"+item.id+"'>"+item.ap_pa_prof+" "+item.ap_ma_prof+" "+item.nombre_prof+"</option>"
+        });
+        $.each(res.docentes, function(i, item) {
+             ops +=   "<option value='"+item.id+"'>"+item.ap_pa_prof+" "+item.ap_ma_prof+" "+item.nombre_prof+"</option>"
+        });
+        select.html(ops);
+    })
+})
+
+$('#cambiarTutor').click(function(){
+    url = $('#nuevoTutor').attr('action');
+    tutor = $('#nuevosTutores').val();
+    var divLista = $('.listaDatos');
+    var token = $("input[name=_token]").val();
+    $.get(url,{'tutor_id':tutor},function(res){
+        alertify.alert(res.mensaje).set('basic', true);
+        divLista.html(res.datos);
+    }).fail(function(ress,status,error){
+        alertify.set('notifier','position', 'top-center');
+        alertify.error(ress.responseText+"");  
+    })
+   
+}) 

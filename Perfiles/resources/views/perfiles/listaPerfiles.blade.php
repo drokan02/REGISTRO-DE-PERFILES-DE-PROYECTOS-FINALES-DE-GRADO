@@ -69,17 +69,22 @@
                                             <a href='{{route('verPerfil',$perfil)}}' class="dropdown-item" href="#">
                                                     <h5><i class="col-sm-3 fa fa-eye iconMenu" >&nbsp;&nbsp;&nbsp;Ver </i></h5>
                                             </a>
+                                        @if(auth()->user()->hasPermisos(['editar_perfil']))
                                             <a href='{{route('editarPerfil',$perfil)}}' class="dropdown-item" href="#">
                                                     <h5><i class="col-sm-3 fa fa-pencil-square-o iconMenu">&nbsp;&nbsp;&nbsp;Editar</i></h5>
                                             </a>
+                                        @endif
+                                        @if(auth()->user()->hasPermisos(['eliminar_perfil']))
                                             <a href='{{ route('eliminarPerfil',$perfil)}}' class="dropdown-item eliminar" href="#">
                                                     <h5> <i class="col-sm-3 fa fa-minus-square iconMenu" >&nbsp;&nbsp;&nbsp;Eliminar</i></h5>
-                                            </a> 
+                                            </a>
+                                        @endif
+                                        @if(auth()->user()->hasPermisos(['eliminar_perfil']))
                                             <a  href="{{ route('cambiarEstadoPerfil',$perfil)}}" class="dropdown-item estado" href="#" data-toggle="modal" data-target="#exampleModalCenter" 
                                             data-perfil="{{$perfil}}" data-ruta="{{ route('cambiarEstadoPerfil',$perfil)}}">
                                                 <h5> <i class="col-sm-3 fa fa-minus-square iconMenu" >&nbsp;&nbsp;&nbsp;Estados</i></h5>
-                                        </a> 
-                                                                              
+                                            </a>
+                                        @endif
                                     </div>
                             </div> 
                         </td>

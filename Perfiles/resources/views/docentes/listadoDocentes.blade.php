@@ -65,7 +65,11 @@
                                         <i class="fa fa-ellipsis-v fa-2x" aria-hidden="true"></i>
                                 </a>
                                 <div class="dropdown-menu profile-dropdown-menu" aria-labelledby="dropdownMenu1">
+<<<<<<< HEAD
                                         <a href='{{route('verDocente',$docente)}}' class="dropdown-item" href="#">
+=======
+                                        <a href='{{route('verDocente',$docente)}}' class="dropdown-item">
+>>>>>>> 4784e7345ce7b3044246520f222794578039d70e
                                                 <h5><i class="col-sm-3 fa fa-eye iconMenu" >&nbsp;&nbsp;&nbsp;Ver </i></h5>
                                         </a>
                                     @if(auth()->user()->hasPermisos(['docentes']))

@@ -17,7 +17,7 @@
     <div class="navbar-custom-menu">
       <ul class="nav navbar">
           @if(auth()->user()->isAdmin())
-              <li class="dropdown">
+              <li class="dropdown mr-4">
                   <a class="nav-link btn-outline-success" onclick="alert('desea lanzar una alarma, esta accion puede tardar unos minutos')" href="{{route('notificar')}}"><span class="hidden-xs">Notificar Estudiantes</span></a>
               </li>
           @endif
@@ -26,7 +26,7 @@
         <li class="dropdown mr-3">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                   @if(auth()->check())
-                    <span class="hidden-xs">{{auth()->user()->user_name}}</span>
+                    <span class="hidden-xs">({{auth()->user()->roles()->pluck('nombre_rol')->implode(' - ')}}) {{auth()->user()->user_name}}</span>
                   @else
                       <span class="hidden-xs">usuario</span>
                   @endif
@@ -37,6 +37,14 @@
                           <a class="dropdown-item" href="{{route('detalleEstudiante',auth()->user()->estudiante()->first())}}">
                               <i class="fa fa-user icon"></i> Perfil </a>
                           <a class="dropdown-item" href="{{route('editarEstudiante',auth()->user()->estudiante()->first())}}">
+                              <i class="fa fa-gear icon"></i> Editar cuenta </a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="{{route('logout')}}">
+                              <i class="fa fa-power-off icon"></i> Cerrar sesion </a>
+                      @elseif(auth()->user()->hasRoles(['docente']))
+                          <a class="dropdown-item" href="{{route('verDocente',auth()->user()->docente()->first())}}">
+                              <i class="fa fa-user icon"></i> Perfil </a>
+                          <a class="dropdown-item" href="{{route('editarDocente',auth()->user()->docente()->first())}}">
                               <i class="fa fa-gear icon"></i> Editar cuenta </a>
                           <div class="dropdown-divider"></div>
                           <a class="dropdown-item" href="{{route('logout')}}">

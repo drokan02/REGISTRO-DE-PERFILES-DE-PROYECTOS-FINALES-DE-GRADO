@@ -62,6 +62,13 @@
 					</div>
 				</div>
 
+				<div class = "form-group row ">
+					<label for="password" class="col-sm-2 col-form-label" >Password</label>
+					<div class="col-sm-10">
+						<input type="password" id="password" class="form-control" name="password" value="{{old('password')}}">
+					</div>
+				</div>
+
 				<div class = "form-group row"> 
 						<label for="cargahoraria_id" class="col-sm-2 col-form-label">Carga Horaria</label>
 						<div class="col-sm-4 row-fluid" >
@@ -125,9 +132,13 @@
 					</div>
 				</div>   
 				<div class="form-group row">   
-					<div class="col-sm-5"></div>
-					<label for="trabajo_conjunto" class="col-sm-3 col-form-label">Director de Carrera  &nbsp;
+					<div class="col-sm-3"></div>
+					<label for="directorCarrera" class="col-sm-3 col-form-label">Director de Carrera  &nbsp;
 							<input type="checkbox"  id="directorCarrera" name="director_carrera">
+							
+					</label>
+					<label for="docenteMateria" class="col-sm-3 col-form-label">Docente de Materia  &nbsp;
+							<input type="checkbox"  id="docenteMateria" name="docente_materia" value="si">
 							
 					</label> 
 				</div>

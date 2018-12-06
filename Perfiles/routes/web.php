@@ -21,7 +21,7 @@ Route::get('/verifiqueCuenta',function () {
 Route::get('/prueba', function () {
     $valor = 12;
     return view('complementos.prueba',compact('valor'));
-})->name('inicio');
+});
 
 //Roles
 Route::get('/menu','menuController@index')->name('menu');
@@ -65,6 +65,8 @@ Route::post('/profesionales/editar/modificar/{profesional}','ProfesionalControll
 Route::any('/profesionales/eliminar/{profesional}','ProfesionalController@eliminar')->name('eliminarProfesional');
 Route::any('/profesionales/ver/{profesional}','ProfesionalController@ver')->name('verProfesional');
 Route::any('/profesionales/tutoria/{profesional}','ProfesionalController@tutoria')->name('tutoriaProfesional');
+Route::any('/profesionales/tutores/{perfil}/{profesional}','ProfesionalController@tutores')->name('tutores');
+Route::any('/profesionales/tutoria/renunciar/{profesional}/{perfil}','ProfesionalController@renunciar')->name('renunciarTutoria');
 
 //Subareas
 Route::get('areas/subareas/{area}','SubareaController@index')->name('subareas');
@@ -110,7 +112,10 @@ Route::any('/docentes/editar/{docente}','docenteController@editar')->name('edita
 Route::any('/docentes/editar/modificar/{docente}','docenteController@modificar')->name('modificarDocente');
 Route::any('/docentes/eliminar/{docente}','docenteController@eliminar')->name('eliminarDocente');
 Route::any('/docentes/ver/{docente}','docenteController@ver')->name('verDocente');
-
+Route::get('/cambiar_contraseña_docente/{docente}','docenteController@cambiarContraseña')->name('cambiarContraseñaDocente');
+Route::post('/guardar_contraseña_docente/{docente}','docenteController@guardarContraseña')->name('guardarContraseñaDocente');
+Route::get('/tutoria/{docente}','docenteController@tutoria')->name('tutoriaDocente');
+Route::get('/exportar_pdf_tutoria/{docente}','docenteController@descargarPdf')->name('tutoriaDocentePdf');
 
 //estudiantes
 Route::get('/estudiantes','EstudianteController@index')->name('estudiantes');
@@ -146,21 +151,21 @@ Route::get('/fechas/guardar','FechasController@guardar')->name('guadarfecha');
 
 
 Route::get('/perfil','PerfilController@index')->name('perfiles');
-Route::get('/perfil/registrarPerfil','PerfilController@nuevoFormulario')->name('nuevoPerfil');
-Route::any('/perfil/registrarPerfil/mostrarForm','PerfilController@mostrarForm')->name('mostrarFormulario');
-Route::post('/perfil/registrarPerfil/almacenar','PerfilController@almacenar')->name('almacenarPerfil');
-Route::get('/perfil/editar/{perfil}','PerfilController@editar')->name('editarPerfil');
-Route::post('/perfil/editar/modificar/{perfil}','PerfilController@modificar')->name('modificarPerfil');
+Route::get('/perfil/ver','PerfilController@index')->name('verPerfil');
+Route::get('/perfil/registrarPerfil','PerfilController@nuevoFormulario')->name('nuevoPerfil')->middleware('permisos:registrar_perfil');
+Route::any('/perfil/registrarPerfil/mostrarForm','PerfilController@mostrarForm')->name('mostrarFormulario')->middleware('permisos:registrar_perfil');
+Route::post('/perfil/registrarPerfil/almacenar','PerfilController@almacenar')->name('almacenarPerfil')->middleware('permisos:registrar_perfil');
+Route::get('/perfil/editar/{perfil}','PerfilController@editar')->name('editarPerfil')->middleware('permisos:editar_perfil');
+Route::post('/perfil/editar/modificar/{perfil}','PerfilController@modificar')->name('modificarPerfil')->middleware('permisos:editar_perfil');
 //Route::post('/perfil/editar/{perfil}/modificar','PerfilController@modificar')->name('mPerfil');
-Route::any('/perfil/eliminar/{perfil}','PerfilController@eliminar')->name('eliminarPerfil');
-Route::any('/perfil/cambiarEstado/{perfil}','PerfilController@cambiarEstado')->name('cambiarEstadoPerfil');
-Route::any('/perfil/ver/{perfil}','PerfilController@ver')->name('verPerfil');
-Route::get('/perfil/verPdf{perfil}','PerfilController@vistaPdf')->name('descargaPdf');
+Route::any('/perfil/publicar/{perfil}','PerfilController@publicar')->name('publicarPerfil');
+Route::any('/perfil/eliminar/{perfil}','PerfilController@eliminar')->name('eliminarPerfil')->middleware('permisos:eliminar_perfil');
+Route::any('/perfil/cambiarEstado/{perfil}','PerfilController@cambiarEstado')->name('cambiarEstadoPerfil')->middleware('permisos:cambiar_estado_perfil');
 
 //Gestion
 Route::any('/menu/Gestion', 'GestionController@index')->name('gestiones');
 Route::get('menu/Gestion/registrar', 'GestionController@registrar')->name('registrarGestion');
-Route::get('menu/Gestion/registrar/almacenar', 'GestionController@almacenar')->name('almacenarGestion');
+Route::any('menu/Gestion/registrar/almacenar', 'GestionController@almacenar')->name('almacenarGestion');
 Route::get('menu/Gestion/editar/{gestion}', 'GestionController@editar')->name('editarGestion');
 Route::post('menu/Gestion/editar/modificar/{gestion}', 'GestionController@modificar')->name('modificarGestion');
 
@@ -171,8 +176,8 @@ Route::get('/register/verify/{code}', 'Auth\RegisterController@verify');
 //notificacion
 Route::get('/notificar','menuController@notificar')->name('notificar');
 
-
-
-//guia llenado formulario
-Route::get('/guiaFormulario','guiaController@index')->name('guiaFormulario');
+//reportes
+Route::get('/generar_reportes','ReportesController@generar')->name('generar')->middleware('permisos:reportes');
+Route::post('/generador/reportes','ReportesController@generador')->name('generador')->middleware('permisos:reportes');
+Route::get('/reportes/pdf','ReportesController@reporte')->name('reportePdf')->middleware('permisos:reportes');
 
