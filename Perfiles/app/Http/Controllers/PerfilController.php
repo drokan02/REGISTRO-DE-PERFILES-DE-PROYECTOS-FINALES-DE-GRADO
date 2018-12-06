@@ -37,7 +37,6 @@ class PerfilController extends Controller
                           ->with(['tutor','estudiantes'])
                           ->orderBy('id','DESC')
                           ->paginate(7);
-        dd($perfiles->toArray());
     
         if ($request->ajax()) {
             return response()->json([
@@ -383,9 +382,10 @@ class PerfilController extends Controller
 
      public function publicar(PerfilFormRequest $request,Perfil $perfil){
         if($request->ajax()){
+            
             return response()->json([
                 'registrado'=>true,
-                'mensaje'=>'Perfil modificado correctamente'
+                'mensaje'=>'Perfil publicado'
             ]);
         }
         $perfil->update($request->all());

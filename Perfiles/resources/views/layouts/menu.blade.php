@@ -19,6 +19,7 @@
     <script src={{asset("sel/jquery-3.3.1.slim.min.js")}} ></script>
     <script src={{asset('sel/popper.min.js')}}></script>
     <!--<script src={{asset("sel/chosen.jquery.min.js")}}></script>-->
+    <script src={{asset('js/ajax.js')}}></script>
     
     
   </head>
@@ -85,7 +86,6 @@
               </div>
           </div>
       </footer>-->
-      <script src={{asset('js/ajax.js')}}></script>
     <script src={{asset('js/jquery-3.3.1.min.js')}}></script>
     <script src={{asset('js/gijgo.min.js')}} ></script>
     <script src={{asset('js/bootstrap.min.js')}}></script>
