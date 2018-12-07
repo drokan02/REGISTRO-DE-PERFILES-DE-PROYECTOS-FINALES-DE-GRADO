@@ -180,11 +180,7 @@ return [
        // Maatwebsite\Excel\ExcelServiceProvider::class,
 
         Maatwebsite\Excel\ExcelServiceProvider::class,
-<<<<<<< HEAD
         Barryvdh\DomPDF\ServiceProvider::class,
-=======
-        //Barryvdh\DomPDF\ServiceProvider::class,
->>>>>>> d7cb1791a7afca80985417b6ea6382cf8217a14d
 
 
     ],
@@ -243,13 +239,9 @@ return [
 
 
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-<<<<<<< HEAD
         'PDF' => Barryvdh\DomPDF\Facade::class,
  
 
-=======
-        //'PDF' => Barryvdh\DomPDF\Facade::class,
->>>>>>> d7cb1791a7afca80985417b6ea6382cf8217a14d
     ],
 
 ];

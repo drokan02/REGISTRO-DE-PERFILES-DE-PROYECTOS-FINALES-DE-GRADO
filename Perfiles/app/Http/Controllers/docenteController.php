@@ -121,16 +121,9 @@ class docenteController extends Controller
         $horarios = CargaHoraria::all();
         return view('docentes.editarDocente',compact('docente','subareas','areas','titulos','horarios','carreras','horarios'));
     }
-<<<<<<< HEAD
-    public function ver($id){
-		$docente=Docente::findOrFail($id);
-		
-		return view('docentes.ver',['docente'=>$docente]);
-=======
-    public function ver(Docente $docente){
+    public function ver (Docente $docente){
 		$profesional=$docente->profesional()->first();
 		return view('docentes/ver',compact('docente','profesional'));
->>>>>>> d7cb1791a7afca80985417b6ea6382cf8217a14d
     }
    
     public function modificar(DocenteFormRequest $request,Docente $docente){

@@ -151,18 +151,6 @@ Route::get('/fechas/guardar','FechasController@guardar')->name('guadarfecha');
 
 
 Route::get('/perfil','PerfilController@index')->name('perfiles');
-<<<<<<< HEAD
-Route::get('/perfil/registrarPerfil','PerfilController@nuevoFormulario')->name('nuevoPerfil');
-Route::any('/perfil/registrarPerfil/mostrarForm','PerfilController@mostrarForm')->name('mostrarFormulario');
-Route::post('/perfil/registrarPerfil/almacenar','PerfilController@almacenar')->name('almacenarPerfil');
-Route::get('/perfil/editar/{perfil}','PerfilController@editar')->name('editarPerfil');
-Route::post('/perfil/editar/modificar/{perfil}','PerfilController@modificar')->name('modificarPerfil');
-//Route::post('/perfil/editar/{perfil}/modificar','PerfilController@modificar')->name('mPerfil');
-Route::any('/perfil/eliminar/{perfil}','PerfilController@eliminar')->name('eliminarPerfil');
-Route::any('/perfil/cambiarEstado/{perfil}','PerfilController@cambiarEstado')->name('cambiarEstadoPerfil');
-Route::any('/perfil/ver/{perfil}','PerfilController@ver')->name('verPerfil');
-Route::get('/perfil/verPdf{perfil}','PerfilController@vistaPdf')->name('descargaPdf');
-=======
 Route::get('/perfil/ver','PerfilController@index')->name('verPerfil');
 Route::get('/perfil/registrarPerfil','PerfilController@nuevoFormulario')->name('nuevoPerfil')->middleware('permisos:registrar_perfil');
 Route::any('/perfil/registrarPerfil/mostrarForm','PerfilController@mostrarForm')->name('mostrarFormulario')->middleware('permisos:registrar_perfil');
@@ -173,7 +161,6 @@ Route::post('/perfil/editar/modificar/{perfil}','PerfilController@modificar')->n
 Route::any('/perfil/publicar/{perfil}','PerfilController@publicar')->name('publicarPerfil');
 Route::any('/perfil/eliminar/{perfil}','PerfilController@eliminar')->name('eliminarPerfil')->middleware('permisos:eliminar_perfil');
 Route::any('/perfil/cambiarEstado/{perfil}','PerfilController@cambiarEstado')->name('cambiarEstadoPerfil')->middleware('permisos:cambiar_estado_perfil');
->>>>>>> d7cb1791a7afca80985417b6ea6382cf8217a14d
 
 //Gestion
 Route::any('/menu/Gestion', 'GestionController@index')->name('gestiones');
@@ -189,15 +176,8 @@ Route::get('/register/verify/{code}', 'Auth\RegisterController@verify');
 //notificacion
 Route::get('/notificar','menuController@notificar')->name('notificar');
 
-<<<<<<< HEAD
-
-
-//guia llenado formulario
-Route::get('/guiaFormulario','guiaController@index')->name('guiaFormulario');
-=======
 //reportes
 Route::get('/generar_reportes','ReportesController@generar')->name('generar')->middleware('permisos:reportes');
 Route::post('/generador/reportes','ReportesController@generador')->name('generador')->middleware('permisos:reportes');
 Route::get('/reportes/pdf','ReportesController@reporte')->name('reportePdf')->middleware('permisos:reportes');
->>>>>>> d7cb1791a7afca80985417b6ea6382cf8217a14d
 
