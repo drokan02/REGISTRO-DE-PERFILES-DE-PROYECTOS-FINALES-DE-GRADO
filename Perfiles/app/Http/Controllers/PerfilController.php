@@ -25,9 +25,13 @@ class PerfilController extends Controller
 
     public function index(Request $request){
         $modalidades = Modal::all();
+        $anios    = Perfil::anios()->orderBy('year','DESC')->get();
+        $profesionales = Profesional::all();
+        $periodos = [1,2];
         $mod_id   = $request['modalidad_id'];
         $periodo  = $request['periodo'];
         $anio     = $request['anio'];
+        $tutor_id = $request['tutor_id'];
         $buscar   = $request['buscar'];//"no hay titulo";
         $fila     = 1;
         $perfiles = Perfil::eliminado(false)
@@ -35,21 +39,61 @@ class PerfilController extends Controller
                           ->anio($anio)
                           ->periodo($periodo)
                           ->buscar($buscar)
-                          ->with('tutor')
+                          ->perfilesTutor($tutor_id)
+                          ->with(['tutor','estudiantes'])
                           ->orderBy('id','DESC')
                           ->paginate(7);
-        //dd($perfiles->toArray());
         if ($request->ajax()) {
             return response()->json([
                 view('parcial.perfiles',compact('perfiles','buscar','fila'))->render()
             ]);
         }
-        return view('perfiles.listaPerfiles',compact('perfiles','buscar','fila','modalidades'));
+        return view('perfiles.listaPerfiles',compact('perfiles','buscar','fila','modalidades','anios','profesionales','periodos'));
     }
 
     public function nuevoFormulario(){
+        $estudiante    = auth()->user()->estudiante()->first();
+        $estudiante_id = 1;//$estudiante->id;
         $modalidades = Modal::all();
-        return view('perfiles.formulario',compact('modalidades'));
+        $perfil        = Perfil::perfilEstudiante($estudiante_id)->with('tutor','estudiantes.carrera','docente.profesional','director.profesional','area','subarea','modalidad')->get();
+       
+        if($perfil->toArray() != []){
+           return $this->perfilGuardado($perfil,$modalidades,$estudiante);
+        }else{
+            return view('perfiles.formulario',compact('modalidades'));
+        } 
+    }
+
+    public function perfilGuardado($perfil,$modalidades,$estudiante){
+       // dd($perfil->toArray());
+        $perfil        = $perfil[0];
+        $modalidad_id  = $perfil->modalidad_id;
+        $carrera_id    = $perfil->estudiantes[0]->carrera_id;
+        $fecha_ini     = $perfil->fecha_ini;
+        $director_id   = $perfil->director->profesional->id;
+        $modalidad     = Modal::where('id',$modalidad_id)->value('nombre_mod');
+        $subareas      = Area::subareasCarrera($carrera_id)->get();
+        $areas         = Area::areasCarrera($carrera_id)->get();
+        $director      = $this->directorCarrera($carrera_id);
+        if($director){
+            $director_id   = $director->toArray()['id'];
+        }else
+            $director_id = 0;
+        
+        $profesionales = Profesional::where('id','!=',$director_id)
+                                    ->DeCarrera($carrera_id)->get();
+        $docentes      = Docente::where('id','!=',$director_id)
+                                  ->where('docente_materia',"si")
+                                 ->with('profesional')
+                                ->porCarrera($carrera_id)->get();
+        $perfiles      = Perfil::where('modalidad_id',$modalidad_id)
+                                ->where('trabajo_conjunto','si')
+                                ->with('docente.profesional')->with('tutor','area','subarea')
+                                ->whereHas('estudiantes')->get();
+        $gestion       = $this->periodo();
+        $fecha_ini     = $this->fechaIni();
+        $fecha_fin     = $this->fechaFin();
+        return view('perfiles.perfilGuardado',compact('perfil','estudiante','modalidades','areas','docentes','subareas','profesionales','perfiles','gestion','fecha_ini','fecha_fin'));
     }
 
     public function mostrarForm(Request $request){
@@ -69,7 +113,9 @@ class PerfilController extends Controller
         
         $profesionales = Profesional::where('id','!=',$director_id)
                                     ->DeCarrera($carrera_id)->get();
-        $docentes      = Docente::where('id','!=',$director_id)->with('profesional')
+        $docentes      = Docente::where('id','!=',$director_id)
+                                  ->where('docente_materia',"si")
+                                 ->with('profesional')
                                 ->porCarrera($carrera_id)->get();
         $perfiles      = Perfil::where('modalidad_id',$modalidad_id)
                                 ->where('trabajo_conjunto','si')
@@ -120,6 +166,7 @@ class PerfilController extends Controller
         if($request->ajax()){
             return response()->json($validacion);
         }
+      
         if($perfil_id  && $trabConjunto == 'si'){
             $perfil->estudiantes()->attach($estudiante_id,['perfil_id'=>$perfil_id]); 
         }else{
@@ -156,6 +203,7 @@ class PerfilController extends Controller
     public function modificar(PerfilFormRequest $request,Perfil $perfil){
         if($request->ajax()){
             return response()->json([
+                'registrado'=>true,
                 'mensaje'=>'Perfil modificado correctamente'
             ]);
         }
@@ -234,7 +282,10 @@ class PerfilController extends Controller
         $fecha_fin = $perfil->toArray()[0]['fecha_fin'];
         $valido = $this->fechaValido($fecha_fin);
         if($valido){
-            //$estudiante->perfil()->detach();
+            $estudiante->perfil()->detach();
+            $perfil->update([
+                'estado'=>'eliminado'
+            ]);
             return [
                 'registrado'=>true,
                 'mensaje'=> 'Formulario para el Cambio De Tema registrado correctamente '
@@ -333,6 +384,7 @@ class PerfilController extends Controller
 
         return $errores;
      }
+<<<<<<< HEAD
      public function ver($id){
 		$perfil=Perfil::findOrFail($id);
 		
@@ -346,4 +398,27 @@ class PerfilController extends Controller
 		//return view('perfiles.ver',['perfil'=>$perfil]);
     }
 }
+=======
+>>>>>>> d7cb1791a7afca80985417b6ea6382cf8217a14d
 
+     public function publicar(PerfilFormRequest $request,Perfil $perfil){
+        if($request->ajax()){
+            $mensaje = "";
+         if($request['estado'] == "Guardado"){
+            $mensaje = "Perfil Guardado";
+         }else{
+             $mensaje = "Perfil Publicado";
+         }
+            return response()->json([
+                'registrado'=>true,
+                'mensaje'=> $mensaje
+            ]);
+        }
+        $perfil->update($request->all());
+        $perfil->sec_trabajo = $request->institucion;
+        $perfil->sec_trabajo = $request->sec_trabajo;
+        $perfil->update();
+        return redirect()->route('perfiles');
+    }
+
+}

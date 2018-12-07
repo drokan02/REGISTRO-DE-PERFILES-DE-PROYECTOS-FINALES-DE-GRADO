@@ -63,7 +63,9 @@ class Perfil extends Model
 
     public function scopeBuscar($query,$buscar){
         if($buscar){
-            return $query->where(DB::raw("CONCAT(titulo,' ',descripcion)"), "LIKE", "%$buscar%");
+            return $query->whereHas('estudiantes', function($query) use ($buscar){
+                return $query->where(DB::raw("CONCAT(titulo,' ',descripcion,' ',nombres)"), "LIKE", "%$buscar%");
+            });
         }
         
     }
@@ -71,17 +73,23 @@ class Perfil extends Model
     public function scopePeriodo($query,$periodo){
         if($periodo){
             if($periodo == 1){
-                return $query->whereMonth('fecha_ini','<',7);
+                return $query->whereMonth('fecha_ini','<=',6);
             }else{
-                return $query->whereMonth('fecha_ini','>=',7);
+                return $query->whereMonth('fecha_ini','>',6);
             }
         }
         
     }
 
+    public function scopeAnios($query){
+
+            return $query->select(DB::raw('YEAR(fecha_ini) as year') )->distinct();
+        
+    }
+
     public function scopeAnio($query,$anio){
-        if($anio){
-            return $query->whereYear('fecha_ini','==',$anio);
+        if($anio ){
+            return $query->whereYear('fecha_ini',$anio);
         }
     }
 
@@ -95,9 +103,28 @@ class Perfil extends Model
 
     public function scopeEliminado($query,$eliminados){
         if ($eliminados) {
-            return $query->where('estado','eliminado');
+            return $query->where('estado','eliminado')->where('estado','!=','Guardado');
         }else{
-            return $query->where('estado','!=','eliminado')->orWhereNull('estado');
+            return $query->where('estado','!=','eliminado')->where('estado','!=','Guardado')->orWhereNull('estado');
         }
     }
+
+    public function scopePerfilesTutor($query,$tutor_id){
+        if($tutor_id){
+            return $query->where('estado','!=','eliminado')->where('estado','!=','Guardado')
+                            ->whereHas('tutor', function($query) use ($tutor_id){
+                            return $query->where('profesional_id',$tutor_id);
+                            });
+         }
+    }
+
+   
+    public function scopePerfilEstudiante($query,$estudiante_id){
+        return $query->where('estado','Guardado')
+                     ->whereHas('estudiantes', function($query) use ($estudiante_id){
+                        return $query->where('estudiante_id',$estudiante_id);
+                     });
+    }
+
+    
 }

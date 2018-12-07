@@ -12,6 +12,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href={{asset('css/bootstrap.min.css')}} rel="stylesheet">
+    <link href={{asset('css/font-awesome.min.css')}} rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href={{asset('css/footer2.css')}} rel="stylesheet">
@@ -46,7 +47,7 @@
 
           <titulo class="row text-white text-center p-3 mb-2">
               <div class="col-2 mt-1">
-                  <img src="{{asset('img/umss.png')}}" width="100" height="100">
+                  <img src="{{asset('img/umss.png')}}" width="80" height="100">
               </div>
               <div class="col-8">
                   <h1>UNIVERSIDAD MAYOR DE SAN SIMON</h1>

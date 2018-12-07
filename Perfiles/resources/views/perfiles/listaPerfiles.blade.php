@@ -4,13 +4,33 @@
 
 <Form method="GET" action="{{route('perfiles')}}" >
     {!! csrf_field() !!}
-    <div class="container">
-       <div class="container col-sm-6">
+    
+       <div class="col-sm-12">
            
             <div class="form-group row">
+                <div class="col-sm-1"></div>
+                <label for="anio" class="col-sm-0 col-form-label">Anio</label>
+                <div class="col-sm-2 " >
+                        <select name="anio" id="anio" class="form-control" >
+                            <option disabled selected > seleccionar </option>
+                            @foreach ($anios as $anio)
+                            <option  > {{$anio->year}} </option> 
+                            @endforeach
+                        </select>
+                </div>
 
-                <label for="cargahoraria_id" class="col-sm-2 col-form-label">Modalidad</label>
-                <div class="col-sm-10 " >
+                <label for="periodo" class="col-sm-0 col-form-label">Periodo</label>
+                <div class="col-sm-2 " >
+                        <select name="periodo" id="periodo" class="form-control" >
+                            <option disabled selected > seleccionar </option>
+                            @foreach ($periodos as $periodo)
+                            <option  > {{$periodo}} </option> 
+                            @endforeach
+                        </select>
+                </div>
+
+                <label for="modalidad_id" class="col-sm-0 col-form-label">Modalidad</label>
+                <div class="col-sm-2 " >
                         <select name="modalidad_id" id="modalidad_id" class="form-control" >
                             <option disabled selected > seleccionar </option>
                             @foreach ($modalidades as $modalidad)
@@ -18,7 +38,17 @@
                             @endforeach
                         </select>
                 </div>
-            </div>
+
+                <label for="tutor_id" class="col-sm-0 col-form-label">Tutor</label>
+                <div class="col-sm-3 " >
+                        <select name="tutor_id" id="tutor_id" class="form-control" >
+                            <option disabled selected > seleccionar </option>
+                            @foreach ($profesionales as $tutor)
+                            <option  value="{{$tutor->id}}"> {{$tutor->ap_pa_prof}} {{$tutor->ap_ma_prof}} {{$tutor->nombre_prof }} </option> 
+                            @endforeach
+                        </select>
+                </div>
+
        </div>
         <div class="form-group row">
             <div class=" col-sm-4 offset-md-4">       
@@ -69,17 +99,22 @@
                                             <a href='{{route('verPerfil',$perfil)}}' class="dropdown-item" href="#">
                                                     <h5><i class="col-sm-3 fa fa-eye iconMenu" >&nbsp;&nbsp;&nbsp;Ver </i></h5>
                                             </a>
+                                        @if(auth()->user()->hasPermisos(['editar_perfil']))
                                             <a href='{{route('editarPerfil',$perfil)}}' class="dropdown-item" href="#">
                                                     <h5><i class="col-sm-3 fa fa-pencil-square-o iconMenu">&nbsp;&nbsp;&nbsp;Editar</i></h5>
                                             </a>
+                                        @endif
+                                        @if(auth()->user()->hasPermisos(['eliminar_perfil']))
                                             <a href='{{ route('eliminarPerfil',$perfil)}}' class="dropdown-item eliminar" href="#">
                                                     <h5> <i class="col-sm-3 fa fa-minus-square iconMenu" >&nbsp;&nbsp;&nbsp;Eliminar</i></h5>
-                                            </a> 
+                                            </a>
+                                        @endif
+                                        @if(auth()->user()->hasPermisos(['eliminar_perfil']))
                                             <a  href="{{ route('cambiarEstadoPerfil',$perfil)}}" class="dropdown-item estado" href="#" data-toggle="modal" data-target="#exampleModalCenter" 
                                             data-perfil="{{$perfil}}" data-ruta="{{ route('cambiarEstadoPerfil',$perfil)}}">
                                                 <h5> <i class="col-sm-3 fa fa-minus-square iconMenu" >&nbsp;&nbsp;&nbsp;Estados</i></h5>
-                                        </a> 
-                                                                              
+                                            </a>
+                                        @endif
                                     </div>
                             </div> 
                         </td>

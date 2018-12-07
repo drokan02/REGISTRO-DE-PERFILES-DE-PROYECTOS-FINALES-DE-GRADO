@@ -146,7 +146,7 @@
                 <div class="col-sm-2"></div>
                 <div class="col-8">
                         <a href="{{ route('Docentes') }}" class="btn btn-danger">Cancel</a>
-                        <button type="submit" class='btn btn-success modificarPerfil perfil'>Registrar</button>
+                        <button type="submit" class='btn btn-success modificarP'>Registrar</button>
                 </div>
                 
                     
@@ -159,4 +159,5 @@
  <script>
         $('.form-control-chosen').chosen({});
  </script>
+ <script src={{asset('js/eliminar.js')}}></script>
 @endsection

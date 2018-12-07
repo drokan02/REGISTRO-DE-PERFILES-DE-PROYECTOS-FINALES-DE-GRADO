@@ -1,5 +1,5 @@
 <form method="POST" action="{{route('almacenarPerfil',['director_id'=>$director->id,'modalidad_id'=>$modalidad_id,
-    'estudiante_id'=>$estudiante->id,'fecha_ini'=>$fecha_ini,'fecha_fin'=>$fecha_fin,'estado'=>'En Progreso'])}}">
+    'estudiante_id'=>$estudiante->id,'fecha_ini'=>$fecha_ini,'fecha_fin'=>$fecha_fin])}}">
     {!! csrf_field() !!}
     <div class="form-group row">
         <label for="name" class="col-sm-2 col-form-label">Nombre Estudiante</label>
@@ -197,7 +197,7 @@
         <div class="col-sm-2"></div>
         <div class="col-8">
                 <a href="{{ route('Docentes') }}" class="btn btn-danger">Cancel</a>
-                <button type="submit" class='btn btn-success registrar'>Registrar</button>
+                <button type="submit" class='btn btn-success registrarPerfil'>Registrar</button>
         </div>
         
             
@@ -206,6 +206,7 @@
 </form>
 <!--<script src={{asset("sel/chosen.jquery.min.js")}}></script>-->
     <script>
-			$('.form-control-chosen').chosen({});
+            //$('.form-control-chosen').chosen({});
+          
 	 </script>
 <script src={{asset('js/eliminar.js')}}></script>

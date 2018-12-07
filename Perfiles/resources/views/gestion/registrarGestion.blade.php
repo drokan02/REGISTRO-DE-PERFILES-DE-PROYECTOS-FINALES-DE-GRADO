@@ -6,36 +6,31 @@
 	@include('complementos.error')				
 <!--FIN ERRORES-->	
 
-	<div class="row justify-content-center mt-4">
+
+	<div class="row justify-content-center mt-4" >
 		<div class= "col-sm-9" style="left: 100px;">
-			<form >
+			<form method="POST" action="{{route('almacenarGestion')}}">
 				{!! csrf_field() !!}
 						<div class = "form-group row"> 
 							<label for="codigo" class="col-sm-2 col-form-label">Fecha inicio</label>
 							<div class="col-sm-7">
-                                <input class="fecha_in" id="fecha_ini" placeholder="Seleccione una fecha" disabled>
-                                <script>
-                                   
-                                </script>
+								<input type="date"  name="fecha_ini" class="form-control" id="fecha_ini" placeholder="Seleccione una fecha" 
+								value="<?php echo date("Y-m-d");?>">
 							</div>
 						</div>
 						<!--Nombre area -->
 						<div class = "form-group row"> 
 							<label for="nombre" class="col-sm-2 col-form-label">fecha Fin</label>
 							<div class="col-sm-7">
-								<input id="fecha_fin" placeholder="Seleccione una fecha" disabled>
-                                <script>
-                                    $('#fecha_fin').datepicker({
-                                        uiLibrary: 'bootstrap4'
-                                    });
-                                </script>
+								<input type="date" id="fecha_fin" name="fecha_fin" class="form-control" placeholder="Seleccione una fecha"
+								value="<?php echo date("Y-m-d");?>">
 							</div>
 						</div>
 			
 						<div class = "form-group row">
 							<label for="descripcion" class="col-sm-2 col-form-label">Periodo</label>
 							<div class="col-sm-7">
-								<input type="text" class="form-control" disabled>
+								<input type="text" class="form-control" value="{{$periodo}}" disabled>
 							</div>
 							
 						</div>

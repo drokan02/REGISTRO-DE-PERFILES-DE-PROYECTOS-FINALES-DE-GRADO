@@ -34,7 +34,21 @@
              @endif
         </ul>
       </li>
-      <!-- menu AREAS -->
+
+        @if(auth()->user()->hasPermisos(['reportes']))
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-map" aria-hidden="true"></i><span>Reportes</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{route('generar')}}"><i class="fa fa-caret-right" aria-hidden="true"></i>Generar Reportes</a></li>
+                </ul>
+            </li>
+        @endif
+
+
+    <!-- menu AREAS -->
       <li class="treeview {{ request()->segment(1) == 'areas'? 'active open':'' }}">
           <a href="#">
               <i class="fa fa-file-text-o" aria-hidden="true"></i>
@@ -161,9 +175,11 @@
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li class="">
-                    <a href="{{route('nuevoPerfil')}}"><i class="fa fa-caret-right" aria-hidden="true"></i>Registrar Perfil</a>
-                </li>
+                @if(auth()->user()->hasPermisos(['registrar_perfil']))
+                    <li class="">
+                        <a href="{{route('nuevoPerfil')}}"><i class="fa fa-caret-right" aria-hidden="true"></i>Registrar Perfil</a>
+                    </li>
+                @endif
                 <li class="">
                     <a href="{{route('perfiles')}}"><i class="fa fa-caret-right" aria-hidden="true"></i>Lista Perfiles</a>
                 </li>

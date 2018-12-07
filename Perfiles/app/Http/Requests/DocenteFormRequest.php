@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Docente;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 class DocenteFormRequest extends FormRequest
@@ -31,7 +32,7 @@ class DocenteFormRequest extends FormRequest
                 'ap_ma_prof'    => 'required|alpha|min:3',
                 'ci_prof'       => 'required|numeric|digits_between:6,8|unique:profesional,ci_prof',
                 'telef_prof'    => 'required|numeric|digits_between:7,8|unique:profesional,telef_prof',
-                'correo_prof'   => 'email|min:8|unique:profesional,correo_prof',
+                'correo_prof'   => 'email|min:8|unique:profesional,correo_prof|unique:users,email',
                 'direc_prof'    => 'min:7',
                 'codigo_sis'    => 'required|numeric|digits_between:6,10|unique:docente,codigo_sis',
                 'director_carrera' => 'unique:docente,director_carrera',
@@ -39,20 +40,23 @@ class DocenteFormRequest extends FormRequest
                 'titulo_id'     => 'required',
                 'area_id'       => 'required',
                 'carrera_id'    => 'required',
+                'password'      => 'required'
 
             ];
         }else{
             $aux = $this->{'docente'};
             $docente= $aux->toArray();
+            $doc=Docente::query()->where('id',$docente['id'])->get()->first();
             return [
                 'nombre_prof'   => ['required','regex:/^[\pL\s]+$/u','min:3'],
                 'ap_pa_prof'    => ['required','alpha','min:3'],
                 'ap_ma_prof'    => ['required','alpha','min:3'],
                 'ci_prof'       => ['required','numeric','digits_between:6,8',Rule::unique('profesional', 'ci_prof')->ignore($docente['profesional_id'])],
                 'telef_prof'    => ['required','numeric','digits_between:7,8',Rule::unique('profesional', 'telef_prof')->ignore($docente['profesional_id'])],
-                'correo_prof'   => ['email',Rule::unique('profesional', 'correo_prof')->ignore($docente['profesional_id'])],
+                'correo_prof'   => ['email',Rule::unique('profesional', 'correo_prof')->ignore($docente['profesional_id']),
+                                     Rule::unique('users','email')->ignore($doc->usuario()->first()->id)],
                 'direc_prof'    => 'min:7',
-                'codigo_sis'    => 'required|numeric|digits_between:6,10|unique:docente,codigo_sis',
+                'codigo_sis'    => ['required','numeric','digits_between:6,10',Rule::unique('docente','codigo_sis')->ignore($docente['id'])],
                 'cargahoraria_id' => 'required',
                 'titulo_id'     => 'required',
                 'area_id'       => 'required',

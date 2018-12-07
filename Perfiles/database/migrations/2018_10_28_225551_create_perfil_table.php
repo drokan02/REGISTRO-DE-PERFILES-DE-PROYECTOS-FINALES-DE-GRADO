@@ -19,10 +19,10 @@ class CreatePerfilTable extends Migration
             $table->integer('docente_id')->unsigned();
             $table->integer('director_id')->unsigned();
             $table->integer('area_id')->unsigned();
-            $table->integer('subarea_id')->unsigned();
+            $table->integer('subarea_id')->unsigned()->nullable();
             $table->string('titulo',200);
-            $table->string('institucion',200)->nullable();;
-            $table->string('sec_trabajo',200)->nullable();;
+            $table->string('institucion',200)->nullable();
+            $table->string('sec_trabajo',200)->nullable();
             $table->string('objetivo_gen',1024);
             $table->string('objetivo_esp',1024);
             $table->string('descripcion',1024);
@@ -30,7 +30,7 @@ class CreatePerfilTable extends Migration
             $table->string('cambio_tema',10)->nullable();
             $table->date('fecha_ini');
             $table->date('fecha_fin');
-            $table->string('estado',10)->nullable();
+            $table->string('estado',100)->nullable();
             $table->foreign('modalidad_id')->references('id')->on('modalidad')->onDelete('cascade');
             $table->foreign('docente_id')->references('id')->on('docente')->onDelete('cascade');
             $table->foreign('director_id')->references('id')->on('docente')->onDelete('cascade');

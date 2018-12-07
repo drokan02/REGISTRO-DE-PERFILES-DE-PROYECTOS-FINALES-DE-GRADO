@@ -54,6 +54,64 @@ $('#eliminarAreaCarrera').click(function(e){
     });
 })
 
+$('.registrarPerfil').click(function(e){
+    e.preventDefault();
+    bloquearCampos(false);
+    var estado = "";
+    form = $(this).parents('form');
+    url  = form.attr('action');
+    datos = form.serialize();
+    modalidad_id =  $('#modalidadG').val();
+    url = url +"&modalidad_id="+modalidad_id;
+   alertify.confirm('Perfil de Grado',
+    function () {
+        url = url+"&estado=Guardado";
+        form.prop('action',url);
+        registrarPerfil(url,datos);
+    },
+    function () {
+        url = url+"&estado=En Progreso";
+        form.prop('action',url);
+         registrarPerfil(url,datos);
+    }
+    ).set('labels', {ok:'Guardar', cancel:'Publicar'});
+
+})
+
+function registrarPerfil(url,datos){
+        console.log(datos);
+        $.post(url,datos,function(res){
+            if(res.registrado){
+                alertify.alert(res.mensaje).set('basic', true); 
+                form.submit();
+            }else{
+                if(perfilSeleccionado()){
+                     bloquearCampos(true);
+                }
+                alertify.set('notifier','position', 'top-right');
+                alertify.error(res.mensaje,6).dismissOthers();
+                
+            }
+         //error   
+        }).fail(function(ress,status,error){
+            if(perfilSeleccionado()){
+                bloquearCampos(true);
+           }
+            var errores="";
+            var cont = 18;
+           // $('#mensajeError').show();//muestra los mensajes
+            $.each($.parseJSON(ress.responseText), function (ind, elem) {     
+                    alertify.set('notifier','position', 'top-right');
+                    if(cont == 18){
+                        alertify.error(""+elem,cont--).dismissOthers();
+                    }else{
+                        alertify.error(""+elem,cont--);
+                    }
+            }); 
+            
+        });
+}
+
 $('.registrar').click(function(e){
     e.preventDefault();
     bloquearCampos(false);
@@ -141,7 +199,6 @@ $('.trabajoCon').click(function(){
         $(this).prop('value','no');
         mostrarPerfiles(false);
         bloquearCampos(false);
-        limpiarCampos();
         $("#inputs").hide();
         $("#selects").show();
     }
@@ -269,3 +326,16 @@ $('.cambiarEstado').click(function(){
     })
    
 })
+
+/*$('.renunciarTutoria').click(function(e){
+    e.preventDefault();
+    url  = $(this).attr('href');
+    fila = $(this).parents("tr");
+    tabla = $(this).parents("tbody");
+    var divLista = $('.listaDatos');
+    console.log(tabla.find("tr").length);
+    $.get(url,[],function(res){
+        alertify.alert(res.mensaje).set('basic', true);
+        divLista.html(res.datos);
+    })
+})*/

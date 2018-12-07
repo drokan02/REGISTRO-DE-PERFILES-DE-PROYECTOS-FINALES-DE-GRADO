@@ -19,6 +19,7 @@
     <script src={{asset("sel/jquery-3.3.1.slim.min.js")}} ></script>
     <script src={{asset('sel/popper.min.js')}}></script>
     <!--<script src={{asset("sel/chosen.jquery.min.js")}}></script>-->
+    <script src={{asset('js/ajax.js')}}></script>
     
     
   </head>
@@ -34,7 +35,7 @@
        <!--Contenido-->
    
       <div class="content-wrapper">
-        <section class="content" style="padding-top: 80px">
+        <section class="content contenidoP" style="padding-top: 80px">
           <div class="row">
             <div class="col-md-12">
               
@@ -49,7 +50,7 @@
                   <div class="box-body ">
                     
                     <div class="row">
-                      <div class="col-md-12">
+                      <div class="col-sm-12">
                           <!--Contenido-->
                           @yield("contenido")
                           <!--Fin Contenido-->
@@ -66,8 +67,30 @@
         </section><!-- /.content -->
       </div>
     </div>
+<<<<<<< HEAD
      
       <script src={{asset('js/ajax.js')}}></script>
+=======
+      <!--Fin-Contenido-->
+
+      <!--PIE DE PAGINA
+      <footer class="main-footer" style="background-color: #3c8dbc;color: white">
+          <div class="row">
+              <div class="col-auto ml-2 mt-1">
+                  <img  src="{{asset('img/vensoft.jpg')}}" width="50" height="50">
+              </div>
+              <div class="col-4 mt-2">
+                      <span class="font-italic">El sistema es Diseño y Desarrollo de la Empresa de software
+                          "VENSOFT" Copyright © 2018 . Todos los derechos reservados.
+                      </span>
+              </div>
+              <div class="col-3 offset-4 text-center mt-2">
+                  <span>Facultad de Ciencias y Tecnología (UMSS).<br></span>
+                  <span> Cochabamba - Bolivia</span>
+              </div>
+          </div>
+      </footer>-->
+>>>>>>> d7cb1791a7afca80985417b6ea6382cf8217a14d
     <script src={{asset('js/jquery-3.3.1.min.js')}}></script>
     <script src={{asset('js/gijgo.min.js')}} ></script>
     <script src={{asset('js/bootstrap.min.js')}}></script>
