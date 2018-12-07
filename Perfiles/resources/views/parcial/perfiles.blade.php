@@ -42,7 +42,7 @@
                                             </a> 
                                             <a  href="{{ route('cambiarEstadoPerfil',$perfil)}}" class="dropdown-item estado" href="#" data-toggle="modal" data-target="#exampleModalCenter" 
                                             data-perfil="{{$perfil}}" data-ruta="{{ route('cambiarEstadoPerfil',$perfil)}}">
-                                                <h5> <i class="col-sm-3 fa fa-minus-square iconMenu" >&nbsp;&nbsp;&nbsp;Estados</i></h5>
+                                                <h5> <i class="col-sm-3 fa fa-calendar-plus-o iconMenu" >&nbsp;&nbsp;&nbsp;Estados</i></h5>
                                         </a> 
                                                                               
                                     </div>

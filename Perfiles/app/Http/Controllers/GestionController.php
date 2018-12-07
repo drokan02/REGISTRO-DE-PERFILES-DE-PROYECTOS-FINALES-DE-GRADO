@@ -66,16 +66,19 @@ class GestionController extends Controller
     }
 
     public function editar(Gestion $gestion){
-        return view('gestion.editarGestion',compact($gestion));
+        return view('gestion.editarGestion',compact('gestion'));
     }
 
-    public function modificar(GestionFormRequest $request,Gestion $gestion){
+    public function modificar(Request $request,Gestion $gestion){
         if ($request->ajax()) {
             return response()->json(
-                ['mensaje'=> 'Gestion editado correctamente']
+                [
+                    'registrado' => true, 
+                    'mensaje'=> 'Gestion editado correctamente'
+                ]
             );
         }
-        $gestion->update($request->all);
+        $gestion->update($request->all());
         return redirect()->route('gestiones');
     }
 

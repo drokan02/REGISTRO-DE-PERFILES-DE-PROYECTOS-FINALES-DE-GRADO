@@ -34,11 +34,7 @@
                         </form>
                     </div>
                 </div>
-<<<<<<< HEAD
-                <p class="text-primary"> Eres estudiante y no tienes cuenta? <a class="btn btn-link" href="{{route('register')}}">Registrate</a></p>
-=======
                 <p class="font-weight-bold mt-2">Eres estudiante y no tienes cuenta? <a class="btn btn-link" href="{{route('register')}}">Registrate</a></p>
->>>>>>> 4784e7345ce7b3044246520f222794578039d70e
             </div>
         </div>
     </div>

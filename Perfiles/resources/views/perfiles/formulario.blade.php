@@ -17,7 +17,7 @@
                 </div>
             </div>
         </form>
-        <div class="col-sm-12" id="contenidoForm">
+        <div class="col-sm-12" id="contenidoForm">  
                 
         </div>
     </div>

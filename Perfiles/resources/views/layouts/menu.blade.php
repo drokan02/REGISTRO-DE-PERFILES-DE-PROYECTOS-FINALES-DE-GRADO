@@ -19,7 +19,6 @@
     <script src={{asset("sel/jquery-3.3.1.slim.min.js")}} ></script>
     <script src={{asset('sel/popper.min.js')}}></script>
     <!--<script src={{asset("sel/chosen.jquery.min.js")}}></script>-->
-    <script src={{asset('js/ajax.js')}}></script>
     
     
   </head>
@@ -67,10 +66,7 @@
         </section><!-- /.content -->
       </div>
     </div>
-<<<<<<< HEAD
-     
-      <script src={{asset('js/ajax.js')}}></script>
-=======
+
       <!--Fin-Contenido-->
 
       <!--PIE DE PAGINA
@@ -90,7 +86,7 @@
               </div>
           </div>
       </footer>-->
->>>>>>> d7cb1791a7afca80985417b6ea6382cf8217a14d
+    <script src={{asset('js/ajax.js')}}></script>
     <script src={{asset('js/jquery-3.3.1.min.js')}}></script>
     <script src={{asset('js/gijgo.min.js')}} ></script>
     <script src={{asset('js/bootstrap.min.js')}}></script>
