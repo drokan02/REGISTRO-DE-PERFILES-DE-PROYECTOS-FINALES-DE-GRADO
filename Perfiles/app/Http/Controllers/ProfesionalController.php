@@ -119,7 +119,7 @@ class ProfesionalController extends Controller
                             ->perfilesTutor($profesional->id)
                             ->buscar($buscar)
                             ->orderBy('id','DESC')
-                            ->paginate(7);
+                            ->paginate(20);
         if($request->ajax()){
             return view('parcial.perfilesTutor',compact('profesional','profesionales','perfiles','fila',"buscar"))->render();      
         }

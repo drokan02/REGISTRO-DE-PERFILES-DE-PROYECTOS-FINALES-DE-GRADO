@@ -35,7 +35,7 @@ class docenteController extends Controller
                                 ->porCarrera($carrera_id)
                                 ->buscardocentes($buscar)
                                 ->orderBy('id','ASC')
-                                ->paginate(10);	
+                                ->paginate(20);	
        } else{
         $docentes=Docente::with('profesional.titulo')->porCarrera($carrera_id)
                                               ->orderBy('id','ASC')
@@ -202,12 +202,14 @@ class docenteController extends Controller
         return view('docentes/ver',compact('docente','profesional'));
     }
     public function tutoria(Docente $docente){
-        $perfiles=$docente->perfiles()->get();
+        $profesional=$docente->profesional()->first();
+        $perfiles=$profesional->perfiles()->get();
         return view('docentes/tutoria',compact('docente','perfiles'));
     }
 
     public function descargarPdf(Docente $docente){
-        $perfiles=$docente->perfiles()->get();
+        $profesional=$docente->profesional()->first();
+        $perfiles=$profesional->perfiles()->get();
         $pdf=PDF::loadView('pdf/tutoriaDocente',compact('perfiles','docente'));
         return  $pdf->download();
     }

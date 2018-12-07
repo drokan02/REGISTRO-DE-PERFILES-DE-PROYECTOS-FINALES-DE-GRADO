@@ -17,7 +17,7 @@
             </li>
         </ul>
     @endif
->>>>>>> b58c11de2948b9da0128db1dc79fa02e3510e2ce
+
     <div class="container">
  
             <div class="row justify-content-center">
@@ -28,7 +28,17 @@
                                  <h4><b>{{$docente->profesional->nombre_prof}} {{$docente->profesional->ap_pa_prof}}  {{$docente->profesional->ap_ma_prof}} </b></h4> 
                                  <small>Nombre Completo</small>  
                               </div>
+<<<<<<< HEAD
                               
+=======
+                            @if(auth()->user()->hasRoles(['docente','administrador']))
+                              <div class="list-group-item">
+                                    
+                                 <strong>{{$docente->profesional->ci_prof}}</strong><br>
+                                 <small>Cedula de Indentidad</small>
+                              </div>
+                            @endif
+>>>>>>> 9bb5db93d0a0dde2824d99089c58f77152f76074
                               <div class="list-group-item">
                                 
                                        <strong class="leas text-left" >{{$docente->profesional->direc_prof}}</strong><br>
@@ -40,18 +50,26 @@
             <br/>
             <div class="row justify-content-center">
                 <div class="list-group  col-10  " >
+<<<<<<< HEAD
                     <h2  class="list-group-item active "><strong class="row justify-content-center">Informacion Academica</strong></h2>  
                           
                       
+=======
+                    <h2  class="list-group-item active "><strong class="row justify-content-center">Informacion Academica</strong></h2>
+                    @if(auth()->user()->hasRoles(['docente','administrador']))
+                      <div class="list-group-item">
+                         <strong>{{$docente->codigo_sis}}</strong><br>
+                         <small>Codigo Sis</small>  
+                      </div>
+                    @endif
+>>>>>>> 9bb5db93d0a0dde2824d99089c58f77152f76074
                       <div class="list-group-item">
                          <strong>{{$docente->cargahoraria->carga_horaria}}</strong><br>
                          <small>Carga Horaria</small>
                       </div>
                       <div class="list-group-item">
-                        
                                <strong class="leas text-left" >{{$docente->profesional->carrera->nombre_carrera}}</strong><br>
                              <small>Carrera</small>
-                        
                       </div>
                       @foreach ($docente->profesional->areas as $area)
                       <div class="list-group-item">
@@ -63,7 +81,6 @@
                               <small>SubArea</small>
                       </div>
                       @endif
-                     
               @endforeach
          </div>  
  </div>  
@@ -85,6 +102,7 @@
 </div>  
  
     </div >
+<<<<<<< HEAD
 
     @if(auth()->user()->hasRoles(['docente','administrador']))
         <ul class="nav justify-content-end ">
@@ -175,4 +193,6 @@
     </div>
 =======
 >>>>>>> b58c11de2948b9da0128db1dc79fa02e3510e2ce
+=======
+>>>>>>> 9bb5db93d0a0dde2824d99089c58f77152f76074
 @endsection
