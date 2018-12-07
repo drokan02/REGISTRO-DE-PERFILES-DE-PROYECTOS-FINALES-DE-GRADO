@@ -61,8 +61,9 @@ $('.registrarPerfil').click(function(e){
     form = $(this).parents('form');
     url  = form.attr('action');
     datos = form.serialize();
-    modalidad_id =  $('#modalidadG').val();
+    modalidad_id =  $('#modalidad').val();
     url = url +"&modalidad_id="+modalidad_id;
+    
    alertify.confirm('Perfil de Grado',
     function () {
         url = url+"&estado=Guardado";

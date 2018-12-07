@@ -25,7 +25,7 @@ class ProfesionalController extends Controller
     public function index(Request $request){
        $buscar = $request->get('buscar');
        $profesionales = Profesional::buscarprofesional($buscar)
-                                 ->doesntHave('docente')
+                                 //->doesntHave('docente')
                                  ->with('titulo')
                                  ->orderBy('id','ASC')
                                  ->paginate(15);
@@ -138,7 +138,7 @@ class ProfesionalController extends Controller
 
     public function tutores(Request $request,Perfil $perfil,Profesional $profesional){
         $carrera_id = $perfil->director->profesional->carrera_id;
-        $profesionales = Profesional::deCarrera($carrera_id)->where('id','!=',$profesional->id)->doesntHave('docente')->get();
+        $profesionales = Profesional::deCarrera($carrera_id)->where('id','!=',$profesional->id)->get();//doesntHave('docente')->get();
         $docentes = Profesional::where('carrera_id',$carrera_id)->WhereHas('docente', function ($query){
             $query->whereNull('docente_materia')->whereNull('director_carrera');
         })->get();
