@@ -13,9 +13,11 @@
                                                     <th style="width: 40%; text-align: center;">
                                                             <h2 display-4 ><strong class="row justify-content-center">{{$perfil->titulo}}</strong></h2>
                                                 </th>
-                                                    <th style="width: 10%;" ><a href="{{route('descargaPdf',$perfil)}}" title="Realizá un click para empezar la descarga del Formulario de esta tesis." class="text-dark">
-                                                            Descargar Pdf
+                                                    <th style="width: 15%;" ><a href="{{route('descargaPdf',$perfil)}}" title="Realizá un click para empezar la descarga del Formulario de esta tesis." class="text-light">
+                                                         <h4>Descargar Pdf
+                                                          
                                                             <img align="middle" src="/img/icon_bajar.gif">
+                                                      </h4> 
                                                       </a></th>
                                                      
                                                 </td>
@@ -39,7 +41,7 @@
                                     <strong>{{$perfil->estado}}</strong><br>
                                     <small>Estado</small><hr>
                                 <strong>{{$perfil->objetivo_gen}}</strong><br>
-                                <small>Objetivos Generales</small>
+                                <small>Objetivos General</small>
                              </div> 
                               
                      
