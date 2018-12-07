@@ -25,9 +25,13 @@ class PerfilController extends Controller
 
     public function index(Request $request){
         $modalidades = Modal::all();
+        $anios    = Perfil::anios()->orderBy('year','DESC')->get();
+        $profesionales = Profesional::all();
+        $periodos = [1,2];
         $mod_id   = $request['modalidad_id'];
         $periodo  = $request['periodo'];
         $anio     = $request['anio'];
+        $tutor_id = $request['tutor_id'];
         $buscar   = $request['buscar'];//"no hay titulo";
         $fila     = 1;
         $perfiles = Perfil::eliminado(false)
@@ -35,17 +39,16 @@ class PerfilController extends Controller
                           ->anio($anio)
                           ->periodo($periodo)
                           ->buscar($buscar)
+                          ->perfilesTutor($tutor_id)
                           ->with(['tutor','estudiantes'])
                           ->orderBy('id','DESC')
                           ->paginate(7);
-        dd($perfiles->toArray());
-    
         if ($request->ajax()) {
             return response()->json([
                 view('parcial.perfiles',compact('perfiles','buscar','fila'))->render()
             ]);
         }
-        return view('perfiles.listaPerfiles',compact('perfiles','buscar','fila','modalidades'));
+        return view('perfiles.listaPerfiles',compact('perfiles','buscar','fila','modalidades','anios','profesionales','periodos'));
     }
 
     public function nuevoFormulario(){
@@ -381,31 +384,24 @@ class PerfilController extends Controller
 
         return $errores;
      }
-<<<<<<< HEAD
-     public function ver($id){
-		$perfil=Perfil::findOrFail($id);
-		
-		return view('perfiles.ver',['perfil'=>$perfil]);
-    }
-    public function vistaPdf($id){
-        $perfil=Perfil::findOrFail($id); 
-       // $pdf = App::make('dompdf.wrapper');
-       $pdf=PDF::loadView('perfiles.formPdf',['perfil'=>$perfil]); 
-     return $pdf->stream(); 
-		//return view('perfiles.ver',['perfil'=>$perfil]);
-    }
-}
-=======
->>>>>>> 4784e7345ce7b3044246520f222794578039d70e
 
      public function publicar(PerfilFormRequest $request,Perfil $perfil){
         if($request->ajax()){
+            $mensaje = "";
+         if($request['estado'] == "Guardado"){
+            $mensaje = "Perfil Guardado";
+         }else{
+             $mensaje = "Perfil Publicado";
+         }
             return response()->json([
                 'registrado'=>true,
-                'mensaje'=>'Perfil modificado correctamente'
+                'mensaje'=> $mensaje
             ]);
         }
         $perfil->update($request->all());
+        $perfil->sec_trabajo = $request->institucion;
+        $perfil->sec_trabajo = $request->sec_trabajo;
+        $perfil->update();
         return redirect()->route('perfiles');
     }
 

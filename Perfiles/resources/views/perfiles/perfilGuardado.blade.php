@@ -3,7 +3,7 @@
 @section('contenido')
 
 <div class="container">
-    <form method="POST" action="{{route('modificarPerfil',['fecha_ini'=>$fecha_ini,'fecha_fin'=>$fecha_fin,'perfil'=>$perfil])}}">
+    <form method="POST" action="{{route('publicarPerfil',['fecha_ini'=>$fecha_ini,'fecha_fin'=>$fecha_fin,'perfil'=>$perfil])}}">
             {!! csrf_field() !!}
         <div class="form-group row">
                 <div class="col-sm-2"></div>
@@ -81,25 +81,26 @@
                 </div>
             </div>
         
-         @if ($perfil->modalidad->nombre_mod == 'adscripcion')
-            <div class="form-group row" >
-                    <label for="name" class="col-sm-2 col-form-label">Seccion de trabajo</label>
-                    <div class="col-10">
-                        <input type="text" class="form-control" name="sec_trabajo" id="sec_trabajo"
-                         value="{{$perfil->sec_trabajo}}" disabled>
+        
+            <div   class="form-group row" id="ad">
+                    <label for="name" class="col-sm-2 col-form-label divSec_travajo" 
+                    style={{$perfil->modalidad->nombre_mod == 'Adscripcion' ? 'display:inline;':'display:none;'}}>Seccion de trabajo</label>
+                    <div class="col-sm-10">
+                        <input type="text" style={{$perfil->modalidad->nombre_mod == 'Adscripcion'? 'display:inline;':'display:none;'}}
+                        class="form-control divSec_travajo" name="sec_trabajo" id="sec_trabajo"
+                         value="{{$perfil->sec_trabajo}}" >
                      </div>
             </div>  
-            @endif
-            
-            @if ($perfil->modalidad->nombre_mod == 'Trabajo Dirigido')
-            <div class="form-group row">
-                <label for="name" class="col-sm-2 col-form-label">Institución Participante</label>
-                <div class="col-10">
-                    <input type="text" class="form-control" name="institucion" id="institucion" 
-                    value="{{$perfil->institucion}}" disabled >
+           
+            <div class="form-group row"  id="td">
+                <label for="name" style={{$perfil->modalidad->nombre_mod =='Trabajo Dirigido' ? 'display:inline;':'display:none;'}}
+                    class="col-sm-2 col-form-label divInstitucion"  >Institución Participante</label>
+                <div class="col-sm-10">
+                    <input type="text" style={{$perfil->modalidad->nombre_mod == 'Trabajo Dirigido'? 'display:inline;':'display:none;'}}
+                    class="form-control divInstitucion" name="institucion" id="institucion" 
+                    value="{{$perfil->institucion}}">
                 </div>
             </div>   
-            @endif
             
                     
             <div class="form-group row">
@@ -202,8 +203,37 @@
 
  </div>
  <script>
-        //$('.form-control-chosen').chosen({});
-       
+        var aux = 0;
+        $("#modalidadG").change(function() {
+             var modalidades = jobs = {!!json_encode($modalidades)!!};
+             var modalidad =  $(this).val();
+             modalidades.forEach(mod => {
+                if (mod.id == modalidad) {
+                    modalidad = mod.nombre_mod;
+                }  
+             });
+             ;
+             console.log(aux)
+             if(modalidad == 'Trabajo Dirigido'){
+                aux = 1;
+                 $("#td").show();
+                 $(".divSec_travajo").hide();
+                 $(".divSec_travajo").val("");
+                 $(".divInstitucion").show();
+             }else if (modalidad == "Adscripcion") {
+                $("#ad").show();
+                 $(".divInstitucion").hide();
+                 $(".divInstitucion").val("");
+                 $(".divSec_travajo").show();
+             }else  {
+                $(".divSec_travajo").val("");
+                $(".divInstitucion").val("");
+                $("#td").hide();
+                $("#ad").hide();
+             }
+             //$("#selects").show();
+         })  
+            
  </script>
  <script src={{asset('js/eliminar.js')}}></script>
 @endsection
