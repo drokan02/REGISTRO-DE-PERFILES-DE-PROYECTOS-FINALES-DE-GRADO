@@ -42,7 +42,8 @@ class PerfilController extends Controller
                           ->perfilesTutor($tutor_id)
                           ->with(['tutor','estudiantes'])
                           ->orderBy('id','DESC')
-                          ->paginate(20);
+                          ->paginate(20
+                        );
         if ($request->ajax()) {
             return response()->json([
                 view('parcial.perfiles',compact('perfiles','buscar','fila'))->render()
