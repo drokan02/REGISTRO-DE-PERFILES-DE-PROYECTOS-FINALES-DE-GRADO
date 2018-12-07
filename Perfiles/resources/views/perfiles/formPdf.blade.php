@@ -45,7 +45,7 @@
                 </tr>
                 <tr>
                     <td colspan="4">
-                        Tutor:  {{$perfil->tutor[0]->ap_pa_prof}} {{$perfil->tutor[0]->ap_ma_prof}}{{$perfil->tutor[0]->nombre_prof}}
+                        Tutor: {{$profesional->titulo->abreviatura}} {{$perfil->tutor[0]->ap_pa_prof}} {{$perfil->tutor[0]->ap_ma_prof}} {{$perfil->tutor[0]->nombre_prof}}
                     </td>
                 </tr>
                 <tr>
@@ -92,7 +92,7 @@
                 <td>
                     <br><strong>Docente de la Materia</strong>
                 </td>
-                <td >{{$perfil->tutor[0]->nombre_prof}} {{$perfil->tutor[0]->ap_pa_prof}}{{$perfil->tutor[0]->ap_ma_prof}}
+                <td >{{$profesional->titulo->abreviatura}} {{$perfil->tutor[0]->nombre_prof}} {{$perfil->tutor[0]->ap_pa_prof}} {{$perfil->tutor[0]->ap_ma_prof}}
                     <br><strong>Tutor</strong>
                 </td>
                 <td>{{$perfil->estudiantes->pluck('nombres')->implode(' - ')}}

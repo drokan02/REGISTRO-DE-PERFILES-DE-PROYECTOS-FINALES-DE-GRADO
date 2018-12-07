@@ -34,7 +34,7 @@
                                 <p>SubArea</p><hr>
                                     <strong class="leas text-left" >{{$perfil->modalidad->nombre_mod}}</strong><br>
                                     <small>Modalidad</small><hr>
-                                    <strong> {{$perfil->tutor[0]->ap_pa_prof}}
+                                    <strong>{{$profesional->titulo->abreviatura}} {{$perfil->tutor[0]->ap_pa_prof}}
                                           {{$perfil->tutor[0]->ap_ma_prof}}
                                           {{$perfil->tutor[0]->nombre_prof}}</strong><br>
                                     <small>Tutor</small><hr>
