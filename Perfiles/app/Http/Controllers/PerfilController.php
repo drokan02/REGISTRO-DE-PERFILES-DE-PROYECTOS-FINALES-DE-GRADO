@@ -384,7 +384,6 @@ class PerfilController extends Controller
 
         return $errores;
      }
-<<<<<<< HEAD
      public function ver($id){
 		$perfil=Perfil::findOrFail($id);
 		
@@ -397,9 +396,7 @@ class PerfilController extends Controller
      return $pdf->stream(); 
 		//return view('perfiles.ver',['perfil'=>$perfil]);
     }
-}
-=======
->>>>>>> d7cb1791a7afca80985417b6ea6382cf8217a14d
+
 
      public function publicar(PerfilFormRequest $request,Perfil $perfil){
         if($request->ajax()){
