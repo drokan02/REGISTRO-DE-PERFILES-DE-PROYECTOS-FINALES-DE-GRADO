@@ -104,8 +104,11 @@ class ProfesionalController extends Controller
         return redirect()->route('listarProfesionales');
     }
 
-    public function ver(Profesional $profesional){
-
+   
+    public function ver($id){
+		$profesional=Profesional::findOrFail($id);
+		
+		return view('profesionales.ver',['profesional'=>$profesional]);
     }
     
     public function tutoria(Request $request,Profesional $profesional){

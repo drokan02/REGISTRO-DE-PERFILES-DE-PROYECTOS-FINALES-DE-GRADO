@@ -121,6 +121,7 @@ class docenteController extends Controller
         $horarios = CargaHoraria::all();
         return view('docentes.editarDocente',compact('docente','subareas','areas','titulos','horarios','carreras','horarios'));
     }
+
     public function ver(Docente $docente){
 		$profesional=$docente->profesional()->first();
 		return view('docentes/ver',compact('docente','profesional'));

@@ -1,88 +1,61 @@
 @extends('layouts.menu')
-@section('titulo','AREA')
+
 @section('contenido')
     
-<div class=" container jumbotron" style="background-color: white;">
-        <div class="">
-                        <div class="" style="background-color: #e9ecef; min-height: 50px;">
-                                       
-                                    
-                                
-                         </div>
-                <div class="row">
 
-                    <div class="col-md-9 offset-md-2">
-                        <h4>Latest News</h4>
-                        <ul class="timeline">
-                            <li>
-                                
-                                <div class="form-group col-sm-12">
-                                        <a target="_blank" href="https://www.totoprayogo.com/#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New Web Design</a>
-                                        <a href="#" class="float-right">21 March, 2014</a>
-                                        <div class=" offset-md-1">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-                                                         scelerisque diam non nisi semper, et elementum lorem ornare.
-                                                         Maecenas placerat facilisis mollis. Duis sagittis ligula in sodales vehicula....</p>
-                                        </div>
-                                </div>
-                            </li>
-                            <li>
-                                        <div class="form-group col-sm-12">
-                                                        <a target="_blank" href="https://www.totoprayogo.com/#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New Web Design</a>
-                                                        <a href="#" class="float-right">21 March, 2014</a>
-                                                        <div class=" offset-md-1">
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-                                                                         scelerisque diam non nisi semper, et elementum lorem ornare.
-                                                                         Maecenas placerat facilisis mollis. Duis sagittis ligula in sodales vehicula....</p>
-                                                        </div>
-                                                </div>
-                            </li>
-                            <li>
-                                        <div class="form-group col-sm-12">
-                                                        <a target="_blank" href="https://www.totoprayogo.com/#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New Web Design</a>
-                                                        <a href="#" class="float-right">21 March, 2014</a>
-                                                        <div class=" offset-md-1">
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-                                                                         scelerisque diam non nisi semper, et elementum lorem ornare.
-                                                                         Maecenas placerat facilisis mollis. Duis sagittis ligula in sodales vehicula....</p>
-                                                        </div>
-                                                </div>
-                            </li>
-                        </ul>
-                    </div>
+
+     
+        <div class="row justify-content-center">
+        <div class="list-group  col-10  " >
+             <h2  class="list-group-item active "><strong class="row justify-content-center"> Area</strong></h2>  
+             
+                      <div class="list-group-item">
+                        <h4><b> {{$area->nombre}}</b></h4>
+                         <small>area </small>  
+                        </div>
+                        <div class="list-group-item">
+                        <strong>{{$area->codigo}}</strong><br>
+                      <small>Codigo</small>
                 </div>
-        </div>
-</div>
-    <div class="container scroll">
-        
-        <div class="jumbotron">
-                        <h1>AREA: {{$area->nombre}}</h1>
+                <div class="list-group-item">
                         @if ($area->descripcion)
-                        <p class="lead">{{$area->Descripcion}}</p>   
+                         <strong class="leas text-left">{{$area->descripcion}}</strong>
+                         <small>Descripcion</small>
                         @else
-                        <p class="lead">No existe descripcion alguna para esa area, para una mejor informacion consulte a su departamento </p>    
+                        <strong class="lead">No existe descripcion alguna para esa area, para una mejor informacion consulte a su departamento </strong>    
                         @endif
-                
-         </div>
-         <h3><b>Lista de SubAreas</b></h3><br>
-
-        <div class=" row marketing">
+                </div>
+                </div>  
+        </div>  
+        <br/>   
+        <div class="row justify-content-center">
+                <div class="list-group col-10 ">
+         <h3 class=" list-group-item active" > <strong class="row justify-content-center" >SubAreas</strong></h3>
+         
+       
                         @if ($subareas->isNotEmpty())
-                                <div class="col-lg-12">
+                               
                                         @foreach ($subareas as $subarea)
-                                                <h4><b>{{$subarea->nombre}}</b></h4>
+                                        <div class="list-group-item">
+                                                <h4><b><li>{{$subarea->nombre}}</li></b></h4>
+                                                <small> &emsp;&emsp;&emsp;SubArea</small>
+                                        </div>
+                                        <div class="list-group-item">
                                                 @if ($subarea->descripcion)
-                                                        <p>{{$subarea->descripcion}}</p>  
+                                                        <p> <strong>{{$subarea->descripcion}}</strong></p>
+                                                       <small>Descripcion</small>
                                                 @else
                                                         <p>No existe descripcion alguna para esa area, para una mejor informacion consulte con el departamento
                                                         de Informatica y Sistemas</p>  
                                                 @endif
+                                        </div>
                                         @endforeach
+                                      
                                         
                                 </div>  
                         @else
                                 <div class="col-lg-12">
-                                        <p><font size="4">No existe SubAreas pertenecientes a esta Area, para una mejor informacion consulte a su departamento</font></p>
+                                        <p>No existe SubAreas pertenecientes a esta Area, para una mejor informacion consulte a su departamento</p>
                                 </div>
                             
                         @endif
@@ -90,4 +63,7 @@
 
                       
     </div >
+
+<!--/div-->
+   
 @endsection
