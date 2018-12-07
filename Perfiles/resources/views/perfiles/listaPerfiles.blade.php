@@ -100,7 +100,7 @@
                                                     <h5><i class="col-sm-3 fa fa-eye iconMenu" >&nbsp;&nbsp;&nbsp;Ver </i></h5>
                                             </a>
                                         @if(auth()->user()->hasPermisos(['editar_perfil']))
-                                            <a href='{{route('editarPerfil',$perfil)}}' class="dropdown-item" href="#">
+                                            <a href='{{route('editarPerfil',$perfil->id)}}' class="dropdown-item" href="#">
                                                     <h5><i class="col-sm-3 fa fa-pencil-square-o iconMenu">&nbsp;&nbsp;&nbsp;Editar</i></h5>
                                             </a>
                                         @endif

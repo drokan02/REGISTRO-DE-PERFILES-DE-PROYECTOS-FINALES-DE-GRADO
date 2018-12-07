@@ -1,10 +1,7 @@
 @extends('layouts.menu')
 @section('titulo','DATOS DOCENTE')
 @section('contenido')
-<<<<<<< HEAD
-<<<<<<< HEAD
-    
-=======
+
     @if(auth()->user()->hasRoles(['docente','administrador']))
         <ul class="nav justify-content-end ">
             {{--   @if($docente->perfiles->toArray() != [])--}}
