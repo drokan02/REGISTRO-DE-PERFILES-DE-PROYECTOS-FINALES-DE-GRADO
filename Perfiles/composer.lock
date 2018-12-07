@@ -8,7 +8,11 @@
     "content-hash": "a247c78faf8334b9cd3d1396802db9bc",
 =======
     "content-hash": "e2aaaf6b662834e160221845a4bb82cc",
+<<<<<<< HEAD
 >>>>>>> d7cb1791a7afca80985417b6ea6382cf8217a14d
+=======
+>>>>>>> 4784e7345ce7b3044246520f222794578039d70e
+>>>>>>> b58c11de2948b9da0128db1dc79fa02e3510e2ce
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -190,7 +194,11 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/dompdf/dompdf/zipball/5113accd9ae5d466077cce5208dcf3fb871bf8f6",
                 "reference": "5113accd9ae5d466077cce5208dcf3fb871bf8f6",
+<<<<<<< HEAD
 >>>>>>> d7cb1791a7afca80985417b6ea6382cf8217a14d
+=======
+>>>>>>> 4784e7345ce7b3044246520f222794578039d70e
+>>>>>>> b58c11de2948b9da0128db1dc79fa02e3510e2ce
                 "shasum": ""
             },
             "require": {
@@ -204,7 +212,11 @@
 =======
                 "phenx/php-svg-lib": "0.3.*",
                 "php": ">=5.4.0"
+<<<<<<< HEAD
 >>>>>>> d7cb1791a7afca80985417b6ea6382cf8217a14d
+=======
+>>>>>>> 4784e7345ce7b3044246520f222794578039d70e
+>>>>>>> b58c11de2948b9da0128db1dc79fa02e3510e2ce
             },
             "require-dev": {
                 "phpunit/phpunit": "4.8.*",
@@ -248,7 +260,11 @@
             "time": "2017-02-16T02:40:40+00:00"
 =======
             "time": "2017-11-26T14:49:08+00:00"
+<<<<<<< HEAD
 >>>>>>> d7cb1791a7afca80985417b6ea6382cf8217a14d
+=======
+>>>>>>> 4784e7345ce7b3044246520f222794578039d70e
+>>>>>>> b58c11de2948b9da0128db1dc79fa02e3510e2ce
         },
         {
             "name": "erusev/parsedown",
@@ -1148,7 +1164,11 @@
             },
             "require-dev": {
                 "phpunit/phpunit": "~5.0"
+<<<<<<< HEAD
 >>>>>>> d7cb1791a7afca80985417b6ea6382cf8217a14d
+=======
+>>>>>>> 4784e7345ce7b3044246520f222794578039d70e
+>>>>>>> b58c11de2948b9da0128db1dc79fa02e3510e2ce
             },
             "type": "library",
             "autoload": {
@@ -1172,7 +1192,11 @@
             "time": "2016-12-13T20:25:45+00:00"
 =======
             "time": "2018-06-03T10:10:03+00:00"
+<<<<<<< HEAD
 >>>>>>> d7cb1791a7afca80985417b6ea6382cf8217a14d
+=======
+>>>>>>> 4784e7345ce7b3044246520f222794578039d70e
+>>>>>>> b58c11de2948b9da0128db1dc79fa02e3510e2ce
         },
         {
             "name": "phpoffice/phpexcel",
@@ -1464,7 +1488,11 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sabberworm/PHP-CSS-Parser/zipball/850cbbcbe7fbb155387a151ea562897a67e242ef",
                 "reference": "850cbbcbe7fbb155387a151ea562897a67e242ef",
+<<<<<<< HEAD
 >>>>>>> d7cb1791a7afca80985417b6ea6382cf8217a14d
+=======
+>>>>>>> 4784e7345ce7b3044246520f222794578039d70e
+>>>>>>> b58c11de2948b9da0128db1dc79fa02e3510e2ce
                 "shasum": ""
             },
             "require": {
@@ -1475,7 +1503,11 @@
             "require-dev": {
                 "phpunit/phpunit": "*"
             },
+<<<<<<< HEAD
 >>>>>>> d7cb1791a7afca80985417b6ea6382cf8217a14d
+=======
+>>>>>>> 4784e7345ce7b3044246520f222794578039d70e
+>>>>>>> b58c11de2948b9da0128db1dc79fa02e3510e2ce
             "type": "library",
             "autoload": {
                 "psr-0": {
@@ -1502,7 +1534,11 @@
             "time": "2015-08-24T08:48:52+00:00"
 =======
             "time": "2016-07-19T19:14:21+00:00"
+<<<<<<< HEAD
 >>>>>>> d7cb1791a7afca80985417b6ea6382cf8217a14d
+=======
+>>>>>>> 4784e7345ce7b3044246520f222794578039d70e
+>>>>>>> b58c11de2948b9da0128db1dc79fa02e3510e2ce
         },
         {
             "name": "swiftmailer/swiftmailer",
