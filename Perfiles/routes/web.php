@@ -181,3 +181,4 @@ Route::get('/generar_reportes','ReportesController@generar')->name('generar')->m
 Route::post('/generador/reportes','ReportesController@generador')->name('generador')->middleware('permisos:reportes');
 Route::get('/reportes/pdf','ReportesController@reporte')->name('reportePdf')->middleware('permisos:reportes');
 
+Route::get('/guiaFormulario','guiaController@index')->name('guiaFormulario');
