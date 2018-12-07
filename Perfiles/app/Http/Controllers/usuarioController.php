@@ -24,7 +24,7 @@ class usuarioController extends Controller
     public function index(Request $request){
         $buscar = $request->get('buscar');
         $users=User::name("$buscar")
-                    ->paginate(15);
+                    ->paginate(20);
         if($request->ajax()){
             return response()->json(
                 view('parcial.usuarios',compact('users','buscar'))->render()

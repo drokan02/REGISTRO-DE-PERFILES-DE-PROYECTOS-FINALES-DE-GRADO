@@ -24,7 +24,7 @@ class AreaController extends Controller
 		$fila = 1;
 		$areas = Area::buscarAreas($buscar)
 				->orderBy('id','ASC')
-				->paginate(5);
+				->paginate(20);
 		if($request->ajax()){
 			return response()->json(
 				view('parcial.areas',compact('areas','buscar','fila'))->render()
