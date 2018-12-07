@@ -34,15 +34,7 @@
                         </form>
                     </div>
                 </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                <p class="text-primary"> Eres estudiante y no tienes cuenta? <a class="btn btn-link" href="{{route('register')}}">Registrate</a></p>
-=======
                 <p class="font-weight-bold mt-2">Eres estudiante y no tienes cuenta? <a class="btn btn-link" href="{{route('register')}}">Registrate</a></p>
->>>>>>> d7cb1791a7afca80985417b6ea6382cf8217a14d
-=======
-                <p class="font-weight-bold mt-2">Eres estudiante y no tienes cuenta? <a class="btn btn-link" href="{{route('register')}}">Registrate</a></p>
->>>>>>> b58c11de2948b9da0128db1dc79fa02e3510e2ce
             </div>
         </div>
     </div>
