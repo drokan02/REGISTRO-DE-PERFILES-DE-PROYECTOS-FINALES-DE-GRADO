@@ -31,6 +31,7 @@
                                  <h4><b>{{$docente->profesional->nombre_prof}} {{$docente->profesional->ap_pa_prof}}  {{$docente->profesional->ap_ma_prof}} </b></h4> 
                                  <small>Nombre Completo</small>  
                               </div>
+<<<<<<< HEAD
                             @if(auth()->user()->hasRoles(['docente','administrador']))
                               <div class="list-group-item">
                                     
@@ -38,6 +39,9 @@
                                  <small>Cedula de Indentidad</small>
                               </div>
                             @endif
+=======
+                              
+>>>>>>> adriano
                               <div class="list-group-item">
                                 
                                        <strong class="leas text-left" >{{$docente->profesional->direc_prof}}</strong><br>
@@ -49,6 +53,7 @@
             <br/>
             <div class="row justify-content-center">
                 <div class="list-group  col-10  " >
+<<<<<<< HEAD
                     <h2  class="list-group-item active "><strong class="row justify-content-center">Informacion Academica</strong></h2>
                     @if(auth()->user()->hasRoles(['docente','administrador']))
                       <div class="list-group-item">
@@ -56,6 +61,11 @@
                          <small>Codigo Sis</small>  
                       </div>
                     @endif
+=======
+                    <h2  class="list-group-item active "><strong class="row justify-content-center">Informacion Academica</strong></h2>  
+                          
+                      
+>>>>>>> adriano
                       <div class="list-group-item">
                          <strong>{{$docente->cargahoraria->carga_horaria}}</strong><br>
                          <small>Carga Horaria</small>

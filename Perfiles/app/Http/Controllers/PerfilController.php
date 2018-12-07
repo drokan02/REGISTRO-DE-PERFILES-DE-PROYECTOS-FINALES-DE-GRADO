@@ -385,14 +385,22 @@ class PerfilController extends Controller
         return $errores;
      }
      public function ver($id){
-		$perfil=Perfil::findOrFail($id);
-		
-		return view('perfiles.ver',['perfil'=>$perfil]);
+        $perfil=Perfil::where('id',$id)->with('tutor.Titulo')->get();
+        $perfil=$perfil[0];
+       // dd($perfil->toArray());
+      $profesional=$perfil->tutor[0];
+        return view('perfiles.ver',compact('perfil','profesional','gestion'));
     }
     public function vistaPdf($id){
+    
+        $perfil=Perfil::where('id',$id)->with('tutor.Titulo')->get();
+        $perfil=$perfil[0];
         $perfil=Perfil::findOrFail($id); 
+        $profesional=$perfil->tutor[0];
        // $pdf = App::make('dompdf.wrapper');
-       $pdf=PDF::loadView('perfiles.formPdf',['perfil'=>$perfil]); 
+       $estudiantes=Estudiante::all();
+       $pdf=PDF::loadView('perfiles.formPdf',compact('perfil','profesional','gestion'));
+      // $pdf=PDF::loadView('perfiles.formPdf',['perfil'=>$perfil]); 
      return $pdf->stream(); 
 		//return view('perfiles.ver',['perfil'=>$perfil]);
     }
