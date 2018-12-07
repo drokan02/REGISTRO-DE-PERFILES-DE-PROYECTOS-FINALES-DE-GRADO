@@ -53,7 +53,7 @@
                     <td colspan="2">Trabajo Conjunto</td>
                 </tr>
                 <tr>
-                    <td colspan="3">Gestion de Aprobacion:</td>
+                    <td colspan="3">Gestion de Aprobacion: {{$gestion}}</td>
                     <td colspan="1">Cambio de Tema:</td>
                 </tr>
 
@@ -87,9 +87,18 @@
             </tr>
             <tr >
                 <td >
+                    {{$profesional->titulo->abreviatura}}
+                    {{$director = $perfil->director->profesional->nombre_prof}}
+                    {{$director = $perfil->director->profesional->ap_pa_prof}}
+                    {{$director = $perfil->director->profesional->ap_ma_prof}}
                     <br><strong>Director de la Carrera</strong> 
+
                 </td>
                 <td>
+                        {{$profesional->titulo->abreviatura}}
+                        {{$docente = $perfil->docente->profesional->nombre_prof}}
+                        {{$docente = $perfil->docente->profesional->ap_pa_prof}}
+                        {{$docente = $perfil->docente->profesional->ap_ma_prof}}
                     <br><strong>Docente de la Materia</strong>
                 </td>
                 <td >{{$profesional->titulo->abreviatura}} {{$perfil->tutor[0]->nombre_prof}} {{$perfil->tutor[0]->ap_pa_prof}} {{$perfil->tutor[0]->ap_ma_prof}}
