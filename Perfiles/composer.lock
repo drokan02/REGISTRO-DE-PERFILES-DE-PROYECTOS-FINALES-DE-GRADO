@@ -4,15 +4,12 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
+
     "content-hash": "a247c78faf8334b9cd3d1396802db9bc",
-=======
+
     "content-hash": "e2aaaf6b662834e160221845a4bb82cc",
-<<<<<<< HEAD
->>>>>>> d7cb1791a7afca80985417b6ea6382cf8217a14d
-=======
->>>>>>> 4784e7345ce7b3044246520f222794578039d70e
->>>>>>> b58c11de2948b9da0128db1dc79fa02e3510e2ce
+
+
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -256,15 +253,11 @@
             ],
             "description": "DOMPDF is a CSS 2.1 compliant HTML to PDF converter",
             "homepage": "https://github.com/dompdf/dompdf",
-<<<<<<< HEAD
+
             "time": "2017-02-16T02:40:40+00:00"
-=======
+
             "time": "2017-11-26T14:49:08+00:00"
-<<<<<<< HEAD
->>>>>>> d7cb1791a7afca80985417b6ea6382cf8217a14d
-=======
->>>>>>> 4784e7345ce7b3044246520f222794578039d70e
->>>>>>> b58c11de2948b9da0128db1dc79fa02e3510e2ce
+
         },
         {
             "name": "erusev/parsedown",

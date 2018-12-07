@@ -48,7 +48,7 @@
                 <td>
                     <div class="text-center">
                         <a href='{{ route('editarGestion',$gestion)}}' class="dropdown-item" href="#">
-                                <h5><i class="col-sm-3 fa fa-pencil-square-o iconMenu">&nbsp;&nbsp;&nbsp;Editar</i></h5>
+                                <h5><i class="col-sm-3 fa fa-pencil-square-o fa-2x iconMenu"></i></h5>
                         </a>  
                     </div> 
                 </td>

@@ -1,5 +1,5 @@
 @extends('layouts.menu')
-@section('titulo','REGISTRAR AREA')
+@section('titulo','REGISTRAR GESTION')
 @section('contenido')
 
 <!--ERRORES-->
@@ -38,7 +38,7 @@
 						<div class = "form-group row"> 
 							<div class="col-sm-2"></div>
 							<div class="col-8">
-								<a href="{{ route('registrarArea') }}" class="btn btn-danger">Cancel</a>	
+								<a href="{{ route('registrarGestion') }}" class="btn btn-danger">Cancel</a>	
 								<button type="submit" class='btn btn-success prueba'>Registrar</button>
 							</div>		
 						</div>
