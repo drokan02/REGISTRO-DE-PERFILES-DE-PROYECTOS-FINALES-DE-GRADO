@@ -218,14 +218,18 @@
                 aux = 1;
                  $("#td").show();
                  $(".divSec_travajo").hide();
+                 $(".divSec_travajo").val("");
                  $(".divInstitucion").show();
              }else if (modalidad == "Adscripcion") {
                 $("#ad").show();
                  $(".divInstitucion").hide();
+                 $(".divInstitucion").val("");
                  $(".divSec_travajo").show();
              }else  {
+                $(".divSec_travajo").val("");
+                $(".divInstitucion").val("");
                 $("#td").hide();
-                $("ad").hide();
+                $("#ad").hide();
              }
              //$("#selects").show();
          })  
