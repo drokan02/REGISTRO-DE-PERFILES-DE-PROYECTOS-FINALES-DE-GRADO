@@ -18,7 +18,7 @@ class SubareaController extends Controller
 		$fila = 1;
 		$subareas = Area::buscarsubareas($area->id,$buscar)
 						->orderBy('id','ASC')
-						->paginate(5);
+						->paginate(20);
 
 		if($request->ajax()){
 			return response()->json(

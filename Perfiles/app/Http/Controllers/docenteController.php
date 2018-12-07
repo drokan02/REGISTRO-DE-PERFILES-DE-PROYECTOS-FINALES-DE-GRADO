@@ -35,7 +35,7 @@ class docenteController extends Controller
                                 ->porCarrera($carrera_id)
                                 ->buscardocentes($buscar)
                                 ->orderBy('id','ASC')
-                                ->paginate(10);	
+                                ->paginate(20);	
        } else{
         $docentes=Docente::with('profesional.titulo')->porCarrera($carrera_id)
                                               ->orderBy('id','ASC')

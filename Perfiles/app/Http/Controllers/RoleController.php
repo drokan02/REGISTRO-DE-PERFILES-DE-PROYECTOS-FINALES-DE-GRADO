@@ -17,7 +17,7 @@ class RoleController extends Controller
     public function index(Request $request){
         $buscar = $request->get('buscar');
         $roles=Role::name($buscar)
-                    ->paginate(15);
+                    ->paginate(20);
         if($request->ajax()){
             return response()->json(
                 view('parcial.roles',compact('roles','buscar'))->render()
