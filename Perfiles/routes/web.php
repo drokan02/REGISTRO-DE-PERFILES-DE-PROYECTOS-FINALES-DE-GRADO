@@ -148,10 +148,9 @@ Route::post('/seleccionarFormulario','PerfilController@formulario')->name('formu
 //fechas
 Route::get('/fechas','FechasController@index')->name('fechas');
 Route::get('/fechas/guardar','FechasController@guardar')->name('guadarfecha');
-
-
+Route::any('/perfil/ver/{perfil}','PerfilController@ver')->name('verPerfil');
+Route::get('/perfil/verPdf{perfil}','PerfilController@vistaPdf')->name('descargaPdf');
 Route::get('/perfil','PerfilController@index')->name('perfiles');
-Route::get('/perfil/ver/{id}','PerfilController@ver')->name('verPerfil');
 Route::get('/perfil/registrarPerfil','PerfilController@nuevoFormulario')->name('nuevoPerfil')->middleware('permisos:registrar_perfil');
 Route::any('/perfil/registrarPerfil/mostrarForm','PerfilController@mostrarForm')->name('mostrarFormulario')->middleware('permisos:registrar_perfil');
 Route::post('/perfil/registrarPerfil/almacenar','PerfilController@almacenar')->name('almacenarPerfil')->middleware('permisos:registrar_perfil');
