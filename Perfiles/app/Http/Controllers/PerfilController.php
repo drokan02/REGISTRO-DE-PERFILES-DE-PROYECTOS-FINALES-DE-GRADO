@@ -382,13 +382,21 @@ class PerfilController extends Controller
 
      public function publicar(PerfilFormRequest $request,Perfil $perfil){
         if($request->ajax()){
-            
+            $mensaje = "";
+         if($request['estado'] == "Guardado"){
+            $mensaje = "Perfil Guardado";
+         }else{
+             $mensaje = "Perfil Publicado";
+         }
             return response()->json([
                 'registrado'=>true,
-                'mensaje'=>'Perfil publicado'
+                'mensaje'=> $mensaje
             ]);
         }
         $perfil->update($request->all());
+        $perfil->sec_trabajo = $request->institucion;
+        $perfil->sec_trabajo = $request->sec_trabajo;
+        $perfil->update();
         return redirect()->route('perfiles');
     }
 
