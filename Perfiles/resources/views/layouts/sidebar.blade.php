@@ -163,6 +163,7 @@
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
+          <li><a href="{{route('importarEstudiantes')}}"><i class="fa fa-upload" aria-hidden="true"></i>Importar Estudiantes</a></li>
           <li><a href="{{route('CrearEstudiantes')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Registrar</a></li>
           <li><a href="{{route('estudiantes')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Lista Estudiantes</a></li>
         </ul>

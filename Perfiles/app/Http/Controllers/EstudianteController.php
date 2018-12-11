@@ -6,6 +6,7 @@ use App\Carrera;
 use App\Estudiante;
 use App\Role;
 use App\User;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
@@ -156,5 +157,46 @@ class EstudianteController extends Controller
             ]);
         });
         return view('estudiantes/detalleEstudiante',compact('estudiante'));
+    }
+    public function importar(){
+        echo "hola a todos";
+        return view('estudiantes/detalleEstudiante');
+    }
+
+    public function importacion(Request $request){
+        $this->validate(request(), [
+            'importar_estudiante' => ['required'],
+        ]);
+        try{
+            $archivo = $request->file('importar_estudiante');
+            $nombre=$archivo->getClientOriginalName();
+            $extension=$archivo->getClientOriginalExtension();
+            if(!in_array($extension,['xls','xlsx','xlsm','xlsb'])){
+                return back()->withErrors('el archivo que intenta 
+                subir no es un archivo excel: xls, xlsx, xlsm, xlsb');
+            }
+            \Storage::disk('archivos')->put($nombre, \File::get($archivo) );
+            $ruta  =  storage_path('archivos') ."/". $nombre;
+            Excel::selectSheetsByIndex(0)->load($ruta, function ($hoja) {
+                $hoja->each(function ($fila) {
+                    $nombre_Est=Estudiante::query()->where('nomnbre_Est',$fila->codigo_mod)->get();
+                    $email_Est=Estudiante::query()->where('email_Est',$fila->nombre_mod)->get();
+                    if(count($nombre_Est)==0 && count($email_Est)==0){
+                        $estudiantes = new Estudiante();
+                        $estudiantes->create([
+                            'nombre_Est' => $fila->nombre,
+                            'email_Est' => $fila->email,
+                            'user_name' => $fila->user_mane
+                        ]);
+                    }
+                });
+
+            });
+            \Storage::disk('archivos')->delete($nombre);
+            return redirect()->route('estudiantes');
+        }catch (\Exception $exception){
+            return back()->withErrors('no se puede importar');
+        }
+
     }
 }

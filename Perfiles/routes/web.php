@@ -127,6 +127,8 @@ Route::put('/estudiantes/{estudiante}','EstudianteController@actualizar')->name(
 Route::get('/cambiar_contraseña_estudiante/{estudiante}','EstudianteController@cambiarContraseña')->name('cambiarContraseñaEstudiante');
 Route::post('/guardar_contraseña_estudiante/{estudiante}','EstudianteController@guardarContraseña')->name('guardarContraseñaEstudiante');
 Route::delete('/estudiantes/{estudiante}/eliminar','EstudianteController@eliminar')->name('eliminarEstudiante');
+Route::get('/estudiantes/importar','EstudianteController@crear')->name('importarEstudiantes');
+Route::get('/estudiantes/importacion','EstudianteController@importacion')->name('importacionEstudiantes');
 
 //login
 Route::get('login','Auth\LoginController@showLoginForm')->name('login');
