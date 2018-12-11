@@ -1,5 +1,12 @@
 @extends('plantilla')
 @section('contenido')
+    @if(session()->has('confirmarCuenta'))
+        <div class="row">
+            <div class="col alert-success display-3">
+                {{session('confirmarCuenta')}}
+            </div>
+        </div>
+    @endif
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-6">

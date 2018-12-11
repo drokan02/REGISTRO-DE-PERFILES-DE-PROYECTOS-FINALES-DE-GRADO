@@ -12,6 +12,13 @@
         </li>
     </ul>
 
+    @if(session()->has('actualizarEstudiante'))
+        <div class="row mb-3">
+            <div class="col alert-success">
+                {{session('actualizarEstudiante')}}
+            </div>
+        </div>
+    @endif
 
     <div class="listaDatos">
        

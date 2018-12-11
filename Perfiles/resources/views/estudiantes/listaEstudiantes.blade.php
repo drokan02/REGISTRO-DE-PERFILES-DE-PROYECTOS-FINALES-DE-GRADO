@@ -2,6 +2,14 @@
 @section('titulo','LISTA DE ESTUDIANTES')
 @section('contenido')
 
+    @if(session()->has('eliminarEstudiante'))
+        <div class="row">
+            <div class="col alert-success">
+                {{session('eliminarEstudiante')}}
+            </div>
+        </div>
+    @endif
+
     @if($estudiantes->isNotEmpty())
         <div class="container col-sm-9 table-responsive listaDatos">
             <table class="table table-hover text-center">

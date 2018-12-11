@@ -162,7 +162,7 @@ class docenteController extends Controller
             'user_name' => $name,
             'email' => $request->correo_prof,
         ]);
-        return redirect()->route('Docentes');
+        return redirect()->route('verDocente',$docente);
     }
 
     //todos los metos eliminar con el tiempo se tendra que validar con registros de BD
