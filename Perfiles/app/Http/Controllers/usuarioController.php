@@ -55,7 +55,7 @@ class usuarioController extends Controller
         $this->validate(request(), [
             'name' => ['required','regex:/^[\pL\s]+$/u'],
             'user_name' => ['required','unique:users,user_name','alpha_num'],
-            'email' => ['required','email','unique:users,email'],
+            'email' => ['required','email','unique:users,email','regex:/[a-z-_.0-9]+@(gmail|hotmail|yahoo|outlook).(com|es|org)/u'],
             'password' => ['required','min:6'],
             'roles'=>'required'
         ]);
@@ -116,7 +116,8 @@ class usuarioController extends Controller
         $this->validate(request(), [
             'name' => ['required','regex:/^[\pL\s]+$/u'],
             'user_name' => ['required',Rule::unique('users')->ignore($user->id),'alpha_num'],
-            'email'=>['required','email',Rule::unique('users')->ignore($user->id)],
+            'email'=>['required','email',Rule::unique('users')->ignore($user->id),
+                    'regex:/[a-z-_.0-9]+@(gmail|hotmail|yahoo|outlook).(com|es|org)/u'],
             'roles'=> ['required']
         ]);
         if($request->ajax()){
