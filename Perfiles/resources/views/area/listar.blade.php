@@ -3,6 +3,13 @@
 @section('titulo','LISTAR AREAS')
 @section('contenido')
 
+    @if(session()->has('exportar'))
+        <div class="row mb-3">
+            <div class="col alert-success">
+                {{session('exportar')}}
+            </div>
+        </div>
+    @endif
   
 <Form method="GET" action="{{route('Areas')}}" >
     <!--BUSCADOR -->

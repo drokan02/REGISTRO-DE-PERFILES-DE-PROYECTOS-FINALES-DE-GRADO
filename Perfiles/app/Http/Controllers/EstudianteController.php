@@ -123,7 +123,8 @@ class EstudianteController extends Controller
                 'email' => $request['email'],
             ]);
         });
-        return redirect()->route('menu');
+        //return redirect()->route('menu');
+        return redirect()->route('detalleEstudiante',$estudiante)->with('actualizarEstudiante','el estudiante fue actualizado');
     }
     /**
      * Remove the specified resource from storage.
@@ -137,7 +138,7 @@ class EstudianteController extends Controller
             $estudiante->usuario()->detach();//eliminar datos en tabla intermedia
             $estudiante->delete();
         });
-        return redirect()->route('menu');
+        return redirect()->route('estudiantes')->with('eliminarEstudiante','el estudiante fue eliminado');
     }
     public function cambiarContraseña(Estudiante $estudiante){
         return view('estudiantes/cambiarPassword',compact('estudiante'));
