@@ -39,7 +39,7 @@
 				<div class = "form-group row"> 
 					<div class="col-sm-2"></div>
 					<div class="col-7">
-						<a href="{{ route('subareas',$area) }}" class="btn btn-danger">Cancel</a>	
+						<a href="{{ route('subareas',$area) }}" class="btn btn-danger">Cancelar</a>	
 						<button type="submit" class='btn btn-success registrar'>Registrar</button>
 					</div>		
 				</div>

@@ -21,7 +21,7 @@
                        <td style="text-align: right;">{{$fila++}}</td>
                        <td>{{$profesional->nombre_prof}}</td>
                        <td style="width: 15%;">{{$profesional->ap_pa_prof}}&nbsp;&nbsp;{{$profesional->ap_ma_prof}}</td>
-                       <td style="width: 8%;">{{$profesional->titulo->pluck('abreviatura')[0]}}</td>
+                       <td style="width: 8%;">{{$profesional->titulo->abreviatura}}</td>
                        <td style="width: 8%;">{{$profesional->telef_prof}}</td>
                        <td style="width: 12%;">{{$profesional->correo_prof}}</td>
                         @foreach ($profesional->areas as $area)
@@ -32,7 +32,7 @@
                         @endforeach 
                        <td>
                             <div class=" dropleft text-center">
-                                    <a href="#" data-toggle="dropdown"  data-placement="right" title="opsiones">
+                                    <a href="#" data-toggle="dropdown"  data-placement="right" title="opciones">
                                             <i class="fa fa-ellipsis-v fa-2x" aria-hidden="true"></i>
                                     </a>
                                     <div class="dropdown-menu profile-dropdown-menu" aria-labelledby="dropdownMenu1">

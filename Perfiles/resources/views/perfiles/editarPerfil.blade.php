@@ -145,7 +145,7 @@
             <div class = "form-group row"> 
                 <div class="col-sm-2"></div>
                 <div class="col-8">
-                        <a href="{{ route('Docentes') }}" class="btn btn-danger">Cancel</a>
+                        <a href="{{ route('Docentes') }}" class="btn btn-danger">Cancelar</a>
                         <button type="submit" class='btn btn-success modificarP'>Registrar</button>
                 </div>
                 

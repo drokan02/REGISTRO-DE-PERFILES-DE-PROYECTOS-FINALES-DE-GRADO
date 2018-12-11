@@ -102,7 +102,7 @@ $('.eliminar').click(function(e){
             })
         },
         function(){ 
-    });
+    }).set('labels', {ok:'Eliminar', cancel:'Cancelar'});
 })
 
 $('.btnBuscar').click(function(e){
@@ -256,7 +256,7 @@ $('#eliminarAreaCarrera').click(function(e){
             })
         },
         function(){ 
-    });
+    }).set('labels', {ok:'Eliminar', cancel:'Cancelar'});
 })
 
 $('.estado').click(function(){

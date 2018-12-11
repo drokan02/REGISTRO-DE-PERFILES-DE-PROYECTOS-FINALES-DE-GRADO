@@ -45,7 +45,7 @@
                 <td>{{$us->roles->pluck('nombre_rol')->implode(' - ')}}</td>
                 <td>
                     <div class=" dropleft text-center">
-                            <a href="#" data-toggle="dropdown"  data-placement="right" title="opsiones">
+                            <a href="#" data-toggle="dropdown"  data-placement="right" title="opciones">
                                     <i class="fa fa-ellipsis-v fa-2x" aria-hidden="true"></i>
                             </a>
                             <div class="dropdown-menu profile-dropdown-menu" aria-labelledby="dropdownMenu1">

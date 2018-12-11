@@ -38,7 +38,7 @@
 						<div class = "form-group row"> 
 							<div class="col-sm-2"></div>
 							<div class="col-8">
-								<a href="{{ route('gestiones') }}" class="btn btn-danger">Cancel</a>	
+								<a href="{{ route('gestiones') }}" class="btn btn-danger">Cancelar</a>	
 								<button type="submit" class='btn btn-success prueba'>Registrar</button>
 							</div>		
 						</div>
