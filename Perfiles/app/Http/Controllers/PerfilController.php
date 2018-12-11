@@ -394,13 +394,16 @@ class PerfilController extends Controller
     }
     public function vistaPdf($id){
     
-        $perfil=Perfil::where('id',$id)->with('tutor.Titulo')->get();
+        $perfil=Perfil::where('id',$id)->with('tutor.Titulo','director.profesional.titulo','docente.profesional.titulo')->get();
         $perfil=$perfil[0];
         $perfil=Perfil::findOrFail($id); 
         $profesional=$perfil->tutor[0];
+        $director = $perfil->director->profesional;
+        $gestion = $this->gestion($perfil->fecha_ini);
+        $docente = $perfil->docente->profesional;
        // $pdf = App::make('dompdf.wrapper');
        $estudiantes=Estudiante::all();
-       $pdf=PDF::loadView('perfiles.formPdf',compact('perfil','profesional','gestion'));
+       $pdf=PDF::loadView('perfiles.formPdf',compact('perfil','profesional','gestion','director','docente'));
       // $pdf=PDF::loadView('perfiles.formPdf',['perfil'=>$perfil]); 
      return $pdf->stream(); 
 		//return view('perfiles.ver',['perfil'=>$perfil]);

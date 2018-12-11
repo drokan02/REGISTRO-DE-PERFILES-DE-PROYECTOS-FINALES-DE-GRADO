@@ -29,9 +29,9 @@
             </div>
         </div>
         <div class="form-group row">
-            <label for="modalidad" class="col-sm-2 col-form-label">modalidad</label>
+            <label for="modal" class="col-sm-2 col-form-label">Modalidad</label>
             <div class="col-sm-7">
-                <select class="form-control" id="modalidad" name="modalidad">
+                <select class="form-control" id="modal" name="modalidad">
                     <option>seleccione una opcion</option>
                     <option>Todos</option>
                     @foreach($modalidades as $modalidad)
