@@ -68,7 +68,37 @@ class AreaController extends Controller
 	}
 
 	public function eliminar(Request $request,$id){
+		$areaperfil = Area::join('perfil','area.id','=','perfil.area_id')
+		 ->where('area.id',$id)->distinct()->get();
+	
+		$areaCarrera = Area::join('area_carrera','area.id','=','area_carrera.area_id')
+		->where('area.id',$id)->distinct()->get();
+		$profesionalArea = Area::join('profesional_area','area.id','=','profesional_area.area_id')
+		->where('area.id',$id)->distinct()->get();
+
+
 		$subareas = Area::subareasarea($id)->get();
+		if($subareas->toArray()||count($areaperfil)>0 || count($areaCarrera)>0 || count($profesionalArea)>0){
+			if($request->ajax())
+			{
+				 return response()->json([
+					 'eliminado'=>false,
+					 'mensaje'=>'Esta área no puede ser eliminada, por que esta asociada a otra informacion'
+				 ]);
+			 }
+			 return back()->withErrors('No se puede eliminar la Area por que existen SubAreas asociadas a este');
+		} else { 
+			Area::findOrFail($id)->delete();
+			if($request->ajax())
+			{
+				 return response()->json([
+					 'eliminado'=>true,
+					 'mensaje'=>'Area se elimino correctamente'
+				 ]);
+			 }
+			return redirect()->route('Areas');
+		
+		/*$subareas = Area::subareasarea($id)->get();
 		if($subareas->toArray()){
 			if($request->ajax())
 			{
@@ -87,7 +117,7 @@ class AreaController extends Controller
 					 'mensaje'=>'Area se elimino correctamente'
 				 ]);
 			 }
-			return redirect()->route('Areas');
+			return redirect()->route('Areas');*/
 		}
 	}
 	
