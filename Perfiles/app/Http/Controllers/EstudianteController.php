@@ -6,6 +6,7 @@ use App\Carrera;
 use App\Estudiante;
 use App\Role;
 use App\User;
+use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -167,7 +168,7 @@ class EstudianteController extends Controller
         $this->validate(request(), [
             'importar_estudiantes' => ['required'],
         ]);
-         try{
+      //   try{
             $archivo = $request->file('importar_estudiantes');
             $nombre=$archivo->getClientOriginalName();
             $extension=$archivo->getClientOriginalExtension();
@@ -179,48 +180,59 @@ class EstudianteController extends Controller
             $ruta  =  storage_path('archivos') ."/". $nombre;
             Excel::selectSheetsByIndex(0)->load($ruta, function ($hoja) {
                 $hoja->each(function ($fila) {
-                    $apellido_paterno =$fila->apellido_paterno;
+                   
+
+                            $apellido_paterno =$fila->apellido_paterno;
                             $apellido_materno =$fila->apellido_materno;
                             $nombre=$fila->nombre;
                             $nombres=$apellido_paterno." ".$apellido_materno." ".$nombre;
                     $user_name=User::query()->where('user_name',$fila->user_name)->get();
                     $email=User::query()->where('email',$fila->email)->get();
-                    if(count($user_name)==0 && count($email)==0){
+               
+                    if(count($user_name)==0 && count($email)==0 ){
                     $user =new User();
             $user->create([
+
                 'name' => $nombres,
                 'user_name' =>$fila->user_name,
                 'email' => $fila->email,
                 'password' => bcrypt($fila->password),
             ]);
-            $fila->password=bcrypt($fila->password);
         }
-                  
+                    $user_name=Estudiante::query()->where('user_name',$fila->user_name)->get();
+                    $email=Estudiante::query()->where('email',$fila->email)->get();
+                    if(count($user_name)==0 && count($email)==0 ){
                         $estudiantes = new Estudiante();
                         $estudiantes->create([
                            
                             'nombres'=>$nombres,
                             'email' => $fila->email,
                             'user_name' =>$fila->user_name,
-                            'password'  => $fila->password,
+                            'password'  =>bcrypt($fila->password),
                             'telefono'  =>$fila->telefono,
                             'carrera_id'=>$fila->carrera_id,
                         
-                        ]);
+                        ]);}
+                        
                         $role_id=Role::query()->where('nombre_rol','estudiante')->value('id');
                         $iduser=User::query()->where('email',$fila->email)->value('id');
                         $idEstudiante=Estudiante::query()->where('email',$fila->email)->value('id');
                         $user->roles()->attach($role_id,['user_id'=>$iduser]);
                         $user->estudiante()->attach($idEstudiante,['user_id'=>$iduser]);
-                   // }
+
+                        $data=['nombres'=> $nombres,'user_name'=>$fila->user_name,'email'=>$fila->email,'password' =>$fila->password,];
+                        Mail::send('emails.importacionCuenta',$data, function($message) use($fila)  {
+                         $message->to($fila->email, $fila->user_name)->subject('Creacion de tu Cuenta en el Sistema de perfil');
+                        });
+                       
                 });
 
             });
             \Storage::disk('archivos')->delete($nombre);
             return redirect()->route('estudiantes');
-       }catch (\Exception $exception){
-           return back()->withErrors('no se puede importar');
-      }
+     //  }catch (\Exception $exception){
+        //   return back()->withErrors('no se puede importar');
+     // }
 
     }
 }
