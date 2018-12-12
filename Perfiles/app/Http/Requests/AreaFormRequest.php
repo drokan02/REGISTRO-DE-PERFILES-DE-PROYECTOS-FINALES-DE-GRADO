@@ -36,7 +36,7 @@ class AreaFormRequest extends FormRequest
             return [
                 'codigo'=> 'required|alpha_num|min:2|max:5|unique:area,codigo',
                 'nombre'=> 'required|regex:/^[\pL\s]+$/u|min:3|unique:area,nombre',
-                'descripcion'=> 'nullable|min:20|max:500',
+                'descripcion'=> 'nullable|min:6|max:500',
             ];
         }
         
@@ -57,8 +57,8 @@ class AreaFormRequest extends FormRequest
             'nombre.required' => 'no ingreso el nombre del '.$tipo,
             'nombre.regex' => 'solo se permiten espacios y letras en el nombre',
             'nombre.unique'   => 'esa '.$tipo.' ya se encuentra registrada',
-            'descripcion.min' => 'minimo numero de caracteres de la descripcion es de 20 o nada',
-            'descripcion.max' => 'maximo numero de caracteres de la descripcion es de 500 caracteres',
+            'descripcion.min' => 'La cantidad minima de letras para descripcion es de 6 letras',
+            'descripcion.max' => 'La cantidad maxima de letras para descricion es de 500 letras',
         ];
     }
 }
