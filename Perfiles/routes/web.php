@@ -120,6 +120,8 @@ Route::get('/exportar_pdf_tutoria/{docente}','docenteController@descargarPdf')->
 //estudiantes
 Route::get('/estudiantes','EstudianteController@index')->name('estudiantes');
 Route::get('/estudiantes/crear','EstudianteController@crear')->name('CrearEstudiantes');
+Route::get('/estudiantes/importar','EstudianteController@importar')->name('importarEstudiantes');
+Route::post('/estudiantes/importacion','EstudianteController@importacion')->name('importacionEstudiantes');
 Route::post('/estudiantes/guardar','EstudianteController@guardar')->name('guardarEstudiante');
 Route::get('/estudiantes/{estudiante}','EstudianteController@detalle')->name('detalleEstudiante');
 Route::get('/estudiantes/{estudiante}/editar','EstudianteController@editar')->name('editarEstudiante');
@@ -127,8 +129,8 @@ Route::put('/estudiantes/{estudiante}','EstudianteController@actualizar')->name(
 Route::get('/cambiar_contraseña_estudiante/{estudiante}','EstudianteController@cambiarContraseña')->name('cambiarContraseñaEstudiante');
 Route::post('/guardar_contraseña_estudiante/{estudiante}','EstudianteController@guardarContraseña')->name('guardarContraseñaEstudiante');
 Route::delete('/estudiantes/{estudiante}/eliminar','EstudianteController@eliminar')->name('eliminarEstudiante');
-Route::get('/estudiantes/importar','EstudianteController@crear')->name('importarEstudiantes');
-Route::get('/estudiantes/importacion','EstudianteController@importacion')->name('importacionEstudiantes');
+//Route::get('/estudiantes/crear','EstudianteController@crear')->name('CrearEstudiantes');
+//Route::post('/estudiantes/importacion','EstudianteController@importacion')->name('importacionEstudiantes');
 
 //login
 Route::get('login','Auth\LoginController@showLoginForm')->name('login');
