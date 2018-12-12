@@ -138,9 +138,9 @@ class EstudianteController extends Controller
             ->where('estudiante.id',$estudiante->id)->get();
         if(count($est)==0){
             DB::transaction(function () use($estudiante) {
-               // $estudiante->usuario()->delete();
-               // $estudiante->usuario()->detach();//eliminar datos en tabla intermedia
-                //$estudiante->delete();
+                $estudiante->usuario()->delete();
+                $estudiante->usuario()->detach();//eliminar datos en tabla intermedia
+                $estudiante->delete();
             });
             return redirect()->route('estudiantes')->with('eliminarEstudiante','el estudiante fue eliminado');
         }else{

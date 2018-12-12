@@ -31,5 +31,14 @@ class UserSeeder extends Seeder
             'carrera_id'=>1,
         ]);
         $user->estudiante()->attach($estudiante->id,['user_id'=>1]);
+        Estudiante::create([
+            'id'=>2,
+            'nombres'=>'aasddin',
+            'user_name'=>'aasdsdin',
+            'email'=>'admsin@gmail.com',
+            'password'=>bcrypt('admin123'),
+            'telefono'=>'789453612',
+            'carrera_id'=>2,
+        ]);
     }
 }
