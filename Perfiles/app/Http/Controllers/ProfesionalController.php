@@ -93,6 +93,37 @@ class ProfesionalController extends Controller
     }
 
     public function eliminar(Request $request,Profesional $profesional){
+        
+        $prof = Profesional::join('docente','profesional.id','=','docente.profesional_id')
+            ->join('perfil','docente.id','=','perfil.docente_id')
+            ->where('profesional.id',$profesional->id)
+            ->distinct()->get();
+        $director = Profesional::join('docente','profesional.id','=','docente.profesional_id')
+            ->join('perfil','docente.id','=','perfil.director_id')
+            ->where('profesional.id',$profesional->id)
+            ->distinct()->get();
+        $perfilTutor = Profesional::join('perfil_tutor','profesional.id','=','perfil_tutor.profesional_id')
+            ->where('profesional.id',$profesional->id)
+            ->distinct()->get();
+            
+        if(count($prof)==0 && count($perfilTutor)==0 && count($director)==0){
+            $profesional->areas()->detach(); //eliminar datos en tabla intermedia
+            $profesional->delete();
+            if($request->ajax()){
+                return response()->json([
+                    'eliminado'=>true,
+                    'mensaje'=>'Profesional se elimino correctamente'
+                ]);
+            }
+        }else{
+            return response()->json([
+                'eliminado'=>false,
+                'mensaje'=>'El Profesional no puede eliminarse debido a que está registrado en algún perfil'
+            ]);
+        }
+        
+        return redirect()->route('listarProfesionales');
+        /*
         $profesional->areas()->detach(); //eliminar datos en tabla intermedia
         $profesional->delete();
         if($request->ajax()){
@@ -102,6 +133,7 @@ class ProfesionalController extends Controller
             ]);
         }
         return redirect()->route('listarProfesionales');
+        */
     }
 
    
