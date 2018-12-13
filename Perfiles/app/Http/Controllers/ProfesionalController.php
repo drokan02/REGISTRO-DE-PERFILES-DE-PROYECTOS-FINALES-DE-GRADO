@@ -105,6 +105,7 @@ class ProfesionalController extends Controller
         $perfilTutor = Profesional::join('perfil_tutor','profesional.id','=','perfil_tutor.profesional_id')
             ->where('profesional.id',$profesional->id)
             ->distinct()->get();
+            
         if(count($prof)==0 && count($perfilTutor)==0 && count($director)==0){
             $profesional->areas()->detach(); //eliminar datos en tabla intermedia
             $profesional->delete();
