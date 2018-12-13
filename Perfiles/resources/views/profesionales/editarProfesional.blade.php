@@ -111,10 +111,10 @@
 								<option disabled selected > Seleccionar </option>
 							@foreach ($subareas as $subarea)
                                 @if ($profesional->areas->count()>1)
-									<option value="{{$area->id}}"
-									{{$profesional->areas->pluck('id')[1] == $area->id ? 'selected':''}}>{{$area->nombre}}</option>	
+									<option value="{{$subarea->id}}"
+									{{$profesional->areas->pluck('id')[1] == $subarea->id ? 'selected':''}}>{{$subarea->nombre}}</option>	
 								@else
-									<option value="{{$area->id}}">{{$area->nombre}}</option>	
+									<option value="{{$subarea->id}}">{{$subarea->nombre}}</option>	
 								@endif
 							@endforeach
 						</select>
