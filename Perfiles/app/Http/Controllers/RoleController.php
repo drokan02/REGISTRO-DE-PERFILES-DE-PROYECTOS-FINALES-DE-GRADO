@@ -6,6 +6,7 @@ use App\Permiso;
 use Illuminate\Http\Request;
 use App\Role;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class RoleController extends Controller
 {
@@ -31,7 +32,7 @@ class RoleController extends Controller
     }
     public function guardar(Request $request){
         $this->validate(request(), [
-            'nombre_rol' => ['required','regex:/^[\pL\s]+$/u'],
+            'nombre_rol' => ['required','regex:/^[\pL\s]+$/u','unique:rol,nombre_rol'],
             'privilegios'=> ['required','not_in:seleccione una opcion'],
             'permisos'=>'required'
         ]);
@@ -55,7 +56,7 @@ class RoleController extends Controller
     }
     public function actualizar(Request $request,Role $role){
         $this->validate(request(), [
-            'nombre_rol' => ['required','regex:/^[\pL\s]+$/u'],
+            'nombre_rol' => ['required','regex:/^[\pL\s]+$/u',Rule::unique('rol')->ignore($role->id)],
             'privilegios'=> ['required','not_in:seleccione una opcion'],
             'permisos'=>'required'
         ]);

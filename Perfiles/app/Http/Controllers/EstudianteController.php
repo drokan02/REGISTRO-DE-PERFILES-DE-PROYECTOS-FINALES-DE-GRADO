@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Permiso;
 use Storage;
 use App\Carrera;
 use App\Estudiante;
@@ -239,6 +240,18 @@ class EstudianteController extends Controller
                         $idEstudiante=Estudiante::query()->where('email',$fila->email)->value('id');
                         $user->roles()->attach($role_id,['user_id'=>$iduser]);
                         $user->estudiante()->attach($idEstudiante,['user_id'=>$iduser]);
+
+                        $permisos=[];
+                        $i=0;
+                        $roles=Role::findOrFail($role_id);
+                        $aux=$roles->permisos()->pluck('name');
+                        foreach ($aux as $a) {
+                            $per=Permiso::query()->where('name',$a)->get()->first();
+                            $per=$per->id;
+                            $permisos=array_add($permisos,$i,$per);
+                            $i=$i+1;
+                        }
+                         $user->permisosUser()->attach($permisos,['user_id'=>$iduser]);
 
                         $data=['nombres'=> $nombres,'user_name'=>$fila->user_name,'email'=>$fila->email,'password' =>$fila->password,];
                         Mail::send('emails.importacionCuenta',$data, function($message) use($fila)  {

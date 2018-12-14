@@ -48,7 +48,7 @@
                             </div>
                             <div class="list-group-item">
                              <strong>{{$estudiante->email}}</strong>
-                              <p>Carrera del Estudiante</p>
+                              <p>Email del Estudiante</p>
                         </div>
                         <div class="list-group-item">
                             <strong>{{$estudiante->telefono}}</strong>
