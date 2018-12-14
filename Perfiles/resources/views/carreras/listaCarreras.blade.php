@@ -26,6 +26,13 @@
         </div>
                 
     </div> 
+    @if(session()->has('message'))
+        <div class="row">
+            <div class="col alert-danger">
+                {{session('message')}}
+            </div>
+        </div>
+    @endif
   <div class="container table-responsive col-sm-8 listaDatos">
             @if($carreras->isNotEmpty())
                 <table class="table  table-hover text-center">
@@ -45,7 +52,7 @@
                             <td>{{$carrera->nombre_carrera}}</td>
                             <td>
                                 <div class=" dropleft text-center">
-                                    <a href="#" data-toggle="dropdown"  data-placement="right" title="opsiones">
+                                    <a href="#" data-toggle="dropdown"  data-placement="right" title="opciones">
                                             <i class="fa fa-ellipsis-v fa-2x" aria-hidden="true"></i>
                                     </a>
                                     <div class="dropdown-menu profile-dropdown-menu" aria-labelledby="dropdownMenu1">

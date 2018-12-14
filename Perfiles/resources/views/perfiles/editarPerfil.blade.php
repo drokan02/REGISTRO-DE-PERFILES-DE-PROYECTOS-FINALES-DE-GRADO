@@ -115,6 +115,17 @@
                     </div>
                 </div>
                 
+                <div class="form-group row">
+                    <label for="tutor" class="col-sm-2 col-form-label">Subarea</label>
+                    <div class="col-10">
+                        <select name="subarea_id" id="subarea_id" class="form-control form-control-chosen">
+                                <option disabled selected>Seleccionar</option>
+                                @foreach ($subareas as $subarea)
+                                <option value="{{$subarea->id}}" {{$perfil->subarea_id == $subarea->id? 'selected':''}}>{{$subarea->nombre}}</option>
+                                @endforeach
+                        </select>
+                    </div>
+                </div>
                 
             
             <div class = "form-group row">
@@ -145,7 +156,7 @@
             <div class = "form-group row"> 
                 <div class="col-sm-2"></div>
                 <div class="col-8">
-                        <a href="{{ route('Docentes') }}" class="btn btn-danger">Cancel</a>
+                        <a href="{{ route('Docentes') }}" class="btn btn-danger">Cancelar</a>
                         <button type="submit" class='btn btn-success modificarP'>Registrar</button>
                 </div>
                 

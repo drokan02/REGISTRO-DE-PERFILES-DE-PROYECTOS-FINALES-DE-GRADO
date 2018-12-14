@@ -88,8 +88,20 @@ class CarreraController extends Controller
      */
     public function eliminar(Carrera $carrera)
     {
-        $carrera->delete();
-        return redirect()->route('carreras');
+        $docente = Carrera::join('docente','carrera.id','=','docente.docente_materia')
+            ->where('carrera.id',$carrera->id)->get();
+        $profesional = Carrera::join('profesional','carrera.id','=','profesional.carrera_id')
+            ->where('carrera.id',$carrera->id)->get();
+        $estudiante = Carrera::join('estudiante','carrera.id','=','estudiante.carrera_id')
+            ->where('carrera.id',$carrera->id)->get();
+        if(count($docente)==0 && count($profesional)==0 &&  count($estudiante)==0){
+            $carrera->delete();
+            
+            return redirect()->route('carreras')->with('message','Carrera eliminada con éxito');
+        }else{
+            return back()->with('message','No se puede eliminar la carrera debido a que esa asociada con otros datos');
+        }
+        
     }
     public function importar(){
         return view('carreras/importarCarrera');

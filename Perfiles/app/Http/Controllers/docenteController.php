@@ -162,11 +162,42 @@ class docenteController extends Controller
             'user_name' => $name,
             'email' => $request->correo_prof,
         ]);
-        return redirect()->route('Docentes');
+        return redirect()->route('verDocente',$docente);
     }
 
     //todos los metos eliminar con el tiempo se tendra que validar con registros de BD
     public function eliminar(Request $request,Docente $docente){
+        $docentePerfil = Docente::join('perfil','docente.id','=','perfil.docente_id')
+            ->where('docente.id',$docente->id)->distinct()->get();
+        $directorCarrera = Docente::join('perfil','docente.id','=','perfil.director_id')
+            ->where('docente.id',$docente->id)->distinct()->get();
+
+        $perfilTutor = Profesional::join('perfil_tutor','profesional.id','=','perfil_tutor.profesional_id')
+        ->where('profesional.id',$docente->profesional_id)
+        ->distinct()->get();
+        if(count($docentePerfil)==0 && count($perfilTutor)==0 && count($directorCarrera)==0){
+            $datosDocente  = $docente->toArray();
+            $prof_id = $datosDocente['profesional_id'];
+            $docente->usuario()->delete();
+            $docente->usuario()->detach();//eliminar datos en tabla intermedia
+            $docente->delete();
+            $profesional = Profesional::findOrFail($prof_id);
+            $profesional->areas()->detach(); //eliminar datos en tabla intermedia
+            $profesional->delete();
+            if($request->ajax()){
+                return response()->json([
+                    'eliminado'=>true,
+                    'mensaje'=>'El Docente se elimino correctamente'
+                ]);
+            }
+        }else{
+            return response()->json([
+                'eliminado'=>false,
+                'mensaje'=>'El Docente no puede ser elminado, debido a que fue registrado en algún perfil'
+            ]);
+        }
+        return redirect()->route('Docentes');
+        /*
         $datosDocente  = $docente->toArray();
         $prof_id = $datosDocente['profesional_id'];
         $docente->usuario()->delete();
@@ -182,6 +213,7 @@ class docenteController extends Controller
             ]);
         }
         return redirect()->route('Docentes');
+        */
     }
 
     public function cambiarContraseña(Docente $docente){

@@ -113,7 +113,8 @@ class EstudianteController extends Controller
             'user_name' => ['required',Rule::unique('users')->ignore($estudiante->usuario()->first()->id),
                             Rule::unique('estudiante')->ignore($estudiante->id),'alpha_num'],
             'email' => ['required','string','email','max:255',Rule::unique('users')->ignore($estudiante->usuario()->first()->id),
-                        Rule::unique('estudiante')->ignore($estudiante->id)],
+                        Rule::unique('estudiante')->ignore($estudiante->id)
+                        ,'regex:/[a-z-_.0-9]+@(gmail|hotmail|yahoo|outlook).(com|es|org)/u'],
             'telefono' => 'required|numeric|digits_between:7,8',
         ]);
         //dd($request->all());
@@ -125,7 +126,8 @@ class EstudianteController extends Controller
                 'email' => $request['email'],
             ]);
         });
-        return redirect()->route('menu');
+        //return redirect()->route('menu');
+        return redirect()->route('detalleEstudiante',$estudiante)->with('actualizarEstudiante','el estudiante fue actualizado');
     }
     /**
      * Remove the specified resource from storage.
@@ -134,12 +136,28 @@ class EstudianteController extends Controller
      */
     public function eliminar(Estudiante $estudiante)
     {
+        $est = Estudiante::join('estudiante_perfil','estudiante.id','=','estudiante_perfil.estudiante_id')
+            ->where('estudiante.id',$estudiante->id)->get();
+        if(count($est)==0){
+            DB::transaction(function () use($estudiante) {
+                $estudiante->usuario()->delete();
+                $estudiante->usuario()->detach();//eliminar datos en tabla intermedia
+                $estudiante->delete();
+            });
+            return redirect()->route('estudiantes')->with('eliminarEstudiante','el estudiante fue eliminado');
+        }else{
+            return redirect()->back()->with('eliminarEstudiante','El estudiante no puede ser eliminado, debido a que ya registró su perfil');
+           
+        }
+        
+        /*
         DB::transaction(function () use($estudiante) {
             $estudiante->usuario()->delete();
             $estudiante->usuario()->detach();//eliminar datos en tabla intermedia
             $estudiante->delete();
         });
-        return redirect()->route('menu');
+        return redirect()->route('estudiantes')->with('eliminarEstudiante','el estudiante fue eliminado');
+        */
     }
     public function cambiarContraseña(Estudiante $estudiante){
         return view('estudiantes/cambiarPassword',compact('estudiante'));

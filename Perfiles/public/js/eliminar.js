@@ -51,7 +51,7 @@ $('#eliminarAreaCarrera').click(function(e){
             })
         },
         function(){ 
-    });
+    }).set('labels', {ok:'Eliminar', cancel:'Cancelar'});
 })
 
 $('.registrarPerfil').click(function(e){
@@ -340,3 +340,7 @@ $('.cambiarEstado').click(function(){
         divLista.html(res.datos);
     })
 })*/
+
+
+
+

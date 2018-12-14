@@ -3,6 +3,13 @@
 @section('titulo','LISTAR AREAS')
 @section('contenido')
 
+    @if(session()->has('exportar'))
+        <div class="row mb-3">
+            <div class="col alert-success">
+                {{session('exportar')}}
+            </div>
+        </div>
+    @endif
   
 <Form method="GET" action="{{route('Areas')}}" >
     <!--BUSCADOR -->
@@ -49,7 +56,7 @@
 
                 <td>
                     <div class=" dropleft text-center">
-                            <a href="#" data-toggle="dropdown"  data-placement="right" title="opsiones">
+                            <a href="#" data-toggle="dropdown"  data-placement="right" title="opciones">
                                     <i class="fa fa-ellipsis-v fa-2x" aria-hidden="true"></i>
                             </a>
                             <div class="dropdown-menu profile-dropdown-menu" aria-labelledby="dropdownMenu1">

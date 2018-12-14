@@ -69,6 +69,30 @@ class SubareaController extends Controller
 	}
 
 	public function eliminar(Request $request,$id){
+
+		$perfilSubarea = Area::join('perfil','area.id','=','perfil.subarea_id')
+			->where('area.id',$id)->distinct()->get();
+		
+		if(count($perfilSubarea)==0){
+			$subarea = Area::findOrFail($id);
+			$area = Area::findOrFail($subarea->area_id);
+			$subarea->delete();
+			if($request->ajax())
+				{
+					 return response()->json([
+						 'eliminado'=>true,
+						 'mensaje'=>'Sub Area se elimino correctamente'
+					 ]);
+				 }
+			
+		}else{
+			return response()->json([
+				'eliminado'=>true,
+				'mensaje'=>'La Sub Area no puede eliminarse debido a que esta asociada a un perfil'
+			]);
+		}
+		return redirect()->route('subareas',compact('area'));
+		/*
 		//falta condicionar la eliminacion
 		$subarea = Area::findOrFail($id);
 		$area = Area::findOrFail($subarea->area_id);
@@ -80,7 +104,7 @@ class SubareaController extends Controller
 					 'mensaje'=>'Sub Area se elimino correctamente'
 				 ]);
 			 }
-		return redirect()->route('subareas',compact('area'));
+		return redirect()->route('subareas',compact('area'));*/
 	}
 
 	public function agregarCarrera($codigo,$area){

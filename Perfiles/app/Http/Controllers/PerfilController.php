@@ -42,7 +42,8 @@ class PerfilController extends Controller
                           ->perfilesTutor($tutor_id)
                           ->with(['tutor','estudiantes'])
                           ->orderBy('id','DESC')
-                          ->paginate(20);
+                          ->paginate(20
+                        );
         if ($request->ajax()) {
             return response()->json([
                 view('parcial.perfiles',compact('perfiles','buscar','fila'))->render()
@@ -212,13 +213,26 @@ class PerfilController extends Controller
     }
 
     public function eliminar(Request $request, Perfil $perfil){
-        $perfil->update([
+        /*$perfil->update([
             'estado'=>'eliminado'
         ]); 
         return response()->json([
             'eliminado'=>true,
             'mensaje'=>'Se a eliminado el Perfil'
-        ]);
+        ]);*/
+        if($perfil->estado=='Defendido'){
+            $perfil->update([
+                'estado'=>'eliminado'
+            ]); 
+            return response()->json([
+                'eliminado'=>true,
+                'mensaje'=>'Se a eliminado el Perfil'
+            ]);
+        }
+            return response()->json([
+                'eliminado'=>false,
+                'mensaje'=>'No se puede eliminar este perfil'
+            ]);
     }
 
 

@@ -57,7 +57,8 @@ $('.registrar').click(function(e){
         //alertify.alert(ress.responseText).set('basic', true); 
         var errores="";
         var cont = 18;
-       // $('#mensajeError').show();//muestra los mensajes
+
+        $('#mensajeError').show();//muestra los mensajes
         $.each($.parseJSON(ress.responseText), function (ind, elem) {     
                 alertify.set('notifier','position', 'top-right');
                 if(cont == 18){
@@ -77,6 +78,34 @@ $('.registrar').click(function(e){
 
 
 $('.eliminar').click(function(e){
+    
+    e.preventDefault();
+    var divLista = $('.listaDatos');
+    var fila = $(this).parents('tr');
+    var url  = $(this).attr('href');
+    var form = $(this).parents('form');
+    var urlForm = form.attr('action');
+    alertify.confirm("Esta seguro de eliminar",
+        function(){
+            $.get(url,[],function(res){
+                if(res.eliminado){
+                    fila.fadeOut();
+                    alertify.alert(res.mensaje).set('basic', true);
+                    $.get(urlForm,form.serialize(),function(res){ 
+                        divLista.empty();
+                        divLista.html(res);
+                    });
+                }else{
+                    alertify.alert(res.mensaje).set('basic', true);
+                    
+                }  
+            }).fail(function(ress,status,error){
+                alertify.alert(ress.responseText).set('basic', true);
+            })
+        },
+        function(){ 
+    }).set('labels', {ok:'Eliminar', cancel:'Cancelar'});
+    /*
     e.preventDefault();
     var divLista = $('.listaDatos');
     var fila = $(this).parents('tr');
@@ -102,7 +131,8 @@ $('.eliminar').click(function(e){
             })
         },
         function(){ 
-    });
+    }).set('labels', {ok:'Eliminar', cancel:'Cancelar'});
+    */
 })
 
 $('.btnBuscar').click(function(e){
@@ -256,7 +286,7 @@ $('#eliminarAreaCarrera').click(function(e){
             })
         },
         function(){ 
-    });
+    }).set('labels', {ok:'Eliminar', cancel:'Cancelar'});
 })
 
 $('.estado').click(function(){

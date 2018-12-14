@@ -68,7 +68,37 @@ class AreaController extends Controller
 	}
 
 	public function eliminar(Request $request,$id){
+		$areaperfil = Area::join('perfil','area.id','=','perfil.area_id')
+		 ->where('area.id',$id)->distinct()->get();
+	
+		$areaCarrera = Area::join('area_carrera','area.id','=','area_carrera.area_id')
+		->where('area.id',$id)->distinct()->get();
+		$profesionalArea = Area::join('profesional_area','area.id','=','profesional_area.area_id')
+		->where('area.id',$id)->distinct()->get();
+
+
 		$subareas = Area::subareasarea($id)->get();
+		if($subareas->toArray()||count($areaperfil)>0 || count($areaCarrera)>0 || count($profesionalArea)>0){
+			if($request->ajax())
+			{
+				 return response()->json([
+					 'eliminado'=>false,
+					 'mensaje'=>'Esta área no puede ser eliminada, por que esta asociada a otra informacion'
+				 ]);
+			 }
+			 return back()->withErrors('No se puede eliminar la Area por que existen SubAreas asociadas a este');
+		} else { 
+			Area::findOrFail($id)->delete();
+			if($request->ajax())
+			{
+				 return response()->json([
+					 'eliminado'=>true,
+					 'mensaje'=>'Area se elimino correctamente'
+				 ]);
+			 }
+			return redirect()->route('Areas');
+		
+		/*$subareas = Area::subareasarea($id)->get();
 		if($subareas->toArray()){
 			if($request->ajax())
 			{
@@ -87,7 +117,7 @@ class AreaController extends Controller
 					 'mensaje'=>'Area se elimino correctamente'
 				 ]);
 			 }
-			return redirect()->route('Areas');
+			return redirect()->route('Areas');*/
 		}
 	}
 	
@@ -99,7 +129,11 @@ class AreaController extends Controller
 
 	//metodo para mostras interfaz para subir archivo excel
 	public function subirExcel(){
-		return view('area.importar');
+	    $area=Area::all()->pluck('id')->last();
+	    if(!$area){
+	        $area=1;
+        }
+		return view('area.importar', compact('area'));
 	}
 
 	//metodo para importar los datos de excel a la base de datos
@@ -107,14 +141,14 @@ class AreaController extends Controller
         $this->validate(request(), [
             'importar_area' => ['required'],
         ]);
-        try{
-            $archivo = $request->file('importar_area');
-            $nombre=$archivo->getClientOriginalName();
-            $extension=$archivo->getClientOriginalExtension();
-            if(!in_array($extension,['xls','xlsx','xlsm','xlsb'])){
-                return back()->withErrors('el archivo que intenta 
+        $archivo = $request->file('importar_area');
+        $nombre=$archivo->getClientOriginalName();
+        $extension=$archivo->getClientOriginalExtension();
+        if(!in_array($extension,['xls','xlsx','xlsm','xlsb'])){
+            return back()->withErrors('el archivo que intenta 
                 subir no es un archivo excel: xls, xlsx, xlsm, xlsb');
-            }
+        }
+        try{
             Storage::disk('archivos')->put($nombre, \File::get($archivo) );
             $ruta  =  storage_path('archivos') ."/". $nombre;
             Excel::selectSheetsByIndex(0)->load($ruta, function ($hoja) {
@@ -135,8 +169,9 @@ class AreaController extends Controller
 
             });
             Storage::disk('archivos')->delete($nombre);
-            return redirect()->route('Areas');
+            return redirect()->route('Areas')->with('exportar','La exportacion fue exitosa');
         }catch (\Exception $exception){
+            Storage::disk('archivos')->delete($nombre);
             return back()->withErrors('no se puede importar');
         }
 

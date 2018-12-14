@@ -39,7 +39,7 @@
 				<div class = "form-group row"> 
 					<div class="col-sm-2"></div>
 					<div class="col-7">
-						<a href="{{ route('Areas') }}" class="btn btn-danger">Cancel</a>	
+						<a href="{{ route('Areas') }}" class="btn btn-danger">Cancelar</a>	
 						<button type="submit" class='btn btn-success registrar'>Modificar</button>
 					</div>		
 				</div>

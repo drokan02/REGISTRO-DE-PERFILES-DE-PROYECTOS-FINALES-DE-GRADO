@@ -21,7 +21,7 @@
 				<div class = "form-group row"> 
 					<label for="codigo" class="col-sm-2 col-form-label">Codigo</label>
 					<div class="col-sm-7">
-						<input type="text" class="form-control" placeholder="codito area" name="codigo" autocomplete="off"
+						<input type="text" class="form-control" placeholder="codigo area" name="codigo" autocomplete="off"
 						value="{{old('codigo')}}">
 					</div>
 				</div>
@@ -38,7 +38,7 @@
 				<div class = "form-group row"> 
 					<div class="col-sm-2"></div>
 					<div class="col-8">
-						<a href="{{ route('registrarArea') }}" class="btn btn-danger">Cancel</a>	
+						<a href="{{ route('registrarArea') }}" class="btn btn-danger">Cancelar</a>	
 						<button type="submit" class='btn btn-success registrar'>Registrar</button>
 					</div>		
 				</div>

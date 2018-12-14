@@ -28,6 +28,7 @@
                                  <h4><b>{{$docente->profesional->nombre_prof}} {{$docente->profesional->ap_pa_prof}}  {{$docente->profesional->ap_ma_prof}} </b></h4> 
                                  <small>Nombre Completo</small>  
                               </div>
+
                             @if(auth()->user()->hasRoles(['docente','administrador']))
                               <div class="list-group-item">
                                     
