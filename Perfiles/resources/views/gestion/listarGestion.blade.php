@@ -14,7 +14,7 @@
             <div class="col-sm-10">
                         <a href='{{route('registrarGestion')}}' >
                                         <!--class=pull-right  para poner el boton al extremo derecho-->
-                                        <i class=" fa fa-plus fa-2x fa-3x pull-right" data-toggle="tooltip" data-placement="right" title="Agregar nueva Subarea" ></i>                 
+                                        <i class=" fa fa-plus fa-2x fa-3x pull-right" data-toggle="tooltip" data-placement="right" title="Agregar nueva Gestion" ></i>                 
                          </a> 
             </div>
         </div>
