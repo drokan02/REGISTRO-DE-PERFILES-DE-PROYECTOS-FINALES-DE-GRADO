@@ -78,6 +78,7 @@ $('.registrar').click(function(e){
 
 
 $('.eliminar').click(function(e){
+    
     e.preventDefault();
     var divLista = $('.listaDatos');
     var fila = $(this).parents('tr');
@@ -96,6 +97,7 @@ $('.eliminar').click(function(e){
                     });
                 }else{
                     alertify.alert(res.mensaje).set('basic', true);
+                    
                 }  
             }).fail(function(ress,status,error){
                 alertify.alert(ress.responseText).set('basic', true);
