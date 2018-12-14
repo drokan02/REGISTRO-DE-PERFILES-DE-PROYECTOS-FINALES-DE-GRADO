@@ -57,7 +57,8 @@ $('.registrar').click(function(e){
         //alertify.alert(ress.responseText).set('basic', true); 
         var errores="";
         var cont = 18;
-       // $('#mensajeError').show();//muestra los mensajes
+
+        $('#mensajeError').show();//muestra los mensajes
         $.each($.parseJSON(ress.responseText), function (ind, elem) {     
                 alertify.set('notifier','position', 'top-right');
                 if(cont == 18){
