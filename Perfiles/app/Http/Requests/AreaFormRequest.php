@@ -52,13 +52,15 @@ class AreaFormRequest extends FormRequest
             $tipo = 'SubArea';
         }
         return [
-            'codigo.required' => 'no ingreso el codigo del '.$tipo,
-            'codigo.unique'   => 'ese codigo ya esta siendo usado',
+            'codigo.required' => 'no ingreso el código del '.$tipo,
+            'codigo.unique'   => 'ese código ya esta siendo usado',
             'nombre.required' => 'no ingreso el nombre del '.$tipo,
             'nombre.regex' => 'solo se permiten espacios y letras en el nombre',
             'nombre.unique'   => 'esa '.$tipo.' ya se encuentra registrada',
-            'descripcion.min' => 'La cantidad minima de letras para descripcion es de 6 letras',
-            'descripcion.max' => 'La cantidad maxima de letras para descricion es de 500 letras',
+            'descripcion.min' => 'La cantidad mínima de letras para descripcion es de 6 letras',
+            'descripcion.max' => 'La cantidad máxima de letras para descricion es de 500 letras',
+
+
         ];
     }
 }
