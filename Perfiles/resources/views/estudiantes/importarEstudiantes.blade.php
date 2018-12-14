@@ -16,6 +16,15 @@
     @endif
     <form method="POST" action="{{route('importacionEstudiantes')}}" enctype="multipart/form-data">
         {!! csrf_field() !!}
+        <div class="col">
+            <label for="carrera">Carrera   (*)</label>
+            <select class="form-control" name="carrera" id="carrera">
+                <option>seleccione una opcion</option>
+                @foreach($carreras as $carrera)
+                    <option>{{$carrera}}</option>
+                @endforeach
+            </select>
+        </div>
         <div class="form-group mb-4">
             <label for="importar_estudiantes">Agregar el Archivo Excel de Estudiantes</label>
             <input type="file" class="form-control" id="importar_estudiantes" name="importar_estudiantes" value="{{old('importar_estudiantes')}}">

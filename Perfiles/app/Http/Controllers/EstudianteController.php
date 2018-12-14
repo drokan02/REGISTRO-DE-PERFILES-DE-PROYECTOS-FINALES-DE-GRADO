@@ -161,14 +161,14 @@ class EstudianteController extends Controller
     }
     public function importar(){
         $carreras=Carrera::all()->pluck('nombre_carrera');
-        return view('estudiantes/importarEstudiantes');
+        return view('estudiantes/importarEstudiantes',compact('carreras'));
     }
 
     public function importacion(Request $request){
         $this->validate(request(), [
             'importar_estudiantes' => ['required'],
         ]);
-      //   try{
+        // try{
             $archivo = $request->file('importar_estudiantes');
             $nombre=$archivo->getClientOriginalName();
             $extension=$archivo->getClientOriginalExtension();
@@ -178,9 +178,11 @@ class EstudianteController extends Controller
             }
             \Storage::disk('archivos')->put($nombre, \File::get($archivo) );
             $ruta  =  storage_path('archivos') ."/". $nombre;
-            Excel::selectSheetsByIndex(0)->load($ruta, function ($hoja) {
-                $hoja->each(function ($fila) {
-                   
+            Excel::selectSheetsByIndex(0)->load($ruta, function ($hoja) use($request) {
+                $idcarrera=Carrera::query()->where('nombre_carrera',$request['carrera'])->value('id');
+                    $request['carrera']=$idcarrera;
+                $hoja->each(function ($fila) use($request) {
+                
 
                             $apellido_paterno =$fila->apellido_paterno;
                             $apellido_materno =$fila->apellido_materno;
@@ -201,6 +203,7 @@ class EstudianteController extends Controller
         }
                     $user_name=Estudiante::query()->where('user_name',$fila->user_name)->get();
                     $email=Estudiante::query()->where('email',$fila->email)->get();
+                    
                     if(count($user_name)==0 && count($email)==0 ){
                         $estudiantes = new Estudiante();
                         $estudiantes->create([
@@ -210,8 +213,7 @@ class EstudianteController extends Controller
                             'user_name' =>$fila->user_name,
                             'password'  =>bcrypt($fila->password),
                             'telefono'  =>$fila->telefono,
-                            'carrera_id'=>$fila->carrera_id,
-                        
+                            'carrera_id'=> $request['carrera']
                         ]);}
                         
                         $role_id=Role::query()->where('nombre_rol','estudiante')->value('id');
@@ -231,8 +233,8 @@ class EstudianteController extends Controller
             \Storage::disk('archivos')->delete($nombre);
             return redirect()->route('estudiantes');
      //  }catch (\Exception $exception){
-        //   return back()->withErrors('no se puede importar');
-     // }
+    //  return back()->withErrors('no se puede importar');
+    // }
 
     }
 }
