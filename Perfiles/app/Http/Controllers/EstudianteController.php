@@ -168,7 +168,7 @@ class EstudianteController extends Controller
         $this->validate(request(), [
             'importar_estudiantes' => ['required'],
         ]);
-        // try{
+         try{
             $archivo = $request->file('importar_estudiantes');
             $nombre=$archivo->getClientOriginalName();
             $extension=$archivo->getClientOriginalExtension();
@@ -186,8 +186,8 @@ class EstudianteController extends Controller
 
                             $apellido_paterno =$fila->apellido_paterno;
                             $apellido_materno =$fila->apellido_materno;
-                            $nombre=$fila->nombre;
-                            $nombres=$apellido_paterno." ".$apellido_materno." ".$nombre;
+                            $nombr=$fila->nombre;
+                            $nombres=$apellido_paterno." ".$apellido_materno." ".$nombr;
                     $user_name=User::query()->where('user_name',$fila->user_name)->get();
                     $email=User::query()->where('email',$fila->email)->get();
                
@@ -232,9 +232,9 @@ class EstudianteController extends Controller
             });
             \Storage::disk('archivos')->delete($nombre);
             return redirect()->route('estudiantes');
-     //  }catch (\Exception $exception){
-    //  return back()->withErrors('no se puede importar');
-    // }
+       }catch (\Exception $exception){
+      return back()->withErrors('no se puede importar');
+     }
 
     }
 }
