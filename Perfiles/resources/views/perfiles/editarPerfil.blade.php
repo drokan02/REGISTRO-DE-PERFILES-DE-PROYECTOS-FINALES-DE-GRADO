@@ -115,6 +115,17 @@
                     </div>
                 </div>
                 
+                <div class="form-group row">
+                    <label for="tutor" class="col-sm-2 col-form-label">Subarea</label>
+                    <div class="col-10">
+                        <select name="subarea_id" id="subarea_id" class="form-control form-control-chosen">
+                                <option disabled selected>Seleccionar</option>
+                                @foreach ($subareas as $subarea)
+                                <option value="{{$subarea->id}}" {{$perfil->subarea_id == $subarea->id? 'selected':''}}>{{$subarea->nombre}}</option>
+                                @endforeach
+                        </select>
+                    </div>
+                </div>
                 
             
             <div class = "form-group row">
