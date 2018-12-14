@@ -213,13 +213,26 @@ class PerfilController extends Controller
     }
 
     public function eliminar(Request $request, Perfil $perfil){
-        $perfil->update([
+        /*$perfil->update([
             'estado'=>'eliminado'
         ]); 
         return response()->json([
             'eliminado'=>true,
             'mensaje'=>'Se a eliminado el Perfil'
-        ]);
+        ]);*/
+        if($perfil->estado=='Defendido'){
+            $perfil->update([
+                'estado'=>'eliminado'
+            ]); 
+            return response()->json([
+                'eliminado'=>true,
+                'mensaje'=>'Se a eliminado el Perfil'
+            ]);
+        }
+            return response()->json([
+                'eliminado'=>false,
+                'mensaje'=>'No se puede eliminar este perfil'
+            ]);
     }
 
 

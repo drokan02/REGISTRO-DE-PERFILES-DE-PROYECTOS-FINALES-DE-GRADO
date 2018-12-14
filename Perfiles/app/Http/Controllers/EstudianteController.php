@@ -134,12 +134,28 @@ class EstudianteController extends Controller
      */
     public function eliminar(Estudiante $estudiante)
     {
+        $est = Estudiante::join('estudiante_perfil','estudiante.id','=','estudiante_perfil.estudiante_id')
+            ->where('estudiante.id',$estudiante->id)->get();
+        if(count($est)==0){
+            DB::transaction(function () use($estudiante) {
+                $estudiante->usuario()->delete();
+                $estudiante->usuario()->detach();//eliminar datos en tabla intermedia
+                $estudiante->delete();
+            });
+            return redirect()->route('estudiantes')->with('eliminarEstudiante','el estudiante fue eliminado');
+        }else{
+            return redirect()->back()->with('eliminarEstudiante','El estudiante no puede ser eliminado, debido a que ya registró su perfil');
+           
+        }
+        
+        /*
         DB::transaction(function () use($estudiante) {
             $estudiante->usuario()->delete();
             $estudiante->usuario()->detach();//eliminar datos en tabla intermedia
             $estudiante->delete();
         });
         return redirect()->route('estudiantes')->with('eliminarEstudiante','el estudiante fue eliminado');
+        */
     }
     public function cambiarContraseña(Estudiante $estudiante){
         return view('estudiantes/cambiarPassword',compact('estudiante'));

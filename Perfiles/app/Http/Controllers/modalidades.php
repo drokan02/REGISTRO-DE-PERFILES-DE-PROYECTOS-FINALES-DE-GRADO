@@ -115,7 +115,27 @@ class modalidades extends Controller
      * @internal param Modal $user
      */
     public function eliminar(Request $request, Modal $modalidad){
-		$modalidad->delete();
+        $modalidades = Modal::join('perfil','modalidad.id','=','perfil.modalidad_id')
+            ->where('modalidad.id',$modalidad->id)->distinct()->get();
+        if(count($modalidades)==0){
+            $modalidad->delete();
+            if($request->ajax())
+                {
+                     return response()->json([
+                         'eliminado'=>true,
+                         'mensaje'=>'La Modalidad se elimino correctamente'
+                     ]);
+                 }  
+        }else{
+            return response()->json([
+                'eliminado'=>false,
+                'mensaje'=>'La Modalidad no puede eliminarse, debido a que fue registrada en algún perfil'
+            ]);
+        }
+                   //eliminar datos en tabla intermedia
+        return redirect()->route('modalidad');
+
+		/*$modalidad->delete();
 		if($request->ajax())
 			{
 				 return response()->json([
@@ -123,7 +143,7 @@ class modalidades extends Controller
 					 'mensaje'=>'La Modalidad se elimino correctamente'
 				 ]);
 			 }             //eliminar datos en tabla intermedia
-        return redirect()->route('modalidad');
+        return redirect()->route('modalidad');*/
     }
     public function importar(){
         return view('modadelidad/importarModalidades');

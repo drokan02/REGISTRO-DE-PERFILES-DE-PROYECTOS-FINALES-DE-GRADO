@@ -94,6 +94,32 @@ $('.eliminar').click(function(e){
                         divLista.html(res);
                     });
                 }else{
+                    alertify.alert(res.mensaje).set('basic', true);
+                }  
+            }).fail(function(ress,status,error){
+                alertify.alert(ress.responseText).set('basic', true);
+            })
+        },
+        function(){ 
+    }).set('labels', {ok:'Eliminar', cancel:'Cancelar'});
+    /*
+    e.preventDefault();
+    var divLista = $('.listaDatos');
+    var fila = $(this).parents('tr');
+    var url  = $(this).attr('href');
+    var form = $(this).parents('form');
+    var urlForm = form.attr('action');
+    alertify.confirm("Esta seguro de eliminar",
+        function(){
+            $.get(url,[],function(res){
+                if(res.eliminado){
+                    fila.fadeOut();
+                    alertify.alert(res.mensaje).set('basic', true);
+                    $.get(urlForm,form.serialize(),function(res){ 
+                        divLista.empty();
+                        divLista.html(res);
+                    });
+                }else{
                     alertify.set('notifier','position', 'top-right');
                     alertify.error(""+res.mensaje);
                 }  
@@ -103,6 +129,7 @@ $('.eliminar').click(function(e){
         },
         function(){ 
     }).set('labels', {ok:'Eliminar', cancel:'Cancelar'});
+    */
 })
 
 $('.btnBuscar').click(function(e){
