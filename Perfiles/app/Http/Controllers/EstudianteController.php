@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Storage;
 use App\Carrera;
 use App\Estudiante;
 use App\Role;
 use App\User;
+use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
@@ -174,5 +176,83 @@ class EstudianteController extends Controller
             ]);
         });
         return view('estudiantes/detalleEstudiante',compact('estudiante'));
+    }
+    public function importar(){
+        $carreras=Carrera::all()->pluck('nombre_carrera');
+        return view('estudiantes/importarEstudiantes',compact('carreras'));
+    }
+
+    public function importacion(Request $request){
+        $this->validate(request(), [
+            'importar_estudiantes' => ['required'],
+        ]);
+         try{
+            $archivo = $request->file('importar_estudiantes');
+            $nombre=$archivo->getClientOriginalName();
+            $extension=$archivo->getClientOriginalExtension();
+            if(!in_array($extension,['xls','xlsx','xlsm','xlsb'])){
+                return back()->withErrors('el archivo que intenta 
+                subir no es un archivo excel: xls, xlsx, xlsm, xlsb');
+            }
+            \Storage::disk('archivos')->put($nombre, \File::get($archivo) );
+            $ruta  =  storage_path('archivos') ."/". $nombre;
+            Excel::selectSheetsByIndex(0)->load($ruta, function ($hoja) use($request) {
+                $idcarrera=Carrera::query()->where('nombre_carrera',$request['carrera'])->value('id');
+                    $request['carrera']=$idcarrera;
+                $hoja->each(function ($fila) use($request) {
+                
+
+                            $apellido_paterno =$fila->apellido_paterno;
+                            $apellido_materno =$fila->apellido_materno;
+                            $nombr=$fila->nombre;
+                            $nombres=$apellido_paterno." ".$apellido_materno." ".$nombr;
+                    $user_name=User::query()->where('user_name',$fila->user_name)->get();
+                    $email=User::query()->where('email',$fila->email)->get();
+               
+                    if(count($user_name)==0 && count($email)==0 ){
+                    $user =new User();
+            $user->create([
+
+                'name' => $nombres,
+                'user_name' =>$fila->user_name,
+                'email' => $fila->email,
+                'password' => bcrypt($fila->password),
+            ]);
+        }
+                    $user_name=Estudiante::query()->where('user_name',$fila->user_name)->get();
+                    $email=Estudiante::query()->where('email',$fila->email)->get();
+                    
+                    if(count($user_name)==0 && count($email)==0 ){
+                        $estudiantes = new Estudiante();
+                        $estudiantes->create([
+                           
+                            'nombres'=>$nombres,
+                            'email' => $fila->email,
+                            'user_name' =>$fila->user_name,
+                            'password'  =>bcrypt($fila->password),
+                            'telefono'  =>$fila->telefono,
+                            'carrera_id'=> $request['carrera']
+                        ]);}
+                        
+                        $role_id=Role::query()->where('nombre_rol','estudiante')->value('id');
+                        $iduser=User::query()->where('email',$fila->email)->value('id');
+                        $idEstudiante=Estudiante::query()->where('email',$fila->email)->value('id');
+                        $user->roles()->attach($role_id,['user_id'=>$iduser]);
+                        $user->estudiante()->attach($idEstudiante,['user_id'=>$iduser]);
+
+                        $data=['nombres'=> $nombres,'user_name'=>$fila->user_name,'email'=>$fila->email,'password' =>$fila->password,];
+                        Mail::send('emails.importacionCuenta',$data, function($message) use($fila)  {
+                         $message->to($fila->email, $fila->user_name)->subject('Creacion de tu Cuenta en el Sistema de perfil');
+                        });
+                       
+                });
+
+            });
+            \Storage::disk('archivos')->delete($nombre);
+            return redirect()->route('estudiantes');
+       }catch (\Exception $exception){
+      return back()->withErrors('no se puede importar');
+     }
+
     }
 }
