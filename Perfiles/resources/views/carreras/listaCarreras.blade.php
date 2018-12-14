@@ -28,7 +28,7 @@
     </div> 
     @if(session()->has('message'))
         <div class="row">
-            <div class="col alert-success">
+            <div class="col alert-danger">
                 {{session('message')}}
             </div>
         </div>

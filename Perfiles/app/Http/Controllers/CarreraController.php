@@ -96,9 +96,10 @@ class CarreraController extends Controller
             ->where('carrera.id',$carrera->id)->get();
         if(count($docente)==0 && count($profesional)==0 &&  count($estudiante)==0){
             $carrera->delete();
+            
             return redirect()->route('carreras')->with('message','Carrera eliminada con éxito');
         }else{
-            return redirect()->route('carreras')->with('message','No se puede eliminar la carrera debido a que esa asociada con otros datos');
+            return back()->with('message','No se puede eliminar la carrera debido a que esa asociada con otros datos');
         }
         
     }
