@@ -52,18 +52,8 @@ class modalidades extends Controller
             'descripcion_mod'=> ['required']
 		]);
 		if($request->ajax()){
-             $date=Carbon::now();
-    $fechas=new fechas;
-    $fechas->titulo=$request->nombre_mod;
-
-    $fechas->fechainicio=$date;
-    $date=Carbon::now();
-    $endDate =$date->addMonth(6);
-    $fechas->fechafin=$date;
-    $fechas->save();
             return response()->json([
                 'mensaje'=>'Modalidad registrado correctamente'
-
             ]);
     
         }

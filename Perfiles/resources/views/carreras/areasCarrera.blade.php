@@ -58,7 +58,7 @@
       </tbody>
     </table>
      @else
-        <li>No hay Carreras registradas</li>
+        <li>La Carrera no tiene Areas registradas</li>
     @endif
 
 </div>
